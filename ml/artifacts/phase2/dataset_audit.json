@@ -1,0 +1,235 @@
+{
+  "audit_timestamp": "2026-09-29T12:38:00+05:30",
+  "dataset_version": "v2.1-clean-document-isolated",
+  "random_seed": 42,
+  "total_samples": 10000,
+  "split_sizes": {
+    "train": 6924,
+    "val": 1569,
+    "test": 1507
+  },
+  "domains": {
+    "rental_agreement": {
+      "total_documents": 1950,
+      "train_documents": 1363,
+      "val_documents": 294,
+      "test_documents": 293,
+      "total_clauses": 3334,
+      "train_clauses": 2332,
+      "val_clauses": 501,
+      "test_clauses": 501,
+      "disjoint_clusters_count": 1403,
+      "train_clusters": 989,
+      "val_clusters": 206,
+      "test_clusters": 208,
+      "classes_distribution": {
+        "train": {
+          "rent_payment_terms": 234,
+          "security_deposit": 233,
+          "termination": 233,
+          "maintenance_repairs": 234,
+          "entry_notice_access": 233,
+          "subletting": 233,
+          "pet_policy": 233,
+          "late_fees_penalty": 233,
+          "indemnification": 233,
+          "utilities": 233
+        },
+        "val": {
+          "rent_payment_terms": 49,
+          "security_deposit": 51,
+          "termination": 51,
+          "maintenance_repairs": 50,
+          "utilities": 50,
+          "indemnification": 50,
+          "pet_policy": 50,
+          "entry_notice_access": 50,
+          "subletting": 50,
+          "late_fees_penalty": 50
+        },
+        "test": {
+          "rent_payment_terms": 51,
+          "termination": 50,
+          "maintenance_repairs": 50,
+          "entry_notice_access": 50,
+          "subletting": 50,
+          "pet_policy": 50,
+          "utilities": 50,
+          "security_deposit": 50,
+          "late_fees_penalty": 50,
+          "indemnification": 50
+        }
+      },
+      "favorability_distribution": {
+        "train": {
+          "fair": 912,
+          "unfavorable": 647,
+          "needs_review": 773
+        },
+        "val": {
+          "fair": 196,
+          "unfavorable": 140,
+          "needs_review": 165
+        },
+        "test": {
+          "fair": 195,
+          "unfavorable": 139,
+          "needs_review": 167
+        }
+      }
+    },
+    "job_offer_letter": {
+      "total_documents": 2249,
+      "train_documents": 1578,
+      "val_documents": 332,
+      "test_documents": 339,
+      "total_clauses": 3333,
+      "train_clauses": 2331,
+      "val_clauses": 502,
+      "test_clauses": 500,
+      "disjoint_clusters_count": 1397,
+      "train_clusters": 982,
+      "val_clusters": 209,
+      "test_clusters": 206,
+      "classes_distribution": {
+        "train": {
+          "compensation_salary": 233,
+          "start_date_contingencies": 234,
+          "job_title_role": 230,
+          "benefits_overview": 233,
+          "confidentiality_nda": 233,
+          "termination_conditions": 233,
+          "bonus_incentive": 235,
+          "non_compete_non_solicit": 233,
+          "working_hours_location": 233,
+          "at_will_employment": 234
+        },
+        "val": {
+          "compensation_salary": 50,
+          "job_title_role": 53,
+          "benefits_overview": 50,
+          "termination_conditions": 50,
+          "working_hours_location": 50,
+          "non_compete_non_solicit": 50,
+          "confidentiality_nda": 50,
+          "bonus_incentive": 49,
+          "start_date_contingencies": 50,
+          "at_will_employment": 50
+        },
+        "test": {
+          "compensation_salary": 51,
+          "job_title_role": 50,
+          "benefits_overview": 50,
+          "confidentiality_nda": 50,
+          "termination_conditions": 50,
+          "working_hours_location": 50,
+          "bonus_incentive": 49,
+          "non_compete_non_solicit": 50,
+          "start_date_contingencies": 50,
+          "at_will_employment": 50
+        }
+      },
+      "favorability_distribution": {
+        "train": {
+          "unfavorable": 669,
+          "fair": 930,
+          "needs_review": 732
+        },
+        "val": {
+          "fair": 199,
+          "unfavorable": 144,
+          "needs_review": 159
+        },
+        "test": {
+          "needs_review": 156,
+          "unfavorable": 144,
+          "fair": 200
+        }
+      }
+    },
+    "insurance_policy": {
+      "total_documents": 1595,
+      "train_documents": 1210,
+      "val_documents": 173,
+      "test_documents": 212,
+      "total_clauses": 3333,
+      "train_clauses": 2261,
+      "val_clauses": 566,
+      "test_clauses": 506,
+      "disjoint_clusters_count": 1039,
+      "train_clusters": 765,
+      "val_clusters": 126,
+      "test_clusters": 148,
+      "classes_distribution": {
+        "train": {
+          "coverage_scope": 151,
+          "exclusions": 224,
+          "deductible_premium": 223,
+          "claims_process": 175,
+          "cancellation_non_renewal": 249,
+          "limits_of_liability": 248,
+          "policy_period_renewal": 247,
+          "dispute_resolution_appraisal": 249,
+          "subrogation": 246,
+          "grace_period": 249
+        },
+        "val": {
+          "coverage_scope": 108,
+          "exclusions": 64,
+          "deductible_premium": 65,
+          "claims_process": 97,
+          "cancellation_non_renewal": 38,
+          "limits_of_liability": 39,
+          "dispute_resolution_appraisal": 38,
+          "subrogation": 40,
+          "policy_period_renewal": 39,
+          "grace_period": 38
+        },
+        "test": {
+          "coverage_scope": 75,
+          "exclusions": 46,
+          "deductible_premium": 46,
+          "claims_process": 61,
+          "limits_of_liability": 46,
+          "policy_period_renewal": 47,
+          "cancellation_non_renewal": 46,
+          "subrogation": 47,
+          "dispute_resolution_appraisal": 46,
+          "grace_period": 46
+        }
+      },
+      "favorability_distribution": {
+        "train": {
+          "needs_review": 999,
+          "unfavorable": 529,
+          "fair": 733
+        },
+        "val": {
+          "needs_review": 287,
+          "unfavorable": 119,
+          "fair": 160
+        },
+        "test": {
+          "needs_review": 221,
+          "fair": 169,
+          "unfavorable": 116
+        }
+      }
+    }
+  },
+  "leakage_audit": {
+    "cross_split_document_leakage": 0,
+    "cross_split_template_group_leakage": 0,
+    "cross_split_exact_duplicates": 0,
+    "cross_split_normalized_duplicates": 0,
+    "cross_split_near_duplicates_gte_085": 0
+  },
+  "status_checks": {
+    "document_isolation": "PASS",
+    "template_isolation": "PASS",
+    "exact_duplicate_isolation": "PASS",
+    "near_duplicate_isolation": "PASS",
+    "reproducibility": "PASS",
+    "final_decision": "READY FOR CLEAN MODEL BENCHMARK"
+  }
+}

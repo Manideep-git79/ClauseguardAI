@@ -1,0 +1,11 @@
+,entry_notice_access,indemnification,late_fees_penalty,maintenance_repairs,pet_policy,rent_payment_terms,security_deposit,subletting,termination,utilities
+entry_notice_access,49,1,0,0,0,0,0,0,0,0
+indemnification,0,50,0,0,0,0,0,0,0,0
+late_fees_penalty,0,0,50,0,0,0,0,0,0,0
+maintenance_repairs,0,5,0,42,1,0,0,1,0,1
+pet_policy,0,4,0,3,37,5,0,1,0,0
+rent_payment_terms,6,5,3,4,0,25,1,0,6,1
+security_deposit,0,0,3,2,0,0,44,0,0,1
+subletting,0,0,0,0,0,2,0,48,0,0
+termination,3,0,1,1,0,4,3,1,37,0
+utilities,0,0,0,0,0,0,0,0,0,50

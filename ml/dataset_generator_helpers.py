@@ -134,8 +134,10 @@ RENTAL_PATTERNS = {
             "Tenant may take on an additional occupant or roommate subject to Landlord's approval of credit and background verification without arbitrary denial.",
         ],
         "needs_review": [
+            "Tenant shall not assign this lease, sublet the premises, or grant any license to occupy without Landlord consent.",
             "Subletting is permitted only with Landlord's written approval and upon payment of a $350 administrative review fee; Tenant remains jointly liable.",
             "Guests staying longer than fourteen (14) consecutive calendar days must apply for formal leaseholder status and undergo background screening.",
+            "Tenant shall not assign, sublet, or transfer the premises without prior written consent of Landlord.",
         ],
         "unfavorable": [
             "Subletting, assignment, licensing, or short-term hosting of any kind is strictly prohibited; violation triggers immediate lease forfeiture and $2,000 fine.",
@@ -407,10 +409,13 @@ OFFER_PATTERNS = {
         ],
         "needs_review": [
             "For twelve (12) months post-employment, employee shall not accept employment with direct enterprise competitors within the metropolitan area.",
+            "During your employment and for 12 months following termination, you agree not to compete with the Company.",
+            "During your employment and for twelve (12) months following termination, employee agrees not to engage in competing business activities.",
         ],
         "unfavorable": [
             "Employee agrees not to work in any capacity for any technology, finance, or retail company globally for three (3) full years post-separation.",
             "Breach of the global non-compete clause triggers immediate liquidated damages of $250,000, preliminary injunction without bond, and all legal costs.",
+            "Employee is prohibited from working for any competitor or client anywhere in the nation for five (5) years following departure.",
         ],
     },
 }
@@ -437,12 +442,14 @@ INSURANCE_PATTERNS = {
     "exclusions": {
         "fair": [
             "We do not cover loss caused directly or indirectly by: flood, surface water, waves, tidal water, or water which backs up through sewers.",
+            "We do not insure for loss caused directly or indirectly by water damage, flood, or earth movement.",
             "Exclusions include intentional acts committed by any Insured, acts of war, nuclear contamination, and civil insurrection.",
             "This policy excludes ordinary wear and tear, rust, deterioration, dry rot, industrial smog, and continuous water seepage exceeding 14 days.",
         ],
         "needs_review": [
             "Loss occurring while the residence premises has been vacant or unoccupied for more than thirty (30) consecutive days is excluded from coverage.",
             "Damage arising from off-premises utility failure, earth movement, and contractor design defects is excluded from policy protection.",
+            "We do not insure for loss caused directly or indirectly by mechanical breakdown or gradual deterioration.",
         ],
         "unfavorable": [
             "Anti-concurrent causation clause: If an excluded event contributes in any degree to a loss, the entire claim is excluded in its entirety.",

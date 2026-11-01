@@ -28,7 +28,11 @@ def get_baseline_model(document_type: str, task: str = "clause_type"):
     model_path = ml_dir / f"baseline_tfidf_lr_{task}.joblib"
 
     if not model_path.exists():
-        model_path = ml_dir.parent / f"baseline_tfidf_lr.joblib"
+        fallback_dir = get_models_dir() / "rental_agreement"
+        if (fallback_dir / f"baseline_tfidf_lr_{task}.joblib").exists():
+            model_path = fallback_dir / f"baseline_tfidf_lr_{task}.joblib"
+        else:
+            model_path = ml_dir.parent / f"baseline_tfidf_lr.joblib"
 
     if not model_path.exists():
         logger.warning(f"Baseline model not found at {model_path}")

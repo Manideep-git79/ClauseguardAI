@@ -1,0 +1,32 @@
+{
+  "status": "RESEARCH_COMPLETE",
+  "timestamp": "2026-09-29 21:41:18",
+  "best_configuration": {
+    "model": "distilbert-base-uncased",
+    "sequence_length": 256,
+    "context_strategy": "target_only",
+    "learning_rate": 5e-05,
+    "batch_size": 8,
+    "epochs": 4,
+    "weight_decay": 0.01,
+    "dropout": 0.2
+  },
+  "validation_scores": {
+    "rental_agreement": 0.9325,
+    "job_offer_letter": 0.9059,
+    "insurance_policy": 0.8131
+  },
+  "validation_mean_macro_f1": 0.8838,
+  "test_scores": {
+    "rental_agreement": 0.914,
+    "job_offer_letter": 0.8636,
+    "insurance_policy": 0.852
+  },
+  "test_mean_macro_f1": 0.8765,
+  "seed_stability_std": 0.0069,
+  "bootstrap_significance": {
+    "rental_agreement": "Uncertain / Overlaps Zero",
+    "job_offer_letter": "Uncertain / Overlaps Zero",
+    "insurance_policy": "Statistically Supported Improvement"
+  }
+}

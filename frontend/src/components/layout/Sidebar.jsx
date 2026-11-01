@@ -8,6 +8,7 @@ import {
   Bot,
   Activity,
   BookOpen,
+  GitFork,
   LogOut,
   User,
   ChevronRight,
@@ -30,10 +31,10 @@ export function Sidebar({ currentView, onNavigate }) {
         { id: "upload", label: "Upload Document", icon: UploadCloud, path: "/upload" },
         {
           id: "chat",
-          label: "AI Legal Copilot",
+          label: "Deciva AI",
           icon: Bot,
           path: "/chat",
-          badge: "AI Copilot",
+          badge: "Deciva",
           badgeColor: "bg-neutral-100 text-neutral-800 border-neutral-300",
         },
       ],
@@ -41,6 +42,14 @@ export function Sidebar({ currentView, onNavigate }) {
     {
       group: "GOVERNANCE & HELP",
       items: [
+        {
+          id: "architecture",
+          label: "Architecture Flow",
+          icon: GitFork,
+          path: "/architecture/flow",
+          badge: "Code",
+          badgeColor: "bg-neutral-100 text-neutral-800 border-neutral-300",
+        },
         {
           id: "audit",
           label: "Audit & Trail",

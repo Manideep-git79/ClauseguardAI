@@ -1,0 +1,16 @@
+{
+  "best_experiment": "7C_concat_fusion",
+  "best_val_f1": 0.9378,
+  "seed_mean": 0.9384,
+  "seed_std": 0.0029698484809834976,
+  "architecture": "7C_concat_fusion",
+  "phase6_baseline_config": {
+    "model": "distilbert-base-uncased",
+    "max_length": 96,
+    "lr": 5e-05,
+    "batch": 8,
+    "epochs": 4,
+    "weight_decay": 0.01,
+    "warmup": 0.0
+  }
+}

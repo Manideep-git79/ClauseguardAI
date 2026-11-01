@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from app.config import Config
 from app.extensions import db, migrate, cors
@@ -5,6 +6,22 @@ from app.extensions import db, migrate, cors
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    is_prod = (
+        app.config.get("FLASK_ENV") == "production"
+        or os.environ.get("FLASK_ENV") == "production"
+    )
+    if is_prod:
+        if not (app.config.get("JWT_SECRET") or app.config.get("SECRET_KEY")):
+            raise RuntimeError(
+                "CRITICAL SECURITY CONFIGURATION ERROR: Neither JWT_SECRET nor SECRET_KEY "
+                "is configured. Production startup aborted to prevent unauthenticated access."
+            )
+        if not app.config.get("FIELD_ENCRYPTION_KEY"):
+            raise RuntimeError(
+                "CRITICAL SECURITY CONFIGURATION ERROR: FIELD_ENCRYPTION_KEY "
+                "is not configured. Production startup aborted to prevent unencrypted or corrupted data at rest."
+            )
 
     db.init_app(app)
     migrate.init_app(app, db)

@@ -1,0 +1,18 @@
+COMMERCIAL VENDOR SERVICES AGREEMENT
+
+This Agreement is entered into by and between Enterprise Buyer Corp ("Buyer") and Rapid Vendor LLC ("Vendor").
+
+SECTION 1: UNILATERAL INDEMNIFICATION AND LIABILITY ALLOCATION
+1.1 Broad Indemnification: Buyer shall defend, indemnify, and hold harmless Vendor, its officers, directors, employees, and agents from and against any and all claims, demands, losses, costs, expenses, liabilities, and damages of any nature whatsoever, including attorneys' fees, arising directly or indirectly out of or in connection with this Agreement or the products provided, regardless of fault or negligence.
+1.2 Limitation of Liability: Vendor's total aggregate liability for all claims arising out of or related to this Agreement shall under no circumstances exceed the total sum of twenty-five dollars ($25.00). In no event shall Vendor be liable for any lost profits, punitive, indirect, or incidental damages.
+
+SECTION 2: CONFLICTING NOTICE PROVISIONS AND TERMINATION
+2.1 Termination for Convenience: Buyer may terminate this Agreement without cause only upon providing sixty (60) days prior written notice to Vendor.
+2.2 Expedited Notice Provision: Any notice of termination or cancellation may be served by either party upon ten (10) days written notice transmitted via email.
+
+SECTION 3: INCOMPLETE OBLIGATION AND AMBIGUOUS MILESTONES
+3.1 Milestone Delivery: Vendor shall deliver the software infrastructure migration deliverables on or before, provided however that Buyer has completed prerequisite server provisioning.
+
+SECTION 4: ESSENTIAL TIMING AND SEVERABILITY
+4.1 Time is of the essence.
+4.2 Modification: Vendor reserves the unilateral right to amend these terms, pricing schedules, and operational parameters at any time upon posting revised terms to its website.

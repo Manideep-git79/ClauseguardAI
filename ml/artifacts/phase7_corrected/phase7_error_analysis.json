@@ -1,0 +1,902 @@
+[
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0009",
+    "clause_id": "synth_rental_agreement_0009_c00189",
+    "target_clause": "As per this agreement, This lease shall automatically renew on a month-to-month basis unless either party provides 30 days' written notice. This provision is binding on all parties.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "termination",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0016",
+    "clause_id": "synth_rental_agreement_0016_c00334",
+    "target_clause": "As per this agreement, Tenant has the option to renew for one additional year at a rent increase not to exceed 5%, subject to Landlord's approval.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "termination",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0016",
+    "clause_id": "synth_rental_agreement_0016_c00339",
+    "target_clause": "Furthermore, This lease shall automatically renew on a month-to-month basis unless either party provides 30 days' written notice.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "termination",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0016",
+    "clause_id": "synth_rental_agreement_0016_c00331",
+    "target_clause": "In accordance with applicable law, Landlord reserves the right to file legal action in any court of competent jurisdiction at Landlord's sole discretion.",
+    "true_label": "pet_policy",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0034",
+    "clause_id": "synth_rental_agreement_0034_c00691",
+    "target_clause": "It is agreed that Tenant shall maintain renter's insurance with personal property coverage throughout the lease term.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "indemnification",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0034",
+    "clause_id": "synth_rental_agreement_0034_c00690",
+    "target_clause": "Furthermore, Landlord shall maintain adequate property insurance on the building structure throughout the lease term.",
+    "true_label": "indemnification",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0036",
+    "clause_id": "synth_rental_agreement_0036_c00736",
+    "target_clause": "As per this agreement, Landlord reserves the right to file legal action in any court of competent jurisdiction at Landlord's sole discretion.",
+    "true_label": "pet_policy",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0023",
+    "target_clause": "OWNERS AGENTS AND ACCESS: <PERSON>(s) may be represented by an agent who will carry identification. Resident(s) specifically agrees to permit the Owner(s) or agent(s) access to the premises for the pu",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "entry_notice_access",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0017",
+    "target_clause": "PHONE: Resident(s) may install and maintain telephone service, and agrees to furnish to the owner the phone number, and any changes, within 3 days after installation.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0013",
+    "target_clause": "CLEANING: Resident(s) accepts premises in its current state of cleanliness and agrees to return it in a like condition.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0029",
+    "target_clause": "REPUBLIC OF THE PHILIPPINES} CITY OF MANILA}",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "pet_policy",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0012",
+    "target_clause": "MAINTENANCE: Resident(s) agrees to maintain the premises during the period of this agreement. This includes woodwork, ceilings, walls, floors, furnishings and fixtures, appliances, windows, screens do",
+    "true_label": "security_deposit",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0008",
+    "target_clause": "SUBLETTING: Without first requesting permission from the Owner(s), Resident(s) agrees not to assign this agreement, nor to sub-let any part of the property, nor to allow any other person to live there",
+    "true_label": "termination",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0032",
+    "target_clause": "SCHEDULE OF PAYMENT of 11 PDCs from June 20, 2007 to May 20, 2007: Failure to FUFILL THIS PROMISED AS STATED ABOVE will result to Resident(s) and other occupants to freely and voluntarily self evict t",
+    "true_label": "termination",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0014",
+    "target_clause": "REMOVAL OF PROPERTY: Resident(s) agrees not to remove or alter in any way Owner(s)'s property without first requesting permission from the Owner(s). Any removal or alteration of Owner(s)'s property wi",
+    "true_label": "termination",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0011",
+    "target_clause": "9. ACCEPTANCE OF PROPERTY: Resident(s) accepts the \"AS IS\" condition of the property, waiving inspection of same by Owner(s) and agrees to notify Owner(s) of any defects. Resident(s) further agrees to",
+    "true_label": "entry_notice_access",
+    "predicted_label": "indemnification",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0030",
+    "target_clause": "BEFORE ME, a <PERSON>, for and in Manila personally appeared the following persons: known to me and to me known to be the same persons who executed the foregoing instrument and acknowledgement to me t",
+    "true_label": "pet_policy",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129_House_Rental_Contract_Geraldine_Galin",
+    "clause_id": "user_6683129_House_Rental_Contract_Geraldine_Galin_c0025",
+    "target_clause": "LEGAL CONTRACT: This is a legally binding contract. If you do not understand any part of this contract, seek competent legal advice before signing.",
+    "true_label": "pet_policy",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_95421373_Agreement_pdf",
+    "clause_id": "user_95421373_Agreement_pdf_c0012",
+    "target_clause": "PARKING: The TENANT is entitled to park 1 cars & 1 2 Wheelers (1 or 2 in No.) in the space provided in the <PERSON>.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "pet_policy",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_95421373_Agreement_pdf",
+    "clause_id": "user_95421373_Agreement_pdf_c0015",
+    "target_clause": "RIGHT TO INSPECT: The TENANT shall allow the LANDLORD or his / her representative for inspection of the SCHEDULE PREMISES or to make any repairs, additions, or alterations, if any, of his / her choice",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_95421373_Agreement_pdf",
+    "clause_id": "user_95421373_Agreement_pdf_c0016",
+    "target_clause": "TERMINATION : After expiry of the leasing period, this agreement is automatically renewed for a <PERSON> period of 11 (Eleven) months, written notice, intention to terminate 2 month's rent to the LAND",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "termination",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_95421373_Agreement_pdf",
+    "clause_id": "user_95421373_Agreement_pdf_c0009",
+    "target_clause": "ELECTRICITY CHARGES: <PERSON> having 3 phase connection and a separate Energy meter. The TENANT shall pay the electricity consumption charges directly to the concerned authorities before the due date.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "utilities",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_95421373_Agreement_pdf",
+    "clause_id": "user_95421373_Agreement_pdf_c0002",
+    "target_clause": "AND Mr. Jeyanth B, S/o. Balasundaram C aged 30 years, working as a software Engineer, <PERSON> Solutions ,Chennai., having permanent residence at No 5/856, Lakeview 3rd Street, <PERSON>, <PERSON> - 91",
+    "true_label": "subletting",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0045",
+    "clause_id": "synth_rental_agreement_0045_c00904",
+    "target_clause": "The parties acknowledge that Short-term rental of the premises through any platform is strictly prohibited. This provision is binding on all parties.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "entry_notice_access",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0045",
+    "clause_id": "synth_rental_agreement_0045_c00917",
+    "target_clause": "It is agreed that Any unauthorized assignment or subletting shall constitute a material breach and grounds for immediate eviction.",
+    "true_label": "termination",
+    "predicted_label": "subletting",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0057",
+    "clause_id": "synth_rental_agreement_0057_c01149",
+    "target_clause": "For the avoidance of doubt, Tenant shall maintain renter's insurance with personal property coverage throughout the lease term.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "indemnification",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0057",
+    "clause_id": "synth_rental_agreement_0057_c01151",
+    "target_clause": "It is agreed that Landlord may elect not to renew this lease for any reason with 60 days' notice prior to expiration.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "termination",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0057",
+    "clause_id": "synth_rental_agreement_0057_c01146",
+    "target_clause": "It is agreed that Tenant shall make no structural alterations to the premises without prior written consent from Landlord.",
+    "true_label": "rent_payment_terms",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_rental_agreement_0057",
+    "clause_id": "synth_rental_agreement_0057_c01146",
+    "target_clause": "In accordance with applicable law, Landlord shall maintain adequate property insurance on the building structure throughout the lease term. This provision is binding on all parties.",
+    "true_label": "indemnification",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "ca_dre_residential_lease_01",
+    "clause_id": "ca_dre_residential_lease_01_c10",
+    "target_clause": "SECTION 11: ALTERATIONS AND IMPROVEMENTS Tenant shall make no structural alterations, painting, wallpapering, or installation of permanent fixtures without <PERSON>'s prior written permission. Any alt",
+    "true_label": "termination",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "ca_dre_residential_lease_01",
+    "clause_id": "ca_dre_residential_lease_01_c14",
+    "target_clause": "SECTION 15: DISPUTE RESOLUTION AND MEDIATION Prior to initiating any civil lawsuit arising under this agreement, <PERSON> and <PERSON> agree to submit any unresolved dispute to voluntary mediation adm",
+    "true_label": "pet_policy",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "ca_dre_residential_lease_01",
+    "clause_id": "ca_dre_residential_lease_01_c00",
+    "target_clause": "SECTION 1: PARTIES AND PREMISES This Lease Agreement is made on June 1, 2024, by and between <LOCATION> Properties LLC ('<PERSON>') and <PERSON> ('Tenant'), for the real property situated at 742 Everg",
+    "true_label": "pet_policy",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "wa_seattle_housing_lease_05",
+    "clause_id": "wa_seattle_housing_lease_05_c13",
+    "target_clause": "SECTION 14: DISPUTE RESOLUTION AND MEDIATION Parties agree to seek resolution through <LOCATION> Seattle Housing Dispute Resolution Center before initiating eviction litigation in court.",
+    "true_label": "termination",
+    "predicted_label": "pet_policy",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "wa_seattle_housing_lease_05",
+    "clause_id": "wa_seattle_housing_lease_05_c10",
+    "target_clause": "SECTION 11: ALTERATIONS AND FIXTURES Tenant shall make no alterations, painting, or physical modifications without <PERSON>'s prior written approval. Unauthorized alterations must be restored at Tenan",
+    "true_label": "pet_policy",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "fl_bar_approved_lease_14",
+    "clause_id": "fl_bar_approved_lease_14_c09",
+    "target_clause": "SECTION 10: ALTERATIONS RESTRICTION Tenant shall make no alterations, painting, or wallpapering without prior written consent of <LOCATION>.",
+    "true_label": "pet_policy",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "tx_taa_sample_lease_02",
+    "clause_id": "tx_taa_sample_lease_02_c11",
+    "target_clause": "12. DISPUTE RESOLUTION AND JURY TRIAL WAIVER Resident and Owner knowingly and voluntarily waive any right to a trial by jury in any lawsuit arising out of or related to this Lease Contract. All disput",
+    "true_label": "pet_policy",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "tx_taa_sample_lease_02",
+    "clause_id": "tx_taa_sample_lease_02_c01",
+    "target_clause": "2. RENT AND CHARGES Resident agrees to pay $1,650.00 per month for rent, payable on or before the 1st day of each month with no grace period. If rent is not received by 11:59 PM on the 3rd day of the ",
+    "true_label": "late_fees_penalty",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "uc_berkeley_sls_lease_10",
+    "clause_id": "uc_berkeley_sls_lease_10_c09",
+    "target_clause": "CLAUSE 10: ALTERATIONS RESTRICTION Tenant shall make no structural alterations, painting, or lock changes without prior written approval of <LOCATION>.",
+    "true_label": "pet_policy",
+    "predicted_label": "maintenance_repairs",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_269137702_Rental_Agreement_pdf",
+    "clause_id": "user_269137702_Rental_Agreement_pdf_c0003",
+    "target_clause": "1. Whereas the Tenant has paid Advance amount of <MONEY>/- ( Forty thousand only ). to the owner. This amount shall not carry any interest and this is refundable at the time vacating.. If any arrears ",
+    "true_label": "termination",
+    "predicted_label": "security_deposit",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129-house-rental-contract-geraldine-ga",
+    "clause_id": "user_6683129-house-rental-contract-geraldine-ga_c015",
+    "target_clause": "UTILITIES: Resident(s) shall be responsible for payments of all utilities, electricity, water and sewer charges, association dues, telephone or other bills incurred during their residency. They specif",
+    "true_label": "security_deposit",
+    "predicted_label": "utilities",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129-house-rental-contract-geraldine-ga",
+    "clause_id": "user_6683129-house-rental-contract-geraldine-ga_c017",
+    "target_clause": "VEHICLES: Resident(s) agrees to park ONLY ON THE PAVED DRIVEWAY PROVIDED his/her automobile described as follows: Resident(s) agrees that no vehicle may be repaired in the paved driveway.",
+    "true_label": "maintenance_repairs",
+    "predicted_label": "pet_policy",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "user_6683129-house-rental-contract-geraldine-ga",
+    "clause_id": "user_6683129-house-rental-contract-geraldine-ga_c023",
+    "target_clause": "ACKNOWLEDGMENT: In this agreement the Singular number where used will also include the Plural, the Masculine gender will include the Feminine, the terms Owner, Owners, and Owner(s) will include Landlo",
+    "true_label": "subletting",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "rental_agreement",
+    "doc_id": "synth_scenario_rental_agreement_termination_545",
+    "clause_id": "synth_ren_term_0259",
+    "target_clause": "Paragraph S.3: Upon lease expiration, tenancy converts to month-to-month terminable by either party upon thirty (30) calendar days written notice.",
+    "true_label": "termination",
+    "predicted_label": "rent_payment_terms",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0047",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0026",
+    "target_clause": "OFFER LETTER of \"<PERSON>\" and require you to join on or before following are the terms and conditions of our Compa ny M/s <PERSON> Pvt . Ltd. 68 ,000 /- (<PERSON> Eight Thousand Your designation is m",
+    "true_label": "compensation_salary",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0022",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0002",
+    "target_clause": "OFFER LETTER of \"<PERSON>\" and require you to join on or before following are the terms and conditions of our Compa ny M/s <PERSON> Pvt . Ltd. 68 ,000 /- (<PERSON> Eight Thousand Your designation is m",
+    "true_label": "compensation_salary",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0054",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0039",
+    "target_clause": "OFFER LETTER <PERSON> , of \"<PERSON>\" and require you to join on or before following are the terms and conditions of our Compa ny M/s <PERSON> Pvt . Ltd. 68 ,000 /- (<PERSON> Eight Thousand Your desig",
+    "true_label": "compensation_salary",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0032",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0069",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0010",
+    "target_clause": "OFFER LETTER of \"<PERSON>\" and require you to join on or before following are the terms and conditions of our Compa ny M/s <PERSON> Pvt . Ltd. 68 ,000 /- (<PERSON> Eight Thousand Your designation is m",
+    "true_label": "compensation_salary",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0066",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0014",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0070",
+    "target_clause": "OFFER LETTER of \"<PERSON>\" and require you to join on or before following are the terms and conditions of our Compa ny M/s <PERSON> Pvt . Ltd. 68 ,000 /- (<PERSON> Eight Thousand Your designation is m",
+    "true_label": "compensation_salary",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0034",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0007",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0049",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0024",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c001",
+    "target_clause": "OFFER LETTER <PERSON>/Ms. <PERSON>, We are pleased to offer you the position of \"\"SSaalleess EExxeeccuuttiivvee\" and reeqquuiirree yyoouu ttoo jjooiinn oonn oorr bbeeffoorree 4th December 2017. TThhee",
+    "true_label": "compensation_salary",
+    "predicted_label": "job_title_role",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0060",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c000",
+    "target_clause": "OFFER LETTER <PERSON>. A.Akhila, We are pleased to offer you the position ooff \"<PERSON>\" and require you to join on or bbeeffoorree 26th Dec 2018. The ffoolllloowwiinngg aarree tthhee tteerrmmss aann",
+    "true_label": "compensation_salary",
+    "predicted_label": "job_title_role",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0030",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0062",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0045",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0038",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0056",
+    "target_clause": "<PERSON> & Regulations - You will be entitled to leave in accordance with the <PERSON>. - Increments are not automatic but will be based solely on efficient, satisfactory and loyal discharge of duties",
+    "true_label": "compensation_salary",
+    "predicted_label": "termination_conditions",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0044",
+    "target_clause": "OFFER LETTER \"<PERSON> \" and r equire you to join on or before The following are the terms and conditions of our Company M/s <PERSON> Pvt . Ltd. <MONEY>/ - (<PERSON> Hundred Your designation is merely",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0009",
+    "target_clause": "<PERSON>. <PERSON>, We are pleased to offer you the position of The following are the terms and conditions of our Compa ny <PERSON> per annum is <MONEY> Code of Conduct - Your designation is merely in",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0046",
+    "target_clause": "OFFER LETTER \"Sales Executive\" and r equire you to join on or before The following are the terms and conditions of our Company M/s <PERSON> Pvt . Ltd. <MONEY>/ - (<PERSON> Lakh seventy <PERSON> Hundre",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0001",
+    "target_clause": "<PERSON>. A.Akhila, We are pleased to offer you the position of The following are the terms and conditions of our Compa ny <PERSON> per annum is <MONEY> Code of Conduct - Your designation is merely in",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0003",
+    "target_clause": "<PERSON>/Ms. <PERSON>, We are pleased to offer you the position of \"<PERSON> The following are the terms and conditions of our Company <PERSON> per annum is <MONEY>/ Only). Code of Conduct - Your desi",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0025",
+    "target_clause": "<PERSON>. M.<PERSON>, We are pleased to offer you the position of The following are the terms and conditions of our Compa ny <PERSON> per annum is <MONEY> Code of Conduct - Your designation is merely ",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0006",
+    "target_clause": "OFFER LETTER \"<PERSON> \" and r equire you to join on or before The following are the terms and conditions of our Company M/s <PERSON> Pvt . Ltd. <MONEY> 00/- (<PERSON> Hundred Your designation is mere",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0004",
+    "target_clause": "OFFER LETTER \"<PERSON> \" and r equire you to join on or before The following are the terms and conditions of our Company M/s <PERSON> Pvt . Ltd. <MONEY>/ - (<PERSON> Hundred Your designation is merely",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "user_aliens_group_offer_letters",
+    "clause_id": "user_aliens_group_offer_letters_c0048",
+    "target_clause": "OFFER LETTER \"Sales Executive\" and r equire you to join on or before The following are the terms and conditions of our Company M/s <PERSON> Pvt . Ltd. <MONEY>/ - (<PERSON> Lakh seventy <PERSON> Hundre",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0009",
+    "clause_id": "synth_job_offer_letter_0009_c00194",
+    "target_clause": "For the avoidance of doubt, Annual merit increases are not guaranteed and depend entirely on performance ratings and company budget availability. This provision is binding on all parties.",
+    "true_label": "compensation_salary",
+    "predicted_label": "benefits_overview",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0009",
+    "clause_id": "synth_job_offer_letter_0009_c00199",
+    "target_clause": "The parties acknowledge that Reporting lines and team assignments may change based on the Company's evolving structure. This provision is binding on all parties.",
+    "true_label": "job_title_role",
+    "predicted_label": "benefits_overview",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0009",
+    "clause_id": "synth_job_offer_letter_0009_c00182",
+    "target_clause": "For the avoidance of doubt, Your employment will commence with a six-month probation period. During probation, either party may terminate with seven days' notice. This provision is binding on all part",
+    "true_label": "benefits_overview",
+    "predicted_label": "termination_conditions",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0006",
+    "clause_id": "synth_job_offer_letter_0006_c00136",
+    "target_clause": "The parties acknowledge that Performance expectations during probation will be communicated by your manager within the first week.",
+    "true_label": "job_title_role",
+    "predicted_label": "start_date_contingencies",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0006",
+    "clause_id": "synth_job_offer_letter_0006_c00125",
+    "target_clause": "It is agreed that You are expected to report to the HR department on your first day. Your access credentials will be ready within 48 hours. This provision is binding on all parties.",
+    "true_label": "benefits_overview",
+    "predicted_label": "start_date_contingencies",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0006",
+    "clause_id": "synth_job_offer_letter_0006_c00131",
+    "target_clause": "Subject to the terms herein, Employee stock options will be granted subject to a standard vesting schedule with a one-year cliff. This provision is binding on all parties.",
+    "true_label": "benefits_overview",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0036",
+    "clause_id": "synth_job_offer_letter_0036_c00721",
+    "target_clause": "Furthermore, Performance expectations during probation will be communicated by your manager within the first week. This provision is binding on all parties.",
+    "true_label": "benefits_overview",
+    "predicted_label": "start_date_contingencies",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0033",
+    "clause_id": "synth_job_offer_letter_0033_c00665",
+    "target_clause": "Subject to the terms herein, Your total fixed compensation includes an annual bonus of up to fifteen percent of base salary based on performance. This provision is binding on all parties.",
+    "true_label": "compensation_salary",
+    "predicted_label": "bonus_incentive",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0033",
+    "clause_id": "synth_job_offer_letter_0033_c00660",
+    "target_clause": "For the avoidance of doubt, This offer is for the role of Data Analyst. Actual responsibilities may differ from those described in the job posting. This provision is binding on all parties.",
+    "true_label": "job_title_role",
+    "predicted_label": "benefits_overview",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0033",
+    "clause_id": "synth_job_offer_letter_0033_c00668",
+    "target_clause": "Subject to the terms herein, You hereby assign all intellectual property rights in work created within the scope of your employment to the Company.",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0033",
+    "clause_id": "synth_job_offer_letter_0033_c00671",
+    "target_clause": "For the avoidance of doubt, You are entitled to earned leave, sick leave, and public holidays as per company policy. This provision is binding on all parties.",
+    "true_label": "job_title_role",
+    "predicted_label": "benefits_overview",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0025",
+    "clause_id": "synth_job_offer_letter_0025_c00514",
+    "target_clause": "In accordance with applicable law, Annual merit increases are not guaranteed and depend entirely on performance ratings and company budget availability. This provision is binding on all parties.",
+    "true_label": "compensation_salary",
+    "predicted_label": "benefits_overview",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0025",
+    "clause_id": "synth_job_offer_letter_0025_c00510",
+    "target_clause": "Subject to the terms herein, The Company provides a group term life insurance policy.",
+    "true_label": "job_title_role",
+    "predicted_label": "benefits_overview",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_job_offer_letter_0025",
+    "clause_id": "synth_job_offer_letter_0025_c00505",
+    "target_clause": "In accordance with applicable law, Your employment will commence with a six-month probation period. During probation, either party may terminate with seven days' notice. This provision is binding on a",
+    "true_label": "benefits_overview",
+    "predicted_label": "termination_conditions",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "texas_dir_offer_11",
+    "clause_id": "texas_dir_offer_11_c10",
+    "target_clause": "11. INTERNAL GRIEVANCE PROCEDURE Employment concerns may be addressed through the DIR Employee Dispute Resolution Procedure.",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "uw_hr_offer_06",
+    "clause_id": "uw_hr_offer_06_c05",
+    "target_clause": "6. EXPIRATION DATE Offer expires five (5) business days after receipt.",
+    "true_label": "start_date_contingencies",
+    "predicted_label": "termination_conditions",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "uw_hr_offer_06",
+    "clause_id": "uw_hr_offer_06_c03",
+    "target_clause": "4. PATENT ASSIGNMENT POLICY All inventions and software source code created within your scope of employment belong to the University of Washington.",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "uw_hr_offer_06",
+    "clause_id": "uw_hr_offer_06_c10",
+    "target_clause": "11. GRIEVANCE AND DISPUTE RESOLUTION Employment concerns may be addressed through the University of Washington Staff Complaint and Grievance Procedure.",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "uw_hr_offer_06",
+    "clause_id": "uw_hr_offer_06_c07",
+    "target_clause": "8. MERIT INCENTIVE AND SALARY REVIEW Staff salaries are reviewed annually for merit adjustments in accordance with university compensation policies and legislative funding.",
+    "true_label": "bonus_incentive",
+    "predicted_label": "compensation_salary",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "stanford_staff_offer_04",
+    "clause_id": "stanford_staff_offer_04_c01",
+    "target_clause": "2. COMPENSATION AND BONUS Your annual starting salary is $165,000.00. In addition, you will be eligible for a discretionary annual bonus of up to 10% based on project milestones.",
+    "true_label": "compensation_salary",
+    "predicted_label": "bonus_incentive",
+    "error_category": "domain_specific_ambiguity"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "stanford_staff_offer_04",
+    "clause_id": "stanford_staff_offer_04_c03",
+    "target_clause": "4. INTELLECTUAL PROPERTY AGREEMENT (SU-18) You must execute the Stanford University Patent and Copyright Agreement (Form SU-18), assigning rights to inventions created under university auspices.",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "stanford_staff_offer_04",
+    "clause_id": "stanford_staff_offer_04_c04",
+    "target_clause": "5. DISPUTE RESOLUTION PROCEDURE Any employment disputes shall be resolved pursuant to the Stanford Staff Grievance Policy prior to external administrative filings.",
+    "true_label": "job_title_role",
+    "predicted_label": "confidentiality_nda",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "stanford_staff_offer_04",
+    "clause_id": "stanford_staff_offer_04_c10",
+    "target_clause": "11. RESIGNATION AND SEPARATION TERMS Staff appointments are at-will. We request at least four (4) weeks written advance notice of resignation to facilitate transition of projects.",
+    "true_label": "termination_conditions",
+    "predicted_label": "at_will_employment",
+    "error_category": "general_misclassification"
+  },
+  {
+    "domain": "job_offer_letter",
+    "doc_id": "synth_scenario_job_offer_letter_at_will_employment_240",
+    "clause_id": "synth_job_at_w_0081",
+    "target_clause": "Section 1.4 Employment is at-will for the Company, permitting instant discharge without cause or severance; however, employee must give 90 days notice or forfeit all wages. Any dispute arising hereund",
+    "true_label": "at_will_employment",
+    "predicted_label": "termination_conditions",
+    "error_category": "general_misclassification"
+  }
+]

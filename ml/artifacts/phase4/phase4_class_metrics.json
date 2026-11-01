@@ -1,0 +1,188 @@
+{
+  "rental_agreement": {
+    "entry_notice_access": {
+      "raw_f1": 0.9074,
+      "preprocessed_f1": 0.9074,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "indemnification": {
+      "raw_f1": 0.8696,
+      "preprocessed_f1": 0.8696,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "late_fees_penalty": {
+      "raw_f1": 0.9346,
+      "preprocessed_f1": 0.9346,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "maintenance_repairs": {
+      "raw_f1": 0.8235,
+      "preprocessed_f1": 0.8235,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "pet_policy": {
+      "raw_f1": 0.8409,
+      "preprocessed_f1": 0.8409,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "rent_payment_terms": {
+      "raw_f1": 0.5747,
+      "preprocessed_f1": 0.5747,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "security_deposit": {
+      "raw_f1": 0.898,
+      "preprocessed_f1": 0.898,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "subletting": {
+      "raw_f1": 0.9505,
+      "preprocessed_f1": 0.9505,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "termination": {
+      "raw_f1": 0.7957,
+      "preprocessed_f1": 0.7957,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "utilities": {
+      "raw_f1": 0.9709,
+      "preprocessed_f1": 0.9709,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    }
+  },
+  "job_offer_letter": {
+    "at_will_employment": {
+      "raw_f1": 0.9149,
+      "preprocessed_f1": 0.9149,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "benefits_overview": {
+      "raw_f1": 0.8679,
+      "preprocessed_f1": 0.8679,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "bonus_incentive": {
+      "raw_f1": 0.9333,
+      "preprocessed_f1": 0.9333,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "compensation_salary": {
+      "raw_f1": 0.5789,
+      "preprocessed_f1": 0.5789,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "confidentiality_nda": {
+      "raw_f1": 0.9615,
+      "preprocessed_f1": 0.9515,
+      "delta_f1": -0.0101,
+      "status": "DEGRADED"
+    },
+    "job_title_role": {
+      "raw_f1": 0.6179,
+      "preprocessed_f1": 0.6129,
+      "delta_f1": -0.005,
+      "status": "DEGRADED"
+    },
+    "non_compete_non_solicit": {
+      "raw_f1": 0.8958,
+      "preprocessed_f1": 0.8958,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "start_date_contingencies": {
+      "raw_f1": 0.9697,
+      "preprocessed_f1": 0.9697,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "termination_conditions": {
+      "raw_f1": 0.8627,
+      "preprocessed_f1": 0.8627,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "working_hours_location": {
+      "raw_f1": 0.9474,
+      "preprocessed_f1": 0.9474,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    }
+  },
+  "insurance_policy": {
+    "cancellation_non_renewal": {
+      "raw_f1": 0.8317,
+      "preprocessed_f1": 0.8317,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "claims_process": {
+      "raw_f1": 0.3014,
+      "preprocessed_f1": 0.3014,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "coverage_scope": {
+      "raw_f1": 0.7647,
+      "preprocessed_f1": 0.7602,
+      "delta_f1": -0.0045,
+      "status": "DEGRADED"
+    },
+    "deductible_premium": {
+      "raw_f1": 0.338,
+      "preprocessed_f1": 0.338,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "dispute_resolution_appraisal": {
+      "raw_f1": 1.0,
+      "preprocessed_f1": 1.0,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "exclusions": {
+      "raw_f1": 0.2556,
+      "preprocessed_f1": 0.2576,
+      "delta_f1": 0.0019,
+      "status": "IMPROVED"
+    },
+    "grace_period": {
+      "raw_f1": 0.9892,
+      "preprocessed_f1": 0.9892,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "limits_of_liability": {
+      "raw_f1": 0.6596,
+      "preprocessed_f1": 0.6596,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "policy_period_renewal": {
+      "raw_f1": 0.9333,
+      "preprocessed_f1": 0.9333,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    },
+    "subrogation": {
+      "raw_f1": 0.9895,
+      "preprocessed_f1": 0.9895,
+      "delta_f1": 0.0,
+      "status": "UNCHANGED"
+    }
+  }
+}

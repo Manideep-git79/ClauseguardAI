@@ -38,13 +38,13 @@ export function StandaloneChat({ onNavigate }) {
           </div>
           <div>
             <h1 className="font-serif text-xl sm:text-2xl font-bold text-black flex items-center gap-2">
-              ClauseGuard AI Chat Copilot
+              Deciva - AI Legal Assistant
               <span className="text-[10px] font-mono border border-neutral-300 bg-neutral-100 text-black px-2 py-0.5 rounded font-semibold">
                 Grounded RAG
               </span>
             </h1>
             <p className="text-xs font-mono text-neutral-600 mt-1">
-              Ask legal copilot questions, analyze clauses, or inspect specific uploaded documents with verified citations.
+              Ask Deciva legal questions, analyze clauses, or inspect specific uploaded documents with verified citations.
             </p>
           </div>
         </div>
@@ -60,7 +60,7 @@ export function StandaloneChat({ onNavigate }) {
             disabled={loadingDocs}
             className="w-full sm:w-64 bg-white border border-neutral-300 text-black text-xs font-mono py-2 px-3 focus:outline-none focus:border-black rounded shadow-sm"
           >
-            <option value="">General Copilot Mode</option>
+            <option value="">General Deciva Mode</option>
             {documents.map((d) => (
               <option key={d.id} value={d.id}>
                 {d.filename} ({d.document_type ? d.document_type.replace("_", " ") : "Document"})

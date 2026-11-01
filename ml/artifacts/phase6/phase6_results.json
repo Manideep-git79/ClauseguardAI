@@ -1,0 +1,269 @@
+{
+  "rental_agreement": {
+    "validation_macro_f1": 0.9218,
+    "test_accuracy": 0.9002,
+    "test_macro_precision": 0.9013,
+    "test_macro_recall": 0.9007,
+    "test_macro_f1": 0.8977,
+    "test_weighted_f1": 0.8974,
+    "calibration": {
+      "mean_confidence_correct": 0.9336,
+      "mean_confidence_incorrect": 0.7402,
+      "ece": 0.0163,
+      "brier_score": 0.1677
+    },
+    "classification_report": {
+      "entry_notice_access": {
+        "precision": 0.9782608695652174,
+        "recall": 0.9,
+        "f1-score": 0.9375,
+        "support": 50.0
+      },
+      "indemnification": {
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "f1-score": 0.9523809523809523,
+        "support": 50.0
+      },
+      "late_fees_penalty": {
+        "precision": 0.9259259259259259,
+        "recall": 1.0,
+        "f1-score": 0.9615384615384616,
+        "support": 50.0
+      },
+      "maintenance_repairs": {
+        "precision": 0.8275862068965517,
+        "recall": 0.96,
+        "f1-score": 0.8888888888888888,
+        "support": 50.0
+      },
+      "pet_policy": {
+        "precision": 0.8823529411764706,
+        "recall": 0.9,
+        "f1-score": 0.8910891089108911,
+        "support": 50.0
+      },
+      "rent_payment_terms": {
+        "precision": 0.85,
+        "recall": 0.6666666666666666,
+        "f1-score": 0.7472527472527473,
+        "support": 51.0
+      },
+      "security_deposit": {
+        "precision": 0.9347826086956522,
+        "recall": 0.86,
+        "f1-score": 0.8958333333333334,
+        "support": 50.0
+      },
+      "subletting": {
+        "precision": 0.8571428571428571,
+        "recall": 0.96,
+        "f1-score": 0.9056603773584906,
+        "support": 50.0
+      },
+      "termination": {
+        "precision": 0.9047619047619048,
+        "recall": 0.76,
+        "f1-score": 0.8260869565217391,
+        "support": 50.0
+      },
+      "utilities": {
+        "precision": 0.9433962264150944,
+        "recall": 1.0,
+        "f1-score": 0.970873786407767,
+        "support": 50.0
+      },
+      "accuracy": 0.9001996007984032,
+      "macro avg": {
+        "precision": 0.9013300449670583,
+        "recall": 0.9006666666666666,
+        "f1-score": 0.897710461259327,
+        "support": 501.0
+      },
+      "weighted avg": {
+        "precision": 0.9012275897874833,
+        "recall": 0.9001996007984032,
+        "f1-score": 0.8974101464609107,
+        "support": 501.0
+      }
+    }
+  },
+  "job_offer_letter": {
+    "validation_macro_f1": 0.8838,
+    "test_accuracy": 0.864,
+    "test_macro_precision": 0.8754,
+    "test_macro_recall": 0.8649,
+    "test_macro_f1": 0.8651,
+    "test_weighted_f1": 0.8644,
+    "calibration": {
+      "mean_confidence_correct": 0.7721,
+      "mean_confidence_incorrect": 0.4781,
+      "ece": 0.1444,
+      "brier_score": 0.2185
+    },
+    "classification_report": {
+      "at_will_employment": {
+        "precision": 0.9787234042553191,
+        "recall": 0.92,
+        "f1-score": 0.9484536082474226,
+        "support": 50.0
+      },
+      "benefits_overview": {
+        "precision": 0.746031746031746,
+        "recall": 0.94,
+        "f1-score": 0.831858407079646,
+        "support": 50.0
+      },
+      "bonus_incentive": {
+        "precision": 0.9791666666666666,
+        "recall": 0.9591836734693877,
+        "f1-score": 0.9690721649484536,
+        "support": 49.0
+      },
+      "compensation_salary": {
+        "precision": 0.7297297297297297,
+        "recall": 0.5294117647058824,
+        "f1-score": 0.6136363636363636,
+        "support": 51.0
+      },
+      "confidentiality_nda": {
+        "precision": 0.9038461538461539,
+        "recall": 0.94,
+        "f1-score": 0.9215686274509803,
+        "support": 50.0
+      },
+      "job_title_role": {
+        "precision": 0.578125,
+        "recall": 0.74,
+        "f1-score": 0.6491228070175439,
+        "support": 50.0
+      },
+      "non_compete_non_solicit": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1-score": 0.8888888888888888,
+        "support": 50.0
+      },
+      "start_date_contingencies": {
+        "precision": 1.0,
+        "recall": 0.98,
+        "f1-score": 0.98989898989899,
+        "support": 50.0
+      },
+      "termination_conditions": {
+        "precision": 0.8958333333333334,
+        "recall": 0.86,
+        "f1-score": 0.8775510204081632,
+        "support": 50.0
+      },
+      "working_hours_location": {
+        "precision": 0.9423076923076923,
+        "recall": 0.98,
+        "f1-score": 0.9607843137254902,
+        "support": 50.0
+      },
+      "accuracy": 0.864,
+      "macro avg": {
+        "precision": 0.8753763726170641,
+        "recall": 0.864859543817527,
+        "f1-score": 0.8650835191301942,
+        "support": 500.0
+      },
+      "weighted avg": {
+        "precision": 0.8748774987431902,
+        "recall": 0.864,
+        "f1-score": 0.8643726475275701,
+        "support": 500.0
+      }
+    }
+  },
+  "insurance_policy": {
+    "validation_macro_f1": 0.6976,
+    "test_accuracy": 0.7866,
+    "test_macro_precision": 0.8125,
+    "test_macro_recall": 0.786,
+    "test_macro_f1": 0.7869,
+    "test_weighted_f1": 0.7813,
+    "calibration": {
+      "mean_confidence_correct": 0.8137,
+      "mean_confidence_incorrect": 0.4712,
+      "ece": 0.0481,
+      "brier_score": 0.3085
+    },
+    "classification_report": {
+      "cancellation_non_renewal": {
+        "precision": 0.9347826086956522,
+        "recall": 0.9347826086956522,
+        "f1-score": 0.9347826086956522,
+        "support": 46.0
+      },
+      "claims_process": {
+        "precision": 0.7058823529411765,
+        "recall": 0.7868852459016393,
+        "f1-score": 0.7441860465116279,
+        "support": 61.0
+      },
+      "coverage_scope": {
+        "precision": 0.6344086021505376,
+        "recall": 0.7866666666666666,
+        "f1-score": 0.7023809523809523,
+        "support": 75.0
+      },
+      "deductible_premium": {
+        "precision": 0.45901639344262296,
+        "recall": 0.6086956521739131,
+        "f1-score": 0.5233644859813084,
+        "support": 46.0
+      },
+      "dispute_resolution_appraisal": {
+        "precision": 0.9387755102040817,
+        "recall": 1.0,
+        "f1-score": 0.968421052631579,
+        "support": 46.0
+      },
+      "exclusions": {
+        "precision": 0.631578947368421,
+        "recall": 0.2608695652173913,
+        "f1-score": 0.36923076923076925,
+        "support": 46.0
+      },
+      "grace_period": {
+        "precision": 1.0,
+        "recall": 0.9565217391304348,
+        "f1-score": 0.9777777777777777,
+        "support": 46.0
+      },
+      "limits_of_liability": {
+        "precision": 0.9166666666666666,
+        "recall": 0.717391304347826,
+        "f1-score": 0.8048780487804879,
+        "support": 46.0
+      },
+      "policy_period_renewal": {
+        "precision": 1.0,
+        "recall": 0.8085106382978723,
+        "f1-score": 0.8941176470588236,
+        "support": 47.0
+      },
+      "subrogation": {
+        "precision": 0.9038461538461539,
+        "recall": 1.0,
+        "f1-score": 0.9494949494949495,
+        "support": 47.0
+      },
+      "accuracy": 0.7865612648221344,
+      "macro avg": {
+        "precision": 0.8124957235315312,
+        "recall": 0.7860323420431397,
+        "f1-score": 0.7868634338543928,
+        "support": 506.0
+      },
+      "weighted avg": {
+        "precision": 0.7996797702269441,
+        "recall": 0.7865612648221344,
+        "f1-score": 0.7812897835697559,
+        "support": 506.0
+      }
+    }
+  }
+}

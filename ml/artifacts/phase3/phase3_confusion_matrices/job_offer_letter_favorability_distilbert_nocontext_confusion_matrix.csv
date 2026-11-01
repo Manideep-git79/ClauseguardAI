@@ -1,0 +1,4 @@
+actual / predicted,fair,needs_review,unfavorable
+fair,171,25,4
+needs_review,33,103,20
+unfavorable,3,9,132

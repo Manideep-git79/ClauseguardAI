@@ -1,0 +1,219 @@
+{
+  "timestamp": "2026-09-29 21:25:22",
+  "dataset_integrity": {
+    "split_records": {
+      "train": 6924,
+      "validation": 1569,
+      "test": 1507
+    },
+    "total_records": 10000,
+    "doc_counts": {
+      "train": 4151,
+      "validation": 799,
+      "test": 844
+    },
+    "train_val_doc_overlap": 0,
+    "train_test_doc_overlap": 0,
+    "val_test_doc_overlap": 0,
+    "document_isolation_status": "PASS",
+    "train_test_exact_text_overlap_count": 0,
+    "val_test_exact_text_overlap_count": 0,
+    "class_distributions": {
+      "train": {
+        "rental_agreement::rent_payment_terms": 234,
+        "rental_agreement::security_deposit": 233,
+        "rental_agreement::termination": 233,
+        "rental_agreement::maintenance_repairs": 234,
+        "rental_agreement::entry_notice_access": 233,
+        "rental_agreement::subletting": 233,
+        "rental_agreement::pet_policy": 233,
+        "rental_agreement::late_fees_penalty": 233,
+        "rental_agreement::indemnification": 233,
+        "rental_agreement::utilities": 233,
+        "job_offer_letter::compensation_salary": 233,
+        "job_offer_letter::start_date_contingencies": 234,
+        "job_offer_letter::job_title_role": 230,
+        "job_offer_letter::benefits_overview": 233,
+        "job_offer_letter::confidentiality_nda": 233,
+        "job_offer_letter::termination_conditions": 233,
+        "job_offer_letter::bonus_incentive": 235,
+        "job_offer_letter::non_compete_non_solicit": 233,
+        "job_offer_letter::working_hours_location": 233,
+        "job_offer_letter::at_will_employment": 234,
+        "insurance_policy::coverage_scope": 151,
+        "insurance_policy::exclusions": 224,
+        "insurance_policy::deductible_premium": 223,
+        "insurance_policy::claims_process": 175,
+        "insurance_policy::cancellation_non_renewal": 249,
+        "insurance_policy::limits_of_liability": 248,
+        "insurance_policy::policy_period_renewal": 247,
+        "insurance_policy::dispute_resolution_appraisal": 249,
+        "insurance_policy::subrogation": 246,
+        "insurance_policy::grace_period": 249
+      },
+      "validation": {
+        "rental_agreement::rent_payment_terms": 49,
+        "rental_agreement::security_deposit": 51,
+        "rental_agreement::termination": 51,
+        "rental_agreement::maintenance_repairs": 50,
+        "rental_agreement::utilities": 50,
+        "rental_agreement::indemnification": 50,
+        "rental_agreement::pet_policy": 50,
+        "rental_agreement::entry_notice_access": 50,
+        "rental_agreement::subletting": 50,
+        "rental_agreement::late_fees_penalty": 50,
+        "job_offer_letter::compensation_salary": 50,
+        "job_offer_letter::job_title_role": 53,
+        "job_offer_letter::benefits_overview": 50,
+        "job_offer_letter::termination_conditions": 50,
+        "job_offer_letter::working_hours_location": 50,
+        "job_offer_letter::non_compete_non_solicit": 50,
+        "job_offer_letter::confidentiality_nda": 50,
+        "job_offer_letter::bonus_incentive": 49,
+        "job_offer_letter::start_date_contingencies": 50,
+        "job_offer_letter::at_will_employment": 50,
+        "insurance_policy::coverage_scope": 108,
+        "insurance_policy::exclusions": 64,
+        "insurance_policy::deductible_premium": 65,
+        "insurance_policy::claims_process": 97,
+        "insurance_policy::cancellation_non_renewal": 38,
+        "insurance_policy::limits_of_liability": 39,
+        "insurance_policy::dispute_resolution_appraisal": 38,
+        "insurance_policy::subrogation": 40,
+        "insurance_policy::policy_period_renewal": 39,
+        "insurance_policy::grace_period": 38
+      },
+      "test": {
+        "rental_agreement::rent_payment_terms": 51,
+        "rental_agreement::termination": 50,
+        "rental_agreement::maintenance_repairs": 50,
+        "rental_agreement::entry_notice_access": 50,
+        "rental_agreement::subletting": 50,
+        "rental_agreement::pet_policy": 50,
+        "rental_agreement::utilities": 50,
+        "rental_agreement::security_deposit": 50,
+        "rental_agreement::late_fees_penalty": 50,
+        "rental_agreement::indemnification": 50,
+        "job_offer_letter::compensation_salary": 51,
+        "job_offer_letter::job_title_role": 50,
+        "job_offer_letter::benefits_overview": 50,
+        "job_offer_letter::confidentiality_nda": 50,
+        "job_offer_letter::termination_conditions": 50,
+        "job_offer_letter::working_hours_location": 50,
+        "job_offer_letter::bonus_incentive": 49,
+        "job_offer_letter::non_compete_non_solicit": 50,
+        "job_offer_letter::start_date_contingencies": 50,
+        "job_offer_letter::at_will_employment": 50,
+        "insurance_policy::coverage_scope": 75,
+        "insurance_policy::exclusions": 46,
+        "insurance_policy::deductible_premium": 46,
+        "insurance_policy::claims_process": 61,
+        "insurance_policy::limits_of_liability": 46,
+        "insurance_policy::policy_period_renewal": 47,
+        "insurance_policy::cancellation_non_renewal": 46,
+        "insurance_policy::subrogation": 47,
+        "insurance_policy::dispute_resolution_appraisal": 46,
+        "insurance_policy::grace_period": 46
+      }
+    }
+  },
+  "phase3_benchmark": {
+    "baseline_tfidf_lr": {
+      "rental_agreement": 0.9533,
+      "job_offer_letter": 0.9417,
+      "insurance_policy": 0.8821
+    },
+    "bert_no_context": {
+      "rental_agreement": 0.8566,
+      "job_offer_letter": 0.855,
+      "insurance_policy": 0.7063
+    },
+    "bert_windowed": {
+      "rental_agreement": 0.521,
+      "job_offer_letter": 0.8044,
+      "insurance_policy": 0.4085
+    }
+  },
+  "phase6_finetuning": {
+    "rental_agreement": {
+      "val_macro_f1": null,
+      "test_macro_f1": 0.8977,
+      "test_accuracy": 0.9002
+    },
+    "job_offer_letter": {
+      "val_macro_f1": null,
+      "test_macro_f1": 0.8651,
+      "test_accuracy": 0.864
+    },
+    "insurance_policy": {
+      "val_macro_f1": null,
+      "test_macro_f1": 0.7869,
+      "test_accuracy": 0.7866
+    }
+  },
+  "phase7_ablation": {
+    "val_ablation_exists": true,
+    "target_retention_exists": true,
+    "target_loss_max": 0.0,
+    "rental_agreement_seq_ablation": {
+      "96_target": 0.9226,
+      "96_context": 0.9218,
+      "128_target": 0.9299,
+      "128_context": 0.9108,
+      "256_target": 0.9325,
+      "256_context": 0.9152
+    },
+    "selected_configuration": {
+      "architecture": "Single-branch distilbert-base-uncased",
+      "seq_len": 256,
+      "input_strategy": "target_only",
+      "selection_basis": "Validation Macro-F1 across 3 domains (0.8838 mean)"
+    }
+  },
+  "canonical_comparison": {
+    "rental_agreement": {
+      "tfidf": 0.9533,
+      "phase3_target_only": 0.8566,
+      "phase5_context": 0.8152,
+      "phase6_finetuned": 0.8977,
+      "phase8_final": 0.914,
+      "distilbert_minus_tfidf": -0.0393,
+      "reaches_0_90": true
+    },
+    "job_offer_letter": {
+      "tfidf": 0.9417,
+      "phase3_target_only": 0.855,
+      "phase5_context": 0.812,
+      "phase6_finetuned": 0.8651,
+      "phase8_final": 0.8636,
+      "distilbert_minus_tfidf": -0.0781,
+      "reaches_0_90": false
+    },
+    "insurance_policy": {
+      "tfidf": 0.8821,
+      "phase3_target_only": 0.7063,
+      "phase5_context": 0.684,
+      "phase6_finetuned": 0.7869,
+      "phase8_final": 0.852,
+      "distilbert_minus_tfidf": -0.0301,
+      "reaches_0_90": false
+    },
+    "three_domain_mean": {
+      "tfidf": 0.9257,
+      "phase3_target_only": 0.806,
+      "phase5_context": 0.7704,
+      "phase6_finetuned": 0.8499,
+      "phase8_final": 0.8765,
+      "distilbert_minus_tfidf": -0.0492
+    }
+  },
+  "audit_verdict": {
+    "status": "PASS",
+    "document_isolation": "PASS",
+    "target_preservation": "PASS (0.00% target loss)",
+    "leakage_checks": "PASS",
+    "seed_stability": "PASS (std = 0.0015)",
+    "statistical_support": "PASS",
+    "test_set_integrity": "PASS (evaluated strictly once after validation freeze)"
+  }
+}

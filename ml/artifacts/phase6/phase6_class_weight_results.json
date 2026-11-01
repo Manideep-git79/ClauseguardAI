@@ -1,0 +1,17 @@
+{
+  "unweighted_macro_f1": 0.9218,
+  "class_weighted_macro_f1": 0.9201,
+  "selected_scheme": "unweighted",
+  "class_weights": [
+    1.0009,
+    1.0009,
+    1.0009,
+    0.9966,
+    1.0009,
+    0.9966,
+    1.0009,
+    1.0009,
+    1.0009,
+    1.0009
+  ]
+}

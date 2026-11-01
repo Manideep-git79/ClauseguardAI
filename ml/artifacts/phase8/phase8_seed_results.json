@@ -1,0 +1,19 @@
+{
+  "seeds_tested": [
+    42,
+    43,
+    44
+  ],
+  "test_macro_f1_values": [
+    0.914,
+    0.8994,
+    0.9139
+  ],
+  "mean": 0.9091,
+  "std": 0.0069,
+  "min": 0.8994,
+  "max": 0.914,
+  "ci95_lower": 0.9013,
+  "ci95_upper": 0.9169,
+  "stability_status": "PASS (std < 0.01)"
+}

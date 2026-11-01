@@ -1,0 +1,32 @@
+{
+  "rental_agreement": {
+    "phase6_macro_f1": 0.8977,
+    "phase7c_macro_f1": 0.914,
+    "difference": 0.0163,
+    "bootstrap_ci95_lower": -0.0078,
+    "bootstrap_ci95_upper": 0.038,
+    "p_value_one_sided": 0.098,
+    "ci_excludes_zero": false,
+    "statistical_verdict": "Uncertain / Overlaps Zero"
+  },
+  "job_offer_letter": {
+    "phase6_macro_f1": 0.8651,
+    "phase7c_macro_f1": 0.8636,
+    "difference": -0.0015,
+    "bootstrap_ci95_lower": -0.0328,
+    "bootstrap_ci95_upper": 0.0276,
+    "p_value_one_sided": 0.562,
+    "ci_excludes_zero": false,
+    "statistical_verdict": "Uncertain / Overlaps Zero"
+  },
+  "insurance_policy": {
+    "phase6_macro_f1": 0.7869,
+    "phase7c_macro_f1": 0.852,
+    "difference": 0.0651,
+    "bootstrap_ci95_lower": 0.0349,
+    "bootstrap_ci95_upper": 0.091,
+    "p_value_one_sided": 0.0,
+    "ci_excludes_zero": true,
+    "statistical_verdict": "Statistically Supported Improvement"
+  }
+}

@@ -17,6 +17,7 @@ import { DocumentAnalysis } from "./pages/DocumentAnalysis";
 import { StandaloneChat } from "./pages/StandaloneChat";
 import { AuditTrail } from "./pages/AuditTrail";
 import { PlatformGuide } from "./pages/PlatformGuide";
+import { ArchitectureFlow } from "./pages/ArchitectureFlow";
 import { AuthPortal } from "./pages/AuthPortal";
 import { ErrorBoundary } from "./components/common/ErrorBoundary";
 import { ShieldAlert } from "lucide-react";
@@ -45,6 +46,7 @@ function AuthenticatedApp() {
     if (path === "/chat") return "chat";
     if (path === "/audit") return "audit";
     if (path === "/guide") return "guide";
+    if (path === "/architecture" || path.startsWith("/architecture/")) return "architecture";
     return "";
   };
 
@@ -75,6 +77,9 @@ function AuthenticatedApp() {
       case "guide":
         navigate("/guide");
         break;
+      case "architecture":
+        navigate("/architecture/flow");
+        break;
       default:
         navigate("/");
     }
@@ -94,6 +99,8 @@ function AuthenticatedApp() {
           <Route path="/chat" element={<StandaloneChat onNavigate={handleNavigate} />} />
           <Route path="/audit" element={<AuditTrail onNavigate={handleNavigate} />} />
           <Route path="/guide" element={<PlatformGuide onNavigate={handleNavigate} />} />
+          <Route path="/architecture" element={<Navigate to="/architecture/flow" replace />} />
+          <Route path="/architecture/flow" element={<ArchitectureFlow onNavigate={handleNavigate} />} />
           <Route path="/dashboard" element={<Navigate to="/documents" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

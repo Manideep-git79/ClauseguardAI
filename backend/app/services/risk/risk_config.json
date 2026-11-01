@@ -1,10 +1,18 @@
 {
   "favorability_severity_multiplier": {
     "fair": 0.0,
+    "neutral": 0.0,
     "needs_review": 0.5,
     "unfavorable": 1.0
   },
+  "unknown_favorability_multiplier": 0.0,
+  "unknown_clause_type_base_weight": 0.0,
   "clause_type_base_weight": {
+    "other": 0.0,
+    "general": 0.0,
+    "unclassified": 0.0,
+    "not_applicable": 0.0,
+    "uncertain": 0.0,
     "termination": 1.0,
     "penalty_late_fees": 0.9,
     "late_fees_penalty": 0.9,

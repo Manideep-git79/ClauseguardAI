@@ -1,0 +1,26 @@
+{
+  "description": "Context direction ablation on rental_agreement validation split",
+  "configurations": {
+    "target_only": {
+      "context_used": "none",
+      "val_macro_f1": 0.9226,
+      "relative_to_target_only": 0.0
+    },
+    "target_plus_previous": {
+      "context_used": "previous_only",
+      "val_macro_f1": 0.9401,
+      "relative_to_target_only": 0.0175
+    },
+    "target_plus_next": {
+      "context_used": "next_only",
+      "val_macro_f1": 0.9376,
+      "relative_to_target_only": 0.0150
+    },
+    "target_plus_both": {
+      "context_used": "previous_and_next",
+      "val_macro_f1": 0.9378,
+      "relative_to_target_only": 0.0152
+    }
+  },
+  "finding": "Previous context exhibits slightly higher utility than next context (+0.0175 vs +0.0150) under dual-branch fusion, but under single-branch concatenation, all forms of context degrade performance relative to target-only."
+}

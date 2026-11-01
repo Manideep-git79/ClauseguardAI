@@ -1,0 +1,89 @@
+{
+  "rental_agreement": {
+    "baseline_target_only": {
+      "accuracy": 0.8623,
+      "macro_precision": 0.8629,
+      "macro_recall": 0.863,
+      "macro_f1": 0.8566,
+      "weighted_f1": 0.856
+    },
+    "phase3_broken_window": {
+      "accuracy": 0.5729,
+      "macro_precision": 0.7025,
+      "macro_recall": 0.5723,
+      "macro_f1": 0.521,
+      "weighted_f1": 0.521
+    },
+    "selected_target_preserving": {
+      "configuration": "target_priority_b96_nomarkers",
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "none",
+      "accuracy": 0.5828,
+      "macro_precision": 0.6113,
+      "macro_recall": 0.5831,
+      "macro_f1": 0.5715,
+      "weighted_f1": 0.5715
+    },
+    "improvement_over_broken_window": 0.0505,
+    "improvement_over_target_only": -0.2851
+  },
+  "job_offer_letter": {
+    "baseline_target_only": {
+      "accuracy": 0.854,
+      "macro_precision": 0.8752,
+      "macro_recall": 0.8551,
+      "macro_f1": 0.8535,
+      "weighted_f1": 0.8528
+    },
+    "phase3_broken_window": {
+      "accuracy": 0.8,
+      "macro_precision": 0.8199,
+      "macro_recall": 0.8001,
+      "macro_f1": 0.8029,
+      "weighted_f1": 0.8027
+    },
+    "selected_target_preserving": {
+      "configuration": "target_priority_b96_nomarkers",
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "none",
+      "accuracy": 0.47,
+      "macro_precision": 0.4836,
+      "macro_recall": 0.4711,
+      "macro_f1": 0.4337,
+      "weighted_f1": 0.4335
+    },
+    "improvement_over_broken_window": -0.3692,
+    "improvement_over_target_only": -0.4198
+  },
+  "insurance_policy": {
+    "baseline_target_only": {
+      "accuracy": 0.7095,
+      "macro_precision": 0.7616,
+      "macro_recall": 0.7158,
+      "macro_f1": 0.7061,
+      "weighted_f1": 0.6982
+    },
+    "phase3_broken_window": {
+      "accuracy": 0.4526,
+      "macro_precision": 0.5246,
+      "macro_recall": 0.4334,
+      "macro_f1": 0.4084,
+      "weighted_f1": 0.4143
+    },
+    "selected_target_preserving": {
+      "configuration": "target_priority_b96_nomarkers",
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "none",
+      "accuracy": 0.5435,
+      "macro_precision": 0.6418,
+      "macro_recall": 0.5497,
+      "macro_f1": 0.5387,
+      "weighted_f1": 0.5405
+    },
+    "improvement_over_broken_window": 0.1303,
+    "improvement_over_target_only": -0.1674
+  }
+}

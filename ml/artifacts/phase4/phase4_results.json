@@ -1,0 +1,2613 @@
+{
+  "validation_ablation": {
+    "rental_agreement": {
+      "Variant A (Raw)": {
+        "accuracy": 0.8922,
+        "macro_precision": 0.8929,
+        "macro_recall": 0.8912,
+        "macro_f1": 0.8826,
+        "weighted_f1": 0.8832
+      },
+      "Variant B (Basic Normalization)": {
+        "accuracy": 0.8922,
+        "macro_precision": 0.8929,
+        "macro_recall": 0.8912,
+        "macro_f1": 0.8826,
+        "weighted_f1": 0.8832
+      },
+      "Variant C (Artifact Cleanup)": {
+        "accuracy": 0.8922,
+        "macro_precision": 0.8929,
+        "macro_recall": 0.8912,
+        "macro_f1": 0.8826,
+        "weighted_f1": 0.8832
+      },
+      "Variant D (Full Conservative)": {
+        "accuracy": 0.8922,
+        "macro_precision": 0.8929,
+        "macro_recall": 0.8912,
+        "macro_f1": 0.8826,
+        "weighted_f1": 0.8832
+      }
+    },
+    "job_offer_letter": {
+      "Variant A (Raw)": {
+        "accuracy": 0.8904,
+        "macro_precision": 0.9037,
+        "macro_recall": 0.891,
+        "macro_f1": 0.8929,
+        "weighted_f1": 0.892
+      },
+      "Variant B (Basic Normalization)": {
+        "accuracy": 0.8904,
+        "macro_precision": 0.9037,
+        "macro_recall": 0.891,
+        "macro_f1": 0.8929,
+        "weighted_f1": 0.892
+      },
+      "Variant C (Artifact Cleanup)": {
+        "accuracy": 0.8904,
+        "macro_precision": 0.9037,
+        "macro_recall": 0.891,
+        "macro_f1": 0.8929,
+        "weighted_f1": 0.892
+      },
+      "Variant D (Full Conservative)": {
+        "accuracy": 0.8904,
+        "macro_precision": 0.9037,
+        "macro_recall": 0.891,
+        "macro_f1": 0.8929,
+        "weighted_f1": 0.892
+      }
+    },
+    "insurance_policy": {
+      "Variant A (Raw)": {
+        "accuracy": 0.6166,
+        "macro_precision": 0.7942,
+        "macro_recall": 0.6788,
+        "macro_f1": 0.6864,
+        "weighted_f1": 0.6221
+      },
+      "Variant B (Basic Normalization)": {
+        "accuracy": 0.6166,
+        "macro_precision": 0.7878,
+        "macro_recall": 0.6794,
+        "macro_f1": 0.6861,
+        "weighted_f1": 0.6216
+      },
+      "Variant C (Artifact Cleanup)": {
+        "accuracy": 0.6272,
+        "macro_precision": 0.7921,
+        "macro_recall": 0.6871,
+        "macro_f1": 0.6927,
+        "weighted_f1": 0.6321
+      },
+      "Variant D (Full Conservative)": {
+        "accuracy": 0.6272,
+        "macro_precision": 0.7921,
+        "macro_recall": 0.6871,
+        "macro_f1": 0.6927,
+        "weighted_f1": 0.6321
+      }
+    }
+  },
+  "test_ablation": {
+    "rental_agreement": {
+      "Variant A (Raw)": {
+        "accuracy": 0.8623,
+        "macro_precision": 0.8629,
+        "macro_recall": 0.863,
+        "macro_f1": 0.8566,
+        "weighted_f1": 0.856
+      },
+      "Variant B (Basic Normalization)": {
+        "accuracy": 0.8623,
+        "macro_precision": 0.8629,
+        "macro_recall": 0.863,
+        "macro_f1": 0.8566,
+        "weighted_f1": 0.856
+      },
+      "Variant C (Artifact Cleanup)": {
+        "accuracy": 0.8623,
+        "macro_precision": 0.8629,
+        "macro_recall": 0.863,
+        "macro_f1": 0.8566,
+        "weighted_f1": 0.856
+      },
+      "Variant D (Full Conservative)": {
+        "accuracy": 0.8623,
+        "macro_precision": 0.8629,
+        "macro_recall": 0.863,
+        "macro_f1": 0.8566,
+        "weighted_f1": 0.856
+      }
+    },
+    "job_offer_letter": {
+      "Variant A (Raw)": {
+        "accuracy": 0.856,
+        "macro_precision": 0.8761,
+        "macro_recall": 0.8571,
+        "macro_f1": 0.855,
+        "weighted_f1": 0.8543
+      },
+      "Variant B (Basic Normalization)": {
+        "accuracy": 0.856,
+        "macro_precision": 0.8761,
+        "macro_recall": 0.8571,
+        "macro_f1": 0.855,
+        "weighted_f1": 0.8543
+      },
+      "Variant C (Artifact Cleanup)": {
+        "accuracy": 0.854,
+        "macro_precision": 0.8752,
+        "macro_recall": 0.8551,
+        "macro_f1": 0.8535,
+        "weighted_f1": 0.8528
+      },
+      "Variant D (Full Conservative)": {
+        "accuracy": 0.854,
+        "macro_precision": 0.8752,
+        "macro_recall": 0.8551,
+        "macro_f1": 0.8535,
+        "weighted_f1": 0.8528
+      }
+    },
+    "insurance_policy": {
+      "Variant A (Raw)": {
+        "accuracy": 0.7095,
+        "macro_precision": 0.762,
+        "macro_recall": 0.7158,
+        "macro_f1": 0.7063,
+        "weighted_f1": 0.6987
+      },
+      "Variant B (Basic Normalization)": {
+        "accuracy": 0.7095,
+        "macro_precision": 0.7616,
+        "macro_recall": 0.7158,
+        "macro_f1": 0.7061,
+        "weighted_f1": 0.6982
+      },
+      "Variant C (Artifact Cleanup)": {
+        "accuracy": 0.7095,
+        "macro_precision": 0.7616,
+        "macro_recall": 0.7158,
+        "macro_f1": 0.7061,
+        "weighted_f1": 0.6982
+      },
+      "Variant D (Full Conservative)": {
+        "accuracy": 0.7095,
+        "macro_precision": 0.7616,
+        "macro_recall": 0.7158,
+        "macro_f1": 0.7061,
+        "weighted_f1": 0.6982
+      }
+    }
+  },
+  "best_variant": "Variant C (Artifact Cleanup)",
+  "final_test_detailed": {
+    "rental_agreement": {
+      "Variant A (Raw)": {
+        "metrics": {
+          "accuracy": 0.8623,
+          "f1_macro": 0.8566,
+          "f1_weighted": 0.856,
+          "precision_macro": 0.8629,
+          "recall_macro": 0.863,
+          "confusion_matrix": [
+            [
+              49,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              50,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              50,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5,
+              0,
+              42,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              4,
+              0,
+              3,
+              37,
+              5,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              6,
+              5,
+              3,
+              4,
+              0,
+              25,
+              1,
+              0,
+              6,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              2,
+              0,
+              0,
+              44,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              48,
+              0,
+              0
+            ],
+            [
+              3,
+              0,
+              1,
+              1,
+              0,
+              4,
+              3,
+              1,
+              37,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              50
+            ]
+          ],
+          "classification_report": {
+            "entry_notice_access": {
+              "precision": 0.8448275862068966,
+              "recall": 0.98,
+              "f1-score": 0.9074074074074074,
+              "support": 50.0
+            },
+            "indemnification": {
+              "precision": 0.7692307692307693,
+              "recall": 1.0,
+              "f1-score": 0.8695652173913043,
+              "support": 50.0
+            },
+            "late_fees_penalty": {
+              "precision": 0.8771929824561403,
+              "recall": 1.0,
+              "f1-score": 0.9345794392523364,
+              "support": 50.0
+            },
+            "maintenance_repairs": {
+              "precision": 0.8076923076923077,
+              "recall": 0.84,
+              "f1-score": 0.8235294117647058,
+              "support": 50.0
+            },
+            "pet_policy": {
+              "precision": 0.9736842105263158,
+              "recall": 0.74,
+              "f1-score": 0.8409090909090909,
+              "support": 50.0
+            },
+            "rent_payment_terms": {
+              "precision": 0.6944444444444444,
+              "recall": 0.49019607843137253,
+              "f1-score": 0.5747126436781609,
+              "support": 51.0
+            },
+            "security_deposit": {
+              "precision": 0.9166666666666666,
+              "recall": 0.88,
+              "f1-score": 0.8979591836734694,
+              "support": 50.0
+            },
+            "subletting": {
+              "precision": 0.9411764705882353,
+              "recall": 0.96,
+              "f1-score": 0.9504950495049505,
+              "support": 50.0
+            },
+            "termination": {
+              "precision": 0.8604651162790697,
+              "recall": 0.74,
+              "f1-score": 0.7956989247311828,
+              "support": 50.0
+            },
+            "utilities": {
+              "precision": 0.9433962264150944,
+              "recall": 1.0,
+              "f1-score": 0.970873786407767,
+              "support": 50.0
+            },
+            "accuracy": 0.8622754491017964,
+            "macro avg": {
+              "precision": 0.8628776780505939,
+              "recall": 0.8630196078431374,
+              "f1-score": 0.8565730154720376,
+              "support": 501.0
+            },
+            "weighted avg": {
+              "precision": 0.8625414839715398,
+              "recall": 0.8622754491017964,
+              "f1-score": 0.8560104199195548,
+              "support": 501.0
+            }
+          }
+        },
+        "confusion_matrix": [
+          [
+            49,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            5,
+            0,
+            42,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            4,
+            0,
+            3,
+            37,
+            5,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            6,
+            5,
+            3,
+            4,
+            0,
+            25,
+            1,
+            0,
+            6,
+            1
+          ],
+          [
+            0,
+            0,
+            3,
+            2,
+            0,
+            0,
+            44,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            48,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            1,
+            1,
+            0,
+            4,
+            3,
+            1,
+            37,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            50
+          ]
+        ],
+        "classification_report": {
+          "entry_notice_access": {
+            "precision": 0.8448275862068966,
+            "recall": 0.98,
+            "f1-score": 0.9074074074074074,
+            "support": 50.0
+          },
+          "indemnification": {
+            "precision": 0.7692307692307693,
+            "recall": 1.0,
+            "f1-score": 0.8695652173913043,
+            "support": 50.0
+          },
+          "late_fees_penalty": {
+            "precision": 0.8771929824561403,
+            "recall": 1.0,
+            "f1-score": 0.9345794392523364,
+            "support": 50.0
+          },
+          "maintenance_repairs": {
+            "precision": 0.8076923076923077,
+            "recall": 0.84,
+            "f1-score": 0.8235294117647058,
+            "support": 50.0
+          },
+          "pet_policy": {
+            "precision": 0.9736842105263158,
+            "recall": 0.74,
+            "f1-score": 0.8409090909090909,
+            "support": 50.0
+          },
+          "rent_payment_terms": {
+            "precision": 0.6944444444444444,
+            "recall": 0.49019607843137253,
+            "f1-score": 0.5747126436781609,
+            "support": 51.0
+          },
+          "security_deposit": {
+            "precision": 0.9166666666666666,
+            "recall": 0.88,
+            "f1-score": 0.8979591836734694,
+            "support": 50.0
+          },
+          "subletting": {
+            "precision": 0.9411764705882353,
+            "recall": 0.96,
+            "f1-score": 0.9504950495049505,
+            "support": 50.0
+          },
+          "termination": {
+            "precision": 0.8604651162790697,
+            "recall": 0.74,
+            "f1-score": 0.7956989247311828,
+            "support": 50.0
+          },
+          "utilities": {
+            "precision": 0.9433962264150944,
+            "recall": 1.0,
+            "f1-score": 0.970873786407767,
+            "support": 50.0
+          },
+          "accuracy": 0.8622754491017964,
+          "macro avg": {
+            "precision": 0.8628776780505939,
+            "recall": 0.8630196078431374,
+            "f1-score": 0.8565730154720376,
+            "support": 501.0
+          },
+          "weighted avg": {
+            "precision": 0.8625414839715398,
+            "recall": 0.8622754491017964,
+            "f1-score": 0.8560104199195548,
+            "support": 501.0
+          }
+        }
+      },
+      "Variant C (Artifact Cleanup)": {
+        "metrics": {
+          "accuracy": 0.8623,
+          "f1_macro": 0.8566,
+          "f1_weighted": 0.856,
+          "precision_macro": 0.8629,
+          "recall_macro": 0.863,
+          "confusion_matrix": [
+            [
+              49,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              50,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              50,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              5,
+              0,
+              42,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              4,
+              0,
+              3,
+              37,
+              5,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              6,
+              5,
+              3,
+              4,
+              0,
+              25,
+              1,
+              0,
+              6,
+              1
+            ],
+            [
+              0,
+              0,
+              3,
+              2,
+              0,
+              0,
+              44,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              48,
+              0,
+              0
+            ],
+            [
+              3,
+              0,
+              1,
+              1,
+              0,
+              4,
+              3,
+              1,
+              37,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              50
+            ]
+          ],
+          "classification_report": {
+            "entry_notice_access": {
+              "precision": 0.8448275862068966,
+              "recall": 0.98,
+              "f1-score": 0.9074074074074074,
+              "support": 50.0
+            },
+            "indemnification": {
+              "precision": 0.7692307692307693,
+              "recall": 1.0,
+              "f1-score": 0.8695652173913043,
+              "support": 50.0
+            },
+            "late_fees_penalty": {
+              "precision": 0.8771929824561403,
+              "recall": 1.0,
+              "f1-score": 0.9345794392523364,
+              "support": 50.0
+            },
+            "maintenance_repairs": {
+              "precision": 0.8076923076923077,
+              "recall": 0.84,
+              "f1-score": 0.8235294117647058,
+              "support": 50.0
+            },
+            "pet_policy": {
+              "precision": 0.9736842105263158,
+              "recall": 0.74,
+              "f1-score": 0.8409090909090909,
+              "support": 50.0
+            },
+            "rent_payment_terms": {
+              "precision": 0.6944444444444444,
+              "recall": 0.49019607843137253,
+              "f1-score": 0.5747126436781609,
+              "support": 51.0
+            },
+            "security_deposit": {
+              "precision": 0.9166666666666666,
+              "recall": 0.88,
+              "f1-score": 0.8979591836734694,
+              "support": 50.0
+            },
+            "subletting": {
+              "precision": 0.9411764705882353,
+              "recall": 0.96,
+              "f1-score": 0.9504950495049505,
+              "support": 50.0
+            },
+            "termination": {
+              "precision": 0.8604651162790697,
+              "recall": 0.74,
+              "f1-score": 0.7956989247311828,
+              "support": 50.0
+            },
+            "utilities": {
+              "precision": 0.9433962264150944,
+              "recall": 1.0,
+              "f1-score": 0.970873786407767,
+              "support": 50.0
+            },
+            "accuracy": 0.8622754491017964,
+            "macro avg": {
+              "precision": 0.8628776780505939,
+              "recall": 0.8630196078431374,
+              "f1-score": 0.8565730154720376,
+              "support": 501.0
+            },
+            "weighted avg": {
+              "precision": 0.8625414839715398,
+              "recall": 0.8622754491017964,
+              "f1-score": 0.8560104199195548,
+              "support": 501.0
+            }
+          }
+        },
+        "confusion_matrix": [
+          [
+            49,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            5,
+            0,
+            42,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            4,
+            0,
+            3,
+            37,
+            5,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            6,
+            5,
+            3,
+            4,
+            0,
+            25,
+            1,
+            0,
+            6,
+            1
+          ],
+          [
+            0,
+            0,
+            3,
+            2,
+            0,
+            0,
+            44,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            48,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            1,
+            1,
+            0,
+            4,
+            3,
+            1,
+            37,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            50
+          ]
+        ],
+        "classification_report": {
+          "entry_notice_access": {
+            "precision": 0.8448275862068966,
+            "recall": 0.98,
+            "f1-score": 0.9074074074074074,
+            "support": 50.0
+          },
+          "indemnification": {
+            "precision": 0.7692307692307693,
+            "recall": 1.0,
+            "f1-score": 0.8695652173913043,
+            "support": 50.0
+          },
+          "late_fees_penalty": {
+            "precision": 0.8771929824561403,
+            "recall": 1.0,
+            "f1-score": 0.9345794392523364,
+            "support": 50.0
+          },
+          "maintenance_repairs": {
+            "precision": 0.8076923076923077,
+            "recall": 0.84,
+            "f1-score": 0.8235294117647058,
+            "support": 50.0
+          },
+          "pet_policy": {
+            "precision": 0.9736842105263158,
+            "recall": 0.74,
+            "f1-score": 0.8409090909090909,
+            "support": 50.0
+          },
+          "rent_payment_terms": {
+            "precision": 0.6944444444444444,
+            "recall": 0.49019607843137253,
+            "f1-score": 0.5747126436781609,
+            "support": 51.0
+          },
+          "security_deposit": {
+            "precision": 0.9166666666666666,
+            "recall": 0.88,
+            "f1-score": 0.8979591836734694,
+            "support": 50.0
+          },
+          "subletting": {
+            "precision": 0.9411764705882353,
+            "recall": 0.96,
+            "f1-score": 0.9504950495049505,
+            "support": 50.0
+          },
+          "termination": {
+            "precision": 0.8604651162790697,
+            "recall": 0.74,
+            "f1-score": 0.7956989247311828,
+            "support": 50.0
+          },
+          "utilities": {
+            "precision": 0.9433962264150944,
+            "recall": 1.0,
+            "f1-score": 0.970873786407767,
+            "support": 50.0
+          },
+          "accuracy": 0.8622754491017964,
+          "macro avg": {
+            "precision": 0.8628776780505939,
+            "recall": 0.8630196078431374,
+            "f1-score": 0.8565730154720376,
+            "support": 501.0
+          },
+          "weighted avg": {
+            "precision": 0.8625414839715398,
+            "recall": 0.8622754491017964,
+            "f1-score": 0.8560104199195548,
+            "support": 501.0
+          }
+        }
+      }
+    },
+    "job_offer_letter": {
+      "Variant A (Raw)": {
+        "metrics": {
+          "accuracy": 0.856,
+          "f1_macro": 0.855,
+          "f1_weighted": 0.8543,
+          "precision_macro": 0.8761,
+          "recall_macro": 0.8571,
+          "confusion_matrix": [
+            [
+              43,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              7,
+              0
+            ],
+            [
+              0,
+              46,
+              0,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              49,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              5,
+              22,
+              0,
+              24,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              50,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              8,
+              0,
+              1,
+              1,
+              38,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              3,
+              4,
+              43,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              48,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              2,
+              1,
+              0,
+              1,
+              0,
+              0,
+              44,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              1,
+              0,
+              1,
+              45
+            ]
+          ],
+          "classification_report": {
+            "at_will_employment": {
+              "precision": 0.9772727272727273,
+              "recall": 0.86,
+              "f1-score": 0.9148936170212766,
+              "support": 50.0
+            },
+            "benefits_overview": {
+              "precision": 0.8214285714285714,
+              "recall": 0.92,
+              "f1-score": 0.8679245283018868,
+              "support": 50.0
+            },
+            "bonus_incentive": {
+              "precision": 0.875,
+              "recall": 1.0,
+              "f1-score": 0.9333333333333333,
+              "support": 49.0
+            },
+            "compensation_salary": {
+              "precision": 0.88,
+              "recall": 0.43137254901960786,
+              "f1-score": 0.5789473684210527,
+              "support": 51.0
+            },
+            "confidentiality_nda": {
+              "precision": 0.9259259259259259,
+              "recall": 1.0,
+              "f1-score": 0.9615384615384616,
+              "support": 50.0
+            },
+            "job_title_role": {
+              "precision": 0.5205479452054794,
+              "recall": 0.76,
+              "f1-score": 0.6178861788617886,
+              "support": 50.0
+            },
+            "non_compete_non_solicit": {
+              "precision": 0.9347826086956522,
+              "recall": 0.86,
+              "f1-score": 0.8958333333333334,
+              "support": 50.0
+            },
+            "start_date_contingencies": {
+              "precision": 0.9795918367346939,
+              "recall": 0.96,
+              "f1-score": 0.9696969696969697,
+              "support": 50.0
+            },
+            "termination_conditions": {
+              "precision": 0.8461538461538461,
+              "recall": 0.88,
+              "f1-score": 0.8627450980392157,
+              "support": 50.0
+            },
+            "working_hours_location": {
+              "precision": 1.0,
+              "recall": 0.9,
+              "f1-score": 0.9473684210526315,
+              "support": 50.0
+            },
+            "accuracy": 0.856,
+            "macro avg": {
+              "precision": 0.8760703461416895,
+              "recall": 0.8571372549019607,
+              "f1-score": 0.8550167309599951,
+              "support": 500.0
+            },
+            "weighted avg": {
+              "precision": 0.8760803461416896,
+              "recall": 0.856,
+              "f1-score": 0.8543079590301704,
+              "support": 500.0
+            }
+          }
+        },
+        "confusion_matrix": [
+          [
+            43,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0
+          ],
+          [
+            0,
+            46,
+            0,
+            1,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            49,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            5,
+            22,
+            0,
+            24,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            8,
+            0,
+            1,
+            1,
+            38,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3,
+            4,
+            43,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            48,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            2,
+            1,
+            0,
+            1,
+            0,
+            0,
+            44,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            1,
+            0,
+            1,
+            45
+          ]
+        ],
+        "classification_report": {
+          "at_will_employment": {
+            "precision": 0.9772727272727273,
+            "recall": 0.86,
+            "f1-score": 0.9148936170212766,
+            "support": 50.0
+          },
+          "benefits_overview": {
+            "precision": 0.8214285714285714,
+            "recall": 0.92,
+            "f1-score": 0.8679245283018868,
+            "support": 50.0
+          },
+          "bonus_incentive": {
+            "precision": 0.875,
+            "recall": 1.0,
+            "f1-score": 0.9333333333333333,
+            "support": 49.0
+          },
+          "compensation_salary": {
+            "precision": 0.88,
+            "recall": 0.43137254901960786,
+            "f1-score": 0.5789473684210527,
+            "support": 51.0
+          },
+          "confidentiality_nda": {
+            "precision": 0.9259259259259259,
+            "recall": 1.0,
+            "f1-score": 0.9615384615384616,
+            "support": 50.0
+          },
+          "job_title_role": {
+            "precision": 0.5205479452054794,
+            "recall": 0.76,
+            "f1-score": 0.6178861788617886,
+            "support": 50.0
+          },
+          "non_compete_non_solicit": {
+            "precision": 0.9347826086956522,
+            "recall": 0.86,
+            "f1-score": 0.8958333333333334,
+            "support": 50.0
+          },
+          "start_date_contingencies": {
+            "precision": 0.9795918367346939,
+            "recall": 0.96,
+            "f1-score": 0.9696969696969697,
+            "support": 50.0
+          },
+          "termination_conditions": {
+            "precision": 0.8461538461538461,
+            "recall": 0.88,
+            "f1-score": 0.8627450980392157,
+            "support": 50.0
+          },
+          "working_hours_location": {
+            "precision": 1.0,
+            "recall": 0.9,
+            "f1-score": 0.9473684210526315,
+            "support": 50.0
+          },
+          "accuracy": 0.856,
+          "macro avg": {
+            "precision": 0.8760703461416895,
+            "recall": 0.8571372549019607,
+            "f1-score": 0.8550167309599951,
+            "support": 500.0
+          },
+          "weighted avg": {
+            "precision": 0.8760803461416896,
+            "recall": 0.856,
+            "f1-score": 0.8543079590301704,
+            "support": 500.0
+          }
+        }
+      },
+      "Variant C (Artifact Cleanup)": {
+        "metrics": {
+          "accuracy": 0.854,
+          "f1_macro": 0.8535,
+          "f1_weighted": 0.8528,
+          "precision_macro": 0.8752,
+          "recall_macro": 0.8551,
+          "confusion_matrix": [
+            [
+              43,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              7,
+              0
+            ],
+            [
+              0,
+              46,
+              0,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              49,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              5,
+              22,
+              0,
+              24,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              49,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              8,
+              0,
+              1,
+              1,
+              38,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              3,
+              4,
+              43,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              48,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              2,
+              1,
+              0,
+              1,
+              0,
+              0,
+              44,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              1,
+              0,
+              1,
+              45
+            ]
+          ],
+          "classification_report": {
+            "at_will_employment": {
+              "precision": 0.9772727272727273,
+              "recall": 0.86,
+              "f1-score": 0.9148936170212766,
+              "support": 50.0
+            },
+            "benefits_overview": {
+              "precision": 0.8214285714285714,
+              "recall": 0.92,
+              "f1-score": 0.8679245283018868,
+              "support": 50.0
+            },
+            "bonus_incentive": {
+              "precision": 0.875,
+              "recall": 1.0,
+              "f1-score": 0.9333333333333333,
+              "support": 49.0
+            },
+            "compensation_salary": {
+              "precision": 0.88,
+              "recall": 0.43137254901960786,
+              "f1-score": 0.5789473684210527,
+              "support": 51.0
+            },
+            "confidentiality_nda": {
+              "precision": 0.9245283018867925,
+              "recall": 0.98,
+              "f1-score": 0.9514563106796117,
+              "support": 50.0
+            },
+            "job_title_role": {
+              "precision": 0.5135135135135135,
+              "recall": 0.76,
+              "f1-score": 0.6129032258064516,
+              "support": 50.0
+            },
+            "non_compete_non_solicit": {
+              "precision": 0.9347826086956522,
+              "recall": 0.86,
+              "f1-score": 0.8958333333333334,
+              "support": 50.0
+            },
+            "start_date_contingencies": {
+              "precision": 0.9795918367346939,
+              "recall": 0.96,
+              "f1-score": 0.9696969696969697,
+              "support": 50.0
+            },
+            "termination_conditions": {
+              "precision": 0.8461538461538461,
+              "recall": 0.88,
+              "f1-score": 0.8627450980392157,
+              "support": 50.0
+            },
+            "working_hours_location": {
+              "precision": 1.0,
+              "recall": 0.9,
+              "f1-score": 0.9473684210526315,
+              "support": 50.0
+            },
+            "accuracy": 0.854,
+            "macro avg": {
+              "precision": 0.8752271405685796,
+              "recall": 0.8551372549019607,
+              "f1-score": 0.8535102205685764,
+              "support": 500.0
+            },
+            "weighted avg": {
+              "precision": 0.8752371405685797,
+              "recall": 0.854,
+              "f1-score": 0.8528014486387517,
+              "support": 500.0
+            }
+          }
+        },
+        "confusion_matrix": [
+          [
+            43,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0
+          ],
+          [
+            0,
+            46,
+            0,
+            1,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            49,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            5,
+            22,
+            0,
+            24,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            49,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            8,
+            0,
+            1,
+            1,
+            38,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3,
+            4,
+            43,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            48,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            2,
+            1,
+            0,
+            1,
+            0,
+            0,
+            44,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            1,
+            0,
+            1,
+            45
+          ]
+        ],
+        "classification_report": {
+          "at_will_employment": {
+            "precision": 0.9772727272727273,
+            "recall": 0.86,
+            "f1-score": 0.9148936170212766,
+            "support": 50.0
+          },
+          "benefits_overview": {
+            "precision": 0.8214285714285714,
+            "recall": 0.92,
+            "f1-score": 0.8679245283018868,
+            "support": 50.0
+          },
+          "bonus_incentive": {
+            "precision": 0.875,
+            "recall": 1.0,
+            "f1-score": 0.9333333333333333,
+            "support": 49.0
+          },
+          "compensation_salary": {
+            "precision": 0.88,
+            "recall": 0.43137254901960786,
+            "f1-score": 0.5789473684210527,
+            "support": 51.0
+          },
+          "confidentiality_nda": {
+            "precision": 0.9245283018867925,
+            "recall": 0.98,
+            "f1-score": 0.9514563106796117,
+            "support": 50.0
+          },
+          "job_title_role": {
+            "precision": 0.5135135135135135,
+            "recall": 0.76,
+            "f1-score": 0.6129032258064516,
+            "support": 50.0
+          },
+          "non_compete_non_solicit": {
+            "precision": 0.9347826086956522,
+            "recall": 0.86,
+            "f1-score": 0.8958333333333334,
+            "support": 50.0
+          },
+          "start_date_contingencies": {
+            "precision": 0.9795918367346939,
+            "recall": 0.96,
+            "f1-score": 0.9696969696969697,
+            "support": 50.0
+          },
+          "termination_conditions": {
+            "precision": 0.8461538461538461,
+            "recall": 0.88,
+            "f1-score": 0.8627450980392157,
+            "support": 50.0
+          },
+          "working_hours_location": {
+            "precision": 1.0,
+            "recall": 0.9,
+            "f1-score": 0.9473684210526315,
+            "support": 50.0
+          },
+          "accuracy": 0.854,
+          "macro avg": {
+            "precision": 0.8752271405685796,
+            "recall": 0.8551372549019607,
+            "f1-score": 0.8535102205685764,
+            "support": 500.0
+          },
+          "weighted avg": {
+            "precision": 0.8752371405685797,
+            "recall": 0.854,
+            "f1-score": 0.8528014486387517,
+            "support": 500.0
+          }
+        }
+      }
+    },
+    "insurance_policy": {
+      "Variant A (Raw)": {
+        "metrics": {
+          "accuracy": 0.7095,
+          "f1_macro": 0.7063,
+          "f1_weighted": 0.6987,
+          "precision_macro": 0.762,
+          "recall_macro": 0.7158,
+          "confusion_matrix": [
+            [
+              42,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              11,
+              11,
+              5,
+              0,
+              32,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              65,
+              2,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              10,
+              1,
+              1,
+              12,
+              0,
+              16,
+              1,
+              5,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              46,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              14,
+              2,
+              0,
+              17,
+              0,
+              12,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              46,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              3,
+              1,
+              0,
+              11,
+              0,
+              31,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              0,
+              42,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              47
+            ]
+          ],
+          "classification_report": {
+            "cancellation_non_renewal": {
+              "precision": 0.7636363636363637,
+              "recall": 0.9130434782608695,
+              "f1-score": 0.8316831683168316,
+              "support": 46.0
+            },
+            "claims_process": {
+              "precision": 0.9166666666666666,
+              "recall": 0.18032786885245902,
+              "f1-score": 0.3013698630136986,
+              "support": 61.0
+            },
+            "coverage_scope": {
+              "precision": 0.6842105263157895,
+              "recall": 0.8666666666666667,
+              "f1-score": 0.7647058823529411,
+              "support": 75.0
+            },
+            "deductible_premium": {
+              "precision": 0.48,
+              "recall": 0.2608695652173913,
+              "f1-score": 0.3380281690140845,
+              "support": 46.0
+            },
+            "dispute_resolution_appraisal": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 46.0
+            },
+            "exclusions": {
+              "precision": 0.19540229885057472,
+              "recall": 0.3695652173913043,
+              "f1-score": 0.2556390977443609,
+              "support": 46.0
+            },
+            "grace_period": {
+              "precision": 0.9787234042553191,
+              "recall": 1.0,
+              "f1-score": 0.989247311827957,
+              "support": 46.0
+            },
+            "limits_of_liability": {
+              "precision": 0.6458333333333334,
+              "recall": 0.6739130434782609,
+              "f1-score": 0.6595744680851063,
+              "support": 46.0
+            },
+            "policy_period_renewal": {
+              "precision": 0.9767441860465116,
+              "recall": 0.8936170212765957,
+              "f1-score": 0.9333333333333333,
+              "support": 47.0
+            },
+            "subrogation": {
+              "precision": 0.9791666666666666,
+              "recall": 1.0,
+              "f1-score": 0.9894736842105263,
+              "support": 47.0
+            },
+            "accuracy": 0.7094861660079052,
+            "macro avg": {
+              "precision": 0.7620383445771226,
+              "recall": 0.7158002861143548,
+              "f1-score": 0.706305497789884,
+              "support": 506.0
+            },
+            "weighted avg": {
+              "precision": 0.7630151277101727,
+              "recall": 0.7094861660079052,
+              "f1-score": 0.6986568271429472,
+              "support": 506.0
+            }
+          }
+        },
+        "confusion_matrix": [
+          [
+            42,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            11,
+            11,
+            5,
+            0,
+            32,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            65,
+            2,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            1,
+            1,
+            12,
+            0,
+            16,
+            1,
+            5,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            46,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            14,
+            2,
+            0,
+            17,
+            0,
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            46,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            1,
+            0,
+            11,
+            0,
+            31,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            3,
+            0,
+            0,
+            42,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            47
+          ]
+        ],
+        "classification_report": {
+          "cancellation_non_renewal": {
+            "precision": 0.7636363636363637,
+            "recall": 0.9130434782608695,
+            "f1-score": 0.8316831683168316,
+            "support": 46.0
+          },
+          "claims_process": {
+            "precision": 0.9166666666666666,
+            "recall": 0.18032786885245902,
+            "f1-score": 0.3013698630136986,
+            "support": 61.0
+          },
+          "coverage_scope": {
+            "precision": 0.6842105263157895,
+            "recall": 0.8666666666666667,
+            "f1-score": 0.7647058823529411,
+            "support": 75.0
+          },
+          "deductible_premium": {
+            "precision": 0.48,
+            "recall": 0.2608695652173913,
+            "f1-score": 0.3380281690140845,
+            "support": 46.0
+          },
+          "dispute_resolution_appraisal": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 46.0
+          },
+          "exclusions": {
+            "precision": 0.19540229885057472,
+            "recall": 0.3695652173913043,
+            "f1-score": 0.2556390977443609,
+            "support": 46.0
+          },
+          "grace_period": {
+            "precision": 0.9787234042553191,
+            "recall": 1.0,
+            "f1-score": 0.989247311827957,
+            "support": 46.0
+          },
+          "limits_of_liability": {
+            "precision": 0.6458333333333334,
+            "recall": 0.6739130434782609,
+            "f1-score": 0.6595744680851063,
+            "support": 46.0
+          },
+          "policy_period_renewal": {
+            "precision": 0.9767441860465116,
+            "recall": 0.8936170212765957,
+            "f1-score": 0.9333333333333333,
+            "support": 47.0
+          },
+          "subrogation": {
+            "precision": 0.9791666666666666,
+            "recall": 1.0,
+            "f1-score": 0.9894736842105263,
+            "support": 47.0
+          },
+          "accuracy": 0.7094861660079052,
+          "macro avg": {
+            "precision": 0.7620383445771226,
+            "recall": 0.7158002861143548,
+            "f1-score": 0.706305497789884,
+            "support": 506.0
+          },
+          "weighted avg": {
+            "precision": 0.7630151277101727,
+            "recall": 0.7094861660079052,
+            "f1-score": 0.6986568271429472,
+            "support": 506.0
+          }
+        }
+      },
+      "Variant C (Artifact Cleanup)": {
+        "metrics": {
+          "accuracy": 0.7095,
+          "f1_macro": 0.7061,
+          "f1_weighted": 0.6982,
+          "precision_macro": 0.7616,
+          "recall_macro": 0.7158,
+          "confusion_matrix": [
+            [
+              42,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              11,
+              11,
+              5,
+              0,
+              32,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              65,
+              2,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              10,
+              1,
+              2,
+              12,
+              0,
+              15,
+              1,
+              5,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              46,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              14,
+              2,
+              0,
+              17,
+              0,
+              12,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              46,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              3,
+              1,
+              0,
+              11,
+              0,
+              31,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              0,
+              42,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              47
+            ]
+          ],
+          "classification_report": {
+            "cancellation_non_renewal": {
+              "precision": 0.7636363636363637,
+              "recall": 0.9130434782608695,
+              "f1-score": 0.8316831683168316,
+              "support": 46.0
+            },
+            "claims_process": {
+              "precision": 0.9166666666666666,
+              "recall": 0.18032786885245902,
+              "f1-score": 0.3013698630136986,
+              "support": 61.0
+            },
+            "coverage_scope": {
+              "precision": 0.6770833333333334,
+              "recall": 0.8666666666666667,
+              "f1-score": 0.7602339181286549,
+              "support": 75.0
+            },
+            "deductible_premium": {
+              "precision": 0.48,
+              "recall": 0.2608695652173913,
+              "f1-score": 0.3380281690140845,
+              "support": 46.0
+            },
+            "dispute_resolution_appraisal": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 46.0
+            },
+            "exclusions": {
+              "precision": 0.19767441860465115,
+              "recall": 0.3695652173913043,
+              "f1-score": 0.25757575757575757,
+              "support": 46.0
+            },
+            "grace_period": {
+              "precision": 0.9787234042553191,
+              "recall": 1.0,
+              "f1-score": 0.989247311827957,
+              "support": 46.0
+            },
+            "limits_of_liability": {
+              "precision": 0.6458333333333334,
+              "recall": 0.6739130434782609,
+              "f1-score": 0.6595744680851063,
+              "support": 46.0
+            },
+            "policy_period_renewal": {
+              "precision": 0.9767441860465116,
+              "recall": 0.8936170212765957,
+              "f1-score": 0.9333333333333333,
+              "support": 47.0
+            },
+            "subrogation": {
+              "precision": 0.9791666666666666,
+              "recall": 1.0,
+              "f1-score": 0.9894736842105263,
+              "support": 47.0
+            },
+            "accuracy": 0.7094861660079052,
+            "macro avg": {
+              "precision": 0.7615528372542846,
+              "recall": 0.7158002861143548,
+              "f1-score": 0.7060519673505951,
+              "support": 506.0
+            },
+            "weighted avg": {
+              "precision": 0.7621652819295469,
+              "recall": 0.7094861660079052,
+              "f1-score": 0.6981700465805416,
+              "support": 506.0
+            }
+          }
+        },
+        "confusion_matrix": [
+          [
+            42,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            11,
+            11,
+            5,
+            0,
+            32,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            65,
+            2,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            1,
+            2,
+            12,
+            0,
+            15,
+            1,
+            5,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            46,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            14,
+            2,
+            0,
+            17,
+            0,
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            46,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            1,
+            0,
+            11,
+            0,
+            31,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            3,
+            0,
+            0,
+            42,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            47
+          ]
+        ],
+        "classification_report": {
+          "cancellation_non_renewal": {
+            "precision": 0.7636363636363637,
+            "recall": 0.9130434782608695,
+            "f1-score": 0.8316831683168316,
+            "support": 46.0
+          },
+          "claims_process": {
+            "precision": 0.9166666666666666,
+            "recall": 0.18032786885245902,
+            "f1-score": 0.3013698630136986,
+            "support": 61.0
+          },
+          "coverage_scope": {
+            "precision": 0.6770833333333334,
+            "recall": 0.8666666666666667,
+            "f1-score": 0.7602339181286549,
+            "support": 75.0
+          },
+          "deductible_premium": {
+            "precision": 0.48,
+            "recall": 0.2608695652173913,
+            "f1-score": 0.3380281690140845,
+            "support": 46.0
+          },
+          "dispute_resolution_appraisal": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 46.0
+          },
+          "exclusions": {
+            "precision": 0.19767441860465115,
+            "recall": 0.3695652173913043,
+            "f1-score": 0.25757575757575757,
+            "support": 46.0
+          },
+          "grace_period": {
+            "precision": 0.9787234042553191,
+            "recall": 1.0,
+            "f1-score": 0.989247311827957,
+            "support": 46.0
+          },
+          "limits_of_liability": {
+            "precision": 0.6458333333333334,
+            "recall": 0.6739130434782609,
+            "f1-score": 0.6595744680851063,
+            "support": 46.0
+          },
+          "policy_period_renewal": {
+            "precision": 0.9767441860465116,
+            "recall": 0.8936170212765957,
+            "f1-score": 0.9333333333333333,
+            "support": 47.0
+          },
+          "subrogation": {
+            "precision": 0.9791666666666666,
+            "recall": 1.0,
+            "f1-score": 0.9894736842105263,
+            "support": 47.0
+          },
+          "accuracy": 0.7094861660079052,
+          "macro avg": {
+            "precision": 0.7615528372542846,
+            "recall": 0.7158002861143548,
+            "f1-score": 0.7060519673505951,
+            "support": 506.0
+          },
+          "weighted avg": {
+            "precision": 0.7621652819295469,
+            "recall": 0.7094861660079052,
+            "f1-score": 0.6981700465805416,
+            "support": 506.0
+          }
+        }
+      }
+    }
+  }
+}

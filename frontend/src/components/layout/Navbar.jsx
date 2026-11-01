@@ -1,5 +1,4 @@
-import React from "react";
-import { ShieldAlert, FileText, UploadCloud, Bot, LogOut, LogIn, UserPlus, User } from "lucide-react";
+import { ShieldAlert, FileText, UploadCloud, Bot, LogOut, LogIn, UserPlus, User, GitFork } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 export function Navbar({ currentView, onNavigate }) {
@@ -64,7 +63,20 @@ export function Navbar({ currentView, onNavigate }) {
             }`}
           >
             <Bot className="w-3.5 h-3.5 text-black" />
-            <span>AI Copilot</span>
+            <span>Deciva AI</span>
+          </button>
+
+          <button
+            onClick={() => onNavigate("architecture")}
+            className={`px-3 py-2 text-xs font-mono uppercase tracking-wider transition-colors border rounded flex items-center gap-1.5 ${
+              currentView === "architecture"
+                ? "border-black text-black bg-neutral-100 font-semibold"
+                : "border-transparent text-neutral-600 hover:text-black hover:border-neutral-200"
+            }`}
+          >
+            <GitFork className="w-3.5 h-3.5 text-black" />
+            <span className="hidden md:inline">Architecture</span>
+            <span className="md:hidden">Flow</span>
           </button>
 
           <button

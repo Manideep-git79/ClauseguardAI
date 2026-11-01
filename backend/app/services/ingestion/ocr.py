@@ -61,10 +61,20 @@ def get_rapidocr():
 def preprocess_for_tesseract(image: Image.Image) -> Image.Image:
     """
     Fast grayscale, Gaussian blur, and Otsu binary thresholding for Tesseract.
-    Avoids slow denoising filters for maximum throughput.
+    Handles transparency, CMYK, and 1-bit modes cleanly.
     """
     try:
-        cv_img = np.array(image.convert("RGB"))
+        if image.mode in ("RGBA", "LA") or (image.mode == "P" and "transparency" in image.info):
+            alpha = image.convert("RGBA").split()[-1]
+            bg = Image.new("RGB", image.size, (255, 255, 255))
+            bg.paste(image, mask=alpha)
+            image = bg
+        elif image.mode == "CMYK":
+            image = image.convert("RGB")
+        elif image.mode != "RGB":
+            image = image.convert("RGB")
+
+        cv_img = np.array(image)
         gray = cv2.cvtColor(cv_img, cv2.COLOR_RGB2GRAY)
         blurred = cv2.GaussianBlur(gray, (3, 3), 0)
         thresh = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
@@ -72,7 +82,7 @@ def preprocess_for_tesseract(image: Image.Image) -> Image.Image:
     except Exception as e:
         logger.debug(f"Tesseract preprocessing failed, falling back to Pillow: {e}")
         try:
-            return ImageOps.grayscale(image).filter(ImageFilter.SHARPEN)
+            return ImageOps.grayscale(image.convert("RGB")).filter(ImageFilter.SHARPEN)
         except Exception:
             return image
 
@@ -88,12 +98,20 @@ def preprocess_for_rapidocr(image: Image.Image) -> np.ndarray:
         bg = Image.new("RGB", image.size, (255, 255, 255))
         bg.paste(image, mask=alpha)
         image = bg
+    elif image.mode == "CMYK":
+        image = image.convert("RGB")
     elif image.mode != "RGB":
         image = image.convert("RGB")
 
     w, h = image.size
-    if w < 450 or h < 90:
-        scale = max(2.0, 450.0 / max(1, w), 90.0 / max(1, h))
+    # Bound image dimensions to prevent ONNX memory spikes and long stalls on cloud containers
+    max_dim = max(w, h)
+    if max_dim > 1200:
+        scale = 1200.0 / max_dim
+        new_w, new_h = max(1, int(w * scale)), max(1, int(h * scale))
+        image = image.resize((new_w, new_h), Image.Resampling.LANCZOS)
+    elif w < 300 and h < 80 and w > 0 and h > 0:
+        scale = min(2.5, max(1.5, 300.0 / w, 80.0 / h))
         if scale > 1.2:
             new_w, new_h = int(w * scale), int(h * scale)
             image = image.resize((new_w, new_h), Image.Resampling.LANCZOS)
@@ -105,11 +123,33 @@ def preprocess_for_ocr(image: Image.Image) -> Image.Image:
 
 def ocr_image_detailed(image: Image.Image) -> Dict[str, Any]:
     """
-    Performs OCR on an image with full audit metadata.
+    Performs OCR on an image with full audit metadata and bounding box extraction.
     Tries Tesseract if available, or seamlessly leverages RapidOCR deep-learning engine.
     Includes inverted-color retry for white-on-dark text and transparency handling.
     Never crashes the calling process.
     """
+    if image is None or not isinstance(image, Image.Image):
+        return {
+            "text": "",
+            "method": "ocr_none",
+            "ocr_confidence": 0.0,
+            "word_count": 0,
+            "boxes": [],
+            "error": "Invalid image: input is None or not a PIL.Image instance.",
+        }
+
+    if image.width == 0 or image.height == 0:
+        return {
+            "text": "",
+            "method": "ocr_none",
+            "ocr_confidence": 0.0,
+            "word_count": 0,
+            "boxes": [],
+            "error": "Image has 0 width or height.",
+        }
+
+    boxes = []
+
     if is_tesseract_available():
         try:
             processed = preprocess_for_tesseract(image)
@@ -124,6 +164,20 @@ def ocr_image_detailed(image: Image.Image) -> Dict[str, Any]:
             avg_conf = round(float(np.mean(confs)), 2) if confs else 0.0
             word_count = len([w for w in data.get("text", []) if w.strip()])
 
+            for i, w in enumerate(data.get("text", [])):
+                w_str = str(w).strip()
+                if w_str:
+                    l = data["left"][i]
+                    t = data["top"][i]
+                    wb = data["width"][i]
+                    hb = data["height"][i]
+                    c = float(data["conf"][i]) if str(data["conf"][i]).strip() not in ("-1", "") else 0.0
+                    boxes.append({
+                        "text": w_str,
+                        "bbox": [l, t, l + wb, t + hb],
+                        "confidence": round(c, 1),
+                    })
+
             if text and len(text.split()) >= 1:
                 logger.info(f"[OCR] Tesseract extraction succeeded (Confidence: {avg_conf}%, Words: {word_count})")
                 return {
@@ -131,6 +185,7 @@ def ocr_image_detailed(image: Image.Image) -> Dict[str, Any]:
                     "method": "tesseract",
                     "ocr_confidence": avg_conf,
                     "word_count": word_count,
+                    "boxes": boxes,
                     "error": None,
                 }
         except Exception as e:
@@ -154,10 +209,19 @@ def ocr_image_detailed(image: Image.Image) -> Dict[str, Any]:
             if result:
                 lines = []
                 confs = []
+                rapid_boxes = []
                 for item in result:
                     lines.append(item[1])
-                    if len(item) > 2 and isinstance(item[2], (int, float)):
-                        confs.append(float(item[2]) * 100.0)
+                    conf_val = float(item[2]) * 100.0 if len(item) > 2 and isinstance(item[2], (int, float)) else 85.0
+                    confs.append(conf_val)
+                    if len(item) > 0 and isinstance(item[0], (list, np.ndarray)):
+                        xs = [pt[0] for pt in item[0]]
+                        ys = [pt[1] for pt in item[0]]
+                        rapid_boxes.append({
+                            "text": item[1],
+                            "bbox": [round(min(xs), 1), round(min(ys), 1), round(max(xs), 1), round(max(ys), 1)],
+                            "confidence": round(conf_val, 1),
+                        })
 
                 combined_text = "\n".join(lines).strip()
                 avg_conf = round(float(np.mean(confs)), 2) if confs else 85.0
@@ -170,6 +234,7 @@ def ocr_image_detailed(image: Image.Image) -> Dict[str, Any]:
                         "method": "rapidocr",
                         "ocr_confidence": avg_conf,
                         "word_count": word_count,
+                        "boxes": rapid_boxes,
                         "error": None,
                     }
         except Exception as ex:
@@ -180,6 +245,7 @@ def ocr_image_detailed(image: Image.Image) -> Dict[str, Any]:
         "method": "ocr_none",
         "ocr_confidence": 0.0,
         "word_count": 0,
+        "boxes": [],
         "error": None,
     }
 

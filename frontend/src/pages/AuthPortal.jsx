@@ -100,7 +100,7 @@ export function AuthPortal({ onAuthSuccess }) {
             ClauseGuard AI
           </h1>
           <p className="text-xs font-mono text-neutral-500 tracking-wide uppercase">
-            Enterprise Legal Risk Analyzer & Grounded Copilot
+            Enterprise Legal Risk Analyzer & Deciva AI
           </p>
         </div>
 

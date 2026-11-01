@@ -1,0 +1,52 @@
+[
+  {
+    "domain": "rental_agreement",
+    "class": "rent_payment_terms",
+    "f1": 0.7069
+  },
+  {
+    "domain": "job_offer_letter",
+    "class": "compensation_salary",
+    "f1": 0.6667
+  },
+  {
+    "domain": "job_offer_letter",
+    "class": "job_title_role",
+    "f1": 0.7458
+  },
+  {
+    "domain": "insurance_policy",
+    "class": "claims_process",
+    "f1": 0.6897
+  },
+  {
+    "domain": "insurance_policy",
+    "class": "coverage_scope",
+    "f1": 0.6772
+  },
+  {
+    "domain": "insurance_policy",
+    "class": "deductible_premium",
+    "f1": 0.642
+  },
+  {
+    "domain": "insurance_policy",
+    "class": "exclusions",
+    "f1": 0.3902
+  },
+  {
+    "domain": "insurance_policy",
+    "class": "limits_of_liability",
+    "f1": 0.7848
+  },
+  {
+    "domain": "insurance_policy",
+    "class": "macro avg",
+    "f1": 0.8025
+  },
+  {
+    "domain": "insurance_policy",
+    "class": "weighted avg",
+    "f1": 0.7926
+  }
+]

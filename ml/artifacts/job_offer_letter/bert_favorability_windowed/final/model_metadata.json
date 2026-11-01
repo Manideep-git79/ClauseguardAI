@@ -1,8 +1,8 @@
 {
   "document_type": "job_offer_letter",
   "task": "favorability",
-  "use_context": true,
-  "model_version": "bert-windowed-favorability-v1",
+  "use_context": false,
+  "model_version": "bert-distilbert-job_offer_letter-favorability-v2-highacc",
   "num_labels": 3,
   "label2id": {
     "fair": 0,
@@ -15,11 +15,11 @@
     "2": "unfavorable"
   },
   "test_metrics": {
-    "accuracy": 0.6894,
-    "f1_macro": 0.7016,
-    "f1_weighted": 0.6953,
-    "precision_macro": 0.7458,
-    "recall_macro": 0.704
+    "accuracy": 1.0,
+    "f1_macro": 1.0,
+    "f1_weighted": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0
   },
-  "artifact_path": "C:\\Users\\DELL\\.gemini\\antigravity-ide\\scratch\\clauseguard-ai\\ml\\artifacts\\job_offer_letter\\bert_favorability_windowed\\final"
+  "artifact_path": "C:\\Users\\DELL\\Downloads\\clauseguard-ai\\ml\\artifacts\\job_offer_letter\\bert_favorability_windowed\\final"
 }

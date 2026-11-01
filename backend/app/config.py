@@ -6,7 +6,16 @@ backend_dir = Path(__file__).resolve().parent.parent
 load_dotenv(backend_dir / ".env")
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY", "clauseguard-default-secret-key-2026")
+    FLASK_ENV = os.environ.get("FLASK_ENV", "development")
+
+    raw_secret_key = os.environ.get("SECRET_KEY")
+    raw_jwt_secret = os.environ.get("JWT_SECRET")
+
+    # Canonicalize JWT secret: prefer dedicated JWT_SECRET, fallback to SECRET_KEY
+    JWT_SECRET = raw_jwt_secret or raw_secret_key
+    # Flask application secret key
+    SECRET_KEY = raw_secret_key or raw_jwt_secret
+
     raw_db_url = os.environ.get(
         "DATABASE_URL",
         "postgresql+psycopg2://clauseguard:clauseguard@localhost:5432/clauseguard"
@@ -17,19 +26,29 @@ class Config:
         raw_db_url = raw_db_url.replace("postgresql://", "postgresql+psycopg2://", 1)
     SQLALCHEMY_DATABASE_URI = raw_db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        "pool_pre_ping": True,
-        "pool_recycle": 120,
-        "pool_timeout": 30,
-        "max_overflow": 10,
-        "pool_size": 5,
-    }
+    if raw_db_url.startswith("sqlite"):
+        SQLALCHEMY_ENGINE_OPTIONS = {}
+    else:
+        SQLALCHEMY_ENGINE_OPTIONS = {
+            "pool_pre_ping": True,
+            "pool_recycle": 60,
+            "pool_timeout": 30,
+            "max_overflow": 10,
+            "pool_size": 5,
+            "connect_args": {
+                "keepalives": 1,
+                "keepalives_idle": 30,
+                "keepalives_interval": 10,
+                "keepalives_count": 5,
+            },
+        }
     
     GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
     GEMINI_CHAT_MODEL = os.environ.get("GEMINI_CHAT_MODEL", "gemini-3.8-flash")
     GEMINI_EMBED_MODEL = os.environ.get("GEMINI_EMBED_MODEL", "gemini-embedding-001")
     
     FIELD_ENCRYPTION_KEY = os.environ.get("FIELD_ENCRYPTION_KEY", "")
+    FIELD_ENCRYPTION_FALLBACK_KEYS = os.environ.get("FIELD_ENCRYPTION_FALLBACK_KEYS", "")
     TESSERACT_CMD = os.environ.get("TESSERACT_CMD", "")
     
     import re

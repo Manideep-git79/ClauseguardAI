@@ -27,11 +27,11 @@ export function Upload({ onNavigate, initialDocType = "rental_agreement" }) {
 
   const handleFileSelect = (selectedFile) => {
     setError(null);
-    const validExtensions = [".pdf", ".docx", ".txt"];
+    const validExtensions = [".pdf", ".docx", ".txt", ".png", ".jpg", ".jpeg"];
     const ext = "." + selectedFile.name.split(".").pop().toLowerCase();
 
     if (!validExtensions.includes(ext)) {
-      setError(`Unsupported file format "${ext}". Supported: .pdf, .docx, .txt`);
+      setError(`Unsupported file format "${ext}". Supported: .pdf, .docx, .txt, .png, .jpg, .jpeg`);
       return;
     }
 

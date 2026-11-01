@@ -2,10 +2,6 @@
   "backend": "tokenizers",
   "cls_token": "[CLS]",
   "do_lower_case": true,
-  "extra_special_tokens": [
-    "[TARGET]",
-    "[/TARGET]"
-  ],
   "is_local": false,
   "local_files_only": false,
   "mask_token": "[MASK]",

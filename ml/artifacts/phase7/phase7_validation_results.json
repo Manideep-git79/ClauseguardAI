@@ -1,0 +1,22 @@
+{
+  "7A_target_only": {
+    "val_macro_f1": 0.9226,
+    "train_time_s": 282.4
+  },
+  "7B_concat_baseline": {
+    "val_macro_f1": 0.9218,
+    "train_time_s": 269.5
+  },
+  "7C_concat_fusion": {
+    "val_macro_f1": 0.9378,
+    "train_time_s": 510.3
+  },
+  "7D_gated_fusion": {
+    "val_macro_f1": 0.9331,
+    "train_time_s": 524.2
+  },
+  "7E_tp_gate": {
+    "val_macro_f1": 0.9378,
+    "train_time_s": 521.3
+  }
+}

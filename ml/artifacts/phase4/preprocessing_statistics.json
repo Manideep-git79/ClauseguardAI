@@ -1,0 +1,15 @@
+{
+  "total_samples": 10000,
+  "samples_changed": 2128,
+  "pct_samples_changed": 21.28,
+  "avg_char_reduction": 3.97,
+  "median_char_reduction": 0.0,
+  "max_char_reduction": 1961,
+  "avg_token_reduction": 0.16,
+  "median_token_reduction": 0.0,
+  "max_token_reduction": 27,
+  "samples_with_whitespace_normalization": 2121,
+  "samples_with_header_footer_removal": 343,
+  "samples_with_ocr_corrections": 0,
+  "samples_with_duplicate_token_removal": 298
+}

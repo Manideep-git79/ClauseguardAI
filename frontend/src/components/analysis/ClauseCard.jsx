@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Badge } from "../common/Badge";
 import { AlertCircle, Copy, Check, ChevronDown, ChevronUp } from "lucide-react";
 
-export function ClauseCard({ clause, isSelected, onSelect }) {
+export function ClauseCard({ clause, displayIndex, isSelected, onSelect }) {
   const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -25,6 +25,8 @@ export function ClauseCard({ clause, isSelected, onSelect }) {
       ? "text-amber-800 border-amber-300 bg-amber-50"
       : "text-green-800 border-green-300 bg-green-50";
 
+  const isNeedsReview = clause.human_review || clause.favorability_label === "needs_review";
+
   return (
     <div
       onClick={onSelect}
@@ -37,16 +39,21 @@ export function ClauseCard({ clause, isSelected, onSelect }) {
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-200 pb-3 mb-3">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-mono text-xs text-neutral-500 font-semibold">
-            #{clause.clause_index + 1}
+            #{displayIndex !== undefined ? displayIndex : clause.clause_index + 1}
           </span>
           <span className="font-serif font-bold text-base text-black">
             {clause.clause_type ? clause.clause_type.replace(/_/g, " ").toUpperCase() : "UNCLASSIFIED"}
           </span>
+          {clause.page_number && (
+            <span className="font-mono text-[11px] text-neutral-600 border border-neutral-300 px-1.5 py-0.5 bg-neutral-50 font-medium">
+              Page {clause.page_number}
+            </span>
+          )}
           <Badge variant={clause.favorability_label || "fair"}>
             {clause.favorability_label || "fair"}
           </Badge>
 
-          {clause.favorability_label === "needs_review" && (
+          {isNeedsReview && (
             <span className="inline-flex items-center gap-1 text-[11px] font-mono text-amber-800 border border-amber-300 bg-amber-50 px-2 py-0.5 font-semibold">
               <AlertCircle className="w-3 h-3 text-amber-600" />
               HUMAN REVIEW FLAGGED
@@ -73,6 +80,13 @@ export function ClauseCard({ clause, isSelected, onSelect }) {
           </button>
         </div>
       </div>
+
+      {isNeedsReview && clause.filter_reason && (
+        <div className="mb-3 px-2.5 py-1.5 bg-amber-50 border border-amber-200 text-[11px] font-mono text-amber-900 rounded-none flex items-start gap-1.5">
+          <span className="font-bold whitespace-nowrap">Review Reason:</span>
+          <span>{clause.filter_reason}</span>
+        </div>
+      )}
 
       <p className="text-xs text-neutral-800 font-sans leading-relaxed whitespace-pre-wrap">
         {displayText}

@@ -20,8 +20,9 @@ class Document(db.Model):
     raw_text_encrypted = db.Column(db.LargeBinary)
     redacted_text = db.Column(db.Text)
     overall_risk_score = db.Column(db.Float)
-    risk_band = db.Column(db.String(16))
+    risk_band = db.Column(db.String(32))
     model_version = db.Column(db.String(64))
+    parties_metadata = db.Column(db.JSON, nullable=True)
     uploaded_at = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
     analyzed_at = db.Column(db.DateTime(timezone=True))
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.id", ondelete="CASCADE"), nullable=True, index=True)
@@ -31,10 +32,15 @@ class Document(db.Model):
     missing_clauses = db.relationship("MissingClause", back_populates="document", cascade="all, delete-orphan")
     deadlines = db.relationship("Deadline", back_populates="document", cascade="all, delete-orphan")
     pii_findings = db.relationship("PIIFinding", back_populates="document", cascade="all, delete-orphan")
+    integrity_findings = db.relationship("IntegrityFinding", back_populates="document", cascade="all, delete-orphan")
     chat_sessions = db.relationship("ChatSession", back_populates="document", cascade="all, delete-orphan")
     chat_messages = db.relationship("ChatMessage", back_populates="document", cascade="all, delete-orphan")
-
     def to_dict(self, include_text=False):
+        try:
+            integrity_count = len(self.integrity_findings) if self.integrity_findings else 0
+        except Exception:
+            integrity_count = 0
+
         data = {
             "id": str(self.id),
             "filename": self.filename,
@@ -47,6 +53,8 @@ class Document(db.Model):
             "overall_risk_score": self.overall_risk_score,
             "risk_band": self.risk_band,
             "model_version": self.model_version,
+            "parties_metadata": self.parties_metadata or {},
+            "integrity_findings_count": integrity_count,
             "uploaded_at": self.uploaded_at.isoformat() if self.uploaded_at else None,
             "analyzed_at": self.analyzed_at.isoformat() if self.analyzed_at else None,
             "user_id": str(self.user_id) if self.user_id else None,

@@ -151,7 +151,7 @@ export const ChatTab = ({ documentId }) => {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 600, fontSize: "15px", color: "#000000" }}>
           <span style={{ height: "8px", width: "8px", borderRadius: "50%", background: "#000000" }} />
-          AI Legal Copilot
+          Deciva
         </div>
         <span
           style={{
@@ -164,7 +164,7 @@ export const ChatTab = ({ documentId }) => {
             fontWeight: 500,
           }}
         >
-          Grounded Copilot
+          Deciva AI
         </span>
       </div>
 
@@ -216,7 +216,7 @@ export const ChatTab = ({ documentId }) => {
         {messages.length === 0 ? (
           <div style={{ margin: "auto", textAlign: "center", color: "#71717a" }}>
             <div style={{ fontSize: "32px", marginBottom: "8px" }}>⚖️</div>
-            <div style={{ fontWeight: 600, color: "#000000", fontSize: "16px" }}>How can I assist you today?</div>
+            <div style={{ fontWeight: 600, color: "#000000", fontSize: "16px" }}>I am Deciva. How can I assist you today?</div>
             <div style={{ fontSize: "13px", color: "#71717a", marginTop: "4px" }}>Ask any question or click a suggestion chip above.</div>
           </div>
         ) : (
@@ -239,22 +239,24 @@ export const ChatTab = ({ documentId }) => {
                 }}
               >
                 {!isUser && (
-                  <div style={{ marginBottom: "8px", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <div style={{ marginBottom: "8px", display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
                     <span
                       style={{
                         fontSize: "10px",
                         textTransform: "uppercase",
                         padding: "2px 8px",
                         borderRadius: "4px",
-                        background: "#f4f4f5",
-                        color: "#18181b",
-                        border: "1px solid #e4e4e7",
+                        background: m.grounded ? "#f0fdf4" : (m.content && m.content.toLowerCase().includes("does not contain information") ? "#fffbeb" : "#f4f4f5"),
+                        color: m.grounded ? "#166534" : (m.content && m.content.toLowerCase().includes("does not contain information") ? "#92400e" : "#18181b"),
+                        border: m.grounded ? "1px solid #bbf7d0" : (m.content && m.content.toLowerCase().includes("does not contain information") ? "1px solid #fde68a" : "1px solid #e4e4e7"),
                         fontWeight: 600,
                       }}
                     >
-                      {m.grounded ? "✓ Grounded" : "Legal Guidance"}
+                      {m.grounded
+                        ? `✓ Grounded${m.sources && m.sources.length ? ` (${m.sources.length} citation${m.sources.length > 1 ? "s" : ""})` : ""}`
+                        : (m.content && m.content.toLowerCase().includes("does not contain information") ? "⚠ Information Not Found in Document" : "Legal Guidance")}
                     </span>
-                    {typeof m.confidence === "number" && (
+                    {m.grounded && typeof m.confidence === "number" && (
                       <span style={{ fontSize: "11px", color: "#71717a" }}>
                         ({Math.round(m.confidence * 100)}% confidence)
                       </span>
@@ -271,7 +273,7 @@ export const ChatTab = ({ documentId }) => {
                 {!isUser && m.sources && m.sources.length > 0 && (
                   <div style={{ marginTop: "12px", paddingTop: "10px", borderTop: "1px solid #f0f0f0" }}>
                     <div style={{ fontSize: "11px", fontWeight: 700, color: "#52525b", marginBottom: "6px" }}>
-                      📎 Citations:
+                      📎 Supporting Evidence & Citations:
                     </div>
                     {m.sources.map((src, sIdx) => (
                       <div
@@ -281,13 +283,18 @@ export const ChatTab = ({ documentId }) => {
                           background: "#f9fafb",
                           padding: "8px 10px",
                           borderRadius: "4px",
-                          fontStyle: "italic",
                           color: "#3f3f46",
                           border: "1px solid #e5e5e5",
                           marginTop: sIdx > 0 ? "6px" : "0",
                         }}
                       >
-                        "{src.excerpt}"
+                        <div style={{ fontWeight: 600, color: "#18181b", marginBottom: "3px", fontSize: "11px", display: "flex", justifyContent: "space-between" }}>
+                          <span>{src.section || `Clause #${(src.clause_index || 0) + 1}`}</span>
+                          {src.page_number && <span style={{ color: "#71717a" }}>Page {src.page_number}</span>}
+                        </div>
+                        <div style={{ fontStyle: "italic", color: "#4b5563" }}>
+                          "{src.excerpt}"
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -325,7 +332,7 @@ export const ChatTab = ({ documentId }) => {
       >
         <input
           type="text"
-          placeholder="Ask a question about this document…"
+          placeholder="Ask Deciva about this document…"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}

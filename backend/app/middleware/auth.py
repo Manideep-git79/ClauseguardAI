@@ -4,10 +4,36 @@ from flask import request, jsonify, g, current_app
 from app.extensions import db
 from app.models.user import User, Session
 
+import os
+import logging
+
+logger = logging.getLogger(__name__)
+
 def get_jwt_secret():
+    """
+    Returns the canonical JWT signing and verification secret.
+    Prioritizes JWT_SECRET from app config or environment, falling back to SECRET_KEY.
+    In production, fails immediately if no valid secret is configured.
+    Never logs secret values.
+    """
+    secret = None
     if current_app:
-        return current_app.config.get("JWT_SECRET") or current_app.config.get("SECRET_KEY") or "deciva-super-secret-jwt-key-change-in-production"
-    return "deciva-super-secret-jwt-key-change-in-production"
+        secret = current_app.config.get("JWT_SECRET") or current_app.config.get("SECRET_KEY")
+    if not secret:
+        secret = os.environ.get("JWT_SECRET") or os.environ.get("SECRET_KEY")
+
+    if not secret:
+        is_prod = (
+            (current_app and current_app.config.get("FLASK_ENV") == "production")
+            or os.environ.get("FLASK_ENV") == "production"
+        )
+        if is_prod:
+            logger.error("Authentication halted: No JWT_SECRET or SECRET_KEY configured in production.")
+            raise RuntimeError("CRITICAL SECURITY ERROR: No valid JWT signing secret configured in production environment.")
+        logger.warning("No JWT signing secret configured in environment.")
+        return None
+
+    return secret
 
 def require_auth(f):
     @wraps(f)
@@ -27,6 +53,9 @@ def require_auth(f):
             return jsonify({"error": "Authentication required. No token provided."}), 401
 
         jwt_secret = get_jwt_secret()
+        if not jwt_secret:
+            return jsonify({"error": "Authentication service unavailable: JWT secret is not configured."}), 500
+
         try:
             payload = jwt.decode(token, jwt_secret, algorithms=["HS256"])
         except Exception:
@@ -77,23 +106,24 @@ def optional_auth(f):
 
         if token:
             jwt_secret = get_jwt_secret()
-            try:
-                payload = jwt.decode(token, jwt_secret, algorithms=["HS256"])
-                session_id = payload.get("sessionId")
-                user_id = payload.get("userId")
-                if user_id:
-                    user_obj = db.session.get(User, user_id)
-                    if user_obj:
-                        if session_id:
-                            session_obj = db.session.get(Session, session_id)
-                            if session_obj and not session_obj.revoked:
-                                g.session = session_obj
+            if jwt_secret:
+                try:
+                    payload = jwt.decode(token, jwt_secret, algorithms=["HS256"])
+                    session_id = payload.get("sessionId")
+                    user_id = payload.get("userId")
+                    if user_id:
+                        user_obj = db.session.get(User, user_id)
+                        if user_obj:
+                            if session_id:
+                                session_obj = db.session.get(Session, session_id)
+                                if session_obj and not session_obj.revoked:
+                                    g.session = session_obj
+                                    g.user = user_obj
+                                elif not session_obj:
+                                    g.user = user_obj
+                            else:
                                 g.user = user_obj
-                            elif not session_obj:
-                                g.user = user_obj
-                        else:
-                            g.user = user_obj
-            except Exception:
-                pass
+                except Exception:
+                    pass
         return f(*args, **kwargs)
     return decorated_function

@@ -1,0 +1,78 @@
+{
+  "selected_contextual_configuration": "target_priority_b96_nomarkers",
+  "selection_rule": "Highest 3-Domain Validation Mean Macro-F1 among Contextual Candidates (Section 20)",
+  "validation_mean_macro_f1": 0.5257,
+  "strategy": "target_priority",
+  "max_length": 96,
+  "marker_style": "none",
+  "candidate_ranking": [
+    [
+      "baseline_target_only_96",
+      0.8227
+    ],
+    [
+      "baseline_broken_window_96",
+      0.5382
+    ],
+    [
+      "target_priority_b96_nomarkers",
+      0.5257
+    ],
+    [
+      "target_priority_b192_target_tag",
+      0.4477
+    ],
+    [
+      "symmetric_b256_target_tag",
+      0.4422
+    ],
+    [
+      "target_priority_b256_target_tag",
+      0.4393
+    ],
+    [
+      "immediate_clause_b256_target_tag",
+      0.4393
+    ],
+    [
+      "target_priority_b512_target_tag",
+      0.4373
+    ],
+    [
+      "target_priority_b384_target_tag",
+      0.4363
+    ],
+    [
+      "target_priority_b128_target_tag",
+      0.4201
+    ],
+    [
+      "symmetric_b128_target_tag",
+      0.4122
+    ],
+    [
+      "immediate_clause_b128_target_tag",
+      0.4107
+    ],
+    [
+      "target_priority_b128_nomarkers",
+      0.3757
+    ],
+    [
+      "target_priority_b256_nomarkers",
+      0.3571
+    ],
+    [
+      "target_priority_b96_target_tag",
+      0.3524
+    ],
+    [
+      "symmetric_b96_target_tag",
+      0.3524
+    ],
+    [
+      "immediate_clause_b96_target_tag",
+      0.3524
+    ]
+  ]
+}

@@ -116,7 +116,7 @@ export function AuditTrail({ onNavigate }) {
         return {
           bg: "bg-neutral-100 text-black border-neutral-300",
           icon: Bot,
-          label: "AI Copilot Query",
+          label: "Deciva Query",
         };
       case "CHAT_OPENED":
         return {
@@ -148,7 +148,7 @@ export function AuditTrail({ onNavigate }) {
               </span>
             </h1>
             <p className="text-xs font-mono text-neutral-600 mt-1">
-              Immutable chronological record of document uploads, automated risk evaluations, AI copilot queries, and security sessions.
+              Immutable chronological record of document uploads, automated risk evaluations, Deciva queries, and security sessions.
             </p>
           </div>
         </div>
@@ -210,7 +210,7 @@ export function AuditTrail({ onNavigate }) {
           {[
             { id: "all", label: "All Events" },
             { id: "documents", label: "Documents" },
-            { id: "chat", label: "AI Copilot" },
+            { id: "chat", label: "Deciva AI" },
             { id: "auth", label: "Security & Auth" },
           ].map((tab) => (
             <button

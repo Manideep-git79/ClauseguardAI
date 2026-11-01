@@ -1,0 +1,9 @@
+{
+  "seed_42": 0.9218,
+  "seed_43": 0.9196,
+  "seed_44": 0.9135,
+  "mean_macro_f1": 0.9183,
+  "std_macro_f1": 0.0035,
+  "min_macro_f1": 0.9135,
+  "max_macro_f1": 0.9218
+}

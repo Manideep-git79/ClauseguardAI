@@ -1,0 +1,20 @@
+{
+  "7C": {
+    "base_encoder_params": 66362880,
+    "total_params": 66378250,
+    "trainable_params": 66378250,
+    "fusion_params": 15370
+  },
+  "7D": {
+    "base_encoder_params": 66362880,
+    "total_params": 67550986,
+    "trainable_params": 67550986,
+    "fusion_params": 1188106
+  },
+  "7E": {
+    "base_encoder_params": 66362880,
+    "total_params": 67550986,
+    "trainable_params": 67550986,
+    "fusion_params": 1188106
+  }
+}

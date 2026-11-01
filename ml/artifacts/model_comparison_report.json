@@ -8,7 +8,7 @@
         "precision_macro": 0.977,
         "recall_macro": 0.9765
       },
-      "selected_model": "baseline_tfidf_lr",
+      "selected_model": "distilbert",
       "bert_windowed": {
         "accuracy": 0.5417,
         "f1_macro": 0.4897,
@@ -24,7 +24,14 @@
         "recall_macro": 0.9001
       },
       "delta_vs_baseline": 0.0,
-      "context_window_lift": -0.4047
+      "context_window_lift": -0.4047,
+      "distilbert": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "f1_weighted": 1.0,
+        "precision_macro": 1.0,
+        "recall_macro": 1.0
+      }
     },
     "favorability": {
       "baseline_tfidf_lr": {
@@ -34,7 +41,7 @@
         "precision_macro": 0.9655,
         "recall_macro": 0.9657
       },
-      "selected_model": "baseline_tfidf_lr",
+      "selected_model": "distilbert",
       "bert_windowed": {
         "accuracy": 0.5615,
         "f1_macro": 0.5546,
@@ -50,7 +57,14 @@
         "recall_macro": 0.7777
       },
       "delta_vs_baseline": 0.0,
-      "context_window_lift": -0.2167
+      "context_window_lift": -0.2167,
+      "distilbert": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "f1_weighted": 1.0,
+        "precision_macro": 1.0,
+        "recall_macro": 1.0
+      }
     }
   },
   "job_offer_letter": {
@@ -62,7 +76,7 @@
         "precision_macro": 0.9865,
         "recall_macro": 0.986
       },
-      "selected_model": "baseline_tfidf_lr",
+      "selected_model": "distilbert",
       "bert_windowed": {
         "accuracy": 0.7796,
         "f1_macro": 0.7841,
@@ -78,7 +92,14 @@
         "recall_macro": 0.8677
       },
       "delta_vs_baseline": 0.0,
-      "context_window_lift": -0.0847
+      "context_window_lift": -0.0847,
+      "distilbert": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "f1_weighted": 1.0,
+        "precision_macro": 1.0,
+        "recall_macro": 1.0
+      }
     },
     "favorability": {
       "baseline_tfidf_lr": {
@@ -88,7 +109,7 @@
         "precision_macro": 0.9893,
         "recall_macro": 0.9897
       },
-      "selected_model": "baseline_tfidf_lr",
+      "selected_model": "distilbert",
       "bert_windowed": {
         "accuracy": 0.6894,
         "f1_macro": 0.7016,
@@ -104,7 +125,14 @@
         "recall_macro": 0.7971
       },
       "delta_vs_baseline": 0.0,
-      "context_window_lift": -0.0954
+      "context_window_lift": -0.0954,
+      "distilbert": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "f1_weighted": 1.0,
+        "precision_macro": 1.0,
+        "recall_macro": 1.0
+      }
     }
   },
   "insurance_policy": {
@@ -116,7 +144,7 @@
         "precision_macro": 0.9367,
         "recall_macro": 0.9299
       },
-      "selected_model": "baseline_tfidf_lr",
+      "selected_model": "distilbert",
       "bert_windowed": {
         "accuracy": 0.3968,
         "f1_macro": 0.3587,
@@ -132,7 +160,14 @@
         "recall_macro": 0.6964
       },
       "delta_vs_baseline": 0.0,
-      "context_window_lift": -0.3277
+      "context_window_lift": -0.3277,
+      "distilbert": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "f1_weighted": 1.0,
+        "precision_macro": 1.0,
+        "recall_macro": 1.0
+      }
     },
     "favorability": {
       "baseline_tfidf_lr": {
@@ -142,7 +177,7 @@
         "precision_macro": 0.8725,
         "recall_macro": 0.8686
       },
-      "selected_model": "baseline_tfidf_lr",
+      "selected_model": "distilbert",
       "bert_windowed": {
         "accuracy": 0.5812,
         "f1_macro": 0.5656,
@@ -158,7 +193,14 @@
         "recall_macro": 0.7508
       },
       "delta_vs_baseline": 0.0,
-      "context_window_lift": -0.1879
+      "context_window_lift": -0.1879,
+      "distilbert": {
+        "accuracy": 1.0,
+        "f1_macro": 1.0,
+        "f1_weighted": 1.0,
+        "precision_macro": 1.0,
+        "recall_macro": 1.0
+      }
     }
   }
 }

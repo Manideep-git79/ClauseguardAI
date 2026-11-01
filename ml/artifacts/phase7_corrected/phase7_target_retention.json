@@ -1,0 +1,212 @@
+{
+  "96": {
+    "rental_agreement": {
+      "total_clauses": 2332,
+      "target_fully_retained_count": 2260,
+      "target_fully_retained_pct": 96.91,
+      "target_segmented_count": 72,
+      "target_segmented_pct": 3.09,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 41.2,
+      "avg_context_tokens": 33.2
+    },
+    "job_offer_letter": {
+      "total_clauses": 2331,
+      "target_fully_retained_count": 2323,
+      "target_fully_retained_pct": 99.66,
+      "target_segmented_count": 8,
+      "target_segmented_pct": 0.34,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 38.2,
+      "avg_context_tokens": 35.8
+    },
+    "insurance_policy": {
+      "total_clauses": 2261,
+      "target_fully_retained_count": 1919,
+      "target_fully_retained_pct": 84.87,
+      "target_segmented_count": 342,
+      "target_segmented_pct": 15.13,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 48.8,
+      "avg_context_tokens": 33.7
+    }
+  },
+  "128": {
+    "rental_agreement": {
+      "total_clauses": 2332,
+      "target_fully_retained_count": 2280,
+      "target_fully_retained_pct": 97.77,
+      "target_segmented_count": 52,
+      "target_segmented_pct": 2.23,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 42.1,
+      "avg_context_tokens": 53.0
+    },
+    "job_offer_letter": {
+      "total_clauses": 2331,
+      "target_fully_retained_count": 2325,
+      "target_fully_retained_pct": 99.74,
+      "target_segmented_count": 6,
+      "target_segmented_pct": 0.26,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 38.3,
+      "avg_context_tokens": 56.3
+    },
+    "insurance_policy": {
+      "total_clauses": 2261,
+      "target_fully_retained_count": 1978,
+      "target_fully_retained_pct": 87.48,
+      "target_segmented_count": 283,
+      "target_segmented_pct": 12.52,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 53.2,
+      "avg_context_tokens": 53.9
+    }
+  },
+  "192": {
+    "rental_agreement": {
+      "total_clauses": 2332,
+      "target_fully_retained_count": 2302,
+      "target_fully_retained_pct": 98.71,
+      "target_segmented_count": 30,
+      "target_segmented_pct": 1.29,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 43.2,
+      "avg_context_tokens": 62.2
+    },
+    "job_offer_letter": {
+      "total_clauses": 2331,
+      "target_fully_retained_count": 2326,
+      "target_fully_retained_pct": 99.79,
+      "target_segmented_count": 5,
+      "target_segmented_pct": 0.21,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 38.5,
+      "avg_context_tokens": 61.9
+    },
+    "insurance_policy": {
+      "total_clauses": 2261,
+      "target_fully_retained_count": 2065,
+      "target_fully_retained_pct": 91.33,
+      "target_segmented_count": 196,
+      "target_segmented_pct": 8.67,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 59.8,
+      "avg_context_tokens": 66.7
+    }
+  },
+  "256": {
+    "rental_agreement": {
+      "total_clauses": 2332,
+      "target_fully_retained_count": 2311,
+      "target_fully_retained_pct": 99.1,
+      "target_segmented_count": 21,
+      "target_segmented_pct": 0.9,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 43.9,
+      "avg_context_tokens": 64.6
+    },
+    "job_offer_letter": {
+      "total_clauses": 2331,
+      "target_fully_retained_count": 2327,
+      "target_fully_retained_pct": 99.83,
+      "target_segmented_count": 4,
+      "target_segmented_pct": 0.17,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 38.6,
+      "avg_context_tokens": 62.1
+    },
+    "insurance_policy": {
+      "total_clauses": 2261,
+      "target_fully_retained_count": 2126,
+      "target_fully_retained_pct": 94.03,
+      "target_segmented_count": 135,
+      "target_segmented_pct": 5.97,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 64.4,
+      "avg_context_tokens": 74.3
+    }
+  },
+  "384": {
+    "rental_agreement": {
+      "total_clauses": 2332,
+      "target_fully_retained_count": 2320,
+      "target_fully_retained_pct": 99.49,
+      "target_segmented_count": 12,
+      "target_segmented_pct": 0.51,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 44.7,
+      "avg_context_tokens": 68.0
+    },
+    "job_offer_letter": {
+      "total_clauses": 2331,
+      "target_fully_retained_count": 2327,
+      "target_fully_retained_pct": 99.83,
+      "target_segmented_count": 4,
+      "target_segmented_pct": 0.17,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 38.8,
+      "avg_context_tokens": 62.2
+    },
+    "insurance_policy": {
+      "total_clauses": 2261,
+      "target_fully_retained_count": 2183,
+      "target_fully_retained_pct": 96.55,
+      "target_segmented_count": 78,
+      "target_segmented_pct": 3.45,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 70.3,
+      "avg_context_tokens": 87.1
+    }
+  },
+  "512": {
+    "rental_agreement": {
+      "total_clauses": 2332,
+      "target_fully_retained_count": 2326,
+      "target_fully_retained_pct": 99.74,
+      "target_segmented_count": 6,
+      "target_segmented_pct": 0.26,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 45.3,
+      "avg_context_tokens": 70.0
+    },
+    "job_offer_letter": {
+      "total_clauses": 2331,
+      "target_fully_retained_count": 2329,
+      "target_fully_retained_pct": 99.91,
+      "target_segmented_count": 2,
+      "target_segmented_pct": 0.09,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 39.0,
+      "avg_context_tokens": 62.2
+    },
+    "insurance_policy": {
+      "total_clauses": 2261,
+      "target_fully_retained_count": 2204,
+      "target_fully_retained_pct": 97.48,
+      "target_segmented_count": 57,
+      "target_segmented_pct": 2.52,
+      "target_lost_count": 0,
+      "target_lost_pct": 0.0,
+      "avg_target_tokens": 74.1,
+      "avg_context_tokens": 96.8
+    }
+  }
+}

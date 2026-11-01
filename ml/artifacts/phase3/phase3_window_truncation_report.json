@@ -1,0 +1,38 @@
+{
+  "rental_agreement": {
+    "total_test_samples": 501,
+    "samples_truncated": 382,
+    "pct_samples_truncated": 76.25,
+    "target_marker_survives_pct": 98.0,
+    "target_clause_fully_retained_pct": 60.08,
+    "target_clause_partially_truncated_pct": 37.92,
+    "target_clause_completely_lost_pct": 2.0,
+    "avg_tokens_before_truncation": 125.74,
+    "avg_tokens_after_truncation": 82.01,
+    "max_tokens_before_truncation": 709
+  },
+  "job_offer_letter": {
+    "total_test_samples": 500,
+    "samples_truncated": 374,
+    "pct_samples_truncated": 74.8,
+    "target_marker_survives_pct": 93.6,
+    "target_clause_fully_retained_pct": 70.4,
+    "target_clause_partially_truncated_pct": 23.2,
+    "target_clause_completely_lost_pct": 6.4,
+    "avg_tokens_before_truncation": 182.99,
+    "avg_tokens_after_truncation": 81.98,
+    "max_tokens_before_truncation": 3709
+  },
+  "insurance_policy": {
+    "total_test_samples": 506,
+    "samples_truncated": 362,
+    "pct_samples_truncated": 71.54,
+    "target_marker_survives_pct": 98.02,
+    "target_clause_fully_retained_pct": 60.28,
+    "target_clause_partially_truncated_pct": 37.75,
+    "target_clause_completely_lost_pct": 1.98,
+    "avg_tokens_before_truncation": 151.21,
+    "avg_tokens_after_truncation": 82.04,
+    "max_tokens_before_truncation": 1997
+  }
+}

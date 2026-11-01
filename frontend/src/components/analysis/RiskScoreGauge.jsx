@@ -9,9 +9,11 @@ export function RiskScoreGauge({ score = 0, band = "low" }) {
     medium: "#F59E0B",
     high: "#F97316",
     critical: "#EF4444",
+    insufficient_content: "#6B7280",
   };
 
   const currentColor = bandColors[band.toLowerCase()] || bandColors.medium;
+  const isInsufficient = band.toLowerCase() === "insufficient_content";
 
   const data = [
     { name: "Score", value: normalizedScore },
@@ -28,7 +30,7 @@ export function RiskScoreGauge({ score = 0, band = "low" }) {
           className="text-xs font-mono font-bold uppercase px-2 py-0.5 border"
           style={{ borderColor: currentColor, color: currentColor }}
         >
-          {band} Risk
+          {isInsufficient ? "Insufficient Content" : `${band} Risk`}
         </span>
       </div>
 

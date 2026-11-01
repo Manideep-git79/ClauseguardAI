@@ -6,6 +6,7 @@ import { MissingClauseList } from "../components/analysis/MissingClauseList";
 import { DeadlineTimeline } from "../components/analysis/DeadlineTimeline";
 import { RedactedTextViewer } from "../components/analysis/RedactedTextViewer";
 import { PiiSummaryPanel } from "../components/analysis/PiiSummaryPanel";
+import { DocumentIntegrityPanel } from "../components/analysis/DocumentIntegrityPanel";
 import { ChatPanel } from "../components/chat/ChatPanel";
 import { Badge } from "../components/common/Badge";
 import {
@@ -16,9 +17,15 @@ import {
   Clock,
   MessageSquare,
   ShieldCheck,
+  ShieldAlert,
   Layers,
   Cpu,
   RefreshCw,
+  Users,
+  Building2,
+  UserCheck,
+  Calendar,
+  Scale,
 } from "lucide-react";
 
 export function DocumentAnalysis({ documentId, onNavigate }) {
@@ -31,6 +38,20 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
   const [activeTab, setActiveTab] = useState("overview");
   const [selectedClauseId, setSelectedClauseId] = useState(null);
   const [downloadingPdf, setDownloadingPdf] = useState(false);
+  const [reanalyzing, setReanalyzing] = useState(false);
+
+  const handleReanalyze = async () => {
+    if (!documentId || reanalyzing) return;
+    setReanalyzing(true);
+    try {
+      await api.reanalyzeDocument(documentId);
+      await fetchAnalysisData();
+    } catch (err) {
+      alert("Failed to re-analyze document: " + (err.message || err));
+    } finally {
+      setReanalyzing(false);
+    }
+  };
 
   const fetchAnalysisData = async () => {
     if (!documentId) return;
@@ -123,9 +144,22 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
     );
   }
 
-  const unfavorableCount = clauses.filter((c) => c.favorability_label === "unfavorable").length;
-  const reviewCount = clauses.filter((c) => c.favorability_label === "needs_review").length;
-  const fairCount = clauses.filter((c) => c.favorability_label === "fair").length;
+  const substantiveClauses = clauses.filter(
+    (c) => c.is_substantive !== false && c.content_type === "SUBSTANTIVE_CLAUSE"
+  );
+  const excludedCount = clauses.length - substantiveClauses.length;
+
+  const unfavorableCount = substantiveClauses.filter(
+    (c) => (c.favorability_label || "").toLowerCase() === "unfavorable"
+  ).length;
+  const reviewCount = substantiveClauses.filter(
+    (c) =>
+      (c.favorability_label || "").toLowerCase() !== "unfavorable" &&
+      ((c.favorability_label || "").toLowerCase() === "needs_review" ||
+        c.clause_type === "UNCERTAIN" ||
+        c.human_review)
+  ).length;
+  const fairCount = substantiveClauses.length - unfavorableCount - reviewCount;
 
   return (
     <div className="space-y-6 py-4">
@@ -153,15 +187,26 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
             <span>Uploaded: {new Date(doc.uploaded_at).toLocaleDateString()}</span>
             {doc.page_count && <span>• {doc.page_count} Pages</span>}
             {doc.model_version && (
-              <span className="flex items-center gap-1 text-neutral-700">
-                <Cpu className="w-3.5 h-3.5 text-neutral-500" />
-                Model: {doc.model_version}
+              <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-mono border ${doc.model_version.toLowerCase().includes("bert") || doc.model_version.includes("Disti") ? "bg-emerald-50 border-emerald-300 text-emerald-800" : "bg-neutral-100 border-neutral-300 text-neutral-700"}`}>
+                <Cpu className={`w-3.5 h-3.5 ${doc.model_version.toLowerCase().includes("bert") || doc.model_version.includes("Disti") ? "text-emerald-600" : "text-neutral-500"}`} />
+                <span>Model: Fine-Tuned DistiBERT</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" title="Neural BERT Model Active" />
               </span>
             )}
           </div>
         </div>
 
         <div className="flex items-center gap-3 self-stretch sm:self-auto justify-end">
+          <button
+            onClick={handleReanalyze}
+            disabled={reanalyzing}
+            className="px-3 py-2 text-xs font-mono uppercase tracking-wider border border-neutral-300 hover:border-black text-neutral-800 hover:text-black bg-white transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            title="Re-analyze all clauses with fine-tuned DistilBERT model"
+          >
+            <Cpu className={`w-3.5 h-3.5 ${reanalyzing ? "animate-spin text-blue-600" : "text-neutral-700"}`} />
+            <span>{reanalyzing ? "Analyzing with DistilBERT..." : "Re-analyze with DistilBERT"}</span>
+          </button>
+
           <button
             onClick={fetchAnalysisData}
             className="p-2.5 border border-neutral-300 hover:border-black text-neutral-600 hover:text-black bg-white transition-colors"
@@ -194,10 +239,11 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
       <div className="flex border-b border-neutral-200 overflow-x-auto gap-1">
         {[
           { key: "overview", label: "Executive Risk Overview", icon: Layers },
-          { key: "clauses", label: `Clauses (${clauses.length})`, icon: FileText },
+          { key: "clauses", label: `Clauses (${substantiveClauses.length})`, icon: FileText },
           { key: "deadlines", label: `Deadlines (${deadlines.length})`, icon: Clock },
+          { key: "integrity", label: "Integrity & Safety", icon: ShieldAlert },
           { key: "text", label: "Redacted Text", icon: ShieldCheck },
-          { key: "chat", label: "AI RAG Assistant", icon: MessageSquare },
+          { key: "chat", label: "Deciva AI", icon: MessageSquare },
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.key;
@@ -232,13 +278,13 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
               <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="border border-neutral-200 bg-white p-4 flex flex-col justify-between shadow-sm">
                   <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-semibold">
-                    Total Clauses
+                    Substantive Clauses
                   </span>
                   <span className="font-serif text-3xl font-bold text-black mt-1">
-                    {clauses.length}
+                    {substantiveClauses.length}
                   </span>
                   <span className="text-[11px] font-mono text-neutral-500 mt-2 block">
-                    Segmented by spaCy
+                    {excludedCount > 0 ? `${excludedCount} excluded (front matter/metadata)` : "Gated & Verified"}
                   </span>
                 </div>
 
@@ -304,10 +350,92 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
               </div>
             </div>
 
+            {/* Contracting Parties & Signatories Section */}
+            {doc.parties_metadata && (doc.parties_metadata.parties?.length > 0 || doc.parties_metadata.signatories?.length > 0) && (
+              <div className="border border-neutral-200 bg-white p-6 shadow-sm space-y-4">
+                <div className="flex items-center justify-between border-b border-neutral-100 pb-3 flex-wrap gap-2">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-blue-600" />
+                    <h3 className="font-serif text-lg font-bold text-neutral-900">
+                      Contracting Parties & Signatories
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-mono text-neutral-600 flex-wrap">
+                    {doc.parties_metadata.effective_date && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 border border-blue-200 text-blue-800 rounded font-medium">
+                        <Calendar className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Effective: {doc.parties_metadata.effective_date}</span>
+                      </span>
+                    )}
+                    {doc.parties_metadata.governing_law && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-neutral-100 border border-neutral-200 text-neutral-700 rounded font-medium">
+                        <Scale className="w-3.5 h-3.5 text-neutral-600" />
+                        <span>Law: {doc.parties_metadata.governing_law}</span>
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Parties Cards */}
+                {doc.parties_metadata.parties?.length > 0 && (
+                  <div className="space-y-2">
+                    <h4 className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 font-semibold">
+                      Identified Contracting Parties
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {doc.parties_metadata.parties.map((p, pIdx) => (
+                        <div key={pIdx} className="border border-neutral-200 bg-neutral-50/70 p-4 rounded space-y-1.5">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-bold text-sm text-neutral-900">{p.name}</span>
+                            <span className="text-[10px] font-mono px-2 py-0.5 bg-neutral-200 text-neutral-800 rounded uppercase font-semibold">
+                              {p.role}
+                            </span>
+                          </div>
+                          <div className="text-xs text-neutral-600 font-mono space-y-0.5">
+                            <div>Entity: {p.entity_type || "Entity"}</div>
+                            {p.address && <div className="text-neutral-500 truncate">Address: {p.address}</div>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Signatories List */}
+                {doc.parties_metadata.signatories?.length > 0 && (
+                  <div className="pt-2 border-t border-neutral-100 space-y-2">
+                    <h4 className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 font-semibold">
+                      Authorized Signatories & Execution
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {doc.parties_metadata.signatories.map((s, sIdx) => (
+                        <div key={sIdx} className="flex items-start gap-2.5 p-3 border border-neutral-200 bg-white rounded text-xs shadow-2xs">
+                          <UserCheck className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                          <div className="space-y-0.5 min-w-0">
+                            <div className="font-bold text-neutral-900">{s.name}</div>
+                            <div className="text-neutral-600 font-mono text-[11px]">
+                              {s.title || "Authorized Signatory"} {s.entity ? `(${s.entity})` : ""}
+                            </div>
+                            {s.date && <div className="text-[10px] font-mono text-neutral-400">Date: {s.date}</div>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <DocumentIntegrityPanel documentId={doc.id} />
+
             <MissingClauseList missingClauses={missingClauses} />
 
             <PiiSummaryPanel documentId={doc.id} />
           </div>
+        )}
+
+        {activeTab === "integrity" && (
+          <DocumentIntegrityPanel documentId={doc.id} />
         )}
 
         {activeTab === "clauses" && (

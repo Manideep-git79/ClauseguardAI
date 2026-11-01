@@ -33,5 +33,5 @@
   "tie_weights_": true,
   "tie_word_embeddings": true,
   "transformers_version": "5.17.0",
-  "vocab_size": 30524
+  "vocab_size": 30522
 }

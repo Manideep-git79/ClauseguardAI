@@ -1,0 +1,23 @@
+STRATEGIC PARTNERSHIP AND PLATFORM LICENSE AGREEMENT
+
+RECITALS
+WHEREAS, the parties previously entered into a non-disclosure agreement dated March 14, 2022, which has since expired and is superseded hereby; and
+WHEREAS, Licensor develops cloud data platform software and Licensee desires to integrate said platform.
+
+NOW, THEREFORE, the parties agree as follows:
+
+SECTION 1: FIXED ANCHOR DATES AND RECONCILIATION
+1.1 Reconciliation Milestone: Licensee shall remit the final true-up reconciliation payment on or before December 31, 2026.
+
+SECTION 2: EVENT-TRIGGERED CONDITIONAL DEADLINES
+2.1 Commercial Launch Obligations: Within thirty (30) days following commercial deployment of Release 2.0 to end-users, Licensee shall deliver the platform integration audit report to Licensor.
+
+SECTION 3: CALENDAR-DAY VS BUSINESS-DAY CONVENTIONS
+3.1 Invoice Dispute Notice: Licensee must notify Licensor in writing of any disputed invoice amounts within ten (10) business days following receipt of such invoice.
+3.2 Undisputed Remittance: All undisputed invoice balances shall be remitted by Licensee within thirty (30) calendar days of the invoice date.
+
+SECTION 4: AUTOMATIC RENEWAL AND NON-RENEWAL NOTICE
+4.1 Term and Auto-Renewal: This Agreement commences on June 1, 2026 and shall automatically renew for additional successive terms of twelve (12) months each, unless either party delivers written notice of non-renewal at least sixty (60) days prior to the expiration of the then-current term.
+
+SECTION 5: CURE PERIOD AND TERMINATION NOTICE
+5.1 Default and Cure: In the event of a material breach, the non-breaching party may terminate this Agreement upon thirty (30) days prior written notice, provided that the breaching party has failed to cure such breach within fifteen (15) days after receipt of written notice detailing the breach.

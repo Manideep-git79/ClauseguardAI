@@ -13,6 +13,7 @@ export function Badge({ variant = "default", children, className = "" }) {
     unfavorable: "border-red-300 bg-red-50 text-red-800 font-semibold",
 
     info: "border-neutral-300 bg-neutral-100 text-black font-semibold",
+    insufficient_content: "border-neutral-300 bg-neutral-100 text-neutral-700 font-semibold",
     default: "border-neutral-300 bg-neutral-100 text-neutral-800 font-semibold",
   };
 

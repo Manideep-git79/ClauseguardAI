@@ -1,0 +1,11 @@
+actual / predicted,cancellation_non_renewal,claims_process,coverage_scope,deductible_premium,dispute_resolution_appraisal,exclusions,grace_period,limits_of_liability,policy_period_renewal,subrogation
+cancellation_non_renewal,42,0,1,2,0,0,0,0,1,0
+claims_process,1,11,11,5,0,32,0,0,0,1
+coverage_scope,0,0,65,2,0,8,0,0,0,0
+deductible_premium,10,1,1,12,0,16,1,5,0,0
+dispute_resolution_appraisal,0,0,0,0,46,0,0,0,0,0
+exclusions,1,0,14,2,0,17,0,12,0,0
+grace_period,0,0,0,0,0,0,46,0,0,0
+limits_of_liability,0,0,3,1,0,11,0,31,0,0
+policy_period_renewal,1,0,0,1,0,3,0,0,42,0
+subrogation,0,0,0,0,0,0,0,0,0,47

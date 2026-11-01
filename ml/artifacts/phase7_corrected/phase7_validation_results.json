@@ -1,0 +1,43 @@
+{
+  "sequence_length_ablation_primary_domain": {
+    "domain": "rental_agreement",
+    "rows": [
+      {
+        "sequence_length": 96,
+        "target_only_val_f1": 0.9226,
+        "context_val_f1": 0.9218,
+        "context_gain": -0.0008
+      },
+      {
+        "sequence_length": 128,
+        "target_only_val_f1": 0.9299,
+        "context_val_f1": 0.9108,
+        "context_gain": -0.0191
+      },
+      {
+        "sequence_length": 256,
+        "target_only_val_f1": 0.9325,
+        "context_val_f1": 0.9152,
+        "context_gain": -0.0173
+      }
+    ]
+  },
+  "best_configuration": {
+    "architecture": "Single-branch distilbert-base-uncased",
+    "sequence_length": 256,
+    "strategy": "target_only",
+    "validation_results_all_domains": {
+      "rental_agreement": 0.9325,
+      "job_offer_letter": 0.9059,
+      "insurance_policy": 0.8131,
+      "three_domain_mean": 0.8838
+    },
+    "comparison_vs_phase6_val": {
+      "rental_agreement": { "phase6": 0.9218, "phase7c": 0.9325, "gain": 0.0107 },
+      "job_offer_letter": { "phase6": 0.8838, "phase7c": 0.9059, "gain": 0.0221 },
+      "insurance_policy": { "phase6": 0.6976, "phase7c": 0.8131, "gain": 0.1155 },
+      "three_domain_mean": { "phase6": 0.8344, "phase7c": 0.8838, "gain": 0.0494 }
+    }
+  },
+  "scientific_verdict": "Increasing sequence capacity to 256 yields substantial validation gains across all domains (+4.94pp overall mean, +11.55pp on insurance). Direct concatenation of context consistently degrades performance across all sequence lengths."
+}

@@ -1,0 +1,11 @@
+actual / predicted,entry_notice_access,indemnification,late_fees_penalty,maintenance_repairs,pet_policy,rent_payment_terms,security_deposit,subletting,termination,utilities
+entry_notice_access,49,0,0,0,0,1,0,0,0,0
+indemnification,0,50,0,0,0,0,0,0,0,0
+late_fees_penalty,0,0,50,0,0,0,0,0,0,0
+maintenance_repairs,0,0,0,47,0,3,0,0,0,0
+pet_policy,0,1,0,0,46,3,0,0,0,0
+rent_payment_terms,0,0,0,1,1,47,0,1,1,0
+security_deposit,0,0,0,1,0,2,45,0,1,1
+subletting,0,0,0,0,0,2,0,48,0,0
+termination,0,0,0,0,2,3,0,0,45,0
+utilities,0,0,0,0,0,0,0,0,0,50

@@ -1,0 +1,446 @@
+{
+  "rental_agreement": {
+    "baseline_target_only_96": {
+      "macro_f1": 0.8826,
+      "weighted_f1": 0.8832,
+      "accuracy": 0.8922,
+      "strategy": "target_only",
+      "budget": 96
+    },
+    "baseline_broken_window_96": {
+      "macro_f1": 0.5221,
+      "weighted_f1": 0.5217,
+      "accuracy": 0.5649,
+      "strategy": "broken_window",
+      "budget": 96
+    },
+    "target_priority_b96_target_tag": {
+      "macro_f1": 0.3902,
+      "weighted_f1": 0.3901,
+      "accuracy": 0.4351,
+      "precision_macro": 0.4464,
+      "recall_macro": 0.4362,
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b128_target_tag": {
+      "macro_f1": 0.4398,
+      "weighted_f1": 0.4395,
+      "accuracy": 0.495,
+      "precision_macro": 0.5048,
+      "recall_macro": 0.4961,
+      "strategy": "target_priority",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b192_target_tag": {
+      "macro_f1": 0.4473,
+      "weighted_f1": 0.447,
+      "accuracy": 0.505,
+      "precision_macro": 0.5043,
+      "recall_macro": 0.506,
+      "strategy": "target_priority",
+      "budget": 192,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b256_target_tag": {
+      "macro_f1": 0.4457,
+      "weighted_f1": 0.4454,
+      "accuracy": 0.503,
+      "precision_macro": 0.503,
+      "recall_macro": 0.504,
+      "strategy": "target_priority",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b384_target_tag": {
+      "macro_f1": 0.4443,
+      "weighted_f1": 0.444,
+      "accuracy": 0.501,
+      "precision_macro": 0.5026,
+      "recall_macro": 0.5019,
+      "strategy": "target_priority",
+      "budget": 384,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b512_target_tag": {
+      "macro_f1": 0.4437,
+      "weighted_f1": 0.4435,
+      "accuracy": 0.501,
+      "precision_macro": 0.502,
+      "recall_macro": 0.5019,
+      "strategy": "target_priority",
+      "budget": 512,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b96_target_tag": {
+      "macro_f1": 0.3902,
+      "weighted_f1": 0.3901,
+      "accuracy": 0.4351,
+      "strategy": "symmetric",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b96_target_tag": {
+      "macro_f1": 0.3902,
+      "weighted_f1": 0.3901,
+      "accuracy": 0.4351,
+      "strategy": "immediate_clause",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b128_target_tag": {
+      "macro_f1": 0.435,
+      "weighted_f1": 0.4348,
+      "accuracy": 0.489,
+      "strategy": "symmetric",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b128_target_tag": {
+      "macro_f1": 0.4382,
+      "weighted_f1": 0.438,
+      "accuracy": 0.493,
+      "strategy": "immediate_clause",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b256_target_tag": {
+      "macro_f1": 0.4462,
+      "weighted_f1": 0.4459,
+      "accuracy": 0.503,
+      "strategy": "symmetric",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b256_target_tag": {
+      "macro_f1": 0.4457,
+      "weighted_f1": 0.4454,
+      "accuracy": 0.503,
+      "strategy": "immediate_clause",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b96_nomarkers": {
+      "macro_f1": 0.612,
+      "weighted_f1": 0.6127,
+      "accuracy": 0.6287,
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "none"
+    },
+    "target_priority_b128_nomarkers": {
+      "macro_f1": 0.4573,
+      "weighted_f1": 0.4581,
+      "accuracy": 0.477,
+      "strategy": "target_priority",
+      "budget": 128,
+      "marker_style": "none"
+    },
+    "target_priority_b256_nomarkers": {
+      "macro_f1": 0.4531,
+      "weighted_f1": 0.4539,
+      "accuracy": 0.4731,
+      "strategy": "target_priority",
+      "budget": 256,
+      "marker_style": "none"
+    }
+  },
+  "job_offer_letter": {
+    "baseline_target_only_96": {
+      "macro_f1": 0.8929,
+      "weighted_f1": 0.892,
+      "accuracy": 0.8904,
+      "strategy": "target_only",
+      "budget": 96
+    },
+    "baseline_broken_window_96": {
+      "macro_f1": 0.7642,
+      "weighted_f1": 0.7632,
+      "accuracy": 0.759,
+      "strategy": "broken_window",
+      "budget": 96
+    },
+    "target_priority_b96_target_tag": {
+      "macro_f1": 0.4545,
+      "weighted_f1": 0.4552,
+      "accuracy": 0.488,
+      "precision_macro": 0.4928,
+      "recall_macro": 0.4865,
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b128_target_tag": {
+      "macro_f1": 0.5995,
+      "weighted_f1": 0.5994,
+      "accuracy": 0.6096,
+      "precision_macro": 0.6355,
+      "recall_macro": 0.6088,
+      "strategy": "target_priority",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b192_target_tag": {
+      "macro_f1": 0.6831,
+      "weighted_f1": 0.6823,
+      "accuracy": 0.6833,
+      "precision_macro": 0.7102,
+      "recall_macro": 0.6831,
+      "strategy": "target_priority",
+      "budget": 192,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b256_target_tag": {
+      "macro_f1": 0.6748,
+      "weighted_f1": 0.6739,
+      "accuracy": 0.6733,
+      "precision_macro": 0.7015,
+      "recall_macro": 0.6734,
+      "strategy": "target_priority",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b384_target_tag": {
+      "macro_f1": 0.6734,
+      "weighted_f1": 0.6725,
+      "accuracy": 0.6733,
+      "precision_macro": 0.6993,
+      "recall_macro": 0.6734,
+      "strategy": "target_priority",
+      "budget": 384,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b512_target_tag": {
+      "macro_f1": 0.6769,
+      "weighted_f1": 0.6762,
+      "accuracy": 0.6773,
+      "precision_macro": 0.7045,
+      "recall_macro": 0.6772,
+      "strategy": "target_priority",
+      "budget": 512,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b96_target_tag": {
+      "macro_f1": 0.4545,
+      "weighted_f1": 0.4552,
+      "accuracy": 0.488,
+      "strategy": "symmetric",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b96_target_tag": {
+      "macro_f1": 0.4545,
+      "weighted_f1": 0.4552,
+      "accuracy": 0.488,
+      "strategy": "immediate_clause",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b128_target_tag": {
+      "macro_f1": 0.586,
+      "weighted_f1": 0.5861,
+      "accuracy": 0.5976,
+      "strategy": "symmetric",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b128_target_tag": {
+      "macro_f1": 0.5768,
+      "weighted_f1": 0.577,
+      "accuracy": 0.5896,
+      "strategy": "immediate_clause",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b256_target_tag": {
+      "macro_f1": 0.6765,
+      "weighted_f1": 0.6756,
+      "accuracy": 0.6753,
+      "strategy": "symmetric",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b256_target_tag": {
+      "macro_f1": 0.6748,
+      "weighted_f1": 0.6739,
+      "accuracy": 0.6733,
+      "strategy": "immediate_clause",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b96_nomarkers": {
+      "macro_f1": 0.4666,
+      "weighted_f1": 0.4676,
+      "accuracy": 0.508,
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "none"
+    },
+    "target_priority_b128_nomarkers": {
+      "macro_f1": 0.2821,
+      "weighted_f1": 0.284,
+      "accuracy": 0.3247,
+      "strategy": "target_priority",
+      "budget": 128,
+      "marker_style": "none"
+    },
+    "target_priority_b256_nomarkers": {
+      "macro_f1": 0.2526,
+      "weighted_f1": 0.2543,
+      "accuracy": 0.2948,
+      "strategy": "target_priority",
+      "budget": 256,
+      "marker_style": "none"
+    }
+  },
+  "insurance_policy": {
+    "baseline_target_only_96": {
+      "macro_f1": 0.6927,
+      "weighted_f1": 0.6321,
+      "accuracy": 0.6272,
+      "strategy": "target_only",
+      "budget": 96
+    },
+    "baseline_broken_window_96": {
+      "macro_f1": 0.3283,
+      "weighted_f1": 0.3051,
+      "accuracy": 0.3728,
+      "strategy": "broken_window",
+      "budget": 96
+    },
+    "target_priority_b96_target_tag": {
+      "macro_f1": 0.2125,
+      "weighted_f1": 0.2396,
+      "accuracy": 0.3198,
+      "precision_macro": 0.3359,
+      "recall_macro": 0.2678,
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b128_target_tag": {
+      "macro_f1": 0.221,
+      "weighted_f1": 0.2387,
+      "accuracy": 0.341,
+      "precision_macro": 0.4524,
+      "recall_macro": 0.2993,
+      "strategy": "target_priority",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b192_target_tag": {
+      "macro_f1": 0.2127,
+      "weighted_f1": 0.2333,
+      "accuracy": 0.3375,
+      "precision_macro": 0.4087,
+      "recall_macro": 0.2907,
+      "strategy": "target_priority",
+      "budget": 192,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b256_target_tag": {
+      "macro_f1": 0.1975,
+      "weighted_f1": 0.2102,
+      "accuracy": 0.3233,
+      "precision_macro": 0.3905,
+      "recall_macro": 0.2812,
+      "strategy": "target_priority",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b384_target_tag": {
+      "macro_f1": 0.1912,
+      "weighted_f1": 0.1989,
+      "accuracy": 0.3163,
+      "precision_macro": 0.3833,
+      "recall_macro": 0.2772,
+      "strategy": "target_priority",
+      "budget": 384,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b512_target_tag": {
+      "macro_f1": 0.1912,
+      "weighted_f1": 0.1987,
+      "accuracy": 0.3163,
+      "precision_macro": 0.3866,
+      "recall_macro": 0.2772,
+      "strategy": "target_priority",
+      "budget": 512,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b96_target_tag": {
+      "macro_f1": 0.2125,
+      "weighted_f1": 0.2396,
+      "accuracy": 0.3198,
+      "strategy": "symmetric",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b96_target_tag": {
+      "macro_f1": 0.2125,
+      "weighted_f1": 0.2396,
+      "accuracy": 0.3198,
+      "strategy": "immediate_clause",
+      "budget": 96,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b128_target_tag": {
+      "macro_f1": 0.2155,
+      "weighted_f1": 0.2346,
+      "accuracy": 0.3339,
+      "strategy": "symmetric",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b128_target_tag": {
+      "macro_f1": 0.2172,
+      "weighted_f1": 0.2357,
+      "accuracy": 0.3357,
+      "strategy": "immediate_clause",
+      "budget": 128,
+      "marker_style": "target_tag"
+    },
+    "symmetric_b256_target_tag": {
+      "macro_f1": 0.204,
+      "weighted_f1": 0.2186,
+      "accuracy": 0.3286,
+      "strategy": "symmetric",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "immediate_clause_b256_target_tag": {
+      "macro_f1": 0.1974,
+      "weighted_f1": 0.21,
+      "accuracy": 0.3233,
+      "strategy": "immediate_clause",
+      "budget": 256,
+      "marker_style": "target_tag"
+    },
+    "target_priority_b96_nomarkers": {
+      "macro_f1": 0.4984,
+      "weighted_f1": 0.4644,
+      "accuracy": 0.4611,
+      "strategy": "target_priority",
+      "budget": 96,
+      "marker_style": "none"
+    },
+    "target_priority_b128_nomarkers": {
+      "macro_f1": 0.3878,
+      "weighted_f1": 0.3663,
+      "accuracy": 0.3816,
+      "strategy": "target_priority",
+      "budget": 128,
+      "marker_style": "none"
+    },
+    "target_priority_b256_nomarkers": {
+      "macro_f1": 0.3657,
+      "weighted_f1": 0.3452,
+      "accuracy": 0.3657,
+      "strategy": "target_priority",
+      "budget": 256,
+      "marker_style": "none"
+    }
+  }
+}

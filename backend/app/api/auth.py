@@ -71,6 +71,9 @@ def register():
     db.session.commit()
 
     jwt_secret = get_jwt_secret()
+    if not jwt_secret:
+        return jsonify({"error": "Authentication service is unavailable: JWT secret is not configured."}), 500
+
     payload = {
         "sessionId": str(session_obj.id),
         "userId": str(user.id),
@@ -136,6 +139,9 @@ def login():
     db.session.commit()
 
     jwt_secret = get_jwt_secret()
+    if not jwt_secret:
+        return jsonify({"error": "Authentication service is unavailable: JWT secret is not configured."}), 500
+
     payload = {
         "sessionId": str(session_obj.id),
         "userId": str(user.id),
@@ -180,9 +186,11 @@ def logout():
 
     if token:
         try:
-            payload = jwt.decode(token, get_jwt_secret(), algorithms=["HS256"])
-            session_id = payload.get("sessionId")
-            user_id = payload.get("userId")
+            jwt_secret = get_jwt_secret()
+            if jwt_secret:
+                payload = jwt.decode(token, jwt_secret, algorithms=["HS256"])
+                session_id = payload.get("sessionId")
+                user_id = payload.get("userId")
             if session_id:
                 session_obj = db.session.get(Session, session_id)
                 if session_obj:

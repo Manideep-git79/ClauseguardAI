@@ -52,7 +52,7 @@ export function PlatformGuide({ onNavigate }) {
     },
     {
       id: "copilot",
-      title: "6. Grounded AI Legal Copilot",
+      title: "6. Deciva - Legal AI Assistant",
       icon: Bot,
       badge: "Neural RAG",
     },
@@ -99,7 +99,7 @@ export function PlatformGuide({ onNavigate }) {
             className="px-4 py-2 border border-neutral-300 bg-white text-black hover:bg-neutral-100 text-xs font-mono rounded flex items-center gap-2 transition-colors font-medium shadow-sm"
           >
             <Bot size={14} />
-            <span>Try AI Copilot</span>
+            <span>Try Deciva AI</span>
           </button>
         </div>
       </div>
@@ -173,7 +173,7 @@ export function PlatformGuide({ onNavigate }) {
                   </div>
                   <h3 className="font-serif text-sm font-bold text-black">Inspect & Inquire</h3>
                   <p className="text-xs text-neutral-600 leading-relaxed">
-                    Explore the overall Risk Score (0-100), review flagged unfair terms, track deadlines, and ask the AI Copilot for contract advice.
+                    Explore the overall Risk Score (0-100), review flagged unfair terms, track deadlines, and ask Deciva for contract advice.
                   </p>
                 </div>
               </div>
@@ -372,7 +372,7 @@ export function PlatformGuide({ onNavigate }) {
                   Grounded Intelligence
                 </span>
                 <h2 className="font-serif text-xl font-bold text-black mt-2">
-                  ClauseGuard Grounded AI Legal Copilot
+                  Deciva Grounded Legal AI Assistant
                 </h2>
                 <p className="text-xs font-mono text-neutral-600 mt-1">
                   How semantic retrieval and vector embeddings ensure accurate answers with exact citations.
@@ -381,7 +381,7 @@ export function PlatformGuide({ onNavigate }) {
 
               <div className="space-y-4 text-xs text-neutral-700 leading-relaxed">
                 <p>
-                  You can chat with ClauseGuard AI at any time—either across the whole platform or locked to a specific uploaded document.
+                  You can chat with Deciva at any time—either across the whole platform or locked to a specific uploaded document.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 rounded bg-neutral-50 border border-neutral-200 space-y-2">
@@ -422,7 +422,7 @@ export function PlatformGuide({ onNavigate }) {
                 <ul className="list-disc pl-5 space-y-1.5 text-neutral-600">
                   <li><strong>Document Ingestion:</strong> Timestamp, original filename, format, and document UUID.</li>
                   <li><strong>Analysis Completion:</strong> Final computed risk score, risk band, and clause counts.</li>
-                  <li><strong>AI Inquiries:</strong> Questions posed to the AI copilot, grounding status, and confidence metrics.</li>
+                  <li><strong>AI Inquiries:</strong> Questions posed to Deciva, grounding status, and confidence metrics.</li>
                   <li><strong>Security Events:</strong> User sign-ins, registrations, failed attempts, and session revocations.</li>
                 </ul>
                 <div className="pt-2">

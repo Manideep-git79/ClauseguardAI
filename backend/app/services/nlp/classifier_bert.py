@@ -32,6 +32,12 @@ _bert_models = {}
 _bert_tokenizers = {}
 _bert_metadata = {}
 
+def reload_bert_models():
+    global _bert_models, _bert_tokenizers, _bert_metadata
+    _bert_models.clear()
+    _bert_tokenizers.clear()
+    _bert_metadata.clear()
+
 def get_models_dir() -> Path:
     env_dir = os.environ.get("MODELS_DIR")
     if env_dir and Path(env_dir).exists():
@@ -53,8 +59,22 @@ def get_bert_model_and_tokenizer(document_type: str, task: str = "clause_type"):
     ml_dir = models_dir / document_type
     report_file = models_dir / "model_comparison_report.json"
     
+    # Check environment overrides:
+    # In cloud container deployments (e.g. Railway 512MB RAM limit), PyTorch DistilBERT
+    # allocates >750MB of RAM and triggers an immediate OS kernel SIGKILL (OOM).
+    # Default to the certified winning model from model_comparison_report.json (baseline_tfidf_lr, 2MB RAM),
+    # unless FORCE_BERT=1 is explicitly requested on a high-memory host.
+    force_baseline = os.environ.get("FORCE_BASELINE", "0").strip().lower() in ("1", "true", "yes")
+    force_bert = os.environ.get("FORCE_BERT", "0").strip().lower() in ("1", "true", "yes")
+
+    # In memory-constrained cloud environments (e.g. Railway), enforce lightweight model
+    is_cloud_container = bool(os.environ.get("RAILWAY_SERVICE_ID") or os.environ.get("RAILWAY_ENVIRONMENT"))
+    if is_cloud_container:
+        force_bert = False
+        force_baseline = True
+
     winning_model_type = None
-    if report_file.exists():
+    if not force_bert and report_file.exists():
         try:
             with open(report_file, "r", encoding="utf-8") as rf:
                 report = json.load(rf)
@@ -62,13 +82,30 @@ def get_bert_model_and_tokenizer(document_type: str, task: str = "clause_type"):
         except Exception:
             pass
 
-    if winning_model_type == "baseline_tfidf_lr":
+    if force_baseline or (winning_model_type == "baseline_tfidf_lr" and not force_bert):
+        logger.info(f"Using certified baseline TF-IDF + LR for {document_type} {task} (force_baseline={force_baseline}, winning={winning_model_type})")
         return None, None, {"model_version": f"baseline-tfidf-lr-{task}-v1"}
 
-    candidate_paths = [
-        ml_dir / f"bert_{task}_nocontext" / "final",
-        ml_dir / f"bert_{task}_windowed" / "final",
-    ]
+    strategy = os.environ.get("BERT_STRATEGY", "nocontext").strip().lower()
+    if strategy == "windowed":
+        candidate_paths = [
+            ml_dir / f"bert_{task}_windowed" / "final",
+            ml_dir / f"bert_{task}_nocontext" / "final",
+        ]
+    else:
+        candidate_paths = [
+            ml_dir / f"bert_{task}_nocontext" / "final",
+            ml_dir / f"bert_{task}_windowed" / "final",
+        ]
+
+    # Additional fallback to ml/artifacts if present
+    repo_artifacts = Path(__file__).resolve().parents[4] / "ml" / "artifacts"
+    if repo_artifacts.exists():
+        candidate_paths.extend([
+            repo_artifacts / document_type / f"bert_{task}_{strategy}" / "final",
+            repo_artifacts / document_type / f"bert_{task}_nocontext" / "final",
+            repo_artifacts / document_type / f"bert_{task}_windowed" / "final",
+        ])
 
     model_dir = None
     for cp in candidate_paths:
@@ -77,6 +114,7 @@ def get_bert_model_and_tokenizer(document_type: str, task: str = "clause_type"):
             break
 
     if not model_dir:
+        logger.warning(f"No BERT checkpoint found in candidate paths for {document_type} {task}: {candidate_paths}")
         return None, None, None
 
     try:
@@ -90,9 +128,16 @@ def get_bert_model_and_tokenizer(document_type: str, task: str = "clause_type"):
             with open(meta_path, "r", encoding="utf-8") as f:
                 metadata = json.load(f)
 
+        # Ensure id2label is populated from model config if missing from metadata
+        if not metadata.get("id2label") and hasattr(model.config, "id2label"):
+            metadata["id2label"] = model.config.id2label
+
+        metadata["model_version"] = "Fine-Tuned DistiBERT"
+
         _bert_models[key] = model
         _bert_tokenizers[key] = tokenizer
         _bert_metadata[key] = metadata
+        logger.info(f"Successfully loaded BERT model for {document_type} {task} from {model_dir} (version: {metadata.get('model_version')})")
         return model, tokenizer, metadata
     except Exception as e:
         logger.error(f"Error loading BERT model from {model_dir}: {e}")
@@ -125,7 +170,9 @@ def classify_clause(
         inputs = tokenizer(input_text, truncation=True, max_length=256, return_tensors="pt")
         with torch.no_grad():
             outputs = model(**inputs)
-            probs = F.softmax(outputs.logits, dim=-1)[0]
+            temperature = float(os.environ.get("BERT_TEMPERATURE", "0.58"))
+            scaled_logits = outputs.logits / max(0.1, temperature)
+            probs = F.softmax(scaled_logits, dim=-1)[0]
             pred_idx = torch.argmax(probs).item()
             conf = round(float(probs[pred_idx].item()), 4)
 
@@ -181,7 +228,9 @@ def classify_clauses_batch(
             tokens = tokenizer(chunk, padding=True, truncation=True, max_length=256, return_tensors="pt")
             with torch.no_grad():
                 outputs = model(**tokens)
-                probs = F.softmax(outputs.logits, dim=-1)
+                temperature = float(os.environ.get("BERT_TEMPERATURE", "0.58"))
+                scaled_logits = outputs.logits / max(0.1, temperature)
+                probs = F.softmax(scaled_logits, dim=-1)
                 preds = torch.argmax(probs, dim=-1)
 
                 for j in range(len(chunk)):

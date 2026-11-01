@@ -1,6 +1,25 @@
 import React, { useState } from "react";
 import { ShieldCheck, Copy, Check } from "lucide-react";
 
+function renderWithPseudonymBadges(text) {
+  if (!text) return "";
+  const regex = /(\[(?:Person|Email|Phone|Location|SSN|Credit Card|Bank Account|IP Address)\s+\d+\])/g;
+  const parts = text.split(regex);
+  return parts.map((part, i) => {
+    if (part.match(/^\[(?:Person|Email|Phone|Location|SSN|Credit Card|Bank Account|IP Address)\s+\d+\]$/)) {
+      return (
+        <span
+          key={i}
+          className="bg-neutral-200 border border-neutral-300 text-neutral-900 font-mono font-bold px-1.5 py-0.5 rounded text-[11px] inline-block mx-0.5"
+        >
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
+}
+
 export function RedactedTextViewer({ redactedText = "", clauses = [], selectedClauseId, onSelectClause }) {
   const [copied, setCopied] = useState(false);
 
@@ -20,14 +39,14 @@ export function RedactedTextViewer({ redactedText = "", clauses = [], selectedCl
               Redacted Document Text
             </span>
             <h3 className="font-serif text-lg font-bold text-black">
-              Full Text (PII-Clean)
+              Full Text (PII-Clean & Pseudonymized)
             </h3>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <span className="text-[11px] font-mono text-green-800 border border-green-300 bg-green-50 px-2.5 py-1 font-semibold">
-            ALL PII MASKED WITH [ENTITIES]
+            ALL PII PSEUDONYMIZED
           </span>
           <button
             onClick={handleCopy}
@@ -40,7 +59,8 @@ export function RedactedTextViewer({ redactedText = "", clauses = [], selectedCl
       </div>
 
       <p className="text-xs text-neutral-600 leading-relaxed font-sans">
-        This is the sole version of the document text processed downstream by machine learning models and displayed in the interface. Raw text is encrypted at rest for audit-only purposes.
+        This is the sole version of the document text processed downstream by machine learning models and displayed in the interface.
+        Raw text is encrypted at rest for audit-only purposes.
       </p>
 
       <div className="border border-neutral-300 bg-neutral-50 p-5 max-h-[550px] overflow-y-auto font-mono text-xs leading-relaxed space-y-4 text-black">
@@ -74,15 +94,15 @@ export function RedactedTextViewer({ redactedText = "", clauses = [], selectedCl
                   <span>•</span>
                   <span>Risk {c.risk_score}</span>
                 </div>
-                <div className="text-neutral-800 whitespace-pre-wrap">
-                  {c.redacted_text}
+                <div className="text-neutral-800 whitespace-pre-wrap leading-relaxed">
+                  {renderWithPseudonymBadges(c.redacted_text)}
                 </div>
               </div>
             );
           })
         ) : (
-          <div className="whitespace-pre-wrap text-neutral-800">
-            {redactedText || "No text available."}
+          <div className="whitespace-pre-wrap text-neutral-800 leading-relaxed">
+            {renderWithPseudonymBadges(redactedText) || "No text available."}
           </div>
         )}
       </div>

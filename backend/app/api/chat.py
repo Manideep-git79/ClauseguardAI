@@ -13,14 +13,13 @@ logger = logging.getLogger(__name__)
 chat_bp = Blueprint("chat", __name__)
 
 @chat_bp.route("/chat", methods=["POST"])
-@optional_auth
+@require_auth
 def post_chat_message():
     """
     POST /api/chat
-    Authenticates user (or creates guest user context if unauthenticated),
-    retrieves document context if documentId is provided,
+    Authenticates user, verifies document ownership if documentId is provided,
     invokes Gemini LLM with grounded prompt / deterministic heuristic fallback,
-    records chat history with citations and grounding status.
+    and records chat history with citations and grounding status.
     """
     data = request.get_json() or {}
     question = data.get("question", "").strip()
@@ -29,40 +28,52 @@ def post_chat_message():
     if not question:
         return jsonify({"error": "Question is required and cannot be empty"}), 400
 
-    user = getattr(g, "user", None)
-    if not user:
-        guest_email = "guest@clauseguard.ai"
-        user = User.query.filter_by(email=guest_email).first()
-        if not user:
-            from app.utils.password_policy import hash_password
-            user = User(
-                name="Guest User",
-                email=guest_email,
-                password_hash=hash_password("GuestPass123!"),
-                role="guest",
-            )
-            db.session.add(user)
-            db.session.commit()
+    user = g.user
 
-    document_text = ""
-    doc_uuid = None
     if document_id:
         try:
             doc_uuid = uuid.UUID(str(document_id))
             doc = db.session.get(Document, doc_uuid)
-            if doc:
-                if doc.user_id and (not user or doc.user_id != user.id):
-                    return jsonify({"error": "Unauthorized access to this document."}), 403
-                document_text = doc.redacted_text or ""
-        except Exception as e:
-            logger.warning(f"Could not parse document_id {document_id}: {e}")
+            if not doc:
+                return jsonify({"error": "Document not found."}), 404
+            if doc.user_id != user.id and getattr(user, "role", "") != "admin":
+                return jsonify({"error": "Unauthorized access to this document."}), 403
 
-    ai_result = ask_gemini_or_fallback(question, document_text)
+            result = answer_document_question(
+                document_id=doc_uuid,
+                question=question,
+                session_id=None,
+                user_id=user.id,
+            )
+
+            from app.services.audit_service import log_audit_event
+            log_audit_event(
+                action="CHAT_QUERY",
+                user_id=user.id,
+                user_email=user.email,
+                resource_type="chat_message",
+                resource_id=result.get("id"),
+                details={
+                    "question": question[:120],
+                    "documentId": str(doc_uuid),
+                    "grounded": result.get("grounded", True),
+                    "confidence": result.get("confidence", 0.94)
+                }
+            )
+            return jsonify(result), 200
+        except ValueError:
+            return jsonify({"error": f"Invalid documentId format: {document_id}"}), 400
+        except Exception as e:
+            logger.warning(f"Could not process document chat for {document_id}: {e}")
+            return jsonify({"error": "Failed to load document context."}), 500
+
+    # General legal chat when no documentId is provided
+    ai_result = ask_gemini_or_fallback(question, "")
 
     user_msg_id = uuid.uuid4()
     user_msg = ChatMessage(
         id=user_msg_id,
-        document_id=doc_uuid,
+        document_id=None,
         user_id=user.id,
         role="USER",
         content=question,
@@ -73,7 +84,7 @@ def post_chat_message():
     assistant_msg_id = uuid.uuid4()
     asst_msg = ChatMessage(
         id=assistant_msg_id,
-        document_id=doc_uuid,
+        document_id=None,
         user_id=user.id,
         role="ASSISTANT",
         content=ai_result["answer"],
@@ -93,7 +104,7 @@ def post_chat_message():
         resource_id=str(assistant_msg_id),
         details={
             "question": question[:120],
-            "documentId": str(doc_uuid) if doc_uuid else None,
+            "documentId": None,
             "grounded": ai_result.get("grounded", True),
             "confidence": ai_result.get("confidence", 0.94)
         }
@@ -108,22 +119,23 @@ def post_chat_message():
     }), 200
 
 @chat_bp.route("/chat/history", methods=["GET"])
-@optional_auth
+@require_auth
 def get_conversation_history():
     """
     GET /api/chat/history?documentId=...
-    Retrieves chronological conversation history for user and/or document.
+    Retrieves chronological conversation history for authenticated user and document.
     """
     document_id = request.args.get("documentId")
-    user = getattr(g, "user", None)
-    if not user:
-        return jsonify({"messages": []}), 200
+    user = g.user
 
     query = ChatMessage.query.filter_by(user_id=user.id)
     
     if document_id:
         try:
             doc_uuid = uuid.UUID(str(document_id))
+            doc = db.session.get(Document, doc_uuid)
+            if doc and doc.user_id != user.id and getattr(user, "role", "") != "admin":
+                return jsonify({"error": "Unauthorized access to document chat history."}), 403
             query = query.filter_by(document_id=doc_uuid)
         except Exception:
             pass
@@ -134,11 +146,11 @@ def get_conversation_history():
     }), 200
 
 @chat_bp.route("/documents/<uuid:doc_id>/chat", methods=["POST"])
-@optional_auth
+@require_auth
 def chat_with_document_legacy(doc_id):
     doc = Document.query.get_or_404(doc_id)
-    user = getattr(g, "user", None)
-    if doc.user_id and (not user or doc.user_id != user.id):
+    user = g.user
+    if doc.user_id != user.id and getattr(user, "role", "") != "admin":
         return jsonify({"error": "Unauthorized access to document chat."}), 403
 
     data = request.get_json() or {}
@@ -152,15 +164,31 @@ def chat_with_document_legacy(doc_id):
         document_id=doc_id,
         question=question,
         session_id=session_id,
+        user_id=user.id,
+    )
+
+    from app.services.audit_service import log_audit_event
+    log_audit_event(
+        action="CHAT_QUERY",
+        user_id=user.id,
+        user_email=user.email,
+        resource_type="chat_message",
+        resource_id=result.get("id"),
+        details={
+            "question": question[:120],
+            "documentId": str(doc_id),
+            "grounded": result.get("grounded", True),
+            "confidence": result.get("confidence", 0.94)
+        }
     )
     return jsonify(result), 200
 
 @chat_bp.route("/documents/<uuid:doc_id>/chat/history", methods=["GET"])
-@optional_auth
+@require_auth
 def get_chat_history_legacy(doc_id):
     doc = Document.query.get_or_404(doc_id)
-    user = getattr(g, "user", None)
-    if doc.user_id and (not user or doc.user_id != user.id):
+    user = g.user
+    if doc.user_id != user.id and getattr(user, "role", "") != "admin":
         return jsonify({"error": "Unauthorized access to document chat history."}), 403
 
     sessions = (
@@ -169,3 +197,4 @@ def get_chat_history_legacy(doc_id):
         .all()
     )
     return jsonify([s.to_dict() for s in sessions]), 200
+

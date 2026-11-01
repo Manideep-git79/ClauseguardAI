@@ -1,0 +1,204 @@
+{
+  "rental_agreement": {
+    "seq96_target_only": {
+      "domain": "rental_agreement",
+      "max_length": 96,
+      "use_context": false,
+      "best_val_macro_f1": 0.9226,
+      "train_time_s": 282.4,
+      "source": "Phase 7A audit verified"
+    },
+    "seq96_context": {
+      "domain": "rental_agreement",
+      "max_length": 96,
+      "use_context": true,
+      "best_val_macro_f1": 0.9218,
+      "train_time_s": 269.5,
+      "source": "Phase 7B / Phase 6 baseline verified"
+    },
+    "seq128_target_only": {
+      "domain": "rental_agreement",
+      "max_length": 128,
+      "use_context": false,
+      "direction": "both",
+      "best_val_macro_f1": 0.9299,
+      "train_time_s": 409.7,
+      "epoch_logs": [
+        {
+          "epoch": 1,
+          "loss": 2.0371,
+          "val_macro_f1": 0.7406
+        },
+        {
+          "epoch": 2,
+          "loss": 0.6527,
+          "val_macro_f1": 0.885
+        },
+        {
+          "epoch": 3,
+          "loss": 0.1916,
+          "val_macro_f1": 0.9119
+        },
+        {
+          "epoch": 4,
+          "loss": 0.0671,
+          "val_macro_f1": 0.9299
+        }
+      ]
+    },
+    "seq128_context": {
+      "domain": "rental_agreement",
+      "max_length": 128,
+      "use_context": true,
+      "direction": "both",
+      "best_val_macro_f1": 0.9108,
+      "train_time_s": 407.9,
+      "epoch_logs": [
+        {
+          "epoch": 1,
+          "loss": 2.0997,
+          "val_macro_f1": 0.5636
+        },
+        {
+          "epoch": 2,
+          "loss": 1.0064,
+          "val_macro_f1": 0.8492
+        },
+        {
+          "epoch": 3,
+          "loss": 0.3542,
+          "val_macro_f1": 0.8946
+        },
+        {
+          "epoch": 4,
+          "loss": 0.1498,
+          "val_macro_f1": 0.9108
+        }
+      ]
+    },
+    "seq256_target_only": {
+      "domain": "rental_agreement",
+      "max_length": 256,
+      "use_context": false,
+      "direction": "both",
+      "best_val_macro_f1": 0.9325,
+      "train_time_s": 758.6,
+      "epoch_logs": [
+        {
+          "epoch": 1,
+          "loss": 1.9553,
+          "val_macro_f1": 0.8021
+        },
+        {
+          "epoch": 2,
+          "loss": 0.5791,
+          "val_macro_f1": 0.89
+        },
+        {
+          "epoch": 3,
+          "loss": 0.1944,
+          "val_macro_f1": 0.9325
+        },
+        {
+          "epoch": 4,
+          "loss": 0.0658,
+          "val_macro_f1": 0.9309
+        }
+      ]
+    },
+    "seq256_context": {
+      "domain": "rental_agreement",
+      "max_length": 256,
+      "use_context": true,
+      "direction": "both",
+      "best_val_macro_f1": 0.9152,
+      "train_time_s": 739.3,
+      "epoch_logs": [
+        {
+          "epoch": 1,
+          "loss": 2.1196,
+          "val_macro_f1": 0.6341
+        },
+        {
+          "epoch": 2,
+          "loss": 0.947,
+          "val_macro_f1": 0.8365
+        },
+        {
+          "epoch": 3,
+          "loss": 0.354,
+          "val_macro_f1": 0.8846
+        },
+        {
+          "epoch": 4,
+          "loss": 0.155,
+          "val_macro_f1": 0.9152
+        }
+      ]
+    }
+  },
+  "job_offer_letter": {
+    "seq256_target_only": {
+      "domain": "job_offer_letter",
+      "max_length": 256,
+      "use_context": false,
+      "direction": "both",
+      "best_val_macro_f1": 0.9059,
+      "train_time_s": 735.1,
+      "epoch_logs": [
+        {
+          "epoch": 1,
+          "loss": 1.9316,
+          "val_macro_f1": 0.7959
+        },
+        {
+          "epoch": 2,
+          "loss": 0.5426,
+          "val_macro_f1": 0.8659
+        },
+        {
+          "epoch": 3,
+          "loss": 0.1824,
+          "val_macro_f1": 0.8907
+        },
+        {
+          "epoch": 4,
+          "loss": 0.082,
+          "val_macro_f1": 0.9059
+        }
+      ]
+    }
+  },
+  "insurance_policy": {
+    "seq256_target_only": {
+      "domain": "insurance_policy",
+      "max_length": 256,
+      "use_context": false,
+      "direction": "both",
+      "best_val_macro_f1": 0.8131,
+      "train_time_s": 757.3,
+      "epoch_logs": [
+        {
+          "epoch": 1,
+          "loss": 1.9811,
+          "val_macro_f1": 0.4945
+        },
+        {
+          "epoch": 2,
+          "loss": 0.8693,
+          "val_macro_f1": 0.73
+        },
+        {
+          "epoch": 3,
+          "loss": 0.4538,
+          "val_macro_f1": 0.8131
+        },
+        {
+          "epoch": 4,
+          "loss": 0.2427,
+          "val_macro_f1": 0.7703
+        }
+      ]
+    }
+  }
+}

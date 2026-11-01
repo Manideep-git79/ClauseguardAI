@@ -1,0 +1,21 @@
+{
+  "phase6": {
+    "model": "distilbert-base-uncased",
+    "sequence_length": 96,
+    "architecture": "Single-branch distilbert-base-uncased",
+    "parameters": 66378250,
+    "training_time_s_per_model": 269.5,
+    "inference_time_ms_per_sample": 12.4,
+    "memory_usage_mb": 420
+  },
+  "phase7_corrected": {
+    "model": "distilbert-base-uncased",
+    "sequence_length": 256,
+    "architecture": "Single-branch distilbert-base-uncased (Target-Only)",
+    "parameters": 66378250,
+    "parameter_overhead_vs_phase6": 0,
+    "training_time_s_per_model": 808.3,
+    "inference_time_ms_per_sample": 33.1,
+    "memory_usage_mb": 1120.0
+  }
+}

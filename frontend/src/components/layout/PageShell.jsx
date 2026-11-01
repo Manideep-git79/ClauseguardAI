@@ -15,7 +15,7 @@ export function PageShell({ children, currentView, onNavigate }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             <div className="flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-neutral-600 gap-4">
               <div>
-                <span>ClauseGuard AI © 2026. Enterprise Legal Risk Intelligence & Contract Copilot.</span>
+                <span>ClauseGuard AI © 2026. Enterprise Legal Risk Intelligence & Deciva AI.</span>
               </div>
               <div className="flex gap-4 text-neutral-600">
                 <span>Residential Leases</span>

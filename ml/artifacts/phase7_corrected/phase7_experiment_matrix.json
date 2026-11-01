@@ -1,0 +1,30 @@
+{
+  "experiment_title": "Phase 7 Corrected Sequence-Length x Context Ablation",
+  "base_model": "distilbert-base-uncased",
+  "fixed_hyperparameters": {
+    "learning_rate": 5e-5,
+    "batch_size": 8,
+    "epochs": 4,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.0,
+    "dropout": 0.2,
+    "optimizer": "AdamW",
+    "loss": "CrossEntropyLoss"
+  },
+  "sequence_lengths_tested": [96, 128, 192, 256, 384, 512],
+  "matrix_design": {
+    "96": ["target_only", "target_preserving_context"],
+    "128": ["target_only", "target_preserving_context"],
+    "192": ["target_only", "target_preserving_context"],
+    "256": ["target_only", "target_preserving_context"],
+    "384": ["target_only", "target_preserving_context"],
+    "512": ["target_only", "target_preserving_context"]
+  },
+  "domains": [
+    "rental_agreement",
+    "job_offer_letter",
+    "insurance_policy"
+  ],
+  "model_selection_criterion": "Validation Macro-F1 (3-domain mean)",
+  "test_protocol": "Test set frozen; evaluated strictly once following validation-based configuration freeze."
+}

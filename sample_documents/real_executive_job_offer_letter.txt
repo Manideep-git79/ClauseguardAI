@@ -1,0 +1,47 @@
+CONFIDENTIAL EMPLOYMENT OFFER LETTER
+
+VANTAGE FINANCIAL TECHNOLOGIES LLC
+350 Park Avenue, 28th Floor
+New York, NY 10022
+Phone: (212) 555-0190 | Inquiries: hr.recruitment@vantagefintech.com
+
+Date: October 14, 2026
+
+Candidate: Marcus Aurelius Thorne
+Address: 88 Greenwich Street, Apartment 14C, New York, NY 10006
+Phone: (212) 649-7812 | Email: marcus.thorne@alum.columbia.edu
+Identification Record: SSN 084-33-9124
+
+Dear Marcus,
+
+On behalf of Vantage Financial Technologies LLC (the "Company"), I am delighted to extend to you this formal offer of employment for the full-time exempt position of Lead Cloud Security Architect.
+
+SECTION 1: POSITION, RESPONSIBILITIES, AND LOCATION
+In this role, you will report directly to the Chief Information Security Officer (CISO). You will be responsible for defining multi-cloud security architecture, zero-trust infrastructure, and regulatory compliance standards for our quantitative trading platforms. Your primary work location will be our New York City headquarters at 350 Park Avenue, with flexible eligibility for up to two days per week of remote telework under the Company's hybrid work policy.
+
+SECTION 2: ANNUAL BASE COMPENSATION
+The Company will pay you a starting annual base salary of $225,000.00, payable in semi-monthly installments on the 15th and last business day of each month, in accordance with the Company's customary payroll practices and subject to required federal, state, and local statutory tax withholdings.
+
+SECTION 3: ANNUAL PERFORMANCE BONUS AND EQUITY INCENTIVE
+You will be eligible to participate in the Company's Discretionary Annual Incentive Program. Your target bonus opportunity will be thirty percent (30%) of your annual base salary ($67,500.00 target), determined based on individual objective metrics and overall company performance during the fiscal year. In addition, subject to Board approval, you will receive an initial grant of 15,000 Restricted Stock Units (RSUs) vesting over a four-year schedule with a one-year cliff.
+
+SECTION 4: HEALTH, WELFARE, AND RETIREMENT BENEFITS
+You will be eligible to participate in the Company's standard employee benefit plans, including comprehensive medical, dental, vision, life insurance, short-term and long-term disability, and commuter tax-benefit accounts. Benefits shall become effective on the first (1st) day of the calendar month following your employment commencement date. You will also be eligible to participate in the Company's 401(k) Retirement Savings Plan with an immediate corporate dollar-for-dollar match up to 5% of eligible compensation.
+
+SECTION 5: AT-WILL EMPLOYMENT DOCTRINE
+Your employment with Vantage Financial Technologies LLC is strictly at-will. This means that both you and the Company have the legal right to terminate the employment relationship at any time, for any lawful reason or no reason, with or without prior notice. Nothing in this offer letter, nor any oral representations made during interview discussions, shall modify your at-will employment status.
+
+SECTION 6: PROPRIETARY INFORMATION AND INVENTIONS ASSIGNMENT
+As an express condition of your employment, you must sign and return the enclosed Employee Proprietary Information and Inventions Agreement (PIIA). You agree that all inventions, trade secrets, software code, quantitative algorithms, technical specifications, and proprietary data conceived, developed, or reduced to practice by you during your employment relating to the business of the Company belong solely and exclusively to Vantage Financial Technologies LLC.
+
+SECTION 7: NON-COMPETITION AND NON-SOLICITATION COVENANTS
+During your employment and for a period of twelve (12) months following the termination of your employment for any reason, you agree that you shall not, directly or indirectly, perform algorithmic security or high-frequency trading infrastructure services for any direct commercial competitor operating in the New York, Chicago, or London financial markets. Furthermore, for eighteen (18) months following separation, you shall not recruit, solicit, or induce any employee or contractor of the Company to terminate their employment.
+
+SECTION 8: DISPUTE RESOLUTION AND MANDATORY ARBITRATION
+Any controversy, dispute, or claim arising out of, relating to, or resulting from your employment relationship with the Company, the termination thereof, or the interpretation of this letter shall be resolved exclusively through final, binding arbitration administered by the American Arbitration Association (AAA) under its Employment Arbitration Rules in the Borough of Manhattan, City of New York. You and the Company expressly waive any right to trial by jury or participation in a class-action proceeding.
+
+SECTION 9: ANTICIPATED START DATE AND EMPLOYMENT CONTINGENCIES
+Your anticipated first day of employment will be November 16, 2026. This offer is contingent upon your successful completion of a comprehensive background check (including criminal history, professional credentials, and regulatory FINRA background screening), satisfactory reference verification, and your ability to furnish documentation verifying legal authorization to work in the United States within three (3) business days of your start date.
+
+SECTION 10: FORMAL OFFER ACCEPTANCE DEADLINE
+This formal offer of employment shall remain open and valid until 5:00 PM Eastern Time on October 28, 2026. If you choose to accept this offer, please electronically sign and date this letter where indicated below and return it to Eleanor Vance via secure portal. If we have not received your signed acceptance by the aforementioned deadline, this offer shall automatically expire and become null and void.

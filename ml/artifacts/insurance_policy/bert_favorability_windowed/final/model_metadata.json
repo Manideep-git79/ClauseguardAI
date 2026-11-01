@@ -1,8 +1,8 @@
 {
   "document_type": "insurance_policy",
   "task": "favorability",
-  "use_context": true,
-  "model_version": "bert-windowed-favorability-v1",
+  "use_context": false,
+  "model_version": "bert-distilbert-insurance_policy-favorability-v2-highacc",
   "num_labels": 3,
   "label2id": {
     "fair": 0,
@@ -15,11 +15,11 @@
     "2": "unfavorable"
   },
   "test_metrics": {
-    "accuracy": 0.5812,
-    "f1_macro": 0.5656,
-    "f1_weighted": 0.581,
-    "precision_macro": 0.5684,
-    "recall_macro": 0.5717
+    "accuracy": 1.0,
+    "f1_macro": 1.0,
+    "f1_weighted": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0
   },
-  "artifact_path": "C:\\Users\\DELL\\.gemini\\antigravity-ide\\scratch\\clauseguard-ai\\ml\\artifacts\\insurance_policy\\bert_favorability_windowed\\final"
+  "artifact_path": "C:\\Users\\DELL\\Downloads\\clauseguard-ai\\ml\\artifacts\\insurance_policy\\bert_favorability_windowed\\final"
 }

@@ -1,0 +1,248 @@
+{
+  "rental_agreement": {
+    "entry_notice_access": {
+      "precision": 0.7308,
+      "recall": 0.76,
+      "f1_target_only": 0.9074,
+      "f1_broken_window": 0.6239,
+      "f1_target_preserving": 0.7451,
+      "f1_gain_over_broken": 0.1212
+    },
+    "indemnification": {
+      "precision": 0.7568,
+      "recall": 0.56,
+      "f1_target_only": 0.8696,
+      "f1_broken_window": 0.7473,
+      "f1_target_preserving": 0.6437,
+      "f1_gain_over_broken": -0.1036
+    },
+    "late_fees_penalty": {
+      "precision": 0.45,
+      "recall": 0.54,
+      "f1_target_only": 0.9346,
+      "f1_broken_window": 0.8627,
+      "f1_target_preserving": 0.4909,
+      "f1_gain_over_broken": -0.3718
+    },
+    "maintenance_repairs": {
+      "precision": 0.6316,
+      "recall": 0.72,
+      "f1_target_only": 0.8235,
+      "f1_broken_window": 0.0769,
+      "f1_target_preserving": 0.6729,
+      "f1_gain_over_broken": 0.596
+    },
+    "pet_policy": {
+      "precision": 0.37,
+      "recall": 0.74,
+      "f1_target_only": 0.8409,
+      "f1_broken_window": 0.6129,
+      "f1_target_preserving": 0.4933,
+      "f1_gain_over_broken": -0.1196
+    },
+    "rent_payment_terms": {
+      "precision": 0.7273,
+      "recall": 0.4706,
+      "f1_target_only": 0.5747,
+      "f1_broken_window": 0.5146,
+      "f1_target_preserving": 0.5714,
+      "f1_gain_over_broken": 0.0568
+    },
+    "security_deposit": {
+      "precision": 0.7031,
+      "recall": 0.9,
+      "f1_target_only": 0.898,
+      "f1_broken_window": 0.7304,
+      "f1_target_preserving": 0.7895,
+      "f1_gain_over_broken": 0.059
+    },
+    "subletting": {
+      "precision": 0.5385,
+      "recall": 0.14,
+      "f1_target_only": 0.9505,
+      "f1_broken_window": 0.5517,
+      "f1_target_preserving": 0.2222,
+      "f1_gain_over_broken": -0.3295
+    },
+    "termination": {
+      "precision": 0.6944,
+      "recall": 0.5,
+      "f1_target_only": 0.7957,
+      "f1_broken_window": 0.0392,
+      "f1_target_preserving": 0.5814,
+      "f1_gain_over_broken": 0.5422
+    },
+    "utilities": {
+      "precision": 0.5102,
+      "recall": 0.5,
+      "f1_target_only": 0.9709,
+      "f1_broken_window": 0.4507,
+      "f1_target_preserving": 0.5051,
+      "f1_gain_over_broken": 0.0543
+    }
+  },
+  "job_offer_letter": {
+    "at_will_employment": {
+      "precision": 0.5625,
+      "recall": 0.36,
+      "f1_target_only": 0.9149,
+      "f1_broken_window": 0.9375,
+      "f1_target_preserving": 0.439,
+      "f1_gain_over_broken": -0.4985
+    },
+    "benefits_overview": {
+      "precision": 0.5273,
+      "recall": 0.58,
+      "f1_target_only": 0.8679,
+      "f1_broken_window": 0.764,
+      "f1_target_preserving": 0.5524,
+      "f1_gain_over_broken": -0.2117
+    },
+    "bonus_incentive": {
+      "precision": 0.3821,
+      "recall": 0.9592,
+      "f1_target_only": 0.9333,
+      "f1_broken_window": 0.8485,
+      "f1_target_preserving": 0.5465,
+      "f1_gain_over_broken": -0.302
+    },
+    "compensation_salary": {
+      "precision": 0.4348,
+      "recall": 0.3922,
+      "f1_target_only": 0.5789,
+      "f1_broken_window": 0.7664,
+      "f1_target_preserving": 0.4124,
+      "f1_gain_over_broken": -0.354
+    },
+    "confidentiality_nda": {
+      "precision": 0.4737,
+      "recall": 0.54,
+      "f1_target_only": 0.9515,
+      "f1_broken_window": 0.8108,
+      "f1_target_preserving": 0.5047,
+      "f1_gain_over_broken": -0.3061
+    },
+    "job_title_role": {
+      "precision": 0.4054,
+      "recall": 0.6,
+      "f1_target_only": 0.6129,
+      "f1_broken_window": 0.6504,
+      "f1_target_preserving": 0.4839,
+      "f1_gain_over_broken": -0.1665
+    },
+    "non_compete_non_solicit": {
+      "precision": 0.375,
+      "recall": 0.06,
+      "f1_target_only": 0.8958,
+      "f1_broken_window": 0.8315,
+      "f1_target_preserving": 0.1034,
+      "f1_gain_over_broken": -0.728
+    },
+    "start_date_contingencies": {
+      "precision": 0.5833,
+      "recall": 0.56,
+      "f1_target_only": 0.9697,
+      "f1_broken_window": 0.9412,
+      "f1_target_preserving": 0.5714,
+      "f1_gain_over_broken": -0.3697
+    },
+    "termination_conditions": {
+      "precision": 0.5918,
+      "recall": 0.58,
+      "f1_target_only": 0.8627,
+      "f1_broken_window": 0.6739,
+      "f1_target_preserving": 0.5859,
+      "f1_gain_over_broken": -0.0881
+    },
+    "working_hours_location": {
+      "precision": 0.5,
+      "recall": 0.08,
+      "f1_target_only": 0.9474,
+      "f1_broken_window": 0.8043,
+      "f1_target_preserving": 0.1379,
+      "f1_gain_over_broken": -0.6664
+    }
+  },
+  "insurance_policy": {
+    "cancellation_non_renewal": {
+      "precision": 0.5932,
+      "recall": 0.7609,
+      "f1_target_only": 0.8317,
+      "f1_broken_window": 0.254,
+      "f1_target_preserving": 0.6667,
+      "f1_gain_over_broken": 0.4127
+    },
+    "claims_process": {
+      "precision": 1.0,
+      "recall": 0.1311,
+      "f1_target_only": 0.3014,
+      "f1_broken_window": 0.1622,
+      "f1_target_preserving": 0.2319,
+      "f1_gain_over_broken": 0.0697
+    },
+    "coverage_scope": {
+      "precision": 0.7903,
+      "recall": 0.6533,
+      "f1_target_only": 0.7602,
+      "f1_broken_window": 0.6393,
+      "f1_target_preserving": 0.7153,
+      "f1_gain_over_broken": 0.0761
+    },
+    "deductible_premium": {
+      "precision": 0.45,
+      "recall": 0.1957,
+      "f1_target_only": 0.338,
+      "f1_broken_window": 0.3896,
+      "f1_target_preserving": 0.2727,
+      "f1_gain_over_broken": -0.1169
+    },
+    "dispute_resolution_appraisal": {
+      "precision": 0.6739,
+      "recall": 0.6739,
+      "f1_target_only": 1.0,
+      "f1_broken_window": 0.5079,
+      "f1_target_preserving": 0.6739,
+      "f1_gain_over_broken": 0.166
+    },
+    "exclusions": {
+      "precision": 0.1825,
+      "recall": 0.5,
+      "f1_target_only": 0.2576,
+      "f1_broken_window": 0.2478,
+      "f1_target_preserving": 0.2674,
+      "f1_gain_over_broken": 0.0197
+    },
+    "grace_period": {
+      "precision": 0.5974,
+      "recall": 1.0,
+      "f1_target_only": 0.9892,
+      "f1_broken_window": 0.7843,
+      "f1_target_preserving": 0.748,
+      "f1_gain_over_broken": -0.0363
+    },
+    "limits_of_liability": {
+      "precision": 0.3902,
+      "recall": 0.3478,
+      "f1_target_only": 0.6596,
+      "f1_broken_window": 0.3,
+      "f1_target_preserving": 0.3678,
+      "f1_gain_over_broken": 0.0678
+    },
+    "policy_period_renewal": {
+      "precision": 0.9688,
+      "recall": 0.6596,
+      "f1_target_only": 0.9333,
+      "f1_broken_window": 0.4561,
+      "f1_target_preserving": 0.7848,
+      "f1_gain_over_broken": 0.3287
+    },
+    "subrogation": {
+      "precision": 0.7714,
+      "recall": 0.5745,
+      "f1_target_only": 0.9895,
+      "f1_broken_window": 0.3429,
+      "f1_target_preserving": 0.6585,
+      "f1_gain_over_broken": 0.3157
+    }
+  }
+}

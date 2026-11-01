@@ -1,0 +1,34 @@
+{
+  "dataset_version": "v2.1-clean-preprocessed",
+  "preprocessing_version": "Phase 4 Conservative Preprocessing",
+  "model_checkpoint": "distilbert-base-uncased",
+  "tokenizer": "distilbert-base-uncased",
+  "sequence_length": 96,
+  "context_strategy": "target_priority",
+  "marker_style": "none",
+  "learning_rate": 5e-05,
+  "batch_size": 8,
+  "effective_batch_size": 8,
+  "epochs": 4,
+  "best_epoch": 4,
+  "optimizer": "AdamW",
+  "scheduler": "none",
+  "warmup_ratio": 0.0,
+  "weight_decay": 0.01,
+  "dropout": 0.2,
+  "gradient_clipping": null,
+  "class_weighting": "unweighted",
+  "loss_function": "CrossEntropyLoss",
+  "random_seeds_tested": [
+    42,
+    43,
+    44
+  ],
+  "hardware_environment": "Intel CPU (12 threads configured), NVIDIA GeForce RTX 3050 Laptop GPU present",
+  "software_versions": {
+    "python": "3.11.5",
+    "pytorch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "scikit_learn": "1.9.1"
+  }
+}

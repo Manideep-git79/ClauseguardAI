@@ -102,11 +102,16 @@ export const api = {
     request(`/documents/${id}`, {
       method: "DELETE",
     }),
+  reanalyzeDocument: (id) =>
+    request(`/documents/${id}/reanalyze`, {
+      method: "POST",
+    }),
 
   getClauses: (id) => request(`/documents/${id}/clauses`),
   getMissingClauses: (id) => request(`/documents/${id}/missing-clauses`),
   getDeadlines: (id) => request(`/documents/${id}/deadlines`),
   getPiiSummary: (id) => request(`/documents/${id}/pii-summary`),
+  getIntegrityFindings: (id) => request(`/documents/${id}/integrity-findings`),
   getReportPdf: (id) => request(`/documents/${id}/report.pdf`),
   getReportPdfUrl: (id) => {
     let token = "";

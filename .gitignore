@@ -42,9 +42,11 @@ yarn-error.log*
 
 # Temporary & Log files
 *.log
+*.zip
 .temp/
 tmp/
 temp/
+scratch/
 
 # OS and Editor
 .DS_Store

@@ -1,0 +1,1586 @@
+{
+  "rental_agreement": {
+    "clause_type": {
+      "nocontext": {
+        "accuracy": 0.8623,
+        "f1_macro": 0.8566,
+        "f1_weighted": 0.856,
+        "precision_macro": 0.8629,
+        "recall_macro": 0.863,
+        "confusion_matrix": [
+          [
+            49,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            5,
+            0,
+            42,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            4,
+            0,
+            3,
+            37,
+            5,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            6,
+            5,
+            3,
+            4,
+            0,
+            25,
+            1,
+            0,
+            6,
+            1
+          ],
+          [
+            0,
+            0,
+            3,
+            2,
+            0,
+            0,
+            44,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            48,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            1,
+            1,
+            0,
+            4,
+            3,
+            1,
+            37,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            50
+          ]
+        ],
+        "classification_report": {
+          "entry_notice_access": {
+            "precision": 0.8448275862068966,
+            "recall": 0.98,
+            "f1-score": 0.9074074074074074,
+            "support": 50.0
+          },
+          "indemnification": {
+            "precision": 0.7692307692307693,
+            "recall": 1.0,
+            "f1-score": 0.8695652173913043,
+            "support": 50.0
+          },
+          "late_fees_penalty": {
+            "precision": 0.8771929824561403,
+            "recall": 1.0,
+            "f1-score": 0.9345794392523364,
+            "support": 50.0
+          },
+          "maintenance_repairs": {
+            "precision": 0.8076923076923077,
+            "recall": 0.84,
+            "f1-score": 0.8235294117647058,
+            "support": 50.0
+          },
+          "pet_policy": {
+            "precision": 0.9736842105263158,
+            "recall": 0.74,
+            "f1-score": 0.8409090909090909,
+            "support": 50.0
+          },
+          "rent_payment_terms": {
+            "precision": 0.6944444444444444,
+            "recall": 0.49019607843137253,
+            "f1-score": 0.5747126436781609,
+            "support": 51.0
+          },
+          "security_deposit": {
+            "precision": 0.9166666666666666,
+            "recall": 0.88,
+            "f1-score": 0.8979591836734694,
+            "support": 50.0
+          },
+          "subletting": {
+            "precision": 0.9411764705882353,
+            "recall": 0.96,
+            "f1-score": 0.9504950495049505,
+            "support": 50.0
+          },
+          "termination": {
+            "precision": 0.8604651162790697,
+            "recall": 0.74,
+            "f1-score": 0.7956989247311828,
+            "support": 50.0
+          },
+          "utilities": {
+            "precision": 0.9433962264150944,
+            "recall": 1.0,
+            "f1-score": 0.970873786407767,
+            "support": 50.0
+          },
+          "accuracy": 0.8622754491017964,
+          "macro avg": {
+            "precision": 0.8628776780505939,
+            "recall": 0.8630196078431374,
+            "f1-score": 0.8565730154720376,
+            "support": 501.0
+          },
+          "weighted avg": {
+            "precision": 0.8625414839715398,
+            "recall": 0.8622754491017964,
+            "f1-score": 0.8560104199195548,
+            "support": 501.0
+          }
+        }
+      },
+      "windowed": {
+        "accuracy": 0.5729,
+        "f1_macro": 0.521,
+        "f1_weighted": 0.521,
+        "precision_macro": 0.7025,
+        "recall_macro": 0.5723,
+        "confusion_matrix": [
+          [
+            34,
+            0,
+            0,
+            0,
+            0,
+            9,
+            2,
+            5,
+            0,
+            0
+          ],
+          [
+            0,
+            34,
+            5,
+            0,
+            0,
+            5,
+            1,
+            5,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            44,
+            0,
+            0,
+            3,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            18,
+            0,
+            0,
+            2,
+            1,
+            18,
+            3,
+            8,
+            0,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0,
+            38,
+            7,
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            44,
+            0,
+            4,
+            0,
+            2
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            3,
+            42,
+            3,
+            0,
+            1
+          ],
+          [
+            5,
+            0,
+            0,
+            0,
+            3,
+            9,
+            1,
+            32,
+            0,
+            0
+          ],
+          [
+            2,
+            2,
+            1,
+            0,
+            0,
+            21,
+            15,
+            6,
+            1,
+            2
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            32,
+            1,
+            0,
+            0,
+            0,
+            16
+          ]
+        ],
+        "classification_report": {
+          "entry_notice_access": {
+            "precision": 0.576271186440678,
+            "recall": 0.68,
+            "f1-score": 0.6238532110091743,
+            "support": 50.0
+          },
+          "indemnification": {
+            "precision": 0.8292682926829268,
+            "recall": 0.68,
+            "f1-score": 0.7472527472527473,
+            "support": 50.0
+          },
+          "late_fees_penalty": {
+            "precision": 0.8461538461538461,
+            "recall": 0.88,
+            "f1-score": 0.8627450980392157,
+            "support": 50.0
+          },
+          "maintenance_repairs": {
+            "precision": 1.0,
+            "recall": 0.04,
+            "f1-score": 0.07692307692307693,
+            "support": 50.0
+          },
+          "pet_policy": {
+            "precision": 0.5135135135135135,
+            "recall": 0.76,
+            "f1-score": 0.6129032258064516,
+            "support": 50.0
+          },
+          "rent_payment_terms": {
+            "precision": 0.36666666666666664,
+            "recall": 0.8627450980392157,
+            "f1-score": 0.5146198830409356,
+            "support": 51.0
+          },
+          "security_deposit": {
+            "precision": 0.6461538461538462,
+            "recall": 0.84,
+            "f1-score": 0.7304347826086957,
+            "support": 50.0
+          },
+          "subletting": {
+            "precision": 0.48484848484848486,
+            "recall": 0.64,
+            "f1-score": 0.5517241379310345,
+            "support": 50.0
+          },
+          "termination": {
+            "precision": 1.0,
+            "recall": 0.02,
+            "f1-score": 0.0392156862745098,
+            "support": 50.0
+          },
+          "utilities": {
+            "precision": 0.7619047619047619,
+            "recall": 0.32,
+            "f1-score": 0.4507042253521127,
+            "support": 50.0
+          },
+          "accuracy": 0.5728542914171657,
+          "macro avg": {
+            "precision": 0.7024780598364724,
+            "recall": 0.5722745098039216,
+            "f1-score": 0.5210376074237953,
+            "support": 501.0
+          },
+          "weighted avg": {
+            "precision": 0.7018077776145765,
+            "recall": 0.5728542914171657,
+            "f1-score": 0.5210247975946879,
+            "support": 501.0
+          }
+        }
+      }
+    },
+    "favorability": {
+      "nocontext": {
+        "accuracy": 0.7924,
+        "f1_macro": 0.7883,
+        "f1_weighted": 0.7892,
+        "precision_macro": 0.7983,
+        "recall_macro": 0.7954,
+        "confusion_matrix": [
+          [
+            165,
+            12,
+            18
+          ],
+          [
+            32,
+            107,
+            28
+          ],
+          [
+            9,
+            5,
+            125
+          ]
+        ],
+        "classification_report": {
+          "fair": {
+            "precision": 0.8009708737864077,
+            "recall": 0.8461538461538461,
+            "f1-score": 0.8229426433915212,
+            "support": 195.0
+          },
+          "needs_review": {
+            "precision": 0.8629032258064516,
+            "recall": 0.6407185628742516,
+            "f1-score": 0.7353951890034365,
+            "support": 167.0
+          },
+          "unfavorable": {
+            "precision": 0.7309941520467836,
+            "recall": 0.8992805755395683,
+            "f1-score": 0.8064516129032258,
+            "support": 139.0
+          },
+          "accuracy": 0.7924151696606786,
+          "macro avg": {
+            "precision": 0.7982894172132143,
+            "recall": 0.7953843281892219,
+            "f1-score": 0.7882631484327277,
+            "support": 501.0
+          },
+          "weighted avg": {
+            "precision": 0.8022002918812972,
+            "recall": 0.7924151696606786,
+            "f1-score": 0.7891848028312752,
+            "support": 501.0
+          }
+        }
+      },
+      "windowed": {
+        "accuracy": 0.5768,
+        "f1_macro": 0.5717,
+        "f1_weighted": 0.5721,
+        "precision_macro": 0.6541,
+        "recall_macro": 0.6,
+        "confusion_matrix": [
+          [
+            96,
+            14,
+            85
+          ],
+          [
+            24,
+            67,
+            76
+          ],
+          [
+            6,
+            7,
+            126
+          ]
+        ],
+        "classification_report": {
+          "fair": {
+            "precision": 0.7619047619047619,
+            "recall": 0.49230769230769234,
+            "f1-score": 0.5981308411214953,
+            "support": 195.0
+          },
+          "needs_review": {
+            "precision": 0.7613636363636364,
+            "recall": 0.40119760479041916,
+            "f1-score": 0.5254901960784314,
+            "support": 167.0
+          },
+          "unfavorable": {
+            "precision": 0.43902439024390244,
+            "recall": 0.9064748201438849,
+            "f1-score": 0.5915492957746479,
+            "support": 139.0
+          },
+          "accuracy": 0.5768463073852296,
+          "macro avg": {
+            "precision": 0.6540975961707668,
+            "recall": 0.5999933724139987,
+            "f1-score": 0.5717234443248582,
+            "support": 501.0
+          },
+          "weighted avg": {
+            "precision": 0.6721428065629904,
+            "recall": 0.5768463073852296,
+            "f1-score": 0.5720912752025262,
+            "support": 501.0
+          }
+        }
+      }
+    }
+  },
+  "job_offer_letter": {
+    "clause_type": {
+      "nocontext": {
+        "accuracy": 0.856,
+        "f1_macro": 0.855,
+        "f1_weighted": 0.8543,
+        "precision_macro": 0.8761,
+        "recall_macro": 0.8571,
+        "confusion_matrix": [
+          [
+            43,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0
+          ],
+          [
+            0,
+            46,
+            0,
+            1,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            49,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            5,
+            22,
+            0,
+            24,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            50,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            8,
+            0,
+            1,
+            1,
+            38,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3,
+            4,
+            43,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            48,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            2,
+            1,
+            0,
+            1,
+            0,
+            0,
+            44,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            1,
+            0,
+            1,
+            45
+          ]
+        ],
+        "classification_report": {
+          "at_will_employment": {
+            "precision": 0.9772727272727273,
+            "recall": 0.86,
+            "f1-score": 0.9148936170212766,
+            "support": 50.0
+          },
+          "benefits_overview": {
+            "precision": 0.8214285714285714,
+            "recall": 0.92,
+            "f1-score": 0.8679245283018868,
+            "support": 50.0
+          },
+          "bonus_incentive": {
+            "precision": 0.875,
+            "recall": 1.0,
+            "f1-score": 0.9333333333333333,
+            "support": 49.0
+          },
+          "compensation_salary": {
+            "precision": 0.88,
+            "recall": 0.43137254901960786,
+            "f1-score": 0.5789473684210527,
+            "support": 51.0
+          },
+          "confidentiality_nda": {
+            "precision": 0.9259259259259259,
+            "recall": 1.0,
+            "f1-score": 0.9615384615384616,
+            "support": 50.0
+          },
+          "job_title_role": {
+            "precision": 0.5205479452054794,
+            "recall": 0.76,
+            "f1-score": 0.6178861788617886,
+            "support": 50.0
+          },
+          "non_compete_non_solicit": {
+            "precision": 0.9347826086956522,
+            "recall": 0.86,
+            "f1-score": 0.8958333333333334,
+            "support": 50.0
+          },
+          "start_date_contingencies": {
+            "precision": 0.9795918367346939,
+            "recall": 0.96,
+            "f1-score": 0.9696969696969697,
+            "support": 50.0
+          },
+          "termination_conditions": {
+            "precision": 0.8461538461538461,
+            "recall": 0.88,
+            "f1-score": 0.8627450980392157,
+            "support": 50.0
+          },
+          "working_hours_location": {
+            "precision": 1.0,
+            "recall": 0.9,
+            "f1-score": 0.9473684210526315,
+            "support": 50.0
+          },
+          "accuracy": 0.856,
+          "macro avg": {
+            "precision": 0.8760703461416895,
+            "recall": 0.8571372549019607,
+            "f1-score": 0.8550167309599951,
+            "support": 500.0
+          },
+          "weighted avg": {
+            "precision": 0.8760803461416896,
+            "recall": 0.856,
+            "f1-score": 0.8543079590301704,
+            "support": 500.0
+          }
+        }
+      },
+      "windowed": {
+        "accuracy": 0.802,
+        "f1_macro": 0.8044,
+        "f1_weighted": 0.8043,
+        "precision_macro": 0.8211,
+        "recall_macro": 0.8021,
+        "confusion_matrix": [
+          [
+            45,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            34,
+            1,
+            4,
+            0,
+            6,
+            0,
+            0,
+            2,
+            3
+          ],
+          [
+            0,
+            0,
+            42,
+            4,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            41,
+            0,
+            9,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            46,
+            1,
+            2,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            3,
+            0,
+            2,
+            1,
+            40,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            4,
+            1,
+            3,
+            37,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            48,
+            1,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0,
+            11,
+            5,
+            0,
+            0,
+            31,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            3,
+            5,
+            0,
+            2,
+            1,
+            37
+          ]
+        ],
+        "classification_report": {
+          "at_will_employment": {
+            "precision": 0.9782608695652174,
+            "recall": 0.9,
+            "f1-score": 0.9375,
+            "support": 50.0
+          },
+          "benefits_overview": {
+            "precision": 0.8717948717948718,
+            "recall": 0.68,
+            "f1-score": 0.7640449438202247,
+            "support": 50.0
+          },
+          "bonus_incentive": {
+            "precision": 0.84,
+            "recall": 0.8571428571428571,
+            "f1-score": 0.8484848484848485,
+            "support": 49.0
+          },
+          "compensation_salary": {
+            "precision": 0.7321428571428571,
+            "recall": 0.803921568627451,
+            "f1-score": 0.7663551401869159,
+            "support": 51.0
+          },
+          "confidentiality_nda": {
+            "precision": 0.7419354838709677,
+            "recall": 0.92,
+            "f1-score": 0.8214285714285714,
+            "support": 50.0
+          },
+          "job_title_role": {
+            "precision": 0.5555555555555556,
+            "recall": 0.8,
+            "f1-score": 0.6557377049180327,
+            "support": 50.0
+          },
+          "non_compete_non_solicit": {
+            "precision": 0.9487179487179487,
+            "recall": 0.74,
+            "f1-score": 0.8314606741573034,
+            "support": 50.0
+          },
+          "start_date_contingencies": {
+            "precision": 0.9230769230769231,
+            "recall": 0.96,
+            "f1-score": 0.9411764705882353,
+            "support": 50.0
+          },
+          "termination_conditions": {
+            "precision": 0.7380952380952381,
+            "recall": 0.62,
+            "f1-score": 0.6739130434782609,
+            "support": 50.0
+          },
+          "working_hours_location": {
+            "precision": 0.8809523809523809,
+            "recall": 0.74,
+            "f1-score": 0.8043478260869565,
+            "support": 50.0
+          },
+          "accuracy": 0.802,
+          "macro avg": {
+            "precision": 0.8210532128771961,
+            "recall": 0.8021064425770307,
+            "f1-score": 0.804444922314935,
+            "support": 500.0
+          },
+          "weighted avg": {
+            "precision": 0.8208374985914818,
+            "recall": 0.802,
+            "f1-score": 0.8042806628983391,
+            "support": 500.0
+          }
+        }
+      }
+    },
+    "favorability": {
+      "nocontext": {
+        "accuracy": 0.812,
+        "f1_macro": 0.8078,
+        "f1_weighted": 0.8089,
+        "precision_macro": 0.808,
+        "recall_macro": 0.8106,
+        "confusion_matrix": [
+          [
+            171,
+            25,
+            4
+          ],
+          [
+            33,
+            103,
+            20
+          ],
+          [
+            3,
+            9,
+            132
+          ]
+        ],
+        "classification_report": {
+          "fair": {
+            "precision": 0.8260869565217391,
+            "recall": 0.855,
+            "f1-score": 0.8402948402948403,
+            "support": 200.0
+          },
+          "needs_review": {
+            "precision": 0.7518248175182481,
+            "recall": 0.6602564102564102,
+            "f1-score": 0.7030716723549488,
+            "support": 156.0
+          },
+          "unfavorable": {
+            "precision": 0.8461538461538461,
+            "recall": 0.9166666666666666,
+            "f1-score": 0.88,
+            "support": 144.0
+          },
+          "accuracy": 0.812,
+          "macro avg": {
+            "precision": 0.8080218733979444,
+            "recall": 0.8106410256410256,
+            "f1-score": 0.8077888375499297,
+            "support": 500.0
+          },
+          "weighted avg": {
+            "precision": 0.8086964333666967,
+            "recall": 0.812,
+            "f1-score": 0.8089162978926802,
+            "support": 500.0
+          }
+        }
+      },
+      "windowed": {
+        "accuracy": 0.692,
+        "f1_macro": 0.7028,
+        "f1_weighted": 0.6986,
+        "precision_macro": 0.7372,
+        "recall_macro": 0.7024,
+        "confusion_matrix": [
+          [
+            118,
+            74,
+            8
+          ],
+          [
+            26,
+            124,
+            6
+          ],
+          [
+            3,
+            37,
+            104
+          ]
+        ],
+        "classification_report": {
+          "fair": {
+            "precision": 0.8027210884353742,
+            "recall": 0.59,
+            "f1-score": 0.6801152737752162,
+            "support": 200.0
+          },
+          "needs_review": {
+            "precision": 0.5276595744680851,
+            "recall": 0.7948717948717948,
+            "f1-score": 0.6342710997442456,
+            "support": 156.0
+          },
+          "unfavorable": {
+            "precision": 0.8813559322033898,
+            "recall": 0.7222222222222222,
+            "f1-score": 0.7938931297709924,
+            "support": 144.0
+          },
+          "accuracy": 0.692,
+          "macro avg": {
+            "precision": 0.7372455317022829,
+            "recall": 0.7023646723646723,
+            "f1-score": 0.7027598344301514,
+            "support": 500.0
+          },
+          "weighted avg": {
+            "precision": 0.7395487310827684,
+            "recall": 0.692,
+            "f1-score": 0.6985799140043368,
+            "support": 500.0
+          }
+        }
+      }
+    }
+  },
+  "insurance_policy": {
+    "clause_type": {
+      "nocontext": {
+        "accuracy": 0.7095,
+        "f1_macro": 0.7063,
+        "f1_weighted": 0.6987,
+        "precision_macro": 0.762,
+        "recall_macro": 0.7158,
+        "confusion_matrix": [
+          [
+            42,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            11,
+            11,
+            5,
+            0,
+            32,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            65,
+            2,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            1,
+            1,
+            12,
+            0,
+            16,
+            1,
+            5,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            46,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            14,
+            2,
+            0,
+            17,
+            0,
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            46,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            1,
+            0,
+            11,
+            0,
+            31,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            3,
+            0,
+            0,
+            42,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            47
+          ]
+        ],
+        "classification_report": {
+          "cancellation_non_renewal": {
+            "precision": 0.7636363636363637,
+            "recall": 0.9130434782608695,
+            "f1-score": 0.8316831683168316,
+            "support": 46.0
+          },
+          "claims_process": {
+            "precision": 0.9166666666666666,
+            "recall": 0.18032786885245902,
+            "f1-score": 0.3013698630136986,
+            "support": 61.0
+          },
+          "coverage_scope": {
+            "precision": 0.6842105263157895,
+            "recall": 0.8666666666666667,
+            "f1-score": 0.7647058823529411,
+            "support": 75.0
+          },
+          "deductible_premium": {
+            "precision": 0.48,
+            "recall": 0.2608695652173913,
+            "f1-score": 0.3380281690140845,
+            "support": 46.0
+          },
+          "dispute_resolution_appraisal": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 46.0
+          },
+          "exclusions": {
+            "precision": 0.19540229885057472,
+            "recall": 0.3695652173913043,
+            "f1-score": 0.2556390977443609,
+            "support": 46.0
+          },
+          "grace_period": {
+            "precision": 0.9787234042553191,
+            "recall": 1.0,
+            "f1-score": 0.989247311827957,
+            "support": 46.0
+          },
+          "limits_of_liability": {
+            "precision": 0.6458333333333334,
+            "recall": 0.6739130434782609,
+            "f1-score": 0.6595744680851063,
+            "support": 46.0
+          },
+          "policy_period_renewal": {
+            "precision": 0.9767441860465116,
+            "recall": 0.8936170212765957,
+            "f1-score": 0.9333333333333333,
+            "support": 47.0
+          },
+          "subrogation": {
+            "precision": 0.9791666666666666,
+            "recall": 1.0,
+            "f1-score": 0.9894736842105263,
+            "support": 47.0
+          },
+          "accuracy": 0.7094861660079052,
+          "macro avg": {
+            "precision": 0.7620383445771226,
+            "recall": 0.7158002861143548,
+            "f1-score": 0.706305497789884,
+            "support": 506.0
+          },
+          "weighted avg": {
+            "precision": 0.7630151277101727,
+            "recall": 0.7094861660079052,
+            "f1-score": 0.6986568271429472,
+            "support": 506.0
+          }
+        }
+      },
+      "windowed": {
+        "accuracy": 0.4526,
+        "f1_macro": 0.4085,
+        "f1_weighted": 0.4145,
+        "precision_macro": 0.5246,
+        "recall_macro": 0.4334,
+        "confusion_matrix": [
+          [
+            8,
+            0,
+            3,
+            3,
+            0,
+            1,
+            1,
+            1,
+            27,
+            2
+          ],
+          [
+            0,
+            6,
+            24,
+            1,
+            0,
+            29,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            70,
+            0,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            2,
+            10,
+            15,
+            0,
+            14,
+            1,
+            0,
+            0,
+            3
+          ],
+          [
+            1,
+            2,
+            0,
+            0,
+            16,
+            0,
+            0,
+            0,
+            21,
+            6
+          ],
+          [
+            0,
+            0,
+            21,
+            8,
+            0,
+            14,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            1,
+            0,
+            1,
+            0,
+            40,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            11,
+            4,
+            0,
+            6,
+            12,
+            9,
+            4,
+            0
+          ],
+          [
+            2,
+            0,
+            3,
+            0,
+            0,
+            1,
+            2,
+            0,
+            39,
+            0
+          ],
+          [
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            32,
+            12
+          ]
+        ],
+        "classification_report": {
+          "cancellation_non_renewal": {
+            "precision": 0.47058823529411764,
+            "recall": 0.17391304347826086,
+            "f1-score": 0.25396825396825395,
+            "support": 46.0
+          },
+          "claims_process": {
+            "precision": 0.46153846153846156,
+            "recall": 0.09836065573770492,
+            "f1-score": 0.16216216216216217,
+            "support": 61.0
+          },
+          "coverage_scope": {
+            "precision": 0.48951048951048953,
+            "recall": 0.9333333333333333,
+            "f1-score": 0.6422018348623854,
+            "support": 75.0
+          },
+          "deductible_premium": {
+            "precision": 0.4838709677419355,
+            "recall": 0.32608695652173914,
+            "f1-score": 0.38961038961038963,
+            "support": 46.0
+          },
+          "dispute_resolution_appraisal": {
+            "precision": 0.9411764705882353,
+            "recall": 0.34782608695652173,
+            "f1-score": 0.5079365079365079,
+            "support": 46.0
+          },
+          "exclusions": {
+            "precision": 0.20588235294117646,
+            "recall": 0.30434782608695654,
+            "f1-score": 0.24561403508771928,
+            "support": 46.0
+          },
+          "grace_period": {
+            "precision": 0.7142857142857143,
+            "recall": 0.8695652173913043,
+            "f1-score": 0.7843137254901961,
+            "support": 46.0
+          },
+          "limits_of_liability": {
+            "precision": 0.6428571428571429,
+            "recall": 0.1956521739130435,
+            "f1-score": 0.3,
+            "support": 46.0
+          },
+          "policy_period_renewal": {
+            "precision": 0.31451612903225806,
+            "recall": 0.8297872340425532,
+            "f1-score": 0.45614035087719296,
+            "support": 47.0
+          },
+          "subrogation": {
+            "precision": 0.5217391304347826,
+            "recall": 0.2553191489361702,
+            "f1-score": 0.34285714285714286,
+            "support": 47.0
+          },
+          "accuracy": 0.4525691699604743,
+          "macro avg": {
+            "precision": 0.5245965094224314,
+            "recall": 0.43341916763975874,
+            "f1-score": 0.40848044028519503,
+            "support": 506.0
+          },
+          "weighted avg": {
+            "precision": 0.5202955152424241,
+            "recall": 0.4525691699604743,
+            "f1-score": 0.41453811396910206,
+            "support": 506.0
+          }
+        }
+      }
+    },
+    "favorability": {
+      "nocontext": {
+        "accuracy": 0.8123,
+        "f1_macro": 0.8094,
+        "f1_weighted": 0.8125,
+        "precision_macro": 0.8121,
+        "recall_macro": 0.8117,
+        "confusion_matrix": [
+          [
+            128,
+            29,
+            12
+          ],
+          [
+            15,
+            186,
+            20
+          ],
+          [
+            2,
+            17,
+            97
+          ]
+        ],
+        "classification_report": {
+          "fair": {
+            "precision": 0.8827586206896552,
+            "recall": 0.757396449704142,
+            "f1-score": 0.8152866242038217,
+            "support": 169.0
+          },
+          "needs_review": {
+            "precision": 0.8017241379310345,
+            "recall": 0.8416289592760181,
+            "f1-score": 0.8211920529801324,
+            "support": 221.0
+          },
+          "unfavorable": {
+            "precision": 0.751937984496124,
+            "recall": 0.8362068965517241,
+            "f1-score": 0.7918367346938775,
+            "support": 116.0
+          },
+          "accuracy": 0.8122529644268774,
+          "macro avg": {
+            "precision": 0.8121402477056044,
+            "recall": 0.8117441018439614,
+            "f1-score": 0.809438470625944,
+            "support": 506.0
+          },
+          "weighted avg": {
+            "precision": 0.8173755881044678,
+            "recall": 0.8122529644268774,
+            "f1-score": 0.8124900087421836,
+            "support": 506.0
+          }
+        }
+      },
+      "windowed": {
+        "accuracy": 0.664,
+        "f1_macro": 0.6468,
+        "f1_weighted": 0.6642,
+        "precision_macro": 0.6538,
+        "recall_macro": 0.6439,
+        "confusion_matrix": [
+          [
+            113,
+            35,
+            21
+          ],
+          [
+            43,
+            161,
+            17
+          ],
+          [
+            37,
+            17,
+            62
+          ]
+        ],
+        "classification_report": {
+          "fair": {
+            "precision": 0.5854922279792746,
+            "recall": 0.6686390532544378,
+            "f1-score": 0.6243093922651933,
+            "support": 169.0
+          },
+          "needs_review": {
+            "precision": 0.755868544600939,
+            "recall": 0.7285067873303167,
+            "f1-score": 0.7419354838709677,
+            "support": 221.0
+          },
+          "unfavorable": {
+            "precision": 0.62,
+            "recall": 0.5344827586206896,
+            "f1-score": 0.5740740740740741,
+            "support": 116.0
+          },
+          "accuracy": 0.6640316205533597,
+          "macro avg": {
+            "precision": 0.6537869241934046,
+            "recall": 0.6438761997351481,
+            "f1-score": 0.6467729834034116,
+            "support": 506.0
+          },
+          "weighted avg": {
+            "precision": 0.6678164721053458,
+            "recall": 0.6640316205533597,
+            "f1-score": 0.664167236800186,
+            "support": 506.0
+          }
+        }
+      }
+    }
+  }
+}

@@ -259,7 +259,11 @@ export function DocumentList({ onNavigate }) {
                   <div className="flex items-center gap-4 text-xs font-mono text-neutral-600 flex-wrap">
                     <span>Uploaded: {new Date(doc.uploaded_at).toLocaleDateString()}</span>
                     {doc.page_count && <span>• {doc.page_count} pages</span>}
-                    {doc.model_version && <span>• Model: {doc.model_version}</span>}
+                    {doc.model_version && (
+                      <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-mono border ${doc.model_version.includes("bert") ? "bg-emerald-50 border-emerald-300 text-emerald-800" : "bg-neutral-100 border-neutral-300 text-neutral-600"}`}>
+                        {doc.model_version.includes("bert") ? "● BERT" : "○ TF-IDF"}: {doc.model_version}
+                      </span>
+                    )}
                   </div>
                 </div>
 

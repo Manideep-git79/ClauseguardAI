@@ -1,0 +1,28 @@
+--- CONFIDENTIAL AND PROPRIETARY ---
+TABLE OF CONTENTS
+1. Scope of Engagement .................................... Page 1
+2. Service Level Obligations .............................. Page 2
+3. Representations and Warranties ......................... Page 3
+--- CONFIDENTIAL AND PROPRIETARY ---
+
+SECTION 1: SCOPE OF ENGAGEMENT
+1.1 Engagement Overview: Provider shall perform engineering services in accordance with the Statement of Work attached hereto.
+1.2 Authority Representation: Each party represents and warrants that it has the full legal authority to enter into this Agreement.
+
+--- CONFIDENTIAL AND PROPRIETARY ---
+Page 2 of 3
+--- CONFIDENTIAL AND PROPRIETARY ---
+
+SECTION 2: SERVICE LEVEL OBLIGATIONS AND NESTED SUBSECTIONS
+2.1 Uptime Guarantee: Provider guarantees 99.9% monthly availability for the hosted platform.
+2.2 Support Escalation and Nested Procedures:
+2.2(a) Tier 1 Tickets: Provider will acknowledge critical support requests within thirty (30) minutes.
+2.2(b) Tier 2 Escalation: If unresolved within four (4) hours, the issue shall be escalated to the senior engineering director.
+
+--- CONFIDENTIAL AND PROPRIETARY ---
+Page 3 of 3
+--- CONFIDENTIAL AND PROPRIETARY ---
+
+SECTION 3: LEGAL REPRESENTATIONS AND DUPLICATED CLAUSES
+3.1 Mutual Authorization: Each party represents and warrants that it has the full legal authority to enter into this Agreement.
+3.2 Compliance with Laws: Each party shall comply with all applicable federal, state, and local laws and regulations.

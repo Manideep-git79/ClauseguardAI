@@ -1,0 +1,20 @@
+{
+  "rental_agreement": {
+    "validation_macro_f1": 0.9325,
+    "test_macro_f1": 0.914,
+    "test_accuracy": 0.9142,
+    "train_time_s": 808.3
+  },
+  "job_offer_letter": {
+    "validation_macro_f1": 0.9059,
+    "test_macro_f1": 0.8636,
+    "test_accuracy": 0.87,
+    "train_time_s": 826.7
+  },
+  "insurance_policy": {
+    "validation_macro_f1": 0.8131,
+    "test_macro_f1": 0.852,
+    "test_accuracy": 0.8538,
+    "train_time_s": 873.3
+  }
+}

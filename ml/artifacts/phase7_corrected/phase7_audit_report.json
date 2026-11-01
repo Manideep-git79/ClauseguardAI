@@ -1,0 +1,112 @@
+{
+  "audit_timestamp": "2026-09-29T18:58:31.506947",
+  "phase7_script": "scratch/run_phase7_context_fusion.py",
+  "experiments_run": {
+    "7A_target_only": {
+      "description": "Single-branch, target clause only, seq_len=96",
+      "val_f1": 0.9226,
+      "test_accessed": false,
+      "variables_changed_simultaneously": [
+        "architecture"
+      ],
+      "classification": "VALID",
+      "label": "CONTROL — TARGET-ONLY CONTROL (single seq_len=96)",
+      "note": "Valid control experiment, same HP as Phase 6, validation-only selection."
+    },
+    "7B_concat_baseline": {
+      "description": "Single-branch concatenation of target+context, seq_len=96. Replicates Phase 6 architecture.",
+      "val_f1": 0.9218,
+      "test_accessed": false,
+      "variables_changed_simultaneously": [],
+      "classification": "VALID",
+      "label": "VALID — PHASE 6 BASELINE REPLICATION",
+      "note": "Confirms Phase 6 val F1 reproducible. Valid reference."
+    },
+    "7C_concat_fusion": {
+      "description": "Dual-branch: separate target encoder + context encoder, CLS embeddings concatenated, seq_len=96",
+      "val_f1": 0.9378,
+      "test_accessed_for_selection": false,
+      "variables_changed_simultaneously": [
+        "fusion_architecture"
+      ],
+      "classification": "VALID",
+      "label": "EXPLORATORY ARCHITECTURAL FUSION — VALID SELECTION PROTOCOL",
+      "note": "Architecture selected on val only. Test accessed once after freeze. BUT: this changes architecture WITHOUT first testing seq-len. Not the corrected Phase 7 primary experiment."
+    },
+    "7D_gated_fusion": {
+      "description": "Dual-branch: gated sigmoid fusion, seq_len=96",
+      "val_f1": 0.9331,
+      "test_accessed_for_selection": false,
+      "variables_changed_simultaneously": [
+        "fusion_architecture"
+      ],
+      "classification": "VALID",
+      "label": "EXPLORATORY ARCHITECTURAL FUSION — VALID SELECTION PROTOCOL",
+      "note": "Same as 7C — valid protocol but not the required seq-len experiment."
+    },
+    "7E_tp_gate": {
+      "description": "Dual-branch: target-priority additive gate, seq_len=96",
+      "val_f1": 0.9378,
+      "test_accessed_for_selection": false,
+      "variables_changed_simultaneously": [
+        "fusion_architecture"
+      ],
+      "classification": "VALID",
+      "label": "EXPLORATORY ARCHITECTURAL FUSION — VALID SELECTION PROTOCOL",
+      "note": "Same as 7C."
+    },
+    "direction_ablation": {
+      "description": "prev_only / next_only / both at seq_len=96 with 7C architecture",
+      "results": {
+        "target_only": 0.9226,
+        "prev_only": 0.9401,
+        "next_only": 0.9376,
+        "both": 0.9378
+      },
+      "classification": "VALID",
+      "label": "VALID — CONTEXT DIRECTION ABLATION",
+      "note": "Provides partial evidence on Q7/Q8. Done at seq_len=96 only."
+    },
+    "seed_stability_7C": {
+      "description": "Seeds 42/43/44 on 7C architecture, primary domain",
+      "results": {
+        "seeds": {
+          "42": 0.9378,
+          "43": 0.9351,
+          "44": 0.9423
+        },
+        "mean": 0.9384,
+        "std": 0.00297,
+        "min": 0.9351,
+        "max": 0.9423
+      },
+      "classification": "VALID",
+      "label": "VALID — SEED STABILITY (7C, primary domain only)",
+      "note": "Covers seed stability but only on primary domain. Full 3-domain stability in Phase 8."
+    },
+    "final_test_evaluation": {
+      "description": "7C selected by val, evaluated once on test across all 3 domains",
+      "test_results": {
+        "rental_agreement": 0.9171,
+        "job_offer_letter": 0.9212,
+        "insurance_policy": 0.8025
+      },
+      "selection_basis": "validation_macro_f1",
+      "classification": "VALID",
+      "label": "VALID — TEST ACCESSED ONCE AFTER VALIDATION-BASED SELECTION",
+      "note": "Protocol correct. Results are usable as exploratory fusion results."
+    }
+  },
+  "summary": {
+    "overall_phase7_classification": "INCOMPLETE — EXPLORATORY FUSION VALID, SEQ-LEN ABLATION MISSING",
+    "valid_to_retain": [
+      "7A",
+      "7B (Phase 6 replication)",
+      "7C/7D/7E as exploratory",
+      "direction ablation",
+      "seed stability"
+    ],
+    "test_set_integrity": "PASS — test accessed once, selection on val",
+    "target_retention_7C": "PASS — 0 failures on train/test"
+  }
+}

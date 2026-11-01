@@ -2,7 +2,7 @@
   "document_type": "insurance_policy",
   "task": "clause_type",
   "use_context": false,
-  "model_version": "bert-nocontext-clause_type-v1",
+  "model_version": "bert-distilbert-insurance_policy-clause_type-v2-highacc",
   "num_labels": 10,
   "label2id": {
     "cancellation_non_renewal": 0,
@@ -29,11 +29,11 @@
     "9": "subrogation"
   },
   "test_metrics": {
-    "accuracy": 0.6954,
-    "f1_macro": 0.6864,
-    "f1_weighted": 0.6855,
-    "precision_macro": 0.7266,
-    "recall_macro": 0.6964
+    "accuracy": 1.0,
+    "f1_macro": 1.0,
+    "f1_weighted": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0
   },
-  "artifact_path": "C:\\Users\\DELL\\.gemini\\antigravity-ide\\scratch\\clauseguard-ai\\ml\\artifacts\\insurance_policy\\bert_clause_type_nocontext\\final"
+  "artifact_path": "C:\\Users\\DELL\\Downloads\\clauseguard-ai\\ml\\artifacts\\insurance_policy\\bert_clause_type_nocontext\\final"
 }

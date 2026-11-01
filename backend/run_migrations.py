@@ -66,13 +66,49 @@ try:
         """))
         print("Sessions table ready.")
 
+        conn.execute(text("""
+        CREATE TABLE IF NOT EXISTS integrity_findings (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+            category VARCHAR(64) NOT NULL,
+            severity VARCHAR(16) NOT NULL DEFAULT 'medium',
+            confidence DOUBLE PRECISION NOT NULL DEFAULT 1.0,
+            detection_method VARCHAR(64) NOT NULL,
+            page_number INTEGER,
+            bbox JSONB,
+            explanation TEXT NOT NULL,
+            evidence_snippet TEXT,
+            review_status VARCHAR(32) NOT NULL DEFAULT 'Flagged for Review',
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        );
+        """))
+        print("Integrity findings table ready.")
+
         cols_to_add = [
+            "ALTER TABLE documents ADD COLUMN IF NOT EXISTS parties_metadata JSONB;",
+            "ALTER TABLE clauses ADD COLUMN IF NOT EXISTS page_number INTEGER;",
             "ALTER TABLE chat_messages ADD COLUMN IF NOT EXISTS document_id UUID REFERENCES documents(id) ON DELETE SET NULL;",
             "ALTER TABLE chat_messages ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES users(id) ON DELETE CASCADE;",
             "ALTER TABLE chat_messages ADD COLUMN IF NOT EXISTS confidence DOUBLE PRECISION;",
             "ALTER TABLE chat_messages ADD COLUMN IF NOT EXISTS sources JSONB DEFAULT '[]'::jsonb;",
             "ALTER TABLE chat_messages ALTER COLUMN session_id DROP NOT NULL;",
-            "ALTER TABLE chat_messages ALTER COLUMN role TYPE VARCHAR(20);"
+            "ALTER TABLE chat_messages ALTER COLUMN role TYPE VARCHAR(20);",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS obligation_title VARCHAR(256);",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS responsible_party VARCHAR(128);",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS required_action TEXT;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS trigger_event VARCHAR(256);",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS trigger_date DATE;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS duration_count INTEGER;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS duration_unit VARCHAR(32);",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS day_count_convention VARCHAR(32);",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS recurrence VARCHAR(64);",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS conditions TEXT;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS page_number INTEGER;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS start_offset INTEGER;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS end_offset INTEGER;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS status VARCHAR(32) DEFAULT 'RESOLVED_EXPLICIT';",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS review_reason TEXT;",
+            "ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS calculation_note TEXT;"
         ]
         for q in cols_to_add:
             try:

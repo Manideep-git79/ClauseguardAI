@@ -31,7 +31,7 @@ export function Dropzone({ file, onFileSelect, onClearFile, error }) {
   return (
     <div className="space-y-3">
       <label className="block text-xs font-mono uppercase tracking-wider text-neutral-600 font-semibold">
-        2. Upload Document File <span className="text-neutral-500">(.pdf, .docx, .txt — Max 20MB)</span>
+        2. Upload Document File <span className="text-neutral-500">(.pdf, .docx, .txt, .png, .jpg — Max 20MB)</span>
       </label>
 
       {!file ? (
@@ -51,7 +51,7 @@ export function Dropzone({ file, onFileSelect, onClearFile, error }) {
           <input
             ref={inputRef}
             type="file"
-            accept=".pdf,.docx,.txt"
+            accept=".pdf,.docx,.txt,.png,.jpg,.jpeg"
             onChange={handleFileChange}
             className="hidden"
           />
@@ -65,7 +65,7 @@ export function Dropzone({ file, onFileSelect, onClearFile, error }) {
             or click to browse your computer
           </p>
           <span className="inline-block text-[11px] font-mono text-neutral-600 border border-neutral-300 bg-white px-3 py-1">
-            DIGITAL OR SCANNED PDF • WORD DOCX • PLAIN TXT
+            DIGITAL OR SCANNED PDF • WORD DOCX • PLAIN TXT • IMAGES (PNG, JPG)
           </span>
 
           {error && (

@@ -37,8 +37,14 @@ def detect_missing_clauses(
 
     confident_types = set()
     for clause in classified_clauses:
-        c_type = clause.get("clause_type")
-        c_conf = clause.get("clause_type_confidence", 1.0)
+        if isinstance(clause, str):
+            c_type = clause
+            c_conf = 1.0
+        elif isinstance(clause, dict):
+            c_type = clause.get("clause_type")
+            c_conf = clause.get("clause_type_confidence", 1.0)
+        else:
+            continue
         if c_type and c_conf >= confidence_threshold:
             confident_types.add(c_type)
 

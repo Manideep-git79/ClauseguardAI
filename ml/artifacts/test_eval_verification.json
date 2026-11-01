@@ -1,0 +1,368 @@
+{
+  "rental_agreement": {
+    "clause_type": {
+      "baseline_tfidf_lr": {
+        "metrics": {
+          "accuracy": 0.9762,
+          "f1_macro": 0.9764,
+          "f1_weighted": 0.9761,
+          "precision_macro": 0.977,
+          "recall_macro": 0.9765
+        },
+        "latency_sec_per_sample": 5e-05,
+        "config": {
+          "ngram_range": [
+            1,
+            2
+          ],
+          "max_features": 2000,
+          "actual_vocab_size": 2000,
+          "sublinear_tf": true,
+          "C": 10.0,
+          "max_iter": 2000,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "solver": "lbfgs"
+        }
+      },
+      "bert_no_context": {
+        "metrics": {
+          "accuracy": 0.8988,
+          "f1_macro": 0.8944,
+          "f1_weighted": 0.8935,
+          "precision_macro": 0.8997,
+          "recall_macro": 0.9001
+        },
+        "latency_sec_per_sample": 0.024479,
+        "recorded_meta_metrics": {
+          "accuracy": 0.8988,
+          "f1_macro": 0.8944,
+          "f1_weighted": 0.8935,
+          "precision_macro": 0.8997,
+          "recall_macro": 0.9001
+        }
+      },
+      "bert_windowed": {
+        "metrics": {
+          "accuracy": 0.5417,
+          "f1_macro": 0.4897,
+          "f1_weighted": 0.4885,
+          "precision_macro": 0.5507,
+          "recall_macro": 0.5423
+        },
+        "latency_sec_per_sample": 0.025077,
+        "recorded_meta_metrics": {
+          "accuracy": 0.5417,
+          "f1_macro": 0.4897,
+          "f1_weighted": 0.4885,
+          "precision_macro": 0.5507,
+          "recall_macro": 0.5423
+        }
+      }
+    },
+    "favorability": {
+      "baseline_tfidf_lr": {
+        "metrics": {
+          "accuracy": 0.9663,
+          "f1_macro": 0.9654,
+          "f1_weighted": 0.9663,
+          "precision_macro": 0.9655,
+          "recall_macro": 0.9657
+        },
+        "latency_sec_per_sample": 5.8e-05,
+        "config": {
+          "ngram_range": [
+            1,
+            2
+          ],
+          "max_features": 2000,
+          "actual_vocab_size": 2000,
+          "sublinear_tf": true,
+          "C": 10.0,
+          "max_iter": 2000,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "solver": "lbfgs"
+        }
+      },
+      "bert_no_context": {
+        "metrics": {
+          "accuracy": 0.7758,
+          "f1_macro": 0.7713,
+          "f1_weighted": 0.777,
+          "precision_macro": 0.7864,
+          "recall_macro": 0.7777
+        },
+        "latency_sec_per_sample": 0.025025,
+        "recorded_meta_metrics": {
+          "accuracy": 0.7758,
+          "f1_macro": 0.7713,
+          "f1_weighted": 0.777,
+          "precision_macro": 0.7864,
+          "recall_macro": 0.7777
+        }
+      },
+      "bert_windowed": {
+        "metrics": {
+          "accuracy": 0.5615,
+          "f1_macro": 0.5546,
+          "f1_weighted": 0.5508,
+          "precision_macro": 0.623,
+          "recall_macro": 0.5881
+        },
+        "latency_sec_per_sample": 0.024997,
+        "recorded_meta_metrics": {
+          "accuracy": 0.5615,
+          "f1_macro": 0.5546,
+          "f1_weighted": 0.5508,
+          "precision_macro": 0.623,
+          "recall_macro": 0.5881
+        }
+      }
+    }
+  },
+  "job_offer_letter": {
+    "clause_type": {
+      "baseline_tfidf_lr": {
+        "metrics": {
+          "accuracy": 0.986,
+          "f1_macro": 0.9859,
+          "f1_weighted": 0.986,
+          "precision_macro": 0.9865,
+          "recall_macro": 0.986
+        },
+        "latency_sec_per_sample": 5.5e-05,
+        "config": {
+          "ngram_range": [
+            1,
+            2
+          ],
+          "max_features": 2000,
+          "actual_vocab_size": 2000,
+          "sublinear_tf": true,
+          "C": 10.0,
+          "max_iter": 2000,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "solver": "lbfgs"
+        }
+      },
+      "bert_no_context": {
+        "metrics": {
+          "accuracy": 0.8677,
+          "f1_macro": 0.8688,
+          "f1_weighted": 0.8691,
+          "precision_macro": 0.8776,
+          "recall_macro": 0.8677
+        },
+        "latency_sec_per_sample": 0.025014,
+        "recorded_meta_metrics": {
+          "accuracy": 0.8677,
+          "f1_macro": 0.8688,
+          "f1_weighted": 0.8691,
+          "precision_macro": 0.8776,
+          "recall_macro": 0.8677
+        }
+      },
+      "bert_windowed": {
+        "metrics": {
+          "accuracy": 0.7796,
+          "f1_macro": 0.7841,
+          "f1_weighted": 0.7843,
+          "precision_macro": 0.8071,
+          "recall_macro": 0.7794
+        },
+        "latency_sec_per_sample": 0.024067,
+        "recorded_meta_metrics": {
+          "accuracy": 0.7796,
+          "f1_macro": 0.7841,
+          "f1_weighted": 0.7843,
+          "precision_macro": 0.8071,
+          "recall_macro": 0.7794
+        }
+      }
+    },
+    "favorability": {
+      "baseline_tfidf_lr": {
+        "metrics": {
+          "accuracy": 0.99,
+          "f1_macro": 0.9895,
+          "f1_weighted": 0.99,
+          "precision_macro": 0.9893,
+          "recall_macro": 0.9897
+        },
+        "latency_sec_per_sample": 6.1e-05,
+        "config": {
+          "ngram_range": [
+            1,
+            2
+          ],
+          "max_features": 2000,
+          "actual_vocab_size": 2000,
+          "sublinear_tf": true,
+          "C": 10.0,
+          "max_iter": 2000,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "solver": "lbfgs"
+        }
+      },
+      "bert_no_context": {
+        "metrics": {
+          "accuracy": 0.7956,
+          "f1_macro": 0.797,
+          "f1_weighted": 0.793,
+          "precision_macro": 0.8,
+          "recall_macro": 0.7971
+        },
+        "latency_sec_per_sample": 0.024233,
+        "recorded_meta_metrics": {
+          "accuracy": 0.7956,
+          "f1_macro": 0.797,
+          "f1_weighted": 0.793,
+          "precision_macro": 0.8,
+          "recall_macro": 0.7971
+        }
+      },
+      "bert_windowed": {
+        "metrics": {
+          "accuracy": 0.6894,
+          "f1_macro": 0.7016,
+          "f1_weighted": 0.6953,
+          "precision_macro": 0.7458,
+          "recall_macro": 0.704
+        },
+        "latency_sec_per_sample": 0.024347,
+        "recorded_meta_metrics": {
+          "accuracy": 0.6894,
+          "f1_macro": 0.7016,
+          "f1_weighted": 0.6953,
+          "precision_macro": 0.7458,
+          "recall_macro": 0.704
+        }
+      }
+    }
+  },
+  "insurance_policy": {
+    "clause_type": {
+      "baseline_tfidf_lr": {
+        "metrics": {
+          "accuracy": 0.9299,
+          "f1_macro": 0.931,
+          "f1_weighted": 0.9312,
+          "precision_macro": 0.9367,
+          "recall_macro": 0.9299
+        },
+        "latency_sec_per_sample": 9.3e-05,
+        "config": {
+          "ngram_range": [
+            1,
+            2
+          ],
+          "max_features": 2000,
+          "actual_vocab_size": 2000,
+          "sublinear_tf": true,
+          "C": 10.0,
+          "max_iter": 2000,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "solver": "lbfgs"
+        }
+      },
+      "bert_no_context": {
+        "metrics": {
+          "accuracy": 0.6954,
+          "f1_macro": 0.6864,
+          "f1_weighted": 0.6855,
+          "precision_macro": 0.7266,
+          "recall_macro": 0.6964
+        },
+        "latency_sec_per_sample": 0.024345,
+        "recorded_meta_metrics": {
+          "accuracy": 0.6954,
+          "f1_macro": 0.6864,
+          "f1_weighted": 0.6855,
+          "precision_macro": 0.7266,
+          "recall_macro": 0.6964
+        }
+      },
+      "bert_windowed": {
+        "metrics": {
+          "accuracy": 0.3968,
+          "f1_macro": 0.3587,
+          "f1_weighted": 0.3583,
+          "precision_macro": 0.4912,
+          "recall_macro": 0.3986
+        },
+        "latency_sec_per_sample": 0.024297,
+        "recorded_meta_metrics": {
+          "accuracy": 0.3968,
+          "f1_macro": 0.3587,
+          "f1_weighted": 0.3583,
+          "precision_macro": 0.4912,
+          "recall_macro": 0.3986
+        }
+      }
+    },
+    "favorability": {
+      "baseline_tfidf_lr": {
+        "metrics": {
+          "accuracy": 0.8697,
+          "f1_macro": 0.8701,
+          "f1_weighted": 0.8694,
+          "precision_macro": 0.8725,
+          "recall_macro": 0.8686
+        },
+        "latency_sec_per_sample": 9.6e-05,
+        "config": {
+          "ngram_range": [
+            1,
+            2
+          ],
+          "max_features": 2000,
+          "actual_vocab_size": 2000,
+          "sublinear_tf": true,
+          "C": 10.0,
+          "max_iter": 2000,
+          "class_weight": "balanced",
+          "random_state": 42,
+          "solver": "lbfgs"
+        }
+      },
+      "bert_no_context": {
+        "metrics": {
+          "accuracy": 0.7615,
+          "f1_macro": 0.7535,
+          "f1_weighted": 0.7633,
+          "precision_macro": 0.7734,
+          "recall_macro": 0.7508
+        },
+        "latency_sec_per_sample": 0.024347,
+        "recorded_meta_metrics": {
+          "accuracy": 0.7615,
+          "f1_macro": 0.7535,
+          "f1_weighted": 0.7633,
+          "precision_macro": 0.7734,
+          "recall_macro": 0.7508
+        }
+      },
+      "bert_windowed": {
+        "metrics": {
+          "accuracy": 0.5812,
+          "f1_macro": 0.5656,
+          "f1_weighted": 0.581,
+          "precision_macro": 0.5684,
+          "recall_macro": 0.5717
+        },
+        "latency_sec_per_sample": 0.024819,
+        "recorded_meta_metrics": {
+          "accuracy": 0.5812,
+          "f1_macro": 0.5656,
+          "f1_weighted": 0.581,
+          "precision_macro": 0.5684,
+          "recall_macro": 0.5717
+        }
+      }
+    }
+  }
+}
