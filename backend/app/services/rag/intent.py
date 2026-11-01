@@ -269,6 +269,51 @@ def classify_query_intent(query_text: str) -> QueryIntent:
             },
         )
 
+    # 4b. RECOMMENDATION_QUERY: Suggestions, recommendations, negotiation advice, and actionable guidance
+    # e.g. "any suggestions", "any suggestions?", "suggestions", "what should I do", "recommendations",
+    # "any advice", "how should I negotiate", "what to negotiate", "what to watch out for"
+    recommendation_patterns = [
+        r"\b(?:any\s+)?suggestions?\b",
+        r"\b(?:any\s+)?recommendations?\b",
+        r"\b(?:any\s+)?advice\b",
+        r"\bwhat\s+(?:should|can)\s+i\s+(?:do|negotiate|change|ask|watch\s+out\s+for|look\s+out\s+for|be\s+careful\s+of)\b",
+        r"\bhow\s+(?:can|should)\s+i\s+(?:negotiate|improve|protect\s+myself|respond)\b",
+        r"\bwhat\s+to\s+negotiate\b",
+        r"\bnegotiation\s+(?:tips|points|strategy|suggestions|recommendations)\b",
+        r"\bkey\s+(?:takeaways?|recommendations?|suggestions?)\b",
+        r"\bactionable\s+(?:tips|advice|steps)\b",
+        r"\bnext\s+steps?\b",
+        r"^suggestions?\??$",
+        r"^any\s+suggestions?\??$",
+        r"^recommendations?\??$",
+        r"^any\s+recommendations?\??$",
+        r"^advice\??$",
+        r"^what\s+should\s+i\s+do\??$",
+        r"^what\s+to\s+do\??$",
+    ]
+    if any(re.search(pat, q_lower) for pat in recommendation_patterns):
+        return QueryIntent(
+            intent="RECOMMENDATION_QUERY",
+            confidence=0.96,
+            raw_query=raw_query,
+            normalized_query=norm,
+            requires_risk_summary=True,
+            requires_unfavorable_clauses=True,
+            target_clause_types=[
+                "indemnity", "limitation_of_liability", "termination_notice",
+                "remedies", "non_compete", "penalty", "dispute_resolution", "deposit_refund"
+            ],
+            expansion_terms=[
+                "negotiate", "unfavorable", "risk", "protection", "counter-proposal",
+                "termination", "liability", "penalty", "amendment", "cure period"
+            ],
+            metadata={
+                "source_rule": "recommendation_pattern_match",
+                "negation_detected": negation_detected,
+                "negated_conditions": negated_conditions,
+            },
+        )
+
     # 5. TERMINATION_QUERY: Legally distinct actions
     # NEVER treat resignation, dismissal, lease surrender, and general termination as interchangeable!
 

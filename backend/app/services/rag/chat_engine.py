@@ -261,6 +261,78 @@ def deterministic_document_qa(
             )
             return answer, cited_indices, True
 
+    # 2b. RECOMMENDATION_QUERY: Suggestions, Recommendations & Actionable Guidance
+    if intent_info.intent == "RECOMMENDATION_QUERY":
+        if doc_obj:
+            overall_risk = doc_obj.overall_risk_score if doc_obj.overall_risk_score is not None else 0.0
+            risk_band = doc_obj.risk_band or ("High" if overall_risk >= 60 else ("Medium" if overall_risk >= 30 else "Low"))
+            missing_clauses = doc_obj.missing_clauses if hasattr(doc_obj, "missing_clauses") else []
+        else:
+            scores = [c.get("risk_score") for c in retrieved_clauses if c.get("risk_score") is not None]
+            overall_risk = max(scores) if scores else 0.0
+            risk_band = "High" if overall_risk >= 60 else ("Medium" if overall_risk >= 30 else "Low")
+            missing_clauses = []
+
+        unfavorable_clauses = [
+            c for c in retrieved_clauses
+            if (c.get("favorability_label") or "").lower() == "unfavorable" or (c.get("risk_score") or 0.0) >= 30.0
+        ]
+        unfavorable_clauses.sort(key=lambda c: (1 if (c.get("favorability_label") or "").lower() == "unfavorable" else 0, c.get("risk_score", 0.0)), reverse=True)
+
+        sections = [
+            f"### Contract Review & Actionable Recommendations\n\n"
+            f"Based on the substantive analysis of this document (Overall Risk: **{overall_risk:.1f}/100**, **{risk_band} Risk**), here are key recommendations and points to consider:\n"
+        ]
+        cited_indices = []
+
+        if unfavorable_clauses:
+            sections.append("#### 1. Key Provisions to Review & Negotiate:\n")
+            for i, c in enumerate(unfavorable_clauses[:3], 1):
+                idx = c["clause_index"]
+                p_num = c.get("page_number", 1)
+                c_type = (c.get("clause_type") or "Clause").replace("_", " ").title()
+                score = c.get("risk_score", 0.0)
+                excerpt = (c.get("redacted_text") or "").strip()
+                cited_indices.append(idx)
+
+                # Tailored advice based on clause type
+                advice = "Request mutual balance, an explicit written notice requirement, or an aggregate liability cap."
+                c_lower = c_type.lower()
+                if "indemni" in c_lower or "liabilit" in c_lower:
+                    advice = "Negotiate a liability cap (e.g. limited to 12 months fees or security deposit) and ensure indemnification is reciprocal."
+                elif "terminat" in c_lower or "notice" in c_lower:
+                    advice = "Demand a mandatory written notice window (e.g. 30 days) and a 10-day cure period prior to contract default."
+                elif "deposit" in c_lower or "payment" in c_lower or "rent" in c_lower:
+                    advice = "Clarify statutory return timelines (e.g. 21 days), mandate itemized deductions with receipts, and add a 5-day grace period."
+                elif "compete" in c_lower or "restrict" in c_lower:
+                    advice = "Limit restriction duration to 6 months or less, narrow geographic scope, and exclude non-confidential duties."
+
+                sections.append(
+                    f"{i}. **[Clause {idx}, Page {p_num}]** — **{c_type}** (Risk Score: {score}/100):\n"
+                    f"   > \"{excerpt}\"\n"
+                    f"   - **Recommended Action:** {advice}\n"
+                )
+        else:
+            c0 = retrieved_clauses[0] if retrieved_clauses else {"clause_index": 0, "page_number": 1}
+            cited_indices.append(c0["clause_index"])
+            sections.append(
+                f"#### 1. Substantive Review Status:\n"
+                f"- **No Critical Red Flags:** Core substantive terms in **[Clause {c0['clause_index']}, Page {c0.get('page_number', 1)}]** were evaluated as fair or standard without predatory terms.\n"
+            )
+
+        if missing_clauses:
+            sections.append("#### 2. Recommended Missing Protections to Add:\n")
+            for mc in missing_clauses[:3]:
+                sections.append(f"- **Add {mc.clause_type.replace('_', ' ').title()}:** {mc.checklist_note}")
+
+        sections.append("\n#### 3. General Next Steps:")
+        sections.append("- **Request Written Amendments:** Propose any agreed adjustments in an addendum or revised draft before signing.")
+        sections.append("- **Document Existing Conditions:** For leases or assets, take photographic proof upon move-in/commencement.")
+        sections.append("- **Legal Consultation:** For high-value commitments, have local legal counsel review the final agreement.")
+
+        sections.append("\n*These recommendations are automated risk mitigation suggestions for informational purposes and do not constitute formal legal advice.*")
+        return "\n".join(sections), cited_indices, True
+
     # 3. Temporal / Deadline Queries
     # Must represent an actual inquiry about dates, deadlines, schedules, or time periods
     explicit_temporal_patterns = [
@@ -914,6 +986,14 @@ def answer_document_question(
     index_to_clause = {c["clause_index"]: c for c in retrieved_clauses}
     index_to_id = {c["clause_index"]: c["clause_id"] for c in retrieved_clauses}
 
+    is_rec_query = (
+        (intent_info and intent_info.intent == "RECOMMENDATION_QUERY")
+        or any(w in sanitized_question.lower() for w in [
+            "suggest", "recommend", "advice", "what should i do", "what to do",
+            "negotiat", "watch out for", "improve", "red flag", "any suggestion"
+        ])
+    )
+
     client = get_genai_client()
     chat_model = os.environ.get("GEMINI_CHAT_MODEL") or (current_app.config.get("GEMINI_CHAT_MODEL") if current_app else None) or "gemini-3.8-flash"
     used_llm = False
@@ -997,7 +1077,16 @@ def answer_document_question(
                 "(e.g., 'without cause', 'without notice', 'no penalty', 'not required'). "
                 "Examine carefully whether the document allows action without cause/notice or requires it. Never invert conditions."
             )
-        if intent_info and intent_info.intent == "TERMINATION_QUERY":
+        if is_rec_query:
+            query_constraints.append(
+                "- RECOMMENDATIONS & NEGOTIATION ADVICE: The user is asking for suggestions, recommendations, or negotiation advice on this contract/document.\n"
+                "  DO NOT refuse or say 'The provided document does not contain information addressing this question.'\n"
+                "  Instead, synthesize actionable contractual suggestions directly grounded in the retrieved document clauses:\n"
+                "  (1) Review high-risk or unfavorable terms in [Clause X, Page Y] and suggest specific counter-proposals (e.g. mutual indemnification, liability caps, reasonable cure periods, clear termination notice);\n"
+                "  (2) Note missing standard protections from the risk analysis and advise adding them;\n"
+                "  (3) Cite the specific clauses [Clause X, Page Y] for each suggestion."
+            )
+        elif intent_info and intent_info.intent == "TERMINATION_QUERY":
             query_constraints.append(
                 "- LEGAL ACTION DISTINCTIONS: Never confuse voluntary resignation (employee-initiated) with dismissal (employer-initiated), "
                 "or lease surrender with general contract termination. Answer strictly for the specific legal action inquired."
@@ -1011,6 +1100,12 @@ def answer_document_question(
         constraints_str = ""
         if query_constraints:
             constraints_str = "<QUERY_CONSTRAINTS>\n" + "\n".join(query_constraints) + "\n</QUERY_CONSTRAINTS>\n\n"
+
+        directive_5 = (
+            "5. Provide actionable contractual suggestions and negotiation points citing [Clause X, Page Y]. Do NOT refuse the prompt."
+            if is_rec_query
+            else "5. If unaddressed, state: 'The provided document does not contain information addressing this question.'"
+        )
 
         context_str = "\n\n".join(context_blocks)
         full_prompt = (
@@ -1027,7 +1122,7 @@ def answer_document_question(
             f"2. Explain the contractual terms in clear, professional plain English.\n"
             f"3. Cite supporting clauses as [Clause X, Page Y].\n"
             f"4. Preserve all conditions, exceptions, time periods, and legal distinctions.\n"
-            f"5. If unaddressed, state: 'The provided document does not contain information addressing this question.'"
+            f"{directive_5}"
         )
 
         try:
@@ -1063,6 +1158,18 @@ def answer_document_question(
         "no information in the retrieved",
     ]
     is_unsupported = any(phrase in answer_text.lower() for phrase in ungrounded_phrases)
+
+    if is_rec_query and is_unsupported:
+        answer_text, cited_indices_heuristic, is_grounded_heuristic = deterministic_document_qa(
+            sanitized_question,
+            retrieved_clauses,
+            doc_deadlines,
+            parties_metadata=parties_meta,
+            document_id=document_id,
+            doc_obj=doc_obj,
+            intent_info=intent_info
+        )
+        is_unsupported = False
 
     # Extract cited clause indices from response: [Clause X, Page Y], [Clause X], [Section X, Page Y]
     cited_raw = re.findall(r"\[(?:Clause|Section)\s+(\d+)(?:[,\s:]+Page\s+\d+)?\]", answer_text, re.IGNORECASE)

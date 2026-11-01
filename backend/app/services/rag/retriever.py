@@ -278,7 +278,7 @@ def retrieve_relevant_clauses(
     # -------------------------------------------------------------
     structured_ranked_ids = []
 
-    if intent == "DOCUMENT_RISK_SUMMARY":
+    if intent in ("DOCUMENT_RISK_SUMMARY", "RECOMMENDATION_QUERY"):
         # Prioritize clauses with high risk score, unfavorable label, and key risk types
         risk_sorted = sorted(
             all_candidate_clauses,
@@ -335,7 +335,7 @@ def retrieve_relevant_clauses(
         k_rrf = float(rrf_weights.get("k_rrf", 60.0))
     elif not has_valid_vector:
         # Rebalance weights when vector retrieval is unavailable: emphasize BM25 and structured signals
-        if intent in ("DOCUMENT_RISK_SUMMARY", "UNFAVORABLE_CLAUSE_QUERY"):
+        if intent in ("DOCUMENT_RISK_SUMMARY", "UNFAVORABLE_CLAUSE_QUERY", "RECOMMENDATION_QUERY"):
             w_vec = 0.0
             w_bm25 = 1.5
             w_struct = 2.5
@@ -347,7 +347,7 @@ def retrieve_relevant_clauses(
             w_vec = 0.0
             w_bm25 = 2.0
             w_struct = 1.0
-    elif intent in ("DOCUMENT_RISK_SUMMARY", "UNFAVORABLE_CLAUSE_QUERY"):
+    elif intent in ("DOCUMENT_RISK_SUMMARY", "UNFAVORABLE_CLAUSE_QUERY", "RECOMMENDATION_QUERY"):
         w_vec = 1.0
         w_bm25 = 1.2
         w_struct = 2.5
