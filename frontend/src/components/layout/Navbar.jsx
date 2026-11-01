@@ -63,7 +63,7 @@ export function Navbar({ currentView, onNavigate }) {
             }`}
           >
             <Bot className="w-3.5 h-3.5 text-black" />
-            <span>Deciva AI</span>
+            <span>AI Chat</span>
           </button>
 
           <button

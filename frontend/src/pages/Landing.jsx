@@ -126,7 +126,7 @@ export function Landing({ onNavigate }) {
           </div>
           <div>
             <span className="text-[10px] text-neutral-500 block uppercase font-semibold">RAG Engine</span>
-            <span className="text-black font-medium">Deciva AI Assistant</span>
+            <span className="text-black font-medium">ClauseGuard AI Assistant</span>
           </div>
         </div>
       </section>

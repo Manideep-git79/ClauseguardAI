@@ -151,7 +151,7 @@ export const ChatTab = ({ documentId }) => {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 600, fontSize: "15px", color: "#000000" }}>
           <span style={{ height: "8px", width: "8px", borderRadius: "50%", background: "#000000" }} />
-          Deciva
+          ClauseGuard AI
         </div>
         <span
           style={{
@@ -164,7 +164,7 @@ export const ChatTab = ({ documentId }) => {
             fontWeight: 500,
           }}
         >
-          Deciva AI
+          Grounded RAG Assistant
         </span>
       </div>
 
@@ -216,7 +216,7 @@ export const ChatTab = ({ documentId }) => {
         {messages.length === 0 ? (
           <div style={{ margin: "auto", textAlign: "center", color: "#71717a" }}>
             <div style={{ fontSize: "32px", marginBottom: "8px" }}>⚖️</div>
-            <div style={{ fontWeight: 600, color: "#000000", fontSize: "16px" }}>I am Deciva. How can I assist you today?</div>
+            <div style={{ fontWeight: 600, color: "#000000", fontSize: "16px" }}>I am ClauseGuard AI. How can I assist you today?</div>
             <div style={{ fontSize: "13px", color: "#71717a", marginTop: "4px" }}>Ask any question or click a suggestion chip above.</div>
           </div>
         ) : (
@@ -332,7 +332,7 @@ export const ChatTab = ({ documentId }) => {
       >
         <input
           type="text"
-          placeholder="Ask Deciva about this document…"
+          placeholder="Ask ClauseGuard AI about this document…"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}

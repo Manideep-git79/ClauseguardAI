@@ -29,10 +29,13 @@ export function ClauseCard({ clause, displayIndex, isSelected, onSelect }) {
 
   return (
     <div
+      id={`clause-${clause.clause_index}`}
+      data-clause-index={clause.clause_index}
+      data-clause-id={clause.id}
       onClick={onSelect}
       className={`border p-5 transition-all cursor-pointer shadow-sm ${
         isSelected
-          ? "border-black bg-neutral-100"
+          ? "border-black bg-neutral-100 ring-2 ring-black"
           : "border-neutral-200 bg-white hover:border-neutral-400"
       }`}
     >

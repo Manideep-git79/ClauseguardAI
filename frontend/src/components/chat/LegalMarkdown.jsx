@@ -85,11 +85,71 @@ function sanitizeLegalMarkdown(rawText) {
 
 function cleanVisibleAsterisks(val) {
   if (typeof val !== "string") return val;
-  const noAsterisks = val.replace(/\*{1,3}/g, "");
-  return renderRiskBadge(noAsterisks);
+  return val.replace(/\*{1,3}/g, "");
 }
 
-export function LegalMarkdown({ content = "", className = "" }) {
+function renderClausePillsAndBadges(text, onSelectClause) {
+  if (typeof text !== "string") return text;
+
+  const clausePattern = /\[(?:Clause|Section)\s+(\d+)(?:[,\s:]+Page\s+(\d+))?\]/gi;
+  if (!clausePattern.test(text)) {
+    return renderRiskBadge(cleanVisibleAsterisks(text));
+  }
+
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+  const regex = /\[(?:Clause|Section)\s+(\d+)(?:[,\s:]+Page\s+(\d+))?\]/gi;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      const preceding = text.substring(lastIndex, match.index);
+      parts.push(renderRiskBadge(cleanVisibleAsterisks(preceding)));
+    }
+
+    const matchedStr = match[0];
+    const clauseIdx = match[1];
+    const pageNum = match[2];
+
+    parts.push(
+      <button
+        key={`pill-${match.index}-${clauseIdx}`}
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const idx = parseInt(clauseIdx, 10);
+          const target =
+            document.getElementById(`clause-${idx}`) ||
+            document.querySelector(`[data-clause-index="${idx}"]`);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "center" });
+            target.classList.add("ring-4", "ring-black", "bg-amber-50");
+            setTimeout(() => {
+              target.classList.remove("ring-4", "ring-black", "bg-amber-50");
+            }, 2500);
+          }
+          if (onSelectClause) onSelectClause(idx);
+        }}
+        className="inline-flex items-center gap-1 mx-1 px-2.5 py-0.5 text-xs font-mono font-semibold rounded-full border border-neutral-300 bg-neutral-100 hover:bg-black hover:text-white text-neutral-900 transition-all cursor-pointer shadow-sm align-baseline"
+        title={`View Clause ${clauseIdx}${pageNum ? ` (Page ${pageNum})` : ""} in document viewer`}
+      >
+        <span className="text-[10px] opacity-70">§</span>
+        <span>Clause {clauseIdx}{pageNum ? `, P.${pageNum}` : ""}</span>
+      </button>
+    );
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    const trailing = text.substring(lastIndex);
+    parts.push(renderRiskBadge(cleanVisibleAsterisks(trailing)));
+  }
+
+  return parts;
+}
+
+export function LegalMarkdown({ content = "", className = "", onSelectClause }) {
   if (!content) return null;
 
   try {
@@ -137,7 +197,7 @@ export function LegalMarkdown({ content = "", className = "" }) {
           p: ({ node, children, ...props }) => (
             <p className="mb-3 last:mb-0 text-sm sm:text-base leading-relaxed text-neutral-800" {...props}>
               {React.Children.map(children, (child) =>
-                typeof child === "string" ? cleanVisibleAsterisks(child) : child
+                typeof child === "string" ? renderClausePillsAndBadges(child, onSelectClause) : child
               )}
             </p>
           ),
@@ -169,7 +229,7 @@ export function LegalMarkdown({ content = "", className = "" }) {
           li: ({ node, children, ...props }) => (
             <li className="leading-relaxed pl-1" {...props}>
               {React.Children.map(children, (child) =>
-                typeof child === "string" ? cleanVisibleAsterisks(child) : child
+                typeof child === "string" ? renderClausePillsAndBadges(child, onSelectClause) : child
               )}
             </li>
           ),

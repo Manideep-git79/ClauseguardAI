@@ -243,7 +243,7 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
           { key: "deadlines", label: `Deadlines (${deadlines.length})`, icon: Clock },
           { key: "integrity", label: "Integrity & Safety", icon: ShieldAlert },
           { key: "text", label: "Redacted Text", icon: ShieldCheck },
-          { key: "chat", label: "Deciva AI", icon: MessageSquare },
+          { key: "chat", label: "AI Chatbot", icon: MessageSquare },
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.key;
