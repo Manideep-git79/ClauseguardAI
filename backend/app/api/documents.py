@@ -144,7 +144,7 @@ def _check_and_update_watchdog(doc):
         uploaded = doc.uploaded_at
         if uploaded.tzinfo is None:
             uploaded = uploaded.replace(tzinfo=timezone.utc)
-        if (now - uploaded).total_seconds() > 300:
+        if (now - uploaded).total_seconds() > 600:
             doc.status = "failed"
             doc.processing_stage = "failed"
             doc.error_message = "Document processing timed out or server restarted. Please re-upload the document."

@@ -463,7 +463,8 @@ def extract_pdf_with_metadata(file_path: str) -> Tuple[str, int, List[Dict[str, 
                         w = base_image.get("width", 0)
                         h = base_image.get("height", 0)
                         area = w * h
-                        if w >= 150 and h >= 40 and area >= 8000:
+                        min_area = 8000 if len(clean_native.split()) < 60 else 60000
+                        if w >= 150 and h >= 40 and area >= min_area:
                             candidate_images.append((area, xref, base_image))
                     except Exception:
                         pass
