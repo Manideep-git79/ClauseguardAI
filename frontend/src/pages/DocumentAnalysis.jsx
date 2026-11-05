@@ -145,7 +145,7 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
   }
 
   const substantiveClauses = clauses.filter(
-    (c) => c.is_substantive !== false && c.content_type === "SUBSTANTIVE_CLAUSE"
+    (c) => c.is_substantive !== false && (c.content_type === "SUBSTANTIVE_CLAUSE" || c.content_type === "DEFINITION")
   );
   const excludedCount = clauses.length - substantiveClauses.length;
 
@@ -157,9 +157,16 @@ export function DocumentAnalysis({ documentId, onNavigate }) {
       (c.favorability_label || "").toLowerCase() !== "unfavorable" &&
       ((c.favorability_label || "").toLowerCase() === "needs_review" ||
         c.clause_type === "UNCERTAIN" ||
+        c.clause_type === "UNCLASSIFIED" ||
         c.human_review)
   ).length;
-  const fairCount = substantiveClauses.length - unfavorableCount - reviewCount;
+  const fairCount = substantiveClauses.filter(
+    (c) =>
+      (c.favorability_label || "").toLowerCase() === "fair" &&
+      !c.human_review &&
+      c.clause_type !== "UNCERTAIN" &&
+      c.clause_type !== "UNCLASSIFIED"
+  ).length;
 
   return (
     <div className="space-y-6 py-4">

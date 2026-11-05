@@ -1,116 +1,83 @@
 {
+  "_provenance": "Audited frozen benchmark on v2.1-clean-preprocessed (N=1,507 clauses across 3 domains), certified in ml/artifacts/final_audit/FINAL_REPRODUCIBILITY_AUDIT.md and phase3/phase3_results.json. Placeholder 1.0 metrics replaced in Phase 3.",
+  "benchmark_summary": {
+    "evaluation_set_size": 1507,
+    "clause_type_3_domain_mean_macro_f1": {
+      "baseline_tfidf_lr": 0.9257,
+      "distilbert": 0.8765,
+      "delta_vs_baseline": -0.0492
+    }
+  },
   "rental_agreement": {
     "clause_type": {
       "selected_model": "distilbert",
       "baseline_tfidf_lr": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
+        "f1_macro": 0.9533
       },
-      "delta_vs_baseline": 0.0,
       "distilbert": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
-      }
+        "f1_macro": 0.9140
+      },
+      "delta_vs_baseline": -0.0393
     },
     "favorability": {
       "selected_model": "distilbert",
       "baseline_tfidf_lr": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
+        "f1_macro": 0.4231,
+        "accuracy": 0.7333
       },
-      "delta_vs_baseline": 0.0,
       "distilbert": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
-      }
+        "f1_macro": 0.4641,
+        "accuracy": 0.7512
+      },
+      "delta_vs_baseline": 0.0410
     }
   },
   "job_offer_letter": {
     "clause_type": {
       "selected_model": "distilbert",
       "baseline_tfidf_lr": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
+        "f1_macro": 0.9417
       },
-      "delta_vs_baseline": 0.0,
       "distilbert": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
-      }
+        "f1_macro": 0.8636
+      },
+      "delta_vs_baseline": -0.0781
     },
     "favorability": {
       "selected_model": "distilbert",
       "baseline_tfidf_lr": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
+        "f1_macro": 0.3333,
+        "accuracy": 0.5000
       },
-      "delta_vs_baseline": 0.0,
       "distilbert": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
-      }
+        "f1_macro": 0.3333,
+        "accuracy": 0.5000
+      },
+      "delta_vs_baseline": 0.0
     }
   },
   "insurance_policy": {
     "clause_type": {
       "selected_model": "distilbert",
       "baseline_tfidf_lr": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
+        "f1_macro": 0.8821
       },
-      "delta_vs_baseline": 0.0,
       "distilbert": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
-      }
+        "f1_macro": 0.8520
+      },
+      "delta_vs_baseline": -0.0301
     },
     "favorability": {
       "selected_model": "distilbert",
       "baseline_tfidf_lr": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
+        "f1_macro": 0.2963,
+        "accuracy": 0.7273
       },
-      "delta_vs_baseline": 0.0,
       "distilbert": {
-        "accuracy": 1.0,
-        "f1_macro": 1.0,
-        "f1_weighted": 1.0,
-        "precision_macro": 1.0,
-        "recall_macro": 1.0
-      }
+        "f1_macro": 0.4762,
+        "accuracy": 0.7620
+      },
+      "delta_vs_baseline": 0.1799
     }
   }
 }

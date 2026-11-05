@@ -19,20 +19,24 @@ def get_models_dir() -> Path:
         return repo_artifacts
     return backend_models
 
+SUPPORTED_DOCUMENT_TYPES = {"rental_agreement", "job_offer_letter", "insurance_policy"}
+
+def is_supported_document_type(document_type: str | None) -> bool:
+    if not document_type or not isinstance(document_type, str):
+        return False
+    return document_type.strip().lower() in SUPPORTED_DOCUMENT_TYPES
+
 def get_baseline_model(document_type: str, task: str = "clause_type"):
+    if not is_supported_document_type(document_type):
+        logger.warning(f"Unsupported document type '{document_type}': baseline model unavailable")
+        return None
+
     key = f"{document_type}_{task}"
     if key in _models_cache:
         return _models_cache[key]
 
     ml_dir = get_models_dir() / document_type
     model_path = ml_dir / f"baseline_tfidf_lr_{task}.joblib"
-
-    if not model_path.exists():
-        fallback_dir = get_models_dir() / "rental_agreement"
-        if (fallback_dir / f"baseline_tfidf_lr_{task}.joblib").exists():
-            model_path = fallback_dir / f"baseline_tfidf_lr_{task}.joblib"
-        else:
-            model_path = ml_dir.parent / f"baseline_tfidf_lr.joblib"
 
     if not model_path.exists():
         logger.warning(f"Baseline model not found at {model_path}")
@@ -51,10 +55,14 @@ def predict_baseline(text: str, document_type: str, task: str = "clause_type") -
     Predicts clause_type or favorability using the TF-IDF + Logistic Regression baseline.
     Returns: (predicted_label, confidence_score)
     """
+    if not is_supported_document_type(document_type):
+        default_label = "UNCLASSIFIED" if task == "clause_type" else "needs_review"
+        return default_label, 0.0
+
     model = get_baseline_model(document_type, task)
     if model is None:
-        default_label = "other" if task == "clause_type" else "needs_review"
-        return default_label, 0.5
+        default_label = "UNCLASSIFIED" if task == "clause_type" else "needs_review"
+        return default_label, 0.0
 
     try:
         preds = model.predict([text])
@@ -67,5 +75,5 @@ def predict_baseline(text: str, document_type: str, task: str = "clause_type") -
         return pred_label, round(max_prob, 4)
     except Exception as e:
         logger.error(f"Error predicting with baseline: {e}")
-        default_label = "other" if task == "clause_type" else "needs_review"
-        return default_label, 0.5
+        default_label = "UNCLASSIFIED" if task == "clause_type" else "needs_review"
+        return default_label, 0.0

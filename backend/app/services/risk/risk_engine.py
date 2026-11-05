@@ -45,6 +45,8 @@ def normalize_clause_type(clause_type: str | None) -> str:
         return "NOT_APPLICABLE"
     if clean in ("uncertain", "unknown"):
         return "UNCERTAIN"
+    if clean in ("unclassified",):
+        return "UNCLASSIFIED"
     return clean
 
 def compute_clause_risk(
@@ -68,7 +70,7 @@ def compute_clause_risk(
         return 0.0
 
     norm_type = normalize_clause_type(clause_type)
-    if norm_type in ("NOT_APPLICABLE", "UNCERTAIN"):
+    if norm_type in ("NOT_APPLICABLE", "UNCERTAIN", "UNCLASSIFIED"):
         return 0.0
 
     if config is None:
@@ -138,7 +140,16 @@ def evaluate_clause_risk_and_review(
             "human_review": True,
             "classification": "UNCERTAIN",
             "favorability_label": "needs_review",
-            "review_reason": "Low classification confidence (<0.25): clause requires manual legal review.",
+            "review_reason": "Low classification confidence (<0.45): clause requires manual legal review.",
+        }
+
+    if norm_type == "UNCLASSIFIED":
+        return {
+            "risk_score": 0.0,
+            "human_review": True,
+            "classification": "UNCLASSIFIED",
+            "favorability_label": "needs_review",
+            "review_reason": "Unsupported contract type or unclassified clause: requires manual legal review.",
         }
 
     norm_fav = normalize_favorability(favorability_label)
@@ -146,17 +157,7 @@ def evaluate_clause_risk_and_review(
     is_unknown_type = norm_type not in cfg.get("clause_type_base_weight", {})
     is_unknown_fav = norm_fav == "unknown"
 
-    score = compute_clause_risk(
-        clause_type=norm_type,
-        favorability_label=norm_fav,
-        favorability_confidence=favorability_confidence,
-        prior_clause_type=prior_clause_type,
-        config=cfg,
-        content_type=content_type,
-        is_substantive=is_substantive,
-    )
-
-    # Human review conditions with explicit review reasons
+    # Human review conditions with explicit review reasons (DEF-301: symmetric confidence review)
     review_reason = None
     if is_unknown_type:
         needs_review = True
@@ -170,17 +171,41 @@ def evaluate_clause_risk_and_review(
         needs_review = True
         effective_fav = "needs_review"
         review_reason = "Model evaluated clause as requiring manual legal review."
+    elif norm_fav == "fair" and (favorability_confidence or 0.0) < 0.6:
+        needs_review = True
+        effective_fav = "needs_review"
+        review_reason = f"Low confidence fair prediction ({(favorability_confidence or 0.0):.2f} < 0.60): clause requires manual verification."
     elif norm_fav == "unfavorable" and (favorability_confidence or 0.0) < 0.6:
         needs_review = True
-        effective_fav = "unfavorable"
+        effective_fav = "needs_review"
         review_reason = f"Low confidence unfavorable prediction ({(favorability_confidence or 0.0):.2f} < 0.60): requires verification."
-    elif score >= 40.0:
-        needs_review = True
-        effective_fav = norm_fav
-        review_reason = f"Elevated clause risk score ({score}/100 >= 40.0 threshold): flagged for review."
     else:
-        needs_review = False
-        effective_fav = norm_fav
+        score_candidate = compute_clause_risk(
+            clause_type=norm_type,
+            favorability_label=norm_fav,
+            favorability_confidence=favorability_confidence,
+            prior_clause_type=prior_clause_type,
+            config=cfg,
+            content_type=content_type,
+            is_substantive=is_substantive,
+        )
+        if score_candidate >= 40.0:
+            needs_review = True
+            effective_fav = norm_fav
+            review_reason = f"Elevated clause risk score ({score_candidate}/100 >= 40.0 threshold): flagged for review."
+        else:
+            needs_review = False
+            effective_fav = norm_fav
+
+    score = compute_clause_risk(
+        clause_type=norm_type,
+        favorability_label=norm_fav,
+        favorability_confidence=favorability_confidence,
+        prior_clause_type=prior_clause_type,
+        config=cfg,
+        content_type=content_type,
+        is_substantive=is_substantive,
+    )
 
     return {
         "risk_score": score,

@@ -72,16 +72,56 @@ MIXED_HEADING_PATTERN = re.compile(
     r"^((?:(?:ARTICLE|SECTION|CLAUSE|PARAGRAPH)\s+[0-9IVXLCDM]+(?:\.[0-9]+)*[:.\s-]*|[0-9]+(?:\.[0-9]+)*[.)\s]\s*)?[A-Za-z0-9\s,\/\&'\-]{2,45}?)\s*([:\-—])\s+(.+)$"
 )
 
+SALUTATION_PREFIX_PATTERN = re.compile(
+    r"^(Dear\s+(?:Policyholder|Tenant|Employee|Associate|Sir|Madam|Mr\.|Ms\.|Mrs\.|Dr\.|Lessor|Lessee|Client|Customer|Colleague|[A-Za-z\s.\-]+?)|To\s+Whom\s+It\s+May\s+Concern|Greetings)\s*([,:]\s*)(.+)$",
+    re.IGNORECASE
+)
+
+PARTY_PREFIX_PATTERN = re.compile(
+    r"^(LANDLORD|TENANT|LESSOR|LESSEE|EMPLOYER|EMPLOYEE|BORROWER|LENDER|DISCLOSING\s+PARTY|RECEIVING\s+PARTY|BUYER|SELLER|CONTRACTOR|CLIENT|COMPANY|PARTY\s+[AB12])\s*([:\-—])\s+(.+)$",
+    re.IGNORECASE
+)
+
 
 def try_split_mixed_line(line_text: str) -> Optional[tuple]:
     """
-    Layer C: Detects if a single line contains both a heading prefix and an operative contractual clause.
-    Example: 'PAYMENT: The tenant shall pay rent on the first day of each month.'
+    Layer C: Detects if a single line contains both a heading/salutation/party prefix and an operative contractual clause.
+    Examples:
+      - 'PAYMENT: The tenant shall pay rent on the first day of each month.' -> ('PAYMENT', ':', 'The tenant shall pay...')
+      - 'Dear Marcus, the Company will pay you a starting annual base salary of $225,000.00.' -> ('Dear Marcus', ',', 'the Company will pay...')
+      - 'EMPLOYEE: Candidate shall maintain strict confidentiality regarding all proprietary systems.' -> ('EMPLOYEE', ':', 'Candidate shall maintain...')
+      - 'TENANT: John Smith, 123 Main St' -> None (retained as pure party metadata)
     Returns (heading_text, delimiter, body_text) or None.
     """
     stripped = line_text.strip()
     if not stripped:
         return None
+
+    # Case 1: Comma-separated or colon-separated salutation prefix with operative body on the same line
+    m_sal = SALUTATION_PREFIX_PATTERN.match(stripped)
+    if m_sal:
+        h = m_sal.group(1).strip()
+        delim = m_sal.group(2).strip()
+        b = m_sal.group(3).strip()
+        b_sub = has_operative_legal_language(b) or (
+            len(b.split()) >= 4 and any(w in b.lower() for w in ["shall", "must", "will", "may", "agree", "pay", "terminate", "offer", "salary", "bonus", "equity", "report", "benefit", "contingent", "position"])
+        )
+        if b_sub:
+            return h, delim, b
+
+    # Case 2: Party prefix with operative covenant (preserves operative obligation without dropping as pure metadata)
+    m_party = PARTY_PREFIX_PATTERN.match(stripped)
+    if m_party:
+        h = m_party.group(1).strip()
+        delim = m_party.group(2)
+        b = m_party.group(3).strip()
+        b_sub = has_operative_legal_language(b) or (
+            len(b.split()) >= 5 and any(w in b.lower() for w in ["shall", "must", "will", "may", "agree", "pay", "terminate", "maintain", "covenant", "warrant", "report", "salary", "deposit"])
+        )
+        if b_sub:
+            return h, delim, b
+
+    # Case 3: Standard mixed heading
     m = MIXED_HEADING_PATTERN.match(stripped)
     if not m:
         return None
@@ -89,7 +129,7 @@ def try_split_mixed_line(line_text: str) -> Optional[tuple]:
     delim = m.group(2)
     b = m.group(3).strip()
 
-    # Exclude party metadata & addresses (e.g. LANDLORD: John Smith, Address: 123 Main St)
+    # Exclude pure party metadata & addresses (e.g. LANDLORD: John Smith, Address: 123 Main St)
     if is_party_metadata(stripped) or is_party_metadata(f"{h}: {b}") or is_address_metadata(stripped):
         return None
 

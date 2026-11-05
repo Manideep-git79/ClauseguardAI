@@ -257,6 +257,79 @@ def should_use_ocr(page: fitz.Page, extracted_text: str) -> Tuple[bool, str]:
     needs_ocr, reason, _ = assess_page_extraction_quality(page, extracted_text)
     return needs_ocr, reason
 
+def order_page_blocks_layout_aware(raw_blocks: List[Dict[str, Any]], page_width: float) -> List[Dict[str, Any]]:
+    """
+    Conservatively organizes PyMuPDF dictionary blocks into natural reading order:
+    - Preserves single-column, standard linear documents without modification.
+    - If a page has a distinct multi-column layout with parallel vertical columns,
+      orders full-width header blocks -> Left Column -> Right Column -> Footers.
+    - Prevents interleaving of sentences across parallel columns.
+    """
+    text_blocks = [
+        b for b in raw_blocks
+        if b.get("type", 0) == 0 and any(s.get("text", "").strip() for l in b.get("lines", []) for s in l.get("spans", []))
+    ]
+    if len(text_blocks) < 4 or page_width <= 0:
+        return raw_blocks
+
+    mid = page_width * 0.5
+    margin_tol = page_width * 0.05
+
+    col1 = []
+    col2 = []
+    other = []
+
+    for b in text_blocks:
+        x0, y0, x1, y1 = b.get("bbox", (0, 0, 0, 0))
+        w = x1 - x0
+        is_full_width = w > (page_width * 0.65) or (x0 < (mid - page_width * 0.15) and x1 > (mid + page_width * 0.15))
+
+        if is_full_width:
+            other.append(b)
+        elif x1 <= (mid + margin_tol):
+            col1.append(b)
+        elif x0 >= (mid - margin_tol):
+            col2.append(b)
+        else:
+            other.append(b)
+
+    has_two_cols = len(col1) >= 2 and len(col2) >= 2
+    if has_two_cols:
+        col1_y0 = min(b["bbox"][1] for b in col1)
+        col1_y1 = max(b["bbox"][3] for b in col1)
+        col2_y0 = min(b["bbox"][1] for b in col2)
+        col2_y1 = max(b["bbox"][3] for b in col2)
+
+        overlap_start = max(col1_y0, col2_y0)
+        overlap_end = min(col1_y1, col2_y1)
+        has_overlap = (overlap_end - overlap_start) > 40
+
+        if has_overlap:
+            col_top = min(col1_y0, col2_y0)
+            col_bottom = max(col1_y1, col2_y1)
+
+            sorted_headers = []
+            sorted_footers = []
+            middle_other = []
+
+            for b in other:
+                y0, y1 = b["bbox"][1], b["bbox"][3]
+                if y1 <= col_top + 10:
+                    sorted_headers.append(b)
+                elif y0 >= col_bottom - 10:
+                    sorted_footers.append(b)
+                else:
+                    middle_other.append(b)
+
+            sorted_headers.sort(key=lambda b: (b["bbox"][1], b["bbox"][0]))
+            col1.sort(key=lambda b: (b["bbox"][1], b["bbox"][0]))
+            col2.sort(key=lambda b: (b["bbox"][1], b["bbox"][0]))
+            sorted_footers.sort(key=lambda b: (b["bbox"][1], b["bbox"][0]))
+
+            return sorted_headers + col1 + col2 + middle_other + sorted_footers
+
+    return raw_blocks
+
 def extract_pdf_with_metadata(file_path: str) -> Tuple[str, int, List[Dict[str, Any]]]:
     """
     Processes each PDF page individually with intelligent extraction and layout preservation:
@@ -305,8 +378,9 @@ def extract_pdf_with_metadata(file_path: str) -> Tuple[str, int, List[Dict[str, 
         try:
             page_dict = page.get_text("dict", sort=True)
             raw_blocks = page_dict.get("blocks", [])
+            ordered_blocks = order_page_blocks_layout_aware(raw_blocks, page_w)
 
-            for b_idx, b in enumerate(raw_blocks):
+            for b_idx, b in enumerate(ordered_blocks):
                 if b.get("type", 0) != 0:
                     continue
 

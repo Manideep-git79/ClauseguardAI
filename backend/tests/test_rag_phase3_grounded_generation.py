@@ -26,6 +26,7 @@ from app.services.rag.chat_engine import (
     SYSTEM_INSTRUCTION,
 )
 from app.services.rag.intent import classify_query_intent
+from tests.test_isolation_guard import enforce_test_database_isolation
 
 class TestRAGPhase3GroundedGeneration(unittest.TestCase):
     @classmethod
@@ -33,12 +34,19 @@ class TestRAGPhase3GroundedGeneration(unittest.TestCase):
         cls.app = create_app()
         cls.app_context = cls.app.app_context()
         cls.app_context.push()
+        enforce_test_database_isolation(cls.app)
 
     @classmethod
     def tearDownClass(cls):
         cls.app_context.pop()
 
     def setUp(self):
+        try:
+            db.session.rollback()
+        except Exception:
+            pass
+        db.session.remove()
+
         self.client = self.app.test_client()
         self.jwt_secret = get_jwt_secret()
 
@@ -53,9 +61,8 @@ class TestRAGPhase3GroundedGeneration(unittest.TestCase):
         # Test user
         self.user = User.query.filter_by(email="phase3_tester@clauseguard.ai").first()
         if not self.user:
-            self.user = User(name="Phase 3 Tester", email="phase3_tester@clauseguard.ai", password_hash="dummy")
+            self.user = User(id=uuid.uuid4(), name="Phase 3 Tester", email="phase3_tester@clauseguard.ai", password_hash="dummy")
             db.session.add(self.user)
-            db.session.commit()
 
         self.token = jwt.encode(
             {"userId": str(self.user.id), "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)},
@@ -77,7 +84,6 @@ class TestRAGPhase3GroundedGeneration(unittest.TestCase):
             risk_band="Low",
         )
         db.session.add(self.doc)
-        db.session.commit()
 
         # Clause 0: Payment Terms
         self.clause_rent = Clause(
@@ -182,12 +188,14 @@ class TestRAGPhase3GroundedGeneration(unittest.TestCase):
         self.embed_patcher.stop()
         try:
             db.session.rollback()
-            db.session.query(ChatMessage).delete()
-            db.session.query(ChatSession).delete()
-            db.session.query(Deadline).delete()
-            db.session.query(Clause).delete()
-            db.session.query(Document).delete()
-            db.session.commit()
+            doc_id = getattr(self, "doc", None) and getattr(self.doc, "id", None)
+            if doc_id:
+                db.session.query(ChatMessage).filter(ChatMessage.document_id == doc_id).delete(synchronize_session=False)
+                db.session.query(ChatSession).filter(ChatSession.document_id == doc_id).delete(synchronize_session=False)
+                db.session.query(Deadline).filter(Deadline.document_id == doc_id).delete(synchronize_session=False)
+                db.session.query(Clause).filter(Clause.document_id == doc_id).delete(synchronize_session=False)
+                db.session.query(Document).filter(Document.id == doc_id).delete(synchronize_session=False)
+                db.session.commit()
         except Exception:
             db.session.rollback()
         finally:

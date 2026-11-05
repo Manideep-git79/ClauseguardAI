@@ -24,6 +24,44 @@ def create_app(config_class=Config):
             )
 
     db.init_app(app)
+
+    test_schema = app.config.get("TEST_DATABASE_SCHEMA")
+    if test_schema:
+        import re
+        from sqlalchemy import event
+
+        # Validate schema identifier format to prevent injection or malformed values
+        if not re.match(r"^[a-zA-Z_][a-zA-Z0-9_]*$", test_schema):
+            raise ValueError(
+                f"CRITICAL SECURITY: Invalid test schema identifier: {test_schema!r}. "
+                "Must be a valid alphanumeric/underscore PostgreSQL identifier."
+            )
+        quoted_test_schema = f'"{test_schema}"'
+
+        with app.app_context():
+            engine = db.engine
+
+            def _enforce_test_schema(dbapi_conn):
+                cursor = dbapi_conn.cursor()
+                try:
+                    # Fail-closed isolation: Strictly use test_schema, NEVER fall back to public!
+                    cursor.execute(f"SET search_path TO {quoted_test_schema};")
+                finally:
+                    cursor.close()
+
+            @event.listens_for(engine, "connect")
+            def on_test_connect(dbapi_conn, record):
+                _enforce_test_schema(dbapi_conn)
+
+            @event.listens_for(engine, "checkout")
+            def on_test_checkout(dbapi_conn, record, proxy):
+                _enforce_test_schema(dbapi_conn)
+
+            @event.listens_for(engine, "begin")
+            def on_test_begin(conn):
+                # Strict fail-closed: If SET search_path fails, raise immediately to abort transaction!
+                # Silent exception suppression is strictly prohibited.
+                conn.exec_driver_sql(f"SET search_path TO {quoted_test_schema};")
     migrate.init_app(app, db)
     cors.init_app(app, resources={r"/*": {"origins": app.config.get("CORS_ORIGINS", "*")}}, supports_credentials=True)
 

@@ -32,7 +32,9 @@ export function ClauseList({ clauses = [], selectedClauseId, onSelectClause }) {
     return substantiveClauses
       .filter((c) => {
         if (filter === "needs_review") {
-          if (!c.human_review && c.favorability_label !== "needs_review") return false;
+          if (!c.human_review && c.favorability_label !== "needs_review" && c.clause_type !== "UNCERTAIN" && c.clause_type !== "UNCLASSIFIED") return false;
+        } else if (filter === "fair") {
+          if (c.favorability_label !== "fair" || c.human_review || c.clause_type === "UNCERTAIN" || c.clause_type === "UNCLASSIFIED") return false;
         } else if (filter !== "all" && c.favorability_label !== filter) {
           return false;
         }

@@ -136,6 +136,28 @@ OPERATIVE_LEGAL_PATTERNS = [
     r"\bwaive(?:s|d|r)?\s+(?:any|all|the\s+right)\b",
     r"\bobligation\s+to\b",
     r"\bentitled\s+to\b",
+    # Employment offer operative patterns
+    r"\b(?:delighted|pleased)\s+to\s+offer\b",
+    r"\boffer\s+of\s+employment\b",
+    r"\bextend\s+to\s+you\s+this\s+(?:formal\s+)?offer\b",
+    r"\bposition\s+of\b",
+    r"\bstarting\s+(?:annual\s+)?(?:base\s+)?salary\s+(?:of|is)\b",
+    r"\bbase\s+(?:salary|compensation|pay)\s+(?:will\s+be|of|is)\b",
+    r"\breport\s+directly\s+to\b",
+    r"\breporting\s+(?:directly\s+)?to\b",
+    r"\b(?:target\s+bonus|annual\s+bonus|incentive\s+program|incentive\s+plan)\b",
+    r"\brestricted\s+stock\s+units?\b",
+    r"\bRSUs?\b",
+    r"\binitial\s+grant\s+of\b",
+    r"\bvesting\s+(?:schedule|over|period)\b",
+    r"\bat-will\b",
+    r"\bcontingent\s+upon\b",
+    r"\bbackground\s+(?:check|screening)\b",
+    r"\bemployee\s+benefit\s+plans?\b",
+    r"\b401\(k\)\s+retirement\b",
+    r"\bhybrid\s+work\s+policy\b",
+    r"\bprimary\s+work\s+location\b",
+    r"\bsemi-monthly\s+installments\b",
 ]
 
 COMPILED_OPERATIVE = [re.compile(p, re.IGNORECASE) for p in OPERATIVE_LEGAL_PATTERNS]
@@ -687,7 +709,11 @@ def classify_content_type(
         }
 
     # 10. Party Metadata & Contracting Parties
-    if is_party_metadata(raw):
+    if is_party_metadata(raw) or raw.upper() in (
+        "LANDLORD", "TENANT", "LESSOR", "LESSEE", "EMPLOYER", "EMPLOYEE",
+        "BUYER", "SELLER", "BORROWER", "LENDER", "CLIENT", "CONTRACTOR",
+        "COMPANY", "PARTY A", "PARTY B", "DISCLOSING PARTY", "RECEIVING PARTY"
+    ):
         return {
             "content_type": CONTENT_TYPE_PARTY_METADATA,
             "is_substantive": False,

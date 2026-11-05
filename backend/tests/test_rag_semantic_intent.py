@@ -22,6 +22,7 @@ from app.utils.encryption import encrypt_text
 from app.services.rag.intent import classify_query_intent, normalize_query_text
 from app.services.rag.retriever import retrieve_relevant_clauses
 from app.services.rag.chat_engine import answer_document_question, deterministic_document_qa
+from tests.test_isolation_guard import enforce_test_database_isolation
 import jwt
 
 class TestRAGSemanticIntent(unittest.TestCase):
@@ -30,12 +31,19 @@ class TestRAGSemanticIntent(unittest.TestCase):
         cls.app = create_app()
         cls.app_context = cls.app.app_context()
         cls.app_context.push()
+        enforce_test_database_isolation(cls.app)
 
     @classmethod
     def tearDownClass(cls):
         cls.app_context.pop()
 
     def setUp(self):
+        try:
+            db.session.rollback()
+        except Exception:
+            pass
+        db.session.remove()
+
         self.client = self.app.test_client()
         self.jwt_secret = get_jwt_secret()
 
@@ -47,17 +55,16 @@ class TestRAGSemanticIntent(unittest.TestCase):
         self.embed_patcher = patch("app.services.rag.chat_engine.embed_query", return_value=[0.0] * 768)
         self.embed_patcher.start()
 
-        # Test user
+        # Test users
         self.user_a = User.query.filter_by(email="tenant_rag_a@clauseguard.ai").first()
         if not self.user_a:
-            self.user_a = User(name="User RAG A", email="tenant_rag_a@clauseguard.ai", password_hash="dummy")
+            self.user_a = User(id=uuid.uuid4(), name="User RAG A", email="tenant_rag_a@clauseguard.ai", password_hash="dummy")
             db.session.add(self.user_a)
 
         self.user_b = User.query.filter_by(email="tenant_rag_b@clauseguard.ai").first()
         if not self.user_b:
-            self.user_b = User(name="User RAG B", email="tenant_rag_b@clauseguard.ai", password_hash="dummy")
+            self.user_b = User(id=uuid.uuid4(), name="User RAG B", email="tenant_rag_b@clauseguard.ai", password_hash="dummy")
             db.session.add(self.user_b)
-        db.session.commit()
 
         self.token_a = jwt.encode(
             {"userId": str(self.user_a.id), "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)},
@@ -83,7 +90,6 @@ class TestRAGSemanticIntent(unittest.TestCase):
             redacted_text="Commercial Lease between [Landlord] and [Tenant].",
         )
         db.session.add(self.doc_risky)
-        db.session.commit()
 
         # Clause 0: Preamble
         self.c_preamble = Clause(
@@ -187,7 +193,6 @@ class TestRAGSemanticIntent(unittest.TestCase):
             redacted_text="Consulting Agreement between [Client] and [Consultant].",
         )
         db.session.add(self.doc_clean)
-        db.session.commit()
 
         self.c_clean_services = Clause(
             id=uuid.uuid4(),
@@ -239,7 +244,6 @@ class TestRAGSemanticIntent(unittest.TestCase):
             risk_band="Low",
         )
         db.session.add(self.doc_user_b)
-        db.session.commit()
 
         self.c_user_b = Clause(
             id=uuid.uuid4(),
@@ -262,13 +266,19 @@ class TestRAGSemanticIntent(unittest.TestCase):
         self.embed_patcher.stop()
         try:
             db.session.rollback()
-            ChatMessage.query.delete()
-            ChatSession.query.delete()
-            Deadline.query.delete()
-            MissingClause.query.delete()
-            Clause.query.delete()
-            Document.query.delete()
-            db.session.commit()
+            doc_ids = []
+            for attr in ("doc_clean", "doc_fair", "doc_risky", "doc_user_b"):
+                doc_obj = getattr(self, attr, None)
+                if doc_obj and hasattr(doc_obj, "id"):
+                    doc_ids.append(doc_obj.id)
+            if doc_ids:
+                db.session.query(ChatMessage).filter(ChatMessage.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(ChatSession).filter(ChatSession.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(Deadline).filter(Deadline.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(MissingClause).filter(MissingClause.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(Clause).filter(Clause.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(Document).filter(Document.id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.commit()
         except Exception:
             db.session.rollback()
         finally:

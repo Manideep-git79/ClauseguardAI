@@ -6,7 +6,7 @@ from pathlib import Path
 import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from app.services.nlp.classifier_baseline import predict_baseline
+from app.services.nlp.classifier_baseline import predict_baseline, is_supported_document_type
 
 def build_windowed_input(prev_clause_text: str | None, clause_text: str, next_clause_text: str | None, max_length: int = 256) -> str:
     prev_part = (prev_clause_text or "").strip()
@@ -51,6 +51,10 @@ def get_models_dir() -> Path:
     return backend_models
 
 def get_bert_model_and_tokenizer(document_type: str, task: str = "clause_type"):
+    if not is_supported_document_type(document_type):
+        logger.warning(f"Unsupported document type '{document_type}': BERT checkpoint unavailable")
+        return None, None, {"model_version": "unsupported-document-type"}
+
     key = f"{document_type}_{task}"
     if key in _bert_models:
         return _bert_models[key], _bert_tokenizers[key], _bert_metadata[key]
@@ -154,6 +158,10 @@ def classify_clause(
     Classifies a single clause using the fine-tuned BERT model (with context windowing).
     Gracefully falls back to TF-IDF+LR baseline if BERT is not yet loaded.
     """
+    if not is_supported_document_type(document_type):
+        default_label = "UNCLASSIFIED" if task == "clause_type" else "needs_review"
+        return default_label, 0.0, "unsupported-document-type"
+
     model, tokenizer, meta = get_bert_model_and_tokenizer(document_type, task)
 
     if model is None:
@@ -170,7 +178,7 @@ def classify_clause(
         inputs = tokenizer(input_text, truncation=True, max_length=256, return_tensors="pt")
         with torch.no_grad():
             outputs = model(**inputs)
-            temperature = float(os.environ.get("BERT_TEMPERATURE", "0.58"))
+            temperature = float(os.environ.get("BERT_TEMPERATURE", "1.0"))
             scaled_logits = outputs.logits / max(0.1, temperature)
             probs = F.softmax(scaled_logits, dim=-1)[0]
             pred_idx = torch.argmax(probs).item()
@@ -197,6 +205,10 @@ def classify_clauses_batch(
     """
     if not clause_items:
         return []
+
+    if not is_supported_document_type(document_type):
+        default_label = "UNCLASSIFIED" if task == "clause_type" else "needs_review"
+        return [(default_label, 0.0, "unsupported-document-type") for _ in clause_items]
 
     model, tokenizer, meta = get_bert_model_and_tokenizer(document_type, task)
 
@@ -228,7 +240,7 @@ def classify_clauses_batch(
             tokens = tokenizer(chunk, padding=True, truncation=True, max_length=256, return_tensors="pt")
             with torch.no_grad():
                 outputs = model(**tokens)
-                temperature = float(os.environ.get("BERT_TEMPERATURE", "0.58"))
+                temperature = float(os.environ.get("BERT_TEMPERATURE", "1.0"))
                 scaled_logits = outputs.logits / max(0.1, temperature)
                 probs = F.softmax(scaled_logits, dim=-1)
                 preds = torch.argmax(probs, dim=-1)

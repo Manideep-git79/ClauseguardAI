@@ -213,8 +213,14 @@ def process_document_pipeline(document_id: str, file_path: str, ext: str) -> Doc
                     c.clause_type_confidence = c_conf
 
                 fav_label, fav_conf, _ = fav_results[i]
-                c.favorability_label = fav_label.strip().lower() if fav_label else "neutral"
-                c.favorability_confidence = fav_conf
+                # Section 8: Favorability Abstention - if confidence is inadequate (< 0.45), abstain to needs_review
+                if fav_conf is not None and fav_conf < 0.45:
+                    c.favorability_label = "needs_review"
+                    c.favorability_confidence = fav_conf
+                    c.human_review = True
+                else:
+                    c.favorability_label = fav_label.strip().lower() if fav_label else "neutral"
+                    c.favorability_confidence = fav_conf
 
         # Non-substantive clauses strictly have NOT_APPLICABLE and 0 risk
         for c in clause_objs:

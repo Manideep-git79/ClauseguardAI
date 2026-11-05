@@ -24,6 +24,7 @@ from app.services.rag.retriever import retrieve_relevant_clauses
 from app.services.rag.chat_engine import answer_document_question, deterministic_document_qa
 from app.services.risk.risk_engine import compute_document_risk
 from app.reports.pdf_report import generate_pdf_report
+from tests.test_isolation_guard import enforce_test_database_isolation
 
 class TestPhase8ChatRAG(unittest.TestCase):
     @classmethod
@@ -31,12 +32,19 @@ class TestPhase8ChatRAG(unittest.TestCase):
         cls.app = create_app()
         cls.app_context = cls.app.app_context()
         cls.app_context.push()
+        enforce_test_database_isolation(cls.app)
 
     @classmethod
     def tearDownClass(cls):
         cls.app_context.pop()
 
     def setUp(self):
+        try:
+            db.session.rollback()
+        except Exception:
+            pass
+        db.session.remove()
+
         self.client = self.app.test_client()
         self.jwt_secret = get_jwt_secret()
 
@@ -51,14 +59,13 @@ class TestPhase8ChatRAG(unittest.TestCase):
         # Create or fetch test users
         self.user_a = User.query.filter_by(email="tenant_a_p8@clauseguard.ai").first()
         if not self.user_a:
-            self.user_a = User(name="User A Phase 8", email="tenant_a_p8@clauseguard.ai", password_hash="dummy")
+            self.user_a = User(id=uuid.uuid4(), name="User A Phase 8", email="tenant_a_p8@clauseguard.ai", password_hash="dummy")
             db.session.add(self.user_a)
 
         self.user_b = User.query.filter_by(email="tenant_b_p8@clauseguard.ai").first()
         if not self.user_b:
-            self.user_b = User(name="User B Phase 8", email="tenant_b_p8@clauseguard.ai", password_hash="dummy")
+            self.user_b = User(id=uuid.uuid4(), name="User B Phase 8", email="tenant_b_p8@clauseguard.ai", password_hash="dummy")
             db.session.add(self.user_b)
-        db.session.commit()
 
         self.token_a = jwt.encode(
             {"userId": str(self.user_a.id), "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)},
@@ -85,7 +92,6 @@ class TestPhase8ChatRAG(unittest.TestCase):
             risk_band="Low",
         )
         db.session.add(self.doc_a)
-        db.session.commit()
 
         # Clause 0: Rent Payment
         self.clause_rent = Clause(
@@ -188,7 +194,6 @@ class TestPhase8ChatRAG(unittest.TestCase):
             page_number=3,
         )
         db.session.add_all([self.dl_rent, self.dl_unresolved, self.dl_business_days])
-        db.session.commit()
 
         # Create Document B for User B (for cross-tenant tests)
         self.doc_b = Document(
@@ -204,7 +209,6 @@ class TestPhase8ChatRAG(unittest.TestCase):
             risk_band="Low",
         )
         db.session.add(self.doc_b)
-        db.session.commit()
 
         self.clause_b = Clause(
             id=uuid.uuid4(),
@@ -227,12 +231,18 @@ class TestPhase8ChatRAG(unittest.TestCase):
         self.embed_patcher.stop()
         try:
             db.session.rollback()
-            db.session.query(ChatMessage).delete()
-            db.session.query(ChatSession).delete()
-            db.session.query(Deadline).delete()
-            db.session.query(Clause).delete()
-            db.session.query(Document).delete()
-            db.session.commit()
+            doc_ids = []
+            if hasattr(self, "doc_a") and self.doc_a and hasattr(self.doc_a, "id"):
+                doc_ids.append(self.doc_a.id)
+            if hasattr(self, "doc_b") and self.doc_b and hasattr(self.doc_b, "id"):
+                doc_ids.append(self.doc_b.id)
+            if doc_ids:
+                db.session.query(ChatMessage).filter(ChatMessage.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(ChatSession).filter(ChatSession.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(Deadline).filter(Deadline.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(Clause).filter(Clause.document_id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.query(Document).filter(Document.id.in_(doc_ids)).delete(synchronize_session=False)
+                db.session.commit()
         except Exception:
             db.session.rollback()
         finally:
