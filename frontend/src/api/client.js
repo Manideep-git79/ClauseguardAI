@@ -9,7 +9,11 @@ function resolveBaseUrl() {
     // In production without an explicit env variable, route to the live Railway backend
     return "https://clauseguard-ai-production.up.railway.app/api";
   }
-  const trimmed = rawBaseUrl.trim().replace(/\/+$/, "");
+  let trimmed = rawBaseUrl.trim().replace(/\/+$/, "");
+  // If protocol was omitted (e.g. user set "my-backend.up.railway.app"), prepend https://
+  if (!/^https?:\/\//i.test(trimmed) && !trimmed.startsWith("/")) {
+    trimmed = `https://${trimmed}`;
+  }
   if (trimmed.endsWith("/api")) {
     return trimmed;
   }
