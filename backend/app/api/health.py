@@ -18,4 +18,5 @@ def health_check():
         "database": db_status,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "service": "ClauseGuard AI",
+        "version": "1.0.1",
     }), 200
