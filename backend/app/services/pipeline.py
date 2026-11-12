@@ -293,10 +293,11 @@ def process_document_pipeline(document_id: str, file_path: str, ext: str) -> Doc
         db.session.commit()
         logger.info(f"[{doc.id}] Stage 7: Generating Gemini embeddings for {len(clause_objs)} total clauses in batch")
 
-        texts_to_embed = [c.redacted_text for c in clause_objs if c.redacted_text and c.redacted_text.strip()]
+        embeddable_clauses = [c for c in clause_objs if c.redacted_text and c.redacted_text.strip()]
+        texts_to_embed = [c.redacted_text for c in embeddable_clauses]
         if texts_to_embed:
             batch_embs = batch_embed_texts(texts_to_embed, task_type="RETRIEVAL_DOCUMENT", batch_size=100)
-            for c, emb in zip(clause_objs, batch_embs):
+            for c, emb in zip(embeddable_clauses, batch_embs):
                 c.embedding = emb
 
         # Single bulk insertion of all clauses, missing clauses, and deadlines

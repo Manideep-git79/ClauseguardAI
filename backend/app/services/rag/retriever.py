@@ -5,6 +5,7 @@ from typing import List, Dict, Any, Optional
 from collections import Counter
 from app.extensions import db
 from app.models.clause import Clause
+from app.models.document import Document
 from app.services.rag.intent import classify_query_intent, normalize_query_text, QueryIntent
 
 logger = logging.getLogger(__name__)
@@ -156,6 +157,43 @@ def compute_bm25_scores(
     return scored_clauses
 
 
+def _is_valid_vector(vec: Any) -> bool:
+    return (
+        vec is not None
+        and isinstance(vec, (list, tuple))
+        and len(vec) == 768
+        and any(abs(v) > 1e-6 for v in vec)
+        and all(math.isfinite(v) for v in vec)
+    )
+
+
+def _format_clause_hit(
+    c: Clause,
+    similarity: float,
+    intent: str,
+    doc_info: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    hit = {
+        "clause_id": str(c.id),
+        "document_id": str(c.document_id),
+        "clause_index": c.clause_index,
+        "clause_type": c.clause_type,
+        "favorability_label": c.favorability_label,
+        "risk_score": c.risk_score,
+        "page_number": getattr(c, "page_number", 1) or 1,
+        "start_offset": getattr(c, "start_offset", 0),
+        "end_offset": getattr(c, "end_offset", 0),
+        "redacted_text": c.redacted_text,
+        "similarity": similarity,
+        "intent": intent,
+        "retrieval_status": "matched",
+    }
+    if doc_info:
+        hit["filename"] = doc_info.get("filename")
+        hit["document_type"] = doc_info.get("document_type")
+    return hit
+
+
 def retrieve_relevant_clauses(
     document_id,
     query_vector: Optional[list[float]] = None,
@@ -164,6 +202,7 @@ def retrieve_relevant_clauses(
     intent_info: Optional[QueryIntent] = None,
     candidate_pool_size: int = 25,
     rrf_weights: Optional[Dict[str, float]] = None,
+    extra_queries: Optional[List[str]] = None,
 ) -> list[dict]:
     """
     Hybrid intent-aware retrieval for ClauseGuard AI RAG:
@@ -263,10 +302,16 @@ def retrieve_relevant_clauses(
     # Strategy B: Lexical BM25 Retrieval
     # -------------------------------------------------------------
     keywords = extract_query_keywords(norm_query)
+    extra_expansion = list(intent_info.expansion_terms or [])
+    if extra_queries:
+        for eq in extra_queries:
+            for tok in extract_query_keywords(eq):
+                if tok not in keywords and tok not in extra_expansion:
+                    extra_expansion.append(tok)
     bm25_scored = compute_bm25_scores(
         all_candidate_clauses,
         query_keywords=keywords,
-        expansion_keywords=intent_info.expansion_terms
+        expansion_keywords=extra_expansion
     )
     # Sort by BM25 score descending, then natural clause order
     bm25_scored.sort(key=lambda item: (-item[1], item[0].clause_index))
@@ -407,22 +452,244 @@ def retrieve_relevant_clauses(
         else:
             similarity = 0.50
 
-        retrieved.append({
-            "clause_id": str(c.id),
-            "clause_index": c.clause_index,
-            "clause_type": c.clause_type,
-            "favorability_label": c.favorability_label,
-            "risk_score": c.risk_score,
-            "page_number": getattr(c, "page_number", 1) or 1,
-            "start_offset": getattr(c, "start_offset", 0),
-            "end_offset": getattr(c, "end_offset", 0),
-            "redacted_text": c.redacted_text,
-            "similarity": similarity,
-            "intent": intent,
-            "retrieval_status": "matched",
-        })
+        retrieved.append(_format_clause_hit(c, similarity=similarity, intent=intent))
 
         if len(retrieved) >= top_k:
             break
 
     return retrieved
+
+
+def retrieve_relevant_clauses_for_user(
+    user_id,
+    query_vectors: Optional[List[list[float]]] = None,
+    query_texts: Optional[List[str]] = None,
+    top_k: int = 12,
+    per_doc_cap: int = 4,
+    intent_info: Optional[QueryIntent] = None,
+    target_doc_hints: Optional[List[str]] = None,
+    candidate_pool_size: int = 60,
+) -> list[dict]:
+    """
+    Strictly account-scoped multi-document hybrid retriever.
+    Searches ONLY analyzed documents belonging to `user_id` (Document.user_id == user_id),
+    fuses pgvector + multi-query BM25 + structured risk/clause-type signals + doc hints via RRF,
+    and balances per-document diversity so multi-document comparisons represent every matching agreement.
+    """
+    if not user_id:
+        return []
+
+    clean_texts = [t.strip() for t in (query_texts or []) if t and t.strip()]
+    primary_text = clean_texts[0] if clean_texts else ""
+    if intent_info is None:
+        intent_info = classify_query_intent(primary_text)
+    intent = intent_info.intent
+
+    try:
+        user_docs = (
+            db.session.query(Document)
+            .filter(Document.user_id == user_id)
+            .filter(Document.status == "analyzed")
+            .order_by(Document.uploaded_at.desc())
+            .all()
+        )
+    except Exception as err:
+        logger.error(f"Failed to fetch documents for user {user_id}: {err}")
+        return []
+
+    if not user_docs:
+        return []
+
+    doc_ids = [d.id for d in user_docs]
+    doc_meta_map = {
+        str(d.id): {
+            "id": str(d.id),
+            "filename": d.filename,
+            "document_type": d.document_type,
+            "overall_risk_score": d.overall_risk_score,
+            "risk_band": d.risk_band,
+        }
+        for d in user_docs
+    }
+
+    # Include substantive clauses + title/front-matter/signatories while excluding headers/footers/TOC
+    clause_filter = (
+        (Clause.is_substantive.is_(True))
+        | (Clause.content_type.in_(["SUBSTANTIVE_CLAUSE", "DOCUMENT_TITLE", "DOCUMENT_FRONT_MATTER", "SIGNATURE_BLOCK"]))
+        | (Clause.content_type.is_(None))
+    )
+
+    try:
+        all_candidates = (
+            db.session.query(Clause)
+            .filter(Clause.document_id.in_(doc_ids))
+            .filter(clause_filter)
+            .order_by(Clause.document_id, Clause.clause_index.asc())
+            .all()
+        )
+    except Exception as err:
+        logger.error(f"Failed to fetch candidate clauses for user {user_id}: {err}")
+        return []
+
+    if not all_candidates:
+        return []
+
+    clause_map = {str(c.id): c for c in all_candidates}
+    pool_limit = max(candidate_pool_size, top_k * 3)
+
+    # 1. Multi-query Semantic Vector Search (strictly bounded to user's doc_ids)
+    vector_sim_map: Dict[str, float] = {}
+    valid_vecs = [v for v in (query_vectors or []) if _is_valid_vector(v)]
+    for qvec in valid_vecs:
+        try:
+            distance_col = Clause.embedding.cosine_distance(qvec)
+            v_results = (
+                db.session.query(Clause, distance_col.label("distance"))
+                .filter(Clause.document_id.in_(doc_ids))
+                .filter(Clause.embedding.isnot(None))
+                .filter(clause_filter)
+                .order_by(distance_col)
+                .limit(pool_limit)
+                .all()
+            )
+            for c_obj, dist in v_results:
+                cid = str(c_obj.id)
+                sim = max(0.0, min(1.0, 1.0 - float(dist))) if dist is not None else 0.0
+                if sim > vector_sim_map.get(cid, -1.0):
+                    vector_sim_map[cid] = sim
+        except Exception as v_err:
+            logger.warning(f"Account-wide pgvector search failed for user {user_id}: {v_err}")
+            break
+
+    vector_ranked_ids = [
+        cid for cid, _ in sorted(vector_sim_map.items(), key=lambda x: -x[1])
+    ][:pool_limit]
+
+    # 2. Multi-query Lexical BM25 across all owned documents
+    primary_keywords: List[str] = []
+    expansion_terms: List[str] = list(intent_info.expansion_terms or [])
+    for idx, qt in enumerate(clean_texts):
+        toks = extract_query_keywords(qt)
+        if idx == 0:
+            primary_keywords = toks
+        else:
+            for t in toks:
+                if t not in primary_keywords and t not in expansion_terms:
+                    expansion_terms.append(t)
+
+    bm25_scored = compute_bm25_scores(
+        all_candidates,
+        query_keywords=primary_keywords,
+        expansion_keywords=expansion_terms,
+    )
+    bm25_scored.sort(key=lambda item: (-item[1], str(item[0].document_id), item[0].clause_index))
+    bm25_ranked_ids = [str(c.id) for c, score in bm25_scored if score > 0][:pool_limit]
+    bm25_score_map = {str(c.id): score for c, score in bm25_scored}
+
+    # 3. Structured & Target-Document Hint Ranking
+    structured_ranked_ids: List[str] = []
+    hint_terms = [h.lower().strip() for h in (target_doc_hints or []) if h and h.strip()]
+    matched_doc_ids_by_hint = set()
+    if hint_terms or primary_text:
+        q_low = primary_text.lower()
+        for d_id, dmeta in doc_meta_map.items():
+            fname_low = (dmeta["filename"] or "").lower()
+            dtype_low = (dmeta["document_type"] or "").replace("_", " ").lower()
+            fname_stem = re.sub(r"\.[a-z0-9]+$", "", fname_low).replace("_", " ").replace("-", " ")
+            if any(h in fname_low or h in dtype_low for h in hint_terms) or (
+                len(fname_stem) >= 4 and fname_stem in q_low
+            ):
+                matched_doc_ids_by_hint.add(d_id)
+
+    if intent in ("DOCUMENT_RISK_SUMMARY", "RECOMMENDATION_QUERY", "UNFAVORABLE_CLAUSE_QUERY"):
+        risk_sorted = sorted(
+            all_candidates,
+            key=lambda c: (
+                1 if (c.favorability_label or "").lower() == "unfavorable" else 0,
+                c.risk_score or 0.0,
+            ),
+            reverse=True,
+        )
+        structured_ranked_ids = [str(c.id) for c in risk_sorted][:pool_limit]
+    elif intent_info.target_clause_types:
+        target_types = [t.lower() for t in intent_info.target_clause_types]
+        matched = [
+            c for c in all_candidates
+            if c.clause_type and any(t in c.clause_type.lower() for t in target_types)
+        ]
+        matched.sort(key=lambda c: (c.risk_score or 0.0), reverse=True)
+        structured_ranked_ids = [str(c.id) for c in matched][:pool_limit]
+
+    # 4. Balanced RRF Fusion
+    k_rrf = 60.0
+    w_vec = 1.6 if vector_ranked_ids else 0.0
+    w_bm25 = 1.6
+    w_struct = 1.2
+    w_hint = 1.5
+
+    rrf_scores = Counter()
+    for rank, cid in enumerate(vector_ranked_ids):
+        rrf_scores[cid] += w_vec / (k_rrf + rank + 1)
+    for rank, cid in enumerate(bm25_ranked_ids):
+        rrf_scores[cid] += w_bm25 / (k_rrf + rank + 1)
+    for rank, cid in enumerate(structured_ranked_ids):
+        rrf_scores[cid] += w_struct / (k_rrf + rank + 1)
+    if matched_doc_ids_by_hint:
+        for c in all_candidates:
+            if str(c.document_id) in matched_doc_ids_by_hint and str(c.id) in rrf_scores:
+                rrf_scores[str(c.id)] += w_hint / k_rrf
+
+    if not rrf_scores:
+        return []
+
+    sorted_cids = [cid for cid, _ in rrf_scores.most_common()]
+
+    # Diverse multi-document selection (respect per_doc_cap first, then fill any remaining slots)
+    per_doc_counts: Dict[str, int] = Counter()
+    seen_texts_per_doc: Dict[str, set] = {}
+    selected: List[tuple[Clause, float]] = []
+    overflow: List[tuple[Clause, float]] = []
+
+    for cid in sorted_cids:
+        c = clause_map.get(cid)
+        if not c:
+            continue
+        did = str(c.document_id)
+        norm_text = (c.redacted_text or "").strip().lower()
+        if not norm_text:
+            continue
+        doc_seen = seen_texts_per_doc.setdefault(did, set())
+        if norm_text in doc_seen:
+            continue
+        doc_seen.add(norm_text)
+
+        vec_sim = vector_sim_map.get(cid)
+        bm25_val = bm25_score_map.get(cid, 0.0)
+        if vec_sim is not None:
+            sim = round(vec_sim, 4)
+        elif bm25_val > 0:
+            sim = round(min(0.95, 0.55 + (bm25_val * 0.08)), 4)
+        elif cid in structured_ranked_ids:
+            sim = 0.85
+        else:
+            sim = 0.55
+
+        if per_doc_counts[did] < per_doc_cap:
+            per_doc_counts[did] += 1
+            selected.append((c, sim))
+        else:
+            overflow.append((c, sim))
+
+        if len(selected) >= top_k:
+            break
+
+    if len(selected) < top_k and overflow:
+        for c, sim in overflow:
+            selected.append((c, sim))
+            if len(selected) >= top_k:
+                break
+
+    return [
+        _format_clause_hit(c, similarity=sim, intent=intent, doc_info=doc_meta_map.get(str(c.document_id)))
+        for c, sim in selected
+    ]

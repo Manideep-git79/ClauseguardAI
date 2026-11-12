@@ -174,6 +174,46 @@ def embed_query(query_text: str, max_retries: int = 3) -> Optional[List[float]]:
     return embed_text(query_text, task_type="RETRIEVAL_QUERY", max_retries=max_retries)
 
 
+def _split_text_with_overlap(text: str, max_chars: int = 1600, overlap: int = 200, max_slices: int = 6) -> list[str]:
+    """Split oversized clauses into overlapping slices so tail text is represented in embeddings."""
+    clean = (text or "").strip()
+    if not clean:
+        return ["empty clause"]
+    if len(clean) <= max_chars:
+        return [clean]
+
+    slices: list[str] = []
+    start = 0
+    step = max(200, max_chars - overlap)
+    while start < len(clean) and len(slices) < max_slices:
+        end = min(len(clean), start + max_chars)
+        if end < len(clean):
+            ws = clean.rfind(" ", start + int(max_chars * 0.6), end)
+            if ws > start:
+                end = ws
+        piece = clean[start:end].strip()
+        if piece:
+            slices.append(piece)
+        if end >= len(clean):
+            break
+        start = max(start + 1, end - overlap)
+    return slices or [clean[:max_chars]]
+
+
+def _average_and_normalize_vectors(vectors: list[list[float]]) -> Optional[list[float]]:
+    """Average slice vectors and L2-normalize to unit length for cosine distance retrieval."""
+    if not vectors:
+        return None
+    if len(vectors) == 1:
+        return vectors[0]
+    dim = len(vectors[0])
+    mean_vec = [sum(v[d] for v in vectors) / len(vectors) for d in range(dim)]
+    norm = math.sqrt(sum(x * x for x in mean_vec))
+    if norm <= 1e-12 or not math.isfinite(norm):
+        return vectors[0]
+    return [x / norm for x in mean_vec]
+
+
 def batch_embed_texts(
     texts: list[str],
     task_type: str = "RETRIEVAL_DOCUMENT",
@@ -182,6 +222,7 @@ def batch_embed_texts(
 ) -> list[Optional[list[float]]]:
     """
     High-performance batch embedder: sends chunks of up to batch_size texts per API call.
+    Splits oversized clauses (>1600 chars) with overlap and averages normalized slice vectors.
     Returns a list of Optional[list[float]], where each element is a 768-dim vector or None.
     NEVER silently injects fake zero-vectors on failure.
     """
@@ -193,19 +234,27 @@ def batch_embed_texts(
         logger.warning("GenAI client unavailable; returning None for all batch texts.")
         return [None for _ in texts]
 
-    model = get_embed_model_name()
-    all_embeddings: list[Optional[list[float]]] = []
+    # Expand oversized items into overlapping slices while preserving 1:1 fast path for standard clauses
+    flat_slices: list[str] = []
+    slice_ranges: list[tuple[int, int]] = []
+    for t in texts:
+        s_list = _split_text_with_overlap(t) if (t and t.strip()) else ["empty clause"]
+        start_idx = len(flat_slices)
+        flat_slices.extend(s_list)
+        slice_ranges.append((start_idx, len(flat_slices)))
 
-    for i in range(0, len(texts), batch_size):
-        chunk = texts[i : i + batch_size]
-        cleaned_chunk = [t[:2000] if t and t.strip() else "empty clause" for t in chunk]
+    model = get_embed_model_name()
+    flat_embeddings: list[Optional[list[float]]] = []
+
+    for i in range(0, len(flat_slices), batch_size):
+        chunk = flat_slices[i : i + batch_size]
         chunk_success = False
 
         for attempt in range(max_retries):
             try:
                 result = client.models.embed_content(
                     model=model,
-                    contents=cleaned_chunk,
+                    contents=chunk,
                     config={
                         "output_dimensionality": 768,
                         "task_type": task_type,
@@ -219,7 +268,7 @@ def batch_embed_texts(
                             chunk_vectors.append(vec)
                         else:
                             chunk_vectors.append(None)
-                    all_embeddings.extend(chunk_vectors)
+                    flat_embeddings.extend(chunk_vectors)
                     chunk_success = True
                     break
             except Exception as e:
@@ -237,9 +286,17 @@ def batch_embed_texts(
             logger.error(
                 f"Failed to generate embeddings for chunk {i} of size {len(chunk)}. Returning None for items."
             )
-            all_embeddings.extend([None for _ in chunk])
+            flat_embeddings.extend([None for _ in chunk])
 
-    return all_embeddings
+    pooled_embeddings: list[Optional[list[float]]] = []
+    for idx, (s_idx, e_idx) in enumerate(slice_ranges):
+        if not texts[idx] or not texts[idx].strip():
+            pooled_embeddings.append(None)
+            continue
+        valid_vecs = [v for v in flat_embeddings[s_idx:e_idx] if v is not None]
+        pooled_embeddings.append(_average_and_normalize_vectors(valid_vecs))
+
+    return pooled_embeddings
 
 
 def embed_document_clauses(clauses: list[dict]) -> list[Optional[list[float]]]:

@@ -2,26 +2,35 @@ import React, { useState, useEffect, useRef } from "react";
 import { LegalMarkdown } from "../chat/LegalMarkdown";
 import { apiUrl } from "../../api/client";
 
-export const ChatTab = ({ documentId }) => {
+export const ChatTab = ({ documentId = null, scope = null }) => {
+  const effectiveScope = scope || (documentId ? "document" : "account");
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const chatWindowRef = useRef(null);
 
-  const suggestions = documentId
-    ? [
-        "What are the termination conditions?",
-        "Is there an automatic renewal clause?",
-        "What is the required notice period?",
-        "Summarize the main liabilities & risks",
-      ]
-    : [
-        "What should I look out for in a job offer?",
-        "Explain what an indemnification clause means",
-        "What is a standard lease notice period?",
-        "What makes a non-compete enforceable?",
-      ];
+  const suggestions =
+    effectiveScope === "document"
+      ? [
+          "What are the termination conditions?",
+          "Is there an automatic renewal clause?",
+          "What is the required notice period?",
+          "Summarize the main liabilities & risks",
+        ]
+      : effectiveScope === "account"
+        ? [
+            "Compare notice periods across all my documents",
+            "What are the highest-risk clauses across my contracts?",
+            "List all deadlines and renewal dates in my account",
+            "Are there any conflicts between my agreements?",
+          ]
+        : [
+            "What should I look out for in a job offer?",
+            "Explain what an indemnification clause means",
+            "What is a standard lease notice period?",
+            "What makes a non-compete enforceable?",
+          ];
 
   useEffect(() => {
     let isMounted = true;
@@ -54,7 +63,7 @@ export const ChatTab = ({ documentId }) => {
     return () => {
       isMounted = false;
     };
-  }, [documentId]);
+  }, [documentId, effectiveScope]);
 
   useEffect(() => {
     if (chatWindowRef.current) {
@@ -85,7 +94,11 @@ export const ChatTab = ({ documentId }) => {
         method: "POST",
         headers,
         credentials: "include",
-        body: JSON.stringify({ question: q, documentId }),
+        body: JSON.stringify({
+          question: q,
+          documentId: documentId || null,
+          scope: effectiveScope,
+        }),
       });
 
       if (!res.ok) {
@@ -171,7 +184,11 @@ export const ChatTab = ({ documentId }) => {
             fontWeight: 500,
           }}
         >
-          Grounded RAG Assistant
+          {effectiveScope === "document"
+            ? "Grounded Document RAG"
+            : effectiveScope === "account"
+              ? "Account-Wide Multi-Doc RAG"
+              : "General Legal Assistant"}
         </span>
       </div>
 
@@ -224,7 +241,13 @@ export const ChatTab = ({ documentId }) => {
           <div style={{ margin: "auto", textAlign: "center", color: "#71717a" }}>
             <div style={{ fontSize: "32px", marginBottom: "8px" }}>⚖️</div>
             <div style={{ fontWeight: 600, color: "#000000", fontSize: "16px" }}>I am ClauseGuard AI. How can I assist you today?</div>
-            <div style={{ fontSize: "13px", color: "#71717a", marginTop: "4px" }}>Ask any question or click a suggestion chip above.</div>
+            <div style={{ fontSize: "13px", color: "#71717a", marginTop: "4px" }}>
+              {effectiveScope === "document"
+                ? "Ask any question about this selected document or click a suggestion chip above."
+                : effectiveScope === "account"
+                  ? "Search, compare clauses, and detect conflicts across all uploaded documents in your account."
+                  : "Ask general legal questions without document context, or click a suggestion chip above."}
+            </div>
           </div>
         ) : (
           messages.map((m, idx) => {
@@ -295,9 +318,12 @@ export const ChatTab = ({ documentId }) => {
                           marginTop: sIdx > 0 ? "6px" : "0",
                         }}
                       >
-                        <div style={{ fontWeight: 600, color: "#18181b", marginBottom: "3px", fontSize: "11px", display: "flex", justifyContent: "space-between" }}>
-                          <span>{src.section || `Clause #${(src.clause_index || 0) + 1}`}</span>
-                          {src.page_number && <span style={{ color: "#71717a" }}>Page {src.page_number}</span>}
+                        <div style={{ fontWeight: 600, color: "#18181b", marginBottom: "3px", fontSize: "11px", display: "flex", justifyContent: "space-between", gap: "8px" }}>
+                          <span>
+                            {src.document_name ? `${src.document_name} — ` : ""}
+                            {src.section || `Clause #${(src.clause_index || 0) + 1}`}
+                          </span>
+                          {src.page_number && <span style={{ color: "#71717a", whiteSpace: "nowrap" }}>Page {src.page_number}</span>}
                         </div>
                         <div style={{ fontStyle: "italic", color: "#4b5563" }}>
                           "{src.excerpt}"
@@ -339,7 +365,13 @@ export const ChatTab = ({ documentId }) => {
       >
         <input
           type="text"
-          placeholder={documentId ? "Ask ClauseGuard AI about this document or general legal concepts…" : "Ask ClauseGuard AI any legal or general question…"}
+          placeholder={
+            effectiveScope === "document"
+              ? "Ask ClauseGuard AI about this document or general legal concepts…"
+              : effectiveScope === "account"
+                ? "Ask across all your uploaded documents (compare terms, notice periods, risks)…"
+                : "Ask ClauseGuard AI any legal or general question…"
+          }
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
