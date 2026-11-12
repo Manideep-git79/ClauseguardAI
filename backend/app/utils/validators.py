@@ -38,8 +38,6 @@ PROMPT_INJECTION_PATTERNS = [
     r"(?i)\bpretend\s+you\s+are\b",
     r"(?i)\bsystem\s*:\s*",
     r"(?i)\bDAN\s+mode\b",
-    r"(?i)\b(?:print|dump|leak|show|output|expose|extract)\s+(?:your\s+|the\s+|all\s+)?(?:system\s+prompt|api\s*key|secret|env(?:ironment)?\s+var|database_url|other\s+users?')\b",
-    r"(?i)\b(?:bypass|override|disable)\s+(?:security|access\s+control|ownership|restrictions)\b",
 ]
 
 def allowed_file(filename: str) -> bool:

@@ -38,17 +38,13 @@ export function StandaloneChat({ onNavigate }) {
           </div>
           <div>
             <h1 className="font-serif text-xl sm:text-2xl font-bold text-black flex items-center gap-2">
-              ClauseGuard AI Chatbot
+              ClauseGuard AI Chat Copilot
               <span className="text-[10px] font-mono border border-neutral-300 bg-neutral-100 text-black px-2 py-0.5 rounded font-semibold">
-                {selectedDocId === "__general__"
-                  ? "General Legal AI"
-                  : selectedDocId
-                    ? "Grounded Document RAG"
-                    : "Account-Wide Multi-Doc RAG"}
+                Grounded RAG
               </span>
             </h1>
             <p className="text-xs font-mono text-neutral-600 mt-1">
-              Search and compare across all documents in your account, inspect a specific agreement, or ask general legal questions.
+              Ask legal copilot questions, analyze clauses, or inspect specific uploaded documents with verified citations.
             </p>
           </div>
         </div>
@@ -64,8 +60,7 @@ export function StandaloneChat({ onNavigate }) {
             disabled={loadingDocs}
             className="w-full sm:w-64 bg-white border border-neutral-300 text-black text-xs font-mono py-2 px-3 focus:outline-none focus:border-black rounded shadow-sm"
           >
-            <option value="">All Account Documents (Account-Wide AI)</option>
-            <option value="__general__">General Legal Mode (No Documents)</option>
+            <option value="">General Copilot Mode</option>
             {documents.map((d) => (
               <option key={d.id} value={d.id}>
                 {d.filename} ({d.document_type ? d.document_type.replace("_", " ") : "Document"})
@@ -77,15 +72,8 @@ export function StandaloneChat({ onNavigate }) {
 
       <div className="border border-neutral-200 bg-white rounded-lg shadow-sm overflow-hidden">
         <ChatTab
-          key={selectedDocId === "__general__" ? "general" : selectedDocId || "account"}
-          documentId={selectedDocId && selectedDocId !== "__general__" ? selectedDocId : null}
-          scope={
-            selectedDocId === "__general__"
-              ? "general"
-              : selectedDocId
-                ? "document"
-                : "account"
-          }
+          key={selectedDocId || "general"}
+          documentId={selectedDocId || null}
         />
       </div>
 

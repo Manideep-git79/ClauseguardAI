@@ -31,10 +31,10 @@ export function Sidebar({ currentView, onNavigate }) {
         { id: "upload", label: "Upload Document", icon: UploadCloud, path: "/upload" },
         {
           id: "chat",
-          label: "AI Chatbot",
+          label: "AI Legal Copilot",
           icon: Bot,
           path: "/chat",
-          badge: "Grounded",
+          badge: "AI Copilot",
           badgeColor: "bg-neutral-100 text-neutral-800 border-neutral-300",
         },
       ],

@@ -2,35 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import { LegalMarkdown } from "../chat/LegalMarkdown";
 import { apiUrl } from "../../api/client";
 
-export const ChatTab = ({ documentId = null, scope = null }) => {
-  const effectiveScope = scope || (documentId ? "document" : "account");
+export const ChatTab = ({ documentId }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const chatWindowRef = useRef(null);
 
-  const suggestions =
-    effectiveScope === "document"
-      ? [
-          "What are the termination conditions?",
-          "Is there an automatic renewal clause?",
-          "What is the required notice period?",
-          "Summarize the main liabilities & risks",
-        ]
-      : effectiveScope === "account"
-        ? [
-            "Compare notice periods across all my documents",
-            "What are the highest-risk clauses across my contracts?",
-            "List all deadlines and renewal dates in my account",
-            "Are there any conflicts between my agreements?",
-          ]
-        : [
-            "What should I look out for in a job offer?",
-            "Explain what an indemnification clause means",
-            "What is a standard lease notice period?",
-            "What makes a non-compete enforceable?",
-          ];
+  const suggestions = [
+    "What are the termination conditions?",
+    "Is there an automatic renewal clause?",
+    "What is the required notice period?",
+    "Summarize the main liabilities & risks",
+  ];
 
   useEffect(() => {
     let isMounted = true;
@@ -63,7 +47,7 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
     return () => {
       isMounted = false;
     };
-  }, [documentId, effectiveScope]);
+  }, [documentId]);
 
   useEffect(() => {
     if (chatWindowRef.current) {
@@ -94,11 +78,7 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
         method: "POST",
         headers,
         credentials: "include",
-        body: JSON.stringify({
-          question: q,
-          documentId: documentId || null,
-          scope: effectiveScope,
-        }),
+        body: JSON.stringify({ question: q, documentId }),
       });
 
       if (!res.ok) {
@@ -171,7 +151,7 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 600, fontSize: "15px", color: "#000000" }}>
           <span style={{ height: "8px", width: "8px", borderRadius: "50%", background: "#000000" }} />
-          ClauseGuard AI
+          AI Legal Copilot
         </div>
         <span
           style={{
@@ -184,11 +164,7 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
             fontWeight: 500,
           }}
         >
-          {effectiveScope === "document"
-            ? "Grounded Document RAG"
-            : effectiveScope === "account"
-              ? "Account-Wide Multi-Doc RAG"
-              : "General Legal Assistant"}
+          Grounded Copilot
         </span>
       </div>
 
@@ -240,14 +216,8 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
         {messages.length === 0 ? (
           <div style={{ margin: "auto", textAlign: "center", color: "#71717a" }}>
             <div style={{ fontSize: "32px", marginBottom: "8px" }}>⚖️</div>
-            <div style={{ fontWeight: 600, color: "#000000", fontSize: "16px" }}>I am ClauseGuard AI. How can I assist you today?</div>
-            <div style={{ fontSize: "13px", color: "#71717a", marginTop: "4px" }}>
-              {effectiveScope === "document"
-                ? "Ask any question about this selected document or click a suggestion chip above."
-                : effectiveScope === "account"
-                  ? "Search, compare clauses, and detect conflicts across all uploaded documents in your account."
-                  : "Ask general legal questions without document context, or click a suggestion chip above."}
-            </div>
+            <div style={{ fontWeight: 600, color: "#000000", fontSize: "16px" }}>How can I assist you today?</div>
+            <div style={{ fontSize: "13px", color: "#71717a", marginTop: "4px" }}>Ask any question or click a suggestion chip above.</div>
           </div>
         ) : (
           messages.map((m, idx) => {
@@ -269,24 +239,22 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
                 }}
               >
                 {!isUser && (
-                  <div style={{ marginBottom: "8px", display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
+                  <div style={{ marginBottom: "8px", display: "flex", alignItems: "center", gap: "6px" }}>
                     <span
                       style={{
                         fontSize: "10px",
                         textTransform: "uppercase",
                         padding: "2px 8px",
                         borderRadius: "4px",
-                        background: m.grounded ? "#f0fdf4" : (m.content && m.content.toLowerCase().includes("does not contain information") ? "#fffbeb" : "#f4f4f5"),
-                        color: m.grounded ? "#166534" : (m.content && m.content.toLowerCase().includes("does not contain information") ? "#92400e" : "#18181b"),
-                        border: m.grounded ? "1px solid #bbf7d0" : (m.content && m.content.toLowerCase().includes("does not contain information") ? "1px solid #fde68a" : "1px solid #e4e4e7"),
+                        background: "#f4f4f5",
+                        color: "#18181b",
+                        border: "1px solid #e4e4e7",
                         fontWeight: 600,
                       }}
                     >
-                      {m.grounded
-                        ? `✓ Grounded${m.sources && m.sources.length ? ` (${m.sources.length} citation${m.sources.length > 1 ? "s" : ""})` : ""}`
-                        : (m.content && m.content.toLowerCase().includes("does not contain information") ? "⚠ Information Not Found in Document" : "Legal Guidance")}
+                      {m.grounded ? "✓ Grounded" : "Legal Guidance"}
                     </span>
-                    {m.grounded && typeof m.confidence === "number" && (
+                    {typeof m.confidence === "number" && (
                       <span style={{ fontSize: "11px", color: "#71717a" }}>
                         ({Math.round(m.confidence * 100)}% confidence)
                       </span>
@@ -303,7 +271,7 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
                 {!isUser && m.sources && m.sources.length > 0 && (
                   <div style={{ marginTop: "12px", paddingTop: "10px", borderTop: "1px solid #f0f0f0" }}>
                     <div style={{ fontSize: "11px", fontWeight: 700, color: "#52525b", marginBottom: "6px" }}>
-                      📎 Supporting Evidence & Citations:
+                      📎 Citations:
                     </div>
                     {m.sources.map((src, sIdx) => (
                       <div
@@ -313,21 +281,13 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
                           background: "#f9fafb",
                           padding: "8px 10px",
                           borderRadius: "4px",
+                          fontStyle: "italic",
                           color: "#3f3f46",
                           border: "1px solid #e5e5e5",
                           marginTop: sIdx > 0 ? "6px" : "0",
                         }}
                       >
-                        <div style={{ fontWeight: 600, color: "#18181b", marginBottom: "3px", fontSize: "11px", display: "flex", justifyContent: "space-between", gap: "8px" }}>
-                          <span>
-                            {src.document_name ? `${src.document_name} — ` : ""}
-                            {src.section || `Clause #${(src.clause_index || 0) + 1}`}
-                          </span>
-                          {src.page_number && <span style={{ color: "#71717a", whiteSpace: "nowrap" }}>Page {src.page_number}</span>}
-                        </div>
-                        <div style={{ fontStyle: "italic", color: "#4b5563" }}>
-                          "{src.excerpt}"
-                        </div>
+                        "{src.excerpt}"
                       </div>
                     ))}
                   </div>
@@ -365,13 +325,7 @@ export const ChatTab = ({ documentId = null, scope = null }) => {
       >
         <input
           type="text"
-          placeholder={
-            effectiveScope === "document"
-              ? "Ask ClauseGuard AI about this document or general legal concepts…"
-              : effectiveScope === "account"
-                ? "Ask across all your uploaded documents (compare terms, notice periods, risks)…"
-                : "Ask ClauseGuard AI any legal or general question…"
-          }
+          placeholder="Ask a question about this document…"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}

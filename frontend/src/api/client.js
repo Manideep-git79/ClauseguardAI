@@ -149,25 +149,12 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question, session_id: sessionId }),
     }),
-  getChatHistory: (docId = null) =>
-    docId
-      ? request(`/documents/${docId}/chat/history`)
-      : request("/chat/history"),
+  getChatHistory: (docId) => request(`/documents/${docId}/chat/history`),
 
-  sendStandaloneChat: (
-    question,
-    sessionId = null,
-    scope = "account",
-    documentId = null
-  ) =>
+  sendStandaloneChat: (question, sessionId = null) =>
     request("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        question,
-        session_id: sessionId,
-        scope,
-        documentId,
-      }),
+      body: JSON.stringify({ question, session_id: sessionId }),
     }),
 };
