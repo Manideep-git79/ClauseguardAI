@@ -1,16 +1,18 @@
 import os
 import re
 import logging
+from flask import current_app
 from google import genai
+from app.utils.validators import sanitize_chat_input
 
 logger = logging.getLogger(__name__)
 
+# Fast, verified Gemini models prioritized ahead of slow/stalling models
 GEMINI_CANDIDATE_MODELS = [
-    "gemini-3.5-flash",
-    "gemini-3.8-flash",
-    "gemini-3.7-flash",
+    "gemini-3-flash-preview",
+    "gemini-3.1-flash-lite",
     "gemini-3.5-flash-lite",
-    "gemini-flash-latest",
+    "gemini-3.5-flash",
 ]
 
 _genai_client = None
@@ -18,9 +20,13 @@ _genai_client = None
 def get_genai_client():
     global _genai_client
     if _genai_client is None:
-        api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        api_key = (
+            os.environ.get("GEMINI_API_KEY")
+            or os.environ.get("GOOGLE_API_KEY")
+            or (current_app.config.get("GEMINI_API_KEY") if current_app else None)
+        )
         if api_key:
-            _genai_client = genai.Client(api_key=api_key)
+            _genai_client = genai.Client(api_key=api_key, http_options={"timeout": 15000})
     return _genai_client
 
 def ask_gemini_or_fallback(question: str, context_text: str = "") -> dict:
@@ -28,8 +34,8 @@ def ask_gemini_or_fallback(question: str, context_text: str = "") -> dict:
     Elite Legal AI Copilot Integration with Grounded RAG, Gemini Multi-Model Cascade,
     and Comprehensive Local Legal Knowledge Base Fallback.
     """
-    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-    client = get_genai_client() if api_key else None
+    question, _, _ = sanitize_chat_input(question or "")
+    client = get_genai_client()
 
     clean_markdown_rule = (
         "Respond using clean Markdown structure suitable for rendering in a professional chatbot. "
