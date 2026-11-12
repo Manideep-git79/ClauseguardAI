@@ -15,14 +15,16 @@ _genai_client = None
 def get_genai_client():
     global _genai_client
     if _genai_client is None:
-        api_key = current_app.config.get("GEMINI_API_KEY") if current_app else os.environ.get("GEMINI_API_KEY")
-        if not api_key:
-            api_key = os.environ.get("GOOGLE_API_KEY")
+        api_key = (
+            (current_app.config.get("GEMINI_API_KEY") if current_app else None)
+            or os.environ.get("GEMINI_API_KEY")
+            or os.environ.get("GOOGLE_API_KEY")
+        )
         if not api_key:
             logger.warning("GEMINI_API_KEY is not configured for embeddings.")
             return None
         try:
-            _genai_client = genai.Client(api_key=api_key, http_options={"timeout": 30000})
+            _genai_client = genai.Client(api_key=api_key, http_options={"timeout": 15000})
         except Exception as e:
             logger.warning(f"Failed to initialize GenAI client: {type(e).__name__}")
             _genai_client = None
@@ -30,9 +32,11 @@ def get_genai_client():
 
 
 def get_embed_model_name() -> str:
-    if current_app:
-        return current_app.config.get("GEMINI_EMBED_MODEL", "gemini-embedding-001")
-    return os.environ.get("GEMINI_EMBED_MODEL", "gemini-embedding-001")
+    return (
+        (current_app.config.get("GEMINI_EMBED_MODEL") if current_app else None)
+        or os.environ.get("GEMINI_EMBED_MODEL")
+        or "gemini-embedding-001"
+    )
 
 
 def validate_embedding_vector(vector: Any, expected_dim: int = 768) -> bool:

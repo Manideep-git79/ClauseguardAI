@@ -67,8 +67,20 @@ def post_chat_message():
             logger.warning(f"Could not process document chat for {document_id}: {e}")
             return jsonify({"error": "Failed to load document context."}), 500
 
-    # General legal chat when no documentId is provided
-    ai_result = ask_gemini_or_fallback(question, "")
+    # General / normal chat when no documentId is provided (preserve recent thread history)
+    recent_history = []
+    try:
+        prior_msgs = (
+            ChatMessage.query.filter_by(user_id=user.id, document_id=None)
+            .order_by(ChatMessage.created_at.desc())
+            .limit(6)
+            .all()
+        )
+        recent_history = [{"role": m.role, "content": m.content} for m in reversed(prior_msgs)]
+    except Exception:
+        recent_history = []
+
+    ai_result = ask_gemini_or_fallback(question, "", history=recent_history)
 
     user_msg_id = uuid.uuid4()
     user_msg = ChatMessage(

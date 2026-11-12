@@ -9,12 +9,19 @@ export const ChatTab = ({ documentId }) => {
   const [sending, setSending] = useState(false);
   const chatWindowRef = useRef(null);
 
-  const suggestions = [
-    "What are the termination conditions?",
-    "Is there an automatic renewal clause?",
-    "What is the required notice period?",
-    "Summarize the main liabilities & risks",
-  ];
+  const suggestions = documentId
+    ? [
+        "What are the termination conditions?",
+        "Is there an automatic renewal clause?",
+        "What is the required notice period?",
+        "Summarize the main liabilities & risks",
+      ]
+    : [
+        "What should I look out for in a job offer?",
+        "Explain what an indemnification clause means",
+        "What is a standard lease notice period?",
+        "What makes a non-compete enforceable?",
+      ];
 
   useEffect(() => {
     let isMounted = true;
@@ -332,7 +339,7 @@ export const ChatTab = ({ documentId }) => {
       >
         <input
           type="text"
-          placeholder="Ask ClauseGuard AI about this document…"
+          placeholder={documentId ? "Ask ClauseGuard AI about this document or general legal concepts…" : "Ask ClauseGuard AI any legal or general question…"}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
