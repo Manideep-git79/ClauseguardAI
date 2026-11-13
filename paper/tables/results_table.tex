@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\caption{Model Performance Across Document Domains and Evaluation Tasks (Macro-F1, Accuracy, Macro-Precision, and Macro-Recall)}
+\label{tab:results}
+\small
+\setlength{\tabcolsep}{4.6pt}
+\begin{tabular}{ll cccc cccc cccc}
+\toprule
+& & \multicolumn{4}{c}{\textbf{TF-IDF + LogReg (Baseline)}} & \multicolumn{4}{c}{\textbf{DistilBERT (No Context)}} & \multicolumn{4}{c}{\textbf{DistilBERT (Windowed)}} \\
+\cmidrule(lr){3-6} \cmidrule(lr){7-10} \cmidrule(lr){11-14}
+\textbf{Domain} & \textbf{Task} & \textbf{F1} & \textbf{Acc} & \textbf{Prec} & \textbf{Rec} & \textbf{F1} & \textbf{Acc} & \textbf{Prec} & \textbf{Rec} & \textbf{F1} & \textbf{Acc} & \textbf{Prec} & \textbf{Rec} \\
+\midrule
+Rental Agreement & Clause Type & \textbf{0.9764} & 0.9762 & 0.9770 & 0.9765 & 0.8944 & 0.8988 & 0.8997 & 0.9001 & 0.4897 & 0.5417 & 0.5507 & 0.5423 \\
+ & Favorability & \textbf{0.9654} & 0.9663 & 0.9655 & 0.9657 & 0.7713 & 0.7758 & 0.7864 & 0.7777 & 0.5546 & 0.5615 & 0.6230 & 0.5881 \\
+\midrule
+Job Offer Letter & Clause Type & \textbf{0.9859} & 0.9860 & 0.9865 & 0.9860 & 0.8688 & 0.8677 & 0.8776 & 0.8677 & 0.7841 & 0.7796 & 0.8071 & 0.7794 \\
+ & Favorability & \textbf{0.9895} & 0.9900 & 0.9893 & 0.9897 & 0.7970 & 0.7956 & 0.8000 & 0.7971 & 0.7016 & 0.6894 & 0.7458 & 0.7040 \\
+\midrule
+Insurance Policy & Clause Type & \textbf{0.9310} & 0.9299 & 0.9367 & 0.9299 & 0.6864 & 0.6954 & 0.7266 & 0.6964 & 0.3587 & 0.3968 & 0.4912 & 0.3986 \\
+ & Favorability & \textbf{0.8701} & 0.8697 & 0.8725 & 0.8686 & 0.7535 & 0.7615 & 0.7734 & 0.7508 & 0.5656 & 0.5812 & 0.5684 & 0.5717 \\
+\bottomrule
+\end{tabular}
+\end{table*}

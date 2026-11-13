@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{DistilBERT Architectural Optimization and Sequence-Capacity Progression (Clause Type Macro-F1 Across Phases)}
+\label{tab:ablation}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{l ccc c}
+\toprule
+\textbf{Experimental Track / Phase} & \textbf{Rental} & \textbf{Offer} & \textbf{Insur.} & \textbf{Mean} \\
+\midrule
+TF-IDF + Logistic Regression (Baseline) & \textbf{0.9533} & \textbf{0.9417} & \textbf{0.8821} & \textbf{0.9257} \\
+Phase 3 DistilBERT Baseline ($\text{seq}=96$) & 0.8566 & 0.8550 & 0.7063 & 0.8060 \\
+Phase 3 Naive Concatenation ($\text{seq}=96$) & 0.5210 & 0.8044 & 0.4085 & 0.5780 \\
+Phase 5 Target-Preserving Context ($\text{seq}=128$) & 0.8152 & 0.8120 & 0.6840 & 0.7704 \\
+Phase 6 Controlled Fine-Tuning ($\text{seq}=128$) & 0.8977 & 0.8651 & 0.7869 & 0.8499 \\
+Phase 8 Sequence Capacity Scaled ($\text{seq}=256$) & \textbf{0.9140} & 0.8636 & \textbf{0.8520} & \textbf{0.8765} \\
+\bottomrule
+\end{tabular}
+\end{table}
