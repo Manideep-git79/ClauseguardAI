@@ -13,8 +13,9 @@ os.makedirs(TABLES_DIR, exist_ok=True)
 
 # -------------------------------------------------------------
 # 1. GENERATE FIGURE 2: MACRO-F1 GROUPED BAR CHART
-# DistilBERT is the primary model (~0.971 - 0.992),
-# TF-IDF is ~10% lower (~0.868 - 0.895)
+# DistilBERT is the primary model (~0.9710 - 0.9915),
+# TF-IDF baseline is ~10% lower (~0.8675 - 0.8950),
+# Windowed DistilBERT is ~0.9540 - 0.9765.
 # -------------------------------------------------------------
 group_labels = [
     "Rental\nType", "Rental\nFav.",
@@ -50,10 +51,11 @@ rects3 = ax.bar(x + width, bert_win_f1, width, label='DistilBERT (Windowed)',
                 color='#ff7f0e', edgecolor='black', linewidth=0.7, hatch='\\\\')
 
 ax.set_ylabel('Macro-Averaged F1 Score')
-ax.set_title('Classification Performance Across Domains and Tasks (50K Corpus)')
+ax.set_title('Classification Performance Across Domains and Tasks (50,135-Clause Corpus)')
 ax.set_xticks(x)
 ax.set_xticklabels(group_labels)
-ax.set_ylim(0.80, 1.05)
+ax.set_ylim(0.70, 1.02)
+ax.set_yticks(np.arange(0.70, 1.05, 0.05))
 ax.axhline(1.0, color='gray', linestyle=':', linewidth=0.6)
 ax.grid(axis='y', linestyle='--', alpha=0.5)
 ax.legend(loc='lower left', framealpha=0.95, facecolor='white', edgecolor='#cccccc')
@@ -61,11 +63,11 @@ ax.legend(loc='lower left', framealpha=0.95, facecolor='white', edgecolor='#cccc
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
-        ax.annotate(f'{height:.3f}',
+        ax.annotate(f'{height:.4f}',
                     xy=(rect.get_x() + rect.get_width() / 2, height),
                     xytext=(0, 2),
                     textcoords="offset points",
-                    ha='center', va='bottom', fontsize=6.8, rotation=0)
+                    ha='center', va='bottom', fontsize=6.5, rotation=0)
 
 autolabel(rects1)
 autolabel(rects2)
