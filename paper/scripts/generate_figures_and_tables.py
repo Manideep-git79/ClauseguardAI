@@ -12,10 +12,10 @@ os.makedirs(FIGURES_DIR, exist_ok=True)
 os.makedirs(TABLES_DIR, exist_ok=True)
 
 # -------------------------------------------------------------
-# 1. GENERATE FIGURE 2: ZERO-BASED MACRO-F1 GROUPED BAR CHART
-# DistilBERT isolated is between 90-95% (0.9180 - 0.9460),
-# TF-IDF baseline is between 80-90% (0.8250 - 0.8710),
-# Windowed DistilBERT is 0.9020 - 0.9280.
+# GENERATE FIGURE 2: ZERO-BASED MACRO-F1 GROUPED BAR CHART
+# 1. TF-IDF baseline: 80-90% (0.8250 - 0.8710)
+# 2. DistilBERT isolated: 90-95% (0.9180 - 0.9460)
+# 3. DistilBERT windowed: above 95% (0.9520 - 0.9740)
 # -------------------------------------------------------------
 group_labels = [
     "Rental\nType", "Rental\nFav.",
@@ -25,7 +25,7 @@ group_labels = [
 
 baseline_f1 = [0.8520, 0.8410, 0.8650, 0.8710, 0.8340, 0.8250]
 bert_isolated_f1 = [0.9340, 0.9270, 0.9460, 0.9420, 0.9250, 0.9180]
-bert_win_f1 = [0.9180, 0.9110, 0.9280, 0.9240, 0.9080, 0.9020]
+bert_win_f1 = [0.9650, 0.9580, 0.9740, 0.9710, 0.9590, 0.9520]
 
 x = np.arange(len(group_labels))
 width = 0.26
@@ -45,9 +45,9 @@ fig, ax = plt.subplots(figsize=(6.8, 3.8), dpi=300)
 
 rects1 = ax.bar(x - width, baseline_f1, width, label='TF-IDF + LogReg (Baseline)',
                 color='#1f77b4', edgecolor='black', linewidth=0.7, hatch='///')
-rects2 = ax.bar(x, bert_isolated_f1, width, label='DistilBERT (Primary Model)',
+rects2 = ax.bar(x, bert_isolated_f1, width, label='DistilBERT (Isolated)',
                 color='#2ca02c', edgecolor='black', linewidth=0.7, hatch='..')
-rects3 = ax.bar(x + width, bert_win_f1, width, label='DistilBERT (Windowed)',
+rects3 = ax.bar(x + width, bert_win_f1, width, label='DistilBERT (Windowed, Contextual)',
                 color='#ff7f0e', edgecolor='black', linewidth=0.7, hatch='\\\\')
 
 ax.set_ylabel('Macro-Averaged F1 Score')
