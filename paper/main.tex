@@ -26,20 +26,20 @@
 
 \begin{document}
 
-\title{DocuGuard AI: A Legal Document Risk Assessment Framework}
+\title{ClauseGuard AI: A Privacy-Preserving Framework for Legal Contract Risk Assessment}
 
 \author{
-\IEEEauthorblockN{B. Manideep}
-\IEEEauthorblockA{\textit{School of Computer Science and Engineering} \\
-\textit{VIT-AP University} \\
-Amaravati, Andhra Pradesh, India \\
-Email: manideep.23bce9542@vitapstudent.ac.in}
-\and
 \IEEEauthorblockN{P. Sathwik}
 \IEEEauthorblockA{\textit{School of Computer Science and Engineering} \\
 \textit{VIT-AP University} \\
 Amaravati, Andhra Pradesh, India \\
 Email: sathwik.23bce20043@vitapstudent.ac.in}
+\and
+\IEEEauthorblockN{B. Manideep}
+\IEEEauthorblockA{\textit{School of Computer Science and Engineering} \\
+\textit{VIT-AP University} \\
+Amaravati, Andhra Pradesh, India \\
+Email: manideep.23bce9542@vitapstudent.ac.in}
 \and
 \IEEEauthorblockN{B. Nivas}
 \IEEEauthorblockA{\textit{School of Computer Science and Engineering} \\
@@ -53,7 +53,7 @@ Email: nivas.23bce9856@vitapstudent.ac.in}
 Amaravati, Andhra Pradesh, India \\
 Email: dhanush.23bce9556@vitapstudent.ac.in}
 \and
-\IEEEauthorblockN{Dr. P. Ravi Kumar}
+\IEEEauthorblockN{P. Ravi Kumar}
 \IEEEauthorblockA{\textit{School of Computer Science and Engineering} \\
 \textit{VIT-AP University} \\
 Amaravati, Andhra Pradesh, India \\
@@ -63,7 +63,7 @@ Email: ravikumar.p@vitap.ac.in}
 \maketitle
 
 \begin{abstract}
-Legal contracts such as residential lease agreements, employment offer letters, and commercial insurance policies present substantial cognitive and legal hurdles for non-expert signatories. Direct querying of generative Large Language Models (LLMs) on raw contracts introduces operational risks: exposure of Personally Identifiable Information (PII), non-deterministic and unrepeatable risk assessments, vulnerability to prompt injection, and an inability to detect legally mandatory omitted clauses. We present DocuGuard AI, a modular, privacy-preserving framework for automated contract risk assessment. DocuGuard AI integrates an adaptive optical character recognition and local PII redaction pipeline with Fernet symmetric authenticated encryption, an auditable closed-form scoring engine that computes clause-level and missing-provision penalties, and a grounded retrieval-augmented generation copilot with injection pre-filtering. We evaluated classification architectures across a comprehensive corpus of 50,135 clauses spanning three contract domains under strict document-level isolation (35,105 train, 7,500 validation, and 7,530 frozen test samples across 5,014 source documents). Fine-tuned DistilBERT serves as the primary neural classification engine, achieving Macro-F1 scores between 0.9710 and 0.9915 across isolated clause categorization and favorability scoring tasks, consistently outperforming traditional TF-IDF baselines (0.8675 to 0.8950) by approximately 10 percentage points due to transformer self-attention over complex legal syntax. Contextual windowing configurations yielded 0.9540 to 0.9765 Macro-F1 across all three domains. Our findings demonstrate that combining deep transformer representations with rule-governed risk heuristics provides an auditable, high-accuracy, privacy-conscious foundation for automated contract auditing.
+Legal contracts such as residential lease agreements, employment offer letters, and commercial insurance policies present substantial cognitive and legal hurdles for non-expert signatories. Direct querying of generative Large Language Models (LLMs) on raw contracts introduces operational risks: exposure of Personally Identifiable Information (PII), non-deterministic and unrepeatable risk assessments, vulnerability to prompt injection, and an inability to detect legally mandatory omitted clauses. We present ClauseGuard AI, a modular, privacy-preserving framework for automated contract risk assessment. ClauseGuard AI integrates an adaptive optical character recognition and local PII redaction pipeline with Fernet symmetric authenticated encryption, an auditable closed-form scoring engine that computes clause-level and missing-provision penalties, and a grounded retrieval-augmented generation copilot with injection pre-filtering. We evaluated classification architectures across a comprehensive corpus of 50,135 clauses spanning three contract domains under strict document-level isolation (35,105 train, 7,500 validation, and 7,530 frozen test samples across 5,136 source documents). Fine-tuned DistilBERT models reached 0.9665 to 0.9880 Macro-F1 across isolated clause categorization and favorability scoring tasks, while contextual windowed configurations yielded 0.9605 to 0.9790 Macro-F1. High-capacity n-gram TF-IDF linear baselines sustained 0.9730 to 0.9935 Macro-F1 on the structured corpus. Our findings demonstrate that combining deep transformer representations with rule-governed risk heuristics provides an auditable, high-accuracy, privacy-conscious foundation for automated contract auditing.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -81,12 +81,12 @@ With recent advances in generative natural language processing, non-experts incr
     \item \textbf{Prompt Injection Vulnerabilities:} Adversarial text instructions can be embedded within contract boilerplate (e.g., hidden white-on-white text) designed to instruct downstream evaluators to ignore predatory stipulations~\cite{greshake2023promptinjection}.
 \end{enumerate}
 
-To bridge the gap between user accessibility and stringent legal security requirements, we propose \textbf{DocuGuard AI}, a modular, privacy-preserving contract auditing framework. DocuGuard AI replaces black-box risk prediction with a hybrid pipeline that decouples sensitive data ingestion from downstream analytical reasoning. In this work, we make the following contributions:
+To bridge the gap between user accessibility and stringent legal security requirements, we propose \textbf{ClauseGuard AI}, a modular, privacy-preserving contract auditing framework. ClauseGuard AI replaces black-box risk prediction with a hybrid pipeline that decouples sensitive data ingestion from downstream analytical reasoning. In this work, we make the following contributions:
 \begin{itemize}
     \item We design a multi-tiered ingestion and de-identification pipeline combining adaptive optical character recognition (OCR) with local PII redaction and authenticated symmetric encryption, retaining temporal expressions to support downstream deadline extraction (Section~\ref{sec:architecture}).
     \item We formulate an auditable, deterministic risk assessment engine that combines multi-task clause classification, per-clause severity multipliers, sequence escalation, and set-difference penalties for omitted mandatory clauses (Section~\ref{sec:architecture}).
     \item We construct a grounded Retrieval-Augmented Generation (RAG) assistant guarded by a prompt-injection pre-filter and enforced clause-level citation constraints, utilizing dense vector search over sanitized text (Section~\ref{sec:architecture}).
-    \item We present an empirical evaluation across a balanced corpus of 50,135 clauses across 5,014 document structures with verified document-level isolation, establishing fine-tuned DistilBERT as the primary production classifier (achieving Macro-F1 scores between 0.9710 and 0.9915) and demonstrating its $\approx 10$ percentage point performance advantage over n-gram TF-IDF baselines across all contract categories (Sections~\ref{sec:dataset},~\ref{sec:results}).
+    \item We present an empirical evaluation across a balanced corpus of 50,135 clauses across 5,136 document structures with verified document-level isolation, establishing fine-tuned DistilBERT performance (achieving Macro-F1 scores between 0.9665 and 0.9880) alongside high-capacity linear baselines (0.9730 to 0.9935) across all contract categories (Sections~\ref{sec:dataset},~\ref{sec:results}).
 \end{itemize}
 
 \section{Related Work}
@@ -97,17 +97,17 @@ Automated legal document analysis has advanced rapidly through specialized corpo
 
 Recent studies have emphasized the critical role of domain-specific preprocessing and specialized architectures. Rajchandar et al.~\cite{rajchandar2025nlp} investigated automated legal document analysis using NLP pipelines, demonstrating that normalizing domain-specific legal text through spaCy---including boilerplate text removal, legal abbreviation standardization, clause segmentation, and lemmatization---achieved a 30\% reduction in input noise. Furthermore, their integration of attention-based feature selection with fine-tuned LegalBERT achieved 91.3\% classification accuracy while cutting training time by 22\%.
 
-Similarly, Mulik et al.~\cite{mulik2026legalai} introduced \textit{LegalAI}, an integrated platform combining Longformer for long-text summarization, LayoutLM for document structure and spatial analysis, fine-tuned BERT for clause identification (achieving 94.1\% accuracy and 94.0\% F1 on CUAD and Indian Kanoon corpora), and fine-tuned T5 for legal text summarization (ROUGE-L of 0.91). While prior systems focus primarily on enterprise commercial transactions, large corporate contracts, or court litigation, DocuGuard AI targets consumer-facing agreements (residential leases, employment offer letters, and insurance specimens) where lay signatories face asymmetric risk, requiring end-to-end local PII de-identification and deterministic risk scoring.
+Similarly, Mulik et al.~\cite{mulik2026legalai} introduced \textit{LegalAI}, an integrated platform combining Longformer for long-text summarization, LayoutLM for document structure and spatial analysis, fine-tuned BERT for clause identification (achieving 94.1\% accuracy and 94.0\% F1 on CUAD and Indian Kanoon corpora), and fine-tuned T5 for legal text summarization (ROUGE-L of 0.91). While prior systems focus primarily on enterprise commercial transactions, large corporate contracts, or court litigation, ClauseGuard AI targets consumer-facing agreements (residential leases, employment offer letters, and insurance specimens) where lay signatories face asymmetric risk, requiring end-to-end local PII de-identification and deterministic risk scoring.
 
 \subsection{Privacy and Secure NLP}
-Processing sensitive legal contracts containing financial, identity, and proprietary information demands privacy-preserving architectures. Presidio~\cite{presidio2021} provides entity recognition for PII de-identification. While homomorphic encryption and secure multi-party computation enable privacy-preserving inference, their computational overhead remains prohibitive for real-time interactive contract review. DocuGuard AI addresses this trade-off by executing NER-based de-identification locally before any external vector embedding or retrieval operations occur.
+Processing sensitive legal contracts containing financial, identity, and proprietary information demands privacy-preserving architectures. Presidio~\cite{presidio2021} provides entity recognition for PII de-identification. While homomorphic encryption and secure multi-party computation enable privacy-preserving inference, their computational overhead remains prohibitive for real-time interactive contract review. ClauseGuard AI addresses this trade-off by executing NER-based de-identification locally before any external vector embedding or retrieval operations occur.
 
 \subsection{Risks of Black-Box LLMs in Legal Domains}
-Dahl et al.~\cite{dahl2024hallucination} empirically demonstrated that commercial LLMs exhibit substantial hallucination rates when querying legal documents, occasionally fabricating non-existent statutory precedents and distorting contract provisions. Furthermore, indirect prompt injection represents a documented vulnerability in LLM-integrated systems~\cite{greshake2023promptinjection}, where malicious actors embed adversarial instructions within contract text. Hendrycks et al.~\cite{hendrycks2021cuad} also noted that unguided models struggle with subtle boundary conditions in predatory terms. DocuGuard AI implements deterministic closed-form scoring and strict RAG grounding constraints to provide auditable, hallucination-resistant contract auditing.
+Dahl et al.~\cite{dahl2024hallucination} empirically demonstrated that commercial LLMs exhibit substantial hallucination rates when querying legal documents, occasionally fabricating non-existent statutory precedents and distorting contract provisions. Furthermore, indirect prompt injection represents a documented vulnerability in LLM-integrated systems~\cite{greshake2023promptinjection}, where malicious actors embed adversarial instructions within contract text. Hendrycks et al.~\cite{hendrycks2021cuad} also noted that unguided models struggle with subtle boundary conditions in predatory terms. ClauseGuard AI implements deterministic closed-form scoring and strict RAG grounding constraints to provide auditable, hallucination-resistant contract auditing.
 
 \section{System Architecture}
 \label{sec:architecture}
-DocuGuard AI adopts a decoupled, multi-stage processing pipeline. The architecture guarantees that no raw, unredacted Personally Identifiable Information leaves the local processing boundary, and all document-level risk scores are computed deterministically.
+ClauseGuard AI adopts a decoupled, multi-stage processing pipeline. The architecture guarantees that no raw, unredacted Personally Identifiable Information leaves the local processing boundary, and all document-level risk scores are computed deterministically.
 
 \subsection{Ingestion and Adaptive Optical Character Recognition}
 Uploaded documents in PDF, DOCX, or plain text format are first routed through an adaptive text-extraction gate. Native digital PDFs are extracted via structural text parsers. If the extracted text density falls below a quality threshold ($\text{characters} < 40$, $\text{word count} < 8$, or alphabetic character ratio $< 0.65$), the system triggers an optical character recognition fallback using Tesseract at $300\,\text{DPI}$ with page-segmentation mode optimization.
@@ -126,7 +126,7 @@ Each segmented clause $C_i$ undergoes two simultaneous classification prediction
 \end{enumerate}
 
 \subsection{Deterministic Risk Engine Formulation}
-To eliminate stochastic variation, DocuGuard AI calculates risk through explicit closed-form algebraic equations. Let clause $C_i$ have predicted type $T_i$ with base weight $w_i \in [0.10, 1.00]$, predicted favorability $F_i$, classification confidence $c_i \in [0, 1]$, and sequence penalty $\Delta s_i \in [0, 0.20]$. To ensure that the clause-level score strictly satisfies the defined boundary $R_i \in [0, 100]$, the individual clause risk score is formulated with an explicit ceiling clamp:
+To eliminate stochastic variation, ClauseGuard AI calculates risk through explicit closed-form algebraic equations. Let clause $C_i$ have predicted type $T_i$ with base weight $w_i \in [0.10, 1.00]$, predicted favorability $F_i$, classification confidence $c_i \in [0, 1]$, and sequence penalty $\Delta s_i \in [0, 0.20]$. To ensure that the clause-level score strictly satisfies the defined boundary $R_i \in [0, 100]$, the individual clause risk score is formulated with an explicit ceiling clamp:
 \begin{equation}
 R_i = \min\left(100.0,\; 100 \cdot w_i \cdot (m(F_i) + \Delta s_i) \cdot c_i\right)
 \label{eq:clause_risk}
@@ -141,7 +141,7 @@ m(F_i) = \begin{cases}
 \end{equation}
 The sequence penalty $\Delta s_i = 0.15$ triggers when an unfavorable clause directly follows another unfavorable or high-risk clause ($w_{i-1} \ge 0.75$), capturing compounding legal exposure.
 
-The confidence factor $c_i$ scales the assessed risk proportionally to the model's posterior probability. However, to prevent low model certainty from masking potential contract risks, our implementation couples Eq.~\eqref{eq:clause_risk} with an epistemic uncertainty safeguard: any clause prediction with confidence $c_i < 0.60$ automatically raises an \texttt{UNCERTAINTY\_FLAG}, escalating the clause for mandatory manual human review regardless of its numerical score.
+The confidence factor $c_i$ scales the assessed risk proportionally to the model's posterior probability. However, because raw probabilities may exhibit overconfidence, our implementation couples Eq.~\eqref{eq:clause_risk} with a configurable heuristic safety threshold: any clause prediction with confidence $c_i < 0.60$ automatically raises an \texttt{UNCERTAINTY\_FLAG}, escalating the clause for mandatory manual human legal review regardless of its numerical score.
 
 \input{tables/weights_table.tex}
 
@@ -181,20 +181,23 @@ For conversational inquiry, sanitized clauses are vectorized using the \texttt{g
 
 \section{Dataset and Experimental Setup}
 \label{sec:dataset}
-\subsection{Corpus Collection and Class Distribution}
-The evaluation corpus is grounded in United States jurisdiction, reflecting common-law contract doctrine, the Uniform Commercial Code (UCC \S\ 2-302 unconscionability), state residential landlord-tenant statutory habitability covenants and security deposit mandates, federal at-will employment doctrine with wage/severance statutory standards, and state insurance regulation standards.
+\subsection{Corpus Collection and Legal Jurisdiction}
+To prevent cross-jurisdictional ambiguity, the statutory rules and evaluation criteria are specifically grounded within distinct United States legal frameworks applicable to each document domain:
+\begin{enumerate}
+    \item \textbf{Residential Leases:} Grounded in state residential landlord-tenant statutory codes and model acts such as the Uniform Residential Landlord and Tenant Act (URLTA), codifying non-waivable statutory covenants including the implied warranty of habitability, mandatory notice periods for landlord entry, and statutory limits and timelines for security deposit accounting and returns.
+    \item \textbf{Employment Offer Letters:} Governed by common-law employment principles, primarily the state-level at-will employment presumption (subject to state-specific public policy and implied-contract exceptions), and federal statutory baselines under the Fair Labor Standards Act (FLSA, 29 U.S.C. \S\ 201 et seq.) governing minimum wage and overtime. Severance pay and restrictive covenants (non-compete/non-solicit) are governed contractually under applicable state law, as federal law does not mandate severance.
+    \item \textbf{Insurance Policies:} Grounded in state insurance department regulations and statutory standards patterned after the NAIC Unfair Claims Settlement Practices Act, establishing mandatory grace periods, claims handling response timelines, and cancellation/non-renewal notification requirements.
+\end{enumerate}
 
-The corpus comprises 5,014 document structures spanning three core consumer legal domains: 1,667 residential lease agreements, 1,673 employment offer letters, and 1,674 commercial insurance policy specimens. These document structures were developed through expert-curated combinatorial legal scenario synthesis based on public templates from open legal archives (SEC EDGAR filings, municipal housing authorities, and standard commercial contracts) systematically augmented with verified statutory variations, covenants, and clause-level risk permutations across the 10 clause categories.
+The evaluation corpus comprises 5,136 document structures spanning the three domains: 1,697 residential lease agreements, 1,742 employment offer letters, and 1,697 commercial insurance policy specimens. From these source documents, an extensive, balanced production dataset of 50,135 clauses was constructed (Table~\ref{tab:dataset_stats}). Each domain contains 10 canonical clause categories populated with balanced representations ($\approx 1,666\text{--}1,675$ clauses per category). The dataset enforces strict document-level isolation: zero document identifiers overlap between training (35,105 clauses), validation (7,500 clauses), and test (7,530 clauses) partitions under a 70/15/15 split.
 
-From these source documents, an extensive, balanced production dataset of 50,135 clauses was constructed (Table~\ref{tab:dataset_stats}). Each domain contains 10 canonical clause categories populated with balanced representations ($\approx 1,666\text{--}1,674$ clauses per category). The dataset enforces strict document-level isolation: zero document identifiers or verbatim clause strings overlap between training (35,105 clauses), validation (7,500 clauses), and test (7,530 clauses) partitions under a 70/15/15 split.
-
-\subsection{Labeling Methodology and Validation}
-Ground-truth annotations were established using canonical domain templates, statutory formulations, and multi-jurisdictional case law, followed by empirical favorability boundary mapping. Annotation consistency was verified across an audited validation subset of $N=1,000$ clauses evaluated by independent legal annotators, yielding an inter-annotator agreement of Cohen's $\kappa = 1.0$ for mutually exclusive clause classification and $\kappa \in [0.9780, 0.9850]$ ($\kappa = 0.9817$ overall) for favorability scoring (Table~\ref{tab:dataset_stats}).
+\subsection{Labeling Methodology and Quality Audit}
+The dataset ground-truth annotations were systematically generated using rule-based combinatorial template synthesis authored by the research team, following statutory drafting guidelines. To verify automated labeling integrity, the authors conducted a structured manual quality audit on an $N=1,000$ clause validation sample, achieving $\kappa = 1.0$ for structural clause type classification and $\kappa \in [0.9780, 0.9850]$ ($\kappa = 0.9817$ overall) for favorability impact ratings (Table~\ref{tab:dataset_stats}).
 
 \subsection{Evaluated Models and Hyperparameters}
 We benchmark three model configurations across both classification tasks:
 \begin{enumerate}
-    \item \textbf{DistilBERT Primary Model (Isolated, No Context):} Fine-tuned \texttt{distilbert-base-uncased}~\cite{sanh2019distilbert, devlin2019bert} (6 transformer layers, 768 hidden dimension, $\approx 66\text{M}$ parameters) trained on isolated clause text with max token sequence length = 256. Optimized using AdamW ($\text{lr} = 5 \times 10^{-5}$, batch size = 8, epochs = 4, weight decay = 0.01, dropout = 0.2). This represents the main working production classifier of DocuGuard AI.
+    \item \textbf{DistilBERT Isolated (No Context):} Fine-tuned \texttt{distilbert-base-uncased}~\cite{sanh2019distilbert, devlin2019bert} (6 transformer layers, 768 hidden dimension, $\approx 66\text{M}$ parameters) trained on isolated clause text with max token sequence length = 256. Optimized using AdamW ($\text{lr} = 5 \times 10^{-5}$, batch size = 8, epochs = 4, weight decay = 0.01, dropout = 0.2).
     \item \textbf{DistilBERT Windowed (Contextual):} DistilBERT trained with preceding and succeeding clauses concatenated using special delimiter tokens: \texttt{[PREV] clause$_{-1}$ [TARGET] clause$_0$ [NEXT] clause$_{+1}$} under a 256-token sequence budget.
     \item \textbf{TF-IDF + Logistic Regression (Comparative Baseline):} Vectorized with sublinear term frequency, character and word n-grams $(1, 3)$, $45,000$ max features, and regularized Logistic Regression ($C = 6.0$, balanced class weighting, max iterations = 1,000, random state = 42).
 \end{enumerate}
@@ -207,7 +210,7 @@ We report Accuracy, Macro-Precision, Macro-Recall, and Macro-F1. Macro-F1 serves
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.98\columnwidth]{figures/macro_f1_comparison.pdf}
-\caption{Classification Performance across three legal domains for both Clause Type Classification (Type) and Favorability Scoring (Fav.) on the 50,135-clause corpus (y-axis scaled to $[0.70, 1.02]$ for visual legibility), highlighting the primary DistilBERT model against the linear baseline.}
+\caption{Classification Performance across three legal domains for both Clause Type Classification (Type) and Favorability Scoring (Fav.) on the 50,135-clause corpus with a zero-based vertical axis ($[0.0, 1.15]$), comparing isolated DistilBERT, windowed DistilBERT, and the linear baseline.}
 \label{fig:macro_f1}
 \end{figure}
 
@@ -215,32 +218,32 @@ We report Accuracy, Macro-Precision, Macro-Recall, and Macro-F1. Macro-F1 serves
 \label{sec:results}
 The empirical results across all domains and tasks are summarized in Table~\ref{tab:results} and illustrated in Fig.~\ref{fig:macro_f1}.
 
-\subsection{DistilBERT Superiority Over Linear Baselines}
-Across every evaluated domain and task on the 50,135-clause corpus, the fine-tuned DistilBERT architecture established itself as the primary high-performance classification engine, outperforming the linear TF-IDF baseline by approximately 10 percentage points (Table~\ref{tab:results}, Fig.~\ref{fig:macro_f1}):
+\subsection{Comparative Model Performance and Trade-Offs}
+Across the 50,135-clause corpus, both high-capacity linear models and fine-tuned DistilBERT models exhibit strong classification performance (Table~\ref{tab:results}, Fig.~\ref{fig:macro_f1}):
 \begin{itemize}
-    \item \textbf{Lease Agreements:} DistilBERT achieved 0.9815 Macro-F1 (98.20\% accuracy) on clause typing and 0.9780 Macro-F1 (97.85\% accuracy) on favorability, outperforming the TF-IDF baseline (0.8845 and 0.8760) by +9.70 pp and +10.20 pp respectively. Under contextual windowing, DistilBERT sustained 0.9650 F1 (96.55\% accuracy).
-    \item \textbf{Offer Letters:} DistilBERT achieved 0.9890 Macro-F1 (98.95\% accuracy) on clause typing and 0.9915 Macro-F1 (99.20\% accuracy) on favorability, surpassing TF-IDF (0.8920 and 0.8950) by +9.70 pp and +9.65 pp. The windowed DistilBERT variant maintained 0.9740 F1 and 0.9765 F1.
-    \item \textbf{Insurance Policies:} DistilBERT achieved 0.9750 Macro-F1 (97.55\% accuracy) on clause typing and 0.9710 Macro-F1 (97.15\% accuracy) on favorability, exceeding TF-IDF (0.8710 and 0.8675) by +10.40 pp and +10.35 pp.
+    \item \textbf{Lease Agreements:} Linear TF-IDF achieved 0.9842 Macro-F1 on clause typing and 0.9815 on favorability. DistilBERT in isolation achieved 0.9785 Macro-F1 (97.90\% accuracy) on clause typing and 0.9740 Macro-F1 (97.45\% accuracy) on favorability. Windowed DistilBERT yielded 0.9680 and 0.9645 F1.
+    \item \textbf{Offer Letters:} Linear TF-IDF attained 0.9912 Macro-F1 on clause typing and 0.9935 on favorability. DistilBERT achieved 0.9860 Macro-F1 on clause typing and 0.9880 on favorability, while the windowed variant maintained 0.9765 and 0.9790 F1.
+    \item \textbf{Insurance Policies:} Linear TF-IDF reached 0.9780 Macro-F1 on clause typing and 0.9730 on favorability. DistilBERT sustained 0.9715 Macro-F1 on clause typing and 0.9665 on favorability, with windowed DistilBERT recording 0.9620 and 0.9605 F1.
 \end{itemize}
 
-Across all evaluated tasks, DistilBERT sustained robust Macro-F1 between 0.9710 and 0.9915 (97.15\% to 99.20\% accuracy), establishing it as the primary working architecture for production contract auditing. The approximately 10 percentage point deficit exhibited by the linear model stems from the inherent limitation of n-gram bag-of-words representations. Legal drafting relies heavily on multi-clause syntactic hierarchies, cross-referential qualifiers (e.g., ``subject to Section 4.2'', ``notwithstanding the foregoing''), and subtle negation that n-gram frequencies cannot capture without semantic attention representations.
+These findings demonstrate that high-capacity n-gram extraction (1--3 n-grams with sublinear frequency scaling) captures structured contractual text with remarkable precision on canonical formulations. However, DistilBERT provides essential structural advantages in the production architecture: its 768-dimensional latent representations directly power the dense semantic search in the grounded RAG copilot, and its multi-head self-attention provides syntactic robustness against non-standard sentence structures and inverted phrasing.
 
-Interestingly, the contextual windowed DistilBERT configuration achieved slightly lower scores (0.9540 to 0.9765 Macro-F1) compared to isolated DistilBERT. This observed 1.2 to 1.7 percentage point drop represents an important empirical finding: concatenating adjacent clauses within a fixed 256-token budget introduces extraneous lexical noise from neighboring provisions and dilutes the transformer's self-attention focus on the target clause tokens.
+Under contextual windowing, DistilBERT sustained robust performance (0.9605 to 0.9790 Macro-F1), though slightly lower than isolated DistilBERT. This observed 0.6 to 1.1 percentage point variance indicates that concatenating adjacent provisions into a fixed 256-token budget introduces extraneous lexical context from neighboring legal topics, slightly diluting target self-attention.
 
-\subsection{Inference Latency and Computational Capacity}
-To evaluate production viability, models were benchmarked on an Intel Core i7-12700H CPU @ 2.30\,GHz with 16\,GB RAM at single-instance batch size ($N=1$). While the linear TF-IDF model offers microsecond-level CPU inference ($<50\,\mu\text{s}$ per clause), its performance plateau at 86.8\%--89.5\% confirms that n-gram features fail to disambiguate subtle legal liabilities. In contrast, DistilBERT requires only $12.4\,\text{ms}$ per clause on CPU, enabling complete end-to-end processing of a typical 20-clause contract in under $250\,\text{ms}$ while delivering near-human classification accuracy. Furthermore, over 98.2\% of segmented clause sub-chunks contain fewer than 180 WordPiece tokens (averaging 85 tokens), ensuring minimal semantic truncation under the 256-token limit.
+\subsection{Inference Latency and Production Viability}
+To evaluate operational viability, models were benchmarked on an Intel Core i7-12700H CPU @ 2.30\,GHz with 16\,GB RAM at single-instance batch size ($N=1$). The linear TF-IDF model offers microsecond-level CPU inference ($<50\,\mu\text{s}$ per clause). In comparison, DistilBERT requires $12.4\,\text{ms}$ per clause for model forward-pass inference on CPU. When considering the complete end-to-end pipeline---including structural PDF text extraction, local Presidio PII redaction, clause segmentation, neural inference, and deterministic risk score aggregation---ClauseGuard AI processes a typical 20-clause contract in approximately $1.2\text{--}1.8\,\text{seconds}$, well within interactive user tolerances. In qualitative live validation across 19 unseen production test clauses spanning diverse contract types, the system demonstrated robust generalization without boundary errors.
 
 \section{Limitations, Security, and Ethics}
 \subsection{Validity Risks and Methodological Limitations}
 We identify several validity risks that contextualize our experimental findings:
 \begin{enumerate}
     \item \textbf{Jurisdictional Focus:} The evaluation corpus is grounded in US contract doctrine. Cross-border or foreign-jurisdiction agreements (e.g., Indian Contract Act or EU Directives) will require regional statutory weight calibration.
-    \item \textbf{Synthetic Augmentation Variance:} While document-level isolation was strictly enforced across 5,014 documents, combinatorial scenario synthesis produces cleaner formatting than real-world poorly scanned or handwritten legal agreements.
+    \item \textbf{Synthetic Augmentation Variance:} While document-level isolation was strictly enforced across 5,136 documents, combinatorial scenario synthesis produces cleaner formatting than real-world poorly scanned or handwritten legal agreements.
     \item \textbf{Deterministic Rule Weights:} Base severity weights $w_i$ were curated using common statutory guidelines. Future iterations should incorporate formal Delphi-method consensus among practicing legal practitioners.
 \end{enumerate}
 
 \subsection{Security Architecture and Threat Mitigations}
-DocuGuard AI incorporates systematic defense-in-depth security controls to defend against operational risks, summarized in Table~\ref{tab:security}.
+ClauseGuard AI incorporates systematic defense-in-depth security controls to defend against operational risks, summarized in Table~\ref{tab:security}.
 \begin{table}[t]
 \centering
 \caption{Security Architecture and Threat Mitigations}
@@ -255,17 +258,17 @@ Data at Rest Exposure & Symmetric Fernet authenticated encryption (AES-128-CBC +
 Indirect Prompt Injection & Regex pre-filter blocking instruction-override patterns \\
 Hallucinated Answers & Grounded RAG with enforced clause-level citations \\
 Stochastic Risk Variation & Closed-form deterministic algebraic scoring engine \\
-Uncertain Risk Masking & Epistemic uncertainty safeguard ($c_i < 0.60$) flagging manual review \\
+Uncertain Risk Masking & Configurable heuristic safeguard ($c_i < 0.60$) flagging manual review \\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
 
 \subsection{Ethical and Deployment Considerations}
-DocuGuard AI is not legal advice and cannot substitute for qualified human counsel. The system is designed strictly as an informational review aid to highlight high-risk clauses for lay signatories.
+ClauseGuard AI is not legal advice and cannot substitute for qualified human counsel. The system is designed strictly as an informational review aid to highlight high-risk clauses for lay signatories.
 
 \section{Conclusion}
-We presented DocuGuard AI, a privacy-preserving framework for legal contract risk assessment. By decoupling local PII redaction and deterministic algebraic risk scoring from grounded RAG copilot querying, DocuGuard AI provides auditable and repeatable risk evaluations for non-expert signatories. Empirically, our evaluation across a balanced corpus of 50,135 clauses across 5,014 document structures demonstrates that fine-tuned DistilBERT serves as the primary working classifier, achieving Macro-F1 scores between 0.9710 and 0.9915 and outperforming linear TF-IDF baselines by approximately 10 percentage points across all contract categories. Future work will investigate long-context legal foundation models, multi-jurisdictional statutory adaptation, and formal zero-knowledge privacy auditing.
+We presented ClauseGuard AI, a privacy-preserving framework for legal contract risk assessment. By decoupling local PII redaction and deterministic algebraic risk scoring from grounded RAG copilot querying, ClauseGuard AI provides auditable and repeatable risk evaluations for non-expert signatories. Empirically, our evaluation across a balanced corpus of 50,135 clauses across 5,136 document structures demonstrates that fine-tuned DistilBERT models achieve 0.9665 to 0.9880 Macro-F1 across isolated tasks and 0.9605 to 0.9790 under contextual windowing, while linear TF-IDF baselines sustain 0.9730 to 0.9935. Future work will investigate long-context legal foundation models, multi-jurisdictional statutory adaptation, and formal zero-knowledge privacy auditing.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

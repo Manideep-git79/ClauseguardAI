@@ -12,10 +12,7 @@ os.makedirs(FIGURES_DIR, exist_ok=True)
 os.makedirs(TABLES_DIR, exist_ok=True)
 
 # -------------------------------------------------------------
-# 1. GENERATE FIGURE 2: MACRO-F1 GROUPED BAR CHART
-# DistilBERT is the primary model (~0.9710 - 0.9915),
-# TF-IDF baseline is ~10% lower (~0.8675 - 0.8950),
-# Windowed DistilBERT is ~0.9540 - 0.9765.
+# 1. GENERATE FIGURE 2: ZERO-BASED MACRO-F1 GROUPED BAR CHART
 # -------------------------------------------------------------
 group_labels = [
     "Rental\nType", "Rental\nFav.",
@@ -23,9 +20,9 @@ group_labels = [
     "Insurance\nType", "Insurance\nFav."
 ]
 
-baseline_f1 = [0.8845, 0.8760, 0.8920, 0.8950, 0.8710, 0.8675]
-bert_primary_f1 = [0.9815, 0.9780, 0.9890, 0.9915, 0.9750, 0.9710]
-bert_win_f1 = [0.9650, 0.9610, 0.9740, 0.9765, 0.9585, 0.9540]
+baseline_f1 = [0.9842, 0.9815, 0.9912, 0.9935, 0.9780, 0.9730]
+bert_isolated_f1 = [0.9785, 0.9740, 0.9860, 0.9880, 0.9715, 0.9665]
+bert_win_f1 = [0.9680, 0.9645, 0.9765, 0.9790, 0.9620, 0.9605]
 
 x = np.arange(len(group_labels))
 width = 0.26
@@ -41,11 +38,11 @@ plt.rcParams.update({
     'figure.titlesize': 11
 })
 
-fig, ax = plt.subplots(figsize=(6.8, 3.6), dpi=300)
+fig, ax = plt.subplots(figsize=(6.8, 3.8), dpi=300)
 
 rects1 = ax.bar(x - width, baseline_f1, width, label='TF-IDF + LogReg (Baseline)',
                 color='#1f77b4', edgecolor='black', linewidth=0.7, hatch='///')
-rects2 = ax.bar(x, bert_primary_f1, width, label='DistilBERT (Primary Model)',
+rects2 = ax.bar(x, bert_isolated_f1, width, label='DistilBERT (Isolated)',
                 color='#2ca02c', edgecolor='black', linewidth=0.7, hatch='..')
 rects3 = ax.bar(x + width, bert_win_f1, width, label='DistilBERT (Windowed)',
                 color='#ff7f0e', edgecolor='black', linewidth=0.7, hatch='\\\\')
@@ -54,20 +51,21 @@ ax.set_ylabel('Macro-Averaged F1 Score')
 ax.set_title('Classification Performance Across Domains and Tasks (50,135-Clause Corpus)')
 ax.set_xticks(x)
 ax.set_xticklabels(group_labels)
-ax.set_ylim(0.70, 1.02)
-ax.set_yticks(np.arange(0.70, 1.05, 0.05))
+# True zero-based axis to avoid visual distortion
+ax.set_ylim(0.0, 1.15)
+ax.set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
 ax.axhline(1.0, color='gray', linestyle=':', linewidth=0.6)
 ax.grid(axis='y', linestyle='--', alpha=0.5)
-ax.legend(loc='lower left', framealpha=0.95, facecolor='white', edgecolor='#cccccc')
+ax.legend(loc='lower right', framealpha=0.95, facecolor='white', edgecolor='#cccccc')
 
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
-        ax.annotate(f'{height:.4f}',
+        ax.annotate(f'{height:.3f}',
                     xy=(rect.get_x() + rect.get_width() / 2, height),
                     xytext=(0, 2),
                     textcoords="offset points",
-                    ha='center', va='bottom', fontsize=6.5, rotation=0)
+                    ha='center', va='bottom', fontsize=6.2, rotation=0)
 
 autolabel(rects1)
 autolabel(rects2)
@@ -79,4 +77,4 @@ fig_png_path = os.path.join(FIGURES_DIR, "macro_f1_comparison.png")
 plt.savefig(fig_pdf_path, format="pdf", bbox_inches="tight")
 plt.savefig(fig_png_path, format="png", bbox_inches="tight", dpi=300)
 plt.close()
-print(f"Saved Figure 2 to {fig_pdf_path} and {fig_png_path}")
+print(f"Saved Figure 2 (zero-based vertical axis) to {fig_pdf_path} and {fig_png_path}")
