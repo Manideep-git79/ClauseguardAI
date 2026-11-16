@@ -258,7 +258,13 @@ def compute_risk_band(score: float, config: dict = None, has_substantive_content
     if config is None:
         config = get_risk_config()
 
-    for band, (low, high) in config["risk_bands"].items():
-        if low <= score <= high:
-            return band
-    return "critical" if score > 75 else "low"
+    # Continuous half-open intervals matching research paper specification:
+    # Low: [0, 25), Medium: [25, 50), High: [50, 75), Critical: [75, 100]
+    if score < 25.0:
+        return "low"
+    elif score < 50.0:
+        return "medium"
+    elif score < 75.0:
+        return "high"
+    else:
+        return "critical"

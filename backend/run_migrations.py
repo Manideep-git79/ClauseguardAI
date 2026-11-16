@@ -120,7 +120,9 @@ try:
             "CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);",
             "CREATE INDEX IF NOT EXISTS idx_sessions_user_id ON sessions(user_id);",
             "CREATE INDEX IF NOT EXISTS idx_chat_messages_doc ON chat_messages(document_id, created_at ASC);",
-            "CREATE INDEX IF NOT EXISTS idx_chat_messages_user ON chat_messages(user_id, created_at ASC);"
+            "CREATE INDEX IF NOT EXISTS idx_chat_messages_user ON chat_messages(user_id, created_at ASC);",
+            "CREATE INDEX IF NOT EXISTS idx_clauses_doc_idx ON clauses(document_id, clause_index ASC);",
+            "CREATE INDEX IF NOT EXISTS idx_clauses_embedding_hnsw ON clauses USING hnsw (embedding vector_cosine_ops);",
         ]
         for idx_sql in indexes:
             try:

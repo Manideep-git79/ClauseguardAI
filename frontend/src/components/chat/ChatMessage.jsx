@@ -34,7 +34,7 @@ export function ChatMessage({ message, onSelectClause, clauseLookup = {} }) {
             </div>
           )}
           <span className="font-mono text-xs font-semibold text-neutral-800 uppercase tracking-wider">
-            {isUser ? "You" : "ClauseGuard AI (Document Analysis Assistant)"}
+            {isUser ? "You" : "ClauseGuard AI (Grounded Legal Copilot)"}
           </span>
         </div>
 
@@ -78,7 +78,7 @@ export function ChatMessage({ message, onSelectClause, clauseLookup = {} }) {
           {message.content}
         </div>
       ) : (
-        <LegalMarkdown content={message.content} onSelectClause={onSelectClause} />
+        <LegalMarkdown content={message.content} />
       )}
 
       {!isUser && message.cited_clause_ids && message.cited_clause_ids.length > 0 && (
@@ -123,7 +123,7 @@ export function ChatMessage({ message, onSelectClause, clauseLookup = {} }) {
             ) : (
               <>
                 <ChevronDown className="w-3 h-3" />
-                <span>Inspect {message.retrieved_clauses.length} vector-retrieved clauses passed to ClauseGuard AI</span>
+                <span>Inspect {message.retrieved_clauses.length} vector-retrieved clauses passed to AI Copilot</span>
               </>
             )}
           </button>

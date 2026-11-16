@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Deterministic Risk Engine Parameters and Constants}
+\label{tab:risk_constants}
+\footnotesize
+\setlength{\tabcolsep}{3.8pt}
+\begin{tabular}{llr}
+\toprule
+\textbf{Parameter / Dimension} & \textbf{Description / Setting} & \textbf{Value / Range} \\
+\midrule
+Clause Base Weight ($w_i$) & Domain importance weight & $0.25\text{--}1.00$ \\
+Favorability Multiplier ($m_i$) & Fair / Needs Review / Unfavorable & $0.00 / 0.50 / 1.00$ \\
+Sequence Bump ($\Delta s_i$) & Cumulative unfavorable escalation & $+0.10$ per trigger \\
+Missing Severity ($P_k$) & High / Medium / Low omission & $15.0 / 8.0 / 3.0$ \\
+Missing Confidence Cutoff & Multi-label threshold & $\tau = 0.08$ \\
+Composite Clause Weight & Clause contribution ($W_{\text{clause}}$) & $0.70$ \\
+Composite Missing Weight & Missing contribution ($W_{\text{missing}}$) & $0.30$ \\
+Risk Bands & Low / Medium / High / Critical & $0\text{--}25 / 26\text{--}50 / 51\text{--}75 / 76\text{--}100$ \\
+\bottomrule
+\end{tabular}
+\end{table}

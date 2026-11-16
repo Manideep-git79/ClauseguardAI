@@ -9,6 +9,7 @@ import {
   Activity,
   BookOpen,
   GitFork,
+  Code2,
   LogOut,
   User,
   ChevronRight,
@@ -31,10 +32,31 @@ export function Sidebar({ currentView, onNavigate }) {
         { id: "upload", label: "Upload Document", icon: UploadCloud, path: "/upload" },
         {
           id: "chat",
-          label: "AI Chatbot",
+          label: "AI Legal Copilot",
           icon: Bot,
           path: "/chat",
-          badge: "Grounded",
+          badge: "AI Copilot",
+          badgeColor: "bg-neutral-100 text-neutral-800 border-neutral-300",
+        },
+      ],
+    },
+    {
+      group: "ARCHITECTURE & CODE",
+      items: [
+        {
+          id: "code-review",
+          label: "Code Review Plan",
+          icon: Code2,
+          path: "/code-review",
+          badge: "9 Steps",
+          badgeColor: "bg-black text-white border-black",
+        },
+        {
+          id: "architecture",
+          label: "Architecture Flow",
+          icon: GitFork,
+          path: "/architecture/flow",
+          badge: "Graph",
           badgeColor: "bg-neutral-100 text-neutral-800 border-neutral-300",
         },
       ],
@@ -42,14 +64,6 @@ export function Sidebar({ currentView, onNavigate }) {
     {
       group: "GOVERNANCE & HELP",
       items: [
-        {
-          id: "architecture",
-          label: "Architecture Flow",
-          icon: GitFork,
-          path: "/architecture/flow",
-          badge: "Code",
-          badgeColor: "bg-neutral-100 text-neutral-800 border-neutral-300",
-        },
         {
           id: "audit",
           label: "Audit & Trail",
@@ -92,7 +106,7 @@ export function Sidebar({ currentView, onNavigate }) {
             <Shield className="w-4 h-4 text-black" />
           </div>
           <span className="font-serif text-sm font-bold tracking-tight text-black">
-            ClauseGuard AI
+            DocuGuard AI
           </span>
         </div>
         <button
@@ -125,7 +139,7 @@ export function Sidebar({ currentView, onNavigate }) {
             </div>
             <div>
               <span className="font-serif text-base font-bold tracking-tight text-black block">
-                ClauseGuard AI
+                DocuGuard AI
               </span>
               <span className="text-[10px] font-mono text-neutral-500 tracking-wider uppercase block -mt-0.5">
                 Enterprise Legal AI

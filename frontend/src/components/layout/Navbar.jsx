@@ -1,4 +1,4 @@
-import { ShieldAlert, FileText, UploadCloud, Bot, LogOut, LogIn, UserPlus, User, GitFork } from "lucide-react";
+import { ShieldAlert, FileText, UploadCloud, Bot, LogOut, LogIn, UserPlus, User, GitFork, Code2 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 export function Navbar({ currentView, onNavigate }) {
@@ -23,7 +23,7 @@ export function Navbar({ currentView, onNavigate }) {
           </div>
           <div>
             <span className="font-serif text-lg font-bold tracking-tight text-black block">
-              ClauseGuard AI
+              DocuGuard AI
             </span>
             <span className="text-[10px] font-mono text-neutral-500 tracking-wider uppercase block -mt-1">
               Legal Risk Analyzer & Copilot
@@ -64,6 +64,19 @@ export function Navbar({ currentView, onNavigate }) {
           >
             <Bot className="w-3.5 h-3.5 text-black" />
             <span>AI Chat</span>
+          </button>
+
+          <button
+            onClick={() => onNavigate("code-review")}
+            className={`px-3 py-2 text-xs font-mono uppercase tracking-wider transition-colors border rounded flex items-center gap-1.5 ${
+              currentView === "code-review"
+                ? "border-black text-black bg-neutral-100 font-semibold"
+                : "border-transparent text-neutral-600 hover:text-black hover:border-neutral-200"
+            }`}
+          >
+            <Code2 className="w-3.5 h-3.5 text-black" />
+            <span className="hidden md:inline">Code Review</span>
+            <span className="md:hidden">Review</span>
           </button>
 
           <button

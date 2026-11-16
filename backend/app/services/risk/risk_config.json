@@ -70,10 +70,10 @@
     "missing_clause_penalty_weight": 0.3
   },
   "risk_bands": {
-    "low": [0, 25],
-    "medium": [26, 50],
-    "high": [51, 75],
-    "critical": [76, 100]
+    "low": [0.0, 25.0],
+    "medium": [25.0, 50.0],
+    "high": [50.0, 75.0],
+    "critical": [75.0, 100.0]
   },
   "_disclaimer": "All weights above are starting engineering defaults chosen for transparency and ease of tuning — not derived from a legal or statistical authority. Recalibrate against real annotator consensus and/or domain-expert review before treating outputs as decision-grade, and never present them in the UI as certified legal conclusions."
 }
